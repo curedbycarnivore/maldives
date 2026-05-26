@@ -239,7 +239,7 @@ export function toggleCamelDashCaseText(value: string): string {
   return value.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
 }
 
-function deleteToWordPart(editor: editor.IStandaloneCodeEditor, direction: "left" | "right"): void {
+export function deleteToWordPart(editor: editor.IStandaloneCodeEditor, direction: "left" | "right"): void {
   const start = editor.getPosition();
 
   if (!start) {

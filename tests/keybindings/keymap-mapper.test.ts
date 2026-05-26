@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, test, vi } from "vitest";
 import type * as Monaco from "monaco-editor";
-import { buildKeybindings, removeLastSelection } from "../../src/keybindings";
+import { buildKeybindings, registerKeybindings, removeLastSelection } from "../../src/keybindings";
 import { parseKeymap } from "../../src/parsers/keymap-parser";
 
 const monaco = {
@@ -95,6 +95,59 @@ describe("buildKeybindings", () => {
 
   test("omits unmapped actions", () => {
     expect(bindings.some((action) => action.wsActionId === "AceJumpAction")).toBe(false);
+  });
+});
+
+describe("registerKeybindings", () => {
+  test("tracks selected occurrences and unselects the previous occurrence", () => {
+    const selection = (id: number) => ({
+      id,
+      equalsSelection: (other: { id: number }) => other.id === id,
+    });
+    const first = selection(1);
+    const second = selection(2);
+    const third = selection(3);
+    const additions = [second, third];
+    let selections = [first];
+    const commands = new Map<number, () => void>();
+    const setSelections = vi.fn((next: typeof selections) => {
+      selections = next;
+    });
+    const editor = {
+      addCommand: vi.fn((binding: number, handler: () => void) => {
+        commands.set(binding, handler);
+        return `command-${binding}`;
+      }),
+      getAction: vi.fn(() => ({
+        run: vi.fn(() => {
+          const next = additions.shift();
+
+          if (next) {
+            selections = [...selections, next];
+          }
+        }),
+      })),
+      getSelections: () => selections,
+      setSelections,
+    } as never;
+    const M = monaco.KeyMod;
+    const K = monaco.KeyCode;
+
+    registerKeybindings(editor, monaco, {
+      name: "test",
+      parent: "",
+      actions: [
+        { id: "SelectNextOccurrence", shortcuts: ["alt g"] },
+        { id: "UnselectPreviousOccurrence", shortcuts: ["shift alt g"] },
+      ],
+    });
+
+    commands.get(M.Alt | K.KeyG)?.();
+    commands.get(M.Alt | K.KeyG)?.();
+    selections = [first, third, second];
+    commands.get(M.Shift | M.Alt | K.KeyG)?.();
+
+    expect(setSelections).toHaveBeenCalledWith([first, second]);
   });
 });
 
