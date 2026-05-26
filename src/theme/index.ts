@@ -1,7 +1,8 @@
 import type { editor } from "monaco-editor";
 import type { ThemeConfig, TokenRule } from "../parsers/icls-parser";
 
-export const MALDIVES_THEME_NAME = "maldives";
+export const THEME_NAME = "tomorrow-night-eighties";
+export const MALDIVES_THEME_NAME = THEME_NAME;
 
 const tokenScopes: Record<string, string> = {
   "JS.KEYWORD": "keyword",
@@ -12,7 +13,7 @@ const tokenScopes: Record<string, string> = {
   "JS.GLOBAL_FUNCTION": "function",
 };
 
-export function toMonacoTheme(theme: ThemeConfig): editor.IStandaloneThemeData {
+export function buildMonacoTheme(theme: ThemeConfig): editor.IStandaloneThemeData {
   return {
     base: "vs-dark",
     inherit: false,
@@ -27,6 +28,12 @@ export function toMonacoTheme(theme: ThemeConfig): editor.IStandaloneThemeData {
     },
     rules: theme.tokens.map(toTokenThemeRule),
   };
+}
+
+export const toMonacoTheme = buildMonacoTheme;
+
+export function registerTheme(monaco: typeof import("monaco-editor"), config: ThemeConfig): void {
+  monaco.editor.defineTheme(THEME_NAME, buildMonacoTheme(config));
 }
 
 function toTokenThemeRule(rule: TokenRule): editor.ITokenThemeRule {

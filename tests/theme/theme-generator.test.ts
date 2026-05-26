@@ -1,12 +1,13 @@
 import { readFileSync } from "node:fs";
-import { expect, test } from "vitest";
+import { expect, test, vi } from "vitest";
 import { parseIcls } from "../../src/parsers/icls-parser";
-import { MALDIVES_THEME_NAME, toMonacoTheme } from "../../src/theme";
+import { THEME_NAME, buildMonacoTheme, registerTheme } from "../../src/theme";
 
-const theme = toMonacoTheme(parseIcls(readFileSync("ssot/colors/active-theme.icls", "utf-8")));
+const config = parseIcls(readFileSync("ssot/colors/active-theme.icls", "utf-8"));
+const theme = buildMonacoTheme(config);
 
-test("exports the Maldives Monaco theme name", () => {
-  expect(MALDIVES_THEME_NAME).toBe("maldives");
+test("exports the Tomorrow Night Eighties Monaco theme name", () => {
+  expect(THEME_NAME).toBe("tomorrow-night-eighties");
 });
 
 test("maps editor colors to Monaco theme color ids", () => {
@@ -34,4 +35,13 @@ test("maps parsed JavaScript tokens to Monaco token rules", () => {
     { token: "method", foreground: "74aee8", fontStyle: "bold" },
     { token: "function", foreground: "e3b775" },
   ]);
+});
+
+test("registers the generated Monaco theme", () => {
+  const defineTheme = vi.fn();
+  const monaco = { editor: { defineTheme } } as unknown as typeof import("monaco-editor");
+
+  registerTheme(monaco, config);
+
+  expect(defineTheme).toHaveBeenCalledWith(THEME_NAME, theme);
 });
