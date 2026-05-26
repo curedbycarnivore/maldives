@@ -43,26 +43,50 @@ test("configures strict TypeScript worker options and renders inlay hints", asyn
 
   await page.evaluate(() => {
     const editor = window.__maldivesEditor;
-    editor.setValue(`function greet(name: string) {
-  return name.toUpperCase();
+    editor.setValue(`function add(a: number, b: number) {
+  return a + b;
 }
 
-const message = greet("Maldives");
-message;`);
-    editor.setPosition({ lineNumber: 5, column: 9 });
+const total = add(1, 2);
+total;`);
+    editor.setPosition({ lineNumber: 5, column: 14 });
     editor.focus();
   });
 
+  // Wait for TS worker to process new model before polling decorations
+  await page.waitForTimeout(2000);
+
   await expect
-    .poll(() =>
-      page.evaluate(() =>
-        window.__maldivesEditor
-          .getModel()
-          ?.getAllDecorations()
-          .some((decoration) => decoration.options.description === "InlayHint"),
-      ),
+    .poll(
+      () =>
+        page.evaluate(() =>
+          window.__maldivesEditor
+            .getModel()
+            ?.getAllDecorations()
+            .filter((decoration) => decoration.options.description === "InlayHint")
+            .flatMap((decoration) => [
+              decoration.options.before?.content,
+              decoration.options.after?.content,
+            ])
+            .filter((content): content is string => Boolean(content)),
+        ),
+      { timeout: 10000 },
     )
-    .toBe(true);
+    .toEqual(expect.arrayContaining(["a:", "b:"]));
+
+  const hintText = await page.evaluate(() =>
+    window.__maldivesEditor
+      .getModel()
+      ?.getAllDecorations()
+      .filter((decoration) => decoration.options.description === "InlayHint")
+      .flatMap((decoration) => [
+        decoration.options.before?.content,
+        decoration.options.after?.content,
+      ])
+      .filter((content): content is string => Boolean(content))
+      .join(" ") ?? "",
+  );
+  expect(hintText).not.toContain("any");
 
   await mkdir("proof", { recursive: true });
   await page.screenshot({ path: "proof/ts-inlay-hints.png" });
