@@ -25,6 +25,8 @@ ${Array.from({ length: 80 }, (_, index) => `    const line${index} = ${index};`)
     editor.focus();
   });
 
+  // brief wait for Monaco sticky scroll widget to re-render after programmatic scroll
+  await page.waitForTimeout(500);
   const stickyWidget = page.locator(".monaco-editor .sticky-widget");
   await expect(stickyWidget).toBeVisible();
 

@@ -21,7 +21,7 @@ export function astGrepRangeToMonacoRange(range: AstGrepRange): IRange | undefin
   };
 }
 
-function astGrepRangeToModelRange(range: AstGrepRange, model: editor.ITextModel): IRange | undefined {
+export function astGrepRangeToModelRange(range: AstGrepRange, model: editor.ITextModel): IRange | undefined {
   if (range.end.index <= range.start.index) {
     return undefined;
   }

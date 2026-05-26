@@ -140,8 +140,14 @@ function completeStatement(editor: editor.IStandaloneCodeEditor): boolean {
       text: edit.text,
     },
   ]);
-  editor.setPosition(model.getPositionAt(edit.cursorOffset));
+  editor.setPosition(model.getPositionAt(edit.cursorOffset + eolOffsetBeforeCursor(model.getEOL(), edit)));
   return true;
+}
+
+function eolOffsetBeforeCursor(eol: string, edit: CompleteStatementEdit): number {
+  const insertedCursorOffset = edit.cursorOffset - edit.insertOffset;
+
+  return (eol.length - 1) * (edit.text.slice(0, insertedCursorOffset).split("\n").length - 1);
 }
 
 function kindAtOffset(source: string, offset: number): string | undefined {
@@ -152,11 +158,11 @@ function kindAtOffset(source: string, offset: number): string | undefined {
   }
 }
 
-function nodeAtOffset(node: SgNode, offset: number): SgNode {
+export function nodeAtOffset(node: SgNode, offset: number): SgNode {
   for (const child of node.children_nodes()) {
     const range = child.range();
 
-    if (range.start.index <= offset && offset <= range.end.index) {
+    if (range.start.index <= offset && offset < range.end.index) {
       return nodeAtOffset(child, offset);
     }
   }
@@ -164,7 +170,7 @@ function nodeAtOffset(node: SgNode, offset: number): SgNode {
   return node;
 }
 
-function nextLargerNode(node: SgNode, startOffset: number, endOffset: number): SgNode | undefined {
+export function nextLargerNode(node: SgNode, startOffset: number, endOffset: number): SgNode | undefined {
   let current: SgNode | undefined = node;
 
   while (current) {
