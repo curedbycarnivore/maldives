@@ -1,0 +1,79 @@
+export interface ThemeConfig {
+  background: string;
+  gutterBackground: string;
+  lineHighlight: string;
+  selectionBackground: string;
+  caretColor: string;
+  lineNumbersColor: string;
+  defaultForeground: string;
+  fontFamily: string;
+  fontSize: number;
+  tokens: TokenRule[];
+}
+
+export interface TokenRule {
+  name: string;
+  foreground?: string;
+  fontStyle?: "bold" | "italic" | "bold italic" | "";
+}
+
+const jsTokenNames = [
+  "JS.KEYWORD",
+  "JS.LINE_COMMENT",
+  "JS.NUMBER",
+  "JS.STRING",
+  "JS.INSTANCE_MEMBER_FUNCTION",
+  "JS.GLOBAL_FUNCTION",
+];
+
+export function parseIcls(xmlContent: string): ThemeConfig {
+  const textBlock = blockFor(xmlContent, "TEXT");
+  const fontBlock = xmlContent.match(/<font>([\s\S]*?)<\/font>/)?.[1] ?? "";
+
+  return {
+    background: color(optionValue(textBlock, "BACKGROUND")),
+    defaultForeground: color(optionValue(textBlock, "FOREGROUND")),
+    gutterBackground: color(optionValue(xmlContent, "GUTTER_BACKGROUND")),
+    lineHighlight: color(optionValue(xmlContent, "CARET_ROW_COLOR")),
+    selectionBackground: color(optionValue(xmlContent, "SELECTION_BACKGROUND")),
+    caretColor: color(optionValue(xmlContent, "CARET_COLOR")),
+    lineNumbersColor: color(optionValue(xmlContent, "LINE_NUMBERS_COLOR")),
+    fontFamily: optionValue(fontBlock, "EDITOR_FONT_NAME"),
+    fontSize: Number(optionValue(fontBlock, "EDITOR_FONT_SIZE")),
+    tokens: jsTokenNames.map((name) => tokenRule(xmlContent, name)),
+  };
+}
+
+function tokenRule(xmlContent: string, name: string): TokenRule {
+  const tokenBlock = blockFor(xmlContent, name);
+
+  return {
+    name,
+    foreground: color(optionValue(tokenBlock, "FOREGROUND")),
+    fontStyle: fontStyle(optionValue(tokenBlock, "FONT_TYPE")),
+  };
+}
+
+function blockFor(xmlContent: string, name: string): string {
+  return xmlContent.match(new RegExp(`<option name="${escapeRegExp(name)}">([\\s\\S]*?)<\\/option>`))?.[1] ?? "";
+}
+
+function optionValue(xmlContent: string, name: string): string {
+  return xmlContent.match(new RegExp(`<option name="${escapeRegExp(name)}" value="([^"]*)" \\/>`))?.[1] ?? "";
+}
+
+function color(hex: string): string {
+  return `#${hex}`;
+}
+
+function fontStyle(fontType: string): TokenRule["fontStyle"] {
+  if (fontType === "1") return "bold";
+  if (fontType === "2") return "italic";
+  if (fontType === "3") return "bold italic";
+
+  return "";
+}
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
