@@ -35,3 +35,27 @@ test("hump-delete commands delete across camel-case boundaries", async ({ page }
   await mkdir("proof", { recursive: true });
   await page.screenshot({ path: "proof/hump-delete.png" });
 });
+
+test("toggleCase transforms selected text case", async ({ page }) => {
+  await loadEditor(page);
+
+  const result = await page.evaluate(() => {
+    const editor = window.__maldivesEditor;
+    editor.setValue("hello world");
+    editor.setSelection({ startLineNumber: 1, startColumn: 1, endLineNumber: 1, endColumn: 6 });
+    window.__maldivesExecuteKeybinding("EditorToggleCase");
+    return editor.getValue();
+  });
+  expect(result).toBe("HELLO world");
+
+  const lowered = await page.evaluate(() => {
+    const editor = window.__maldivesEditor;
+    editor.setSelection({ startLineNumber: 1, startColumn: 1, endLineNumber: 1, endColumn: 6 });
+    window.__maldivesExecuteKeybinding("EditorToggleCase");
+    return editor.getValue();
+  });
+  expect(lowered).toBe("hello world");
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/toggle-case.png" });
+});
