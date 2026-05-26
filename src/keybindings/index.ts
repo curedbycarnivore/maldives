@@ -42,7 +42,7 @@ const actionTargets: Record<string, MonacoTarget> = {
   EditorLineEnd: { type: "command", id: "cursorEnd" },
   EditorLineStartWithSelection: { type: "command", id: "cursorHomeSelect" },
   EditorLineEndWithSelection: { type: "command", id: "cursorEndSelect" },
-  EditorDeleteToLineStart: { type: "action", id: "deleteAllLeft" },
+  EditorDeleteToLineStart: { type: "command", id: "deleteAllLeft" },
   AutoIndentLines: { type: "action", id: "editor.action.reindentlines" },
   EditorDownWithSelection: { type: "command", id: "cursorDownSelect" },
   EditorUpWithSelection: { type: "command", id: "cursorUpSelect" },

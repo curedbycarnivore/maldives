@@ -31,6 +31,29 @@ test("unselect previous occurrence removes the last occurrence selection", async
   await page.screenshot({ path: "proof/unselect-occurrence.png" });
 });
 
+test("line navigation keybindings move and delete within the current line", async ({ page }) => {
+  await loadEditor(page);
+
+  await page.evaluate(() => {
+    window.__maldivesEditor.setValue("alpha beta gamma");
+    window.__maldivesEditor.setPosition({ lineNumber: 1, column: 8 });
+    return window.__maldivesExecuteKeybinding("EditorLineStart");
+  });
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getPosition()?.column)).toBe(1);
+
+  await page.evaluate(() => window.__maldivesExecuteKeybinding("EditorLineEnd"));
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getPosition()?.column)).toBe(17);
+
+  await page.evaluate(() => {
+    window.__maldivesEditor.setPosition({ lineNumber: 1, column: 12 });
+    return window.__maldivesExecuteKeybinding("EditorDeleteToLineStart");
+  });
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getValue())).toBe("gamma");
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/line-nav-proof.png" });
+});
+
 test("registered addCommand keybindings work across groups", async ({ page }) => {
   await loadEditor(page);
 

@@ -16,6 +16,8 @@ const monaco = {
     Enter: 3,
     PageUp: 11,
     PageDown: 12,
+    Home: 13,
+    End: 14,
     LeftArrow: 15,
     UpArrow: 16,
     RightArrow: 17,
@@ -23,14 +25,20 @@ const monaco = {
     Delete: 20,
     Digit1: 22,
     Digit2: 23,
+    KeyA: 31,
     KeyB: 32,
     KeyC: 33,
     KeyD: 34,
+    KeyE: 35,
     KeyF: 36,
     KeyG: 37,
+    KeyH: 38,
+    KeyI: 39,
     KeyK: 41,
     KeyL: 42,
     KeyR: 48,
+    KeyS: 49,
+    KeyT: 50,
     KeyU: 51,
     KeyV: 52,
     F2: 60,
@@ -66,6 +74,23 @@ describe("buildKeybindings", () => {
     expect(bindingFor("EditorDeleteLine", M.Shift | K.Backspace)).toBe(M.Shift | K.Backspace);
     expect(bindingFor("EditorSelectWord", M.Alt | K.UpArrow)).toBe(M.Alt | K.UpArrow);
     expect(bindingFor("EditorUnSelectWord", M.Alt | K.DownArrow)).toBe(M.Alt | K.DownArrow);
+    expect(bindingFor("EditorLineStart", M.WinCtrl | K.KeyA)).toBe(M.WinCtrl | K.KeyA);
+    expect(bindingFor("EditorLineStart", M.CtrlCmd | K.LeftArrow)).toBe(M.CtrlCmd | K.LeftArrow);
+    expect(bindingFor("EditorLineEnd", M.WinCtrl | K.KeyE)).toBe(M.WinCtrl | K.KeyE);
+    expect(bindingFor("EditorLineEnd", M.WinCtrl | K.KeyT)).toBe(M.WinCtrl | K.KeyT);
+    expect(bindingFor("EditorLineEnd", M.CtrlCmd | K.RightArrow)).toBe(M.CtrlCmd | K.RightArrow);
+    expect(bindingFor("EditorLineStartWithSelection", M.Shift | K.Home)).toBe(M.Shift | K.Home);
+    expect(bindingFor("EditorLineStartWithSelection", M.Shift | M.CtrlCmd | K.LeftArrow)).toBe(M.Shift | M.CtrlCmd | K.LeftArrow);
+    expect(bindingFor("EditorLineStartWithSelection", M.Shift | M.WinCtrl | K.KeyA)).toBe(M.Shift | M.WinCtrl | K.KeyA);
+    expect(bindingFor("EditorLineEndWithSelection", M.Shift | K.End)).toBe(M.Shift | K.End);
+    expect(bindingFor("EditorLineEndWithSelection", M.Shift | M.CtrlCmd | K.RightArrow)).toBe(M.Shift | M.CtrlCmd | K.RightArrow);
+    expect(bindingFor("EditorLineEndWithSelection", M.Shift | M.WinCtrl | K.KeyT)).toBe(M.Shift | M.WinCtrl | K.KeyT);
+    expect(bindingFor("EditorDeleteToLineStart", M.CtrlCmd | K.Backspace)).toBe(M.CtrlCmd | K.Backspace);
+    expect(bindingFor("AutoIndentLines", M.CtrlCmd | K.KeyI)).toBe(M.CtrlCmd | K.KeyI);
+    expect(bindingFor("EditorDownWithSelection", M.Shift | M.Alt | K.KeyD)).toBe(M.Shift | M.Alt | K.KeyD);
+    expect(bindingFor("EditorDownWithSelection", M.Shift | M.Alt | K.KeyS)).toBe(M.Shift | M.Alt | K.KeyS);
+    expect(bindingFor("EditorUpWithSelection", M.Shift | M.Alt | K.KeyR)).toBe(M.Shift | M.Alt | K.KeyR);
+    expect(bindingFor("EditorUpWithSelection", M.Shift | M.Alt | K.KeyH)).toBe(M.Shift | M.Alt | K.KeyH);
     expect(bindingFor("EditorCloneCaretAbove", K.PageUp)).toBe(K.PageUp);
     expect(bindingFor("EditorCloneCaretBelow", K.PageDown)).toBe(K.PageDown);
     expect(bindingFor("CollapseRegion", M.Alt | K.Minus)).toBe(M.Alt | K.Minus);

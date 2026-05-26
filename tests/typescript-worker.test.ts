@@ -57,6 +57,7 @@ describe("configureTypeScriptWorker", () => {
     expect(compilerOptions.strict).toBe(true);
     expect(compilerOptions.target).toBe(monacoStub.typescript.ScriptTarget.ESNext);
     expect(compilerOptions.module).toBe(monacoStub.typescript.ModuleKind.ESNext);
+    expect(compilerOptions.moduleResolution).toBe(100);
     expect(compilerOptions.lib).toEqual(["ESNext", "DOM", "DOM.Iterable"]);
     expect(compilerOptions.exactOptionalPropertyTypes).toBe(true);
     expect(compilerOptions.noUncheckedIndexedAccess).toBe(true);

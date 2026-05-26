@@ -26,6 +26,7 @@ test("configures strict TypeScript worker options and renders inlay hints", asyn
           strict: options.strict,
           target: options.target === typescript.ScriptTarget.ESNext,
           module: options.module === typescript.ModuleKind.ESNext,
+          moduleResolution: options.moduleResolution,
           lib: options.lib,
           eagerModelSync: typescript.typescriptDefaults.getEagerModelSync(),
         };
@@ -35,6 +36,7 @@ test("configures strict TypeScript worker options and renders inlay hints", asyn
       strict: true,
       target: true,
       module: true,
+      moduleResolution: 100,
       lib: ["ESNext", "DOM", "DOM.Iterable"],
       eagerModelSync: true,
     });

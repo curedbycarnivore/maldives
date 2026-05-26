@@ -38,6 +38,8 @@ export function registerEffectSnippets(monacoApi: typeof monaco): monaco.IDispos
           insertText: snippet.insertText,
           insertTextRules: monacoApi.languages.CompletionItemInsertTextRule.InsertAsSnippet,
           documentation: snippet.documentation,
+          sortText: `0-${snippet.label}`,
+          filterText: snippet.label,
           range,
         })),
       };

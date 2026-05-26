@@ -80,7 +80,12 @@ describe("createMaldivesEditor", () => {
       theme: "tomorrow-night-eighties",
       automaticLayout: true,
       trimAutoWhitespace: true,
+      "semanticHighlighting.enabled": true,
+      bracketPairColorization: { enabled: true },
+      stickyScroll: { enabled: true },
+      inlayHints: { enabled: "on" },
     });
+    expect(monacoStub.editor.addCommand).toHaveBeenCalled();
     expect(monacoStub.api.languages.registerCompletionItemProvider).toHaveBeenCalledWith("typescript", expect.any(Object));
     expect(monacoStub.editor.onDidBlurEditorText).toHaveBeenCalledWith(expect.any(Function));
 
