@@ -86,6 +86,14 @@ describe("buildKeybindings", () => {
     expect(bindingFor("EditorLineEndWithSelection", M.Shift | M.CtrlCmd | K.RightArrow)).toBe(M.Shift | M.CtrlCmd | K.RightArrow);
     expect(bindingFor("EditorLineEndWithSelection", M.Shift | M.WinCtrl | K.KeyT)).toBe(M.Shift | M.WinCtrl | K.KeyT);
     expect(bindingFor("EditorDeleteToLineStart", M.CtrlCmd | K.Backspace)).toBe(M.CtrlCmd | K.Backspace);
+    expect(bindingFor("EditorNextWord", M.Alt | K.RightArrow)).toBe(M.Alt | K.RightArrow);
+    expect(bindingFor("EditorNextWord", M.CtrlCmd | M.Alt | K.KeyT)).toBe(M.CtrlCmd | M.Alt | K.KeyT);
+    expect(bindingFor("EditorPreviousWord", M.Alt | K.LeftArrow)).toBe(M.Alt | K.LeftArrow);
+    expect(bindingFor("EditorPreviousWord", M.CtrlCmd | M.Alt | K.KeyA)).toBe(M.CtrlCmd | M.Alt | K.KeyA);
+    expect(bindingFor("EditorNextWordWithSelection", M.Shift | M.Alt | K.RightArrow)).toBe(M.Shift | M.Alt | K.RightArrow);
+    expect(bindingFor("EditorNextWordWithSelection", M.Shift | M.CtrlCmd | M.Alt | K.KeyT)).toBe(M.Shift | M.CtrlCmd | M.Alt | K.KeyT);
+    expect(bindingFor("EditorPreviousWordWithSelection", M.Shift | M.Alt | K.LeftArrow)).toBe(M.Shift | M.Alt | K.LeftArrow);
+    expect(bindingFor("EditorPreviousWordWithSelection", M.Shift | M.CtrlCmd | M.Alt | K.KeyA)).toBe(M.Shift | M.CtrlCmd | M.Alt | K.KeyA);
     expect(bindingFor("AutoIndentLines", M.CtrlCmd | K.KeyI)).toBe(M.CtrlCmd | K.KeyI);
     expect(bindingFor("EditorDownWithSelection", M.Shift | M.Alt | K.KeyD)).toBe(M.Shift | M.Alt | K.KeyD);
     expect(bindingFor("EditorDownWithSelection", M.Shift | M.Alt | K.KeyS)).toBe(M.Shift | M.Alt | K.KeyS);

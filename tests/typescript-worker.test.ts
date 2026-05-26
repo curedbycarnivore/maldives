@@ -63,6 +63,21 @@ describe("configureTypeScriptWorker", () => {
     expect(compilerOptions.noUncheckedIndexedAccess).toBe(true);
     expect(compilerOptions.allowImportingTsExtensions).toBe(true);
     expect(compilerOptions.verbatimModuleSyntax).toBe(true);
+    expect(compilerOptions.allowNonTsExtensions).toBe(true);
+    expect(monacoStub.typescript.typescriptDefaults.getDiagnosticsOptions()).toEqual({
+      noSemanticValidation: false,
+      noSyntaxValidation: false,
+      noSuggestionDiagnostics: false,
+    });
+    expect(monacoStub.typescript.typescriptDefaults.getInlayHintsOptions()).toMatchObject({
+      includeInlayParameterNameHints: "all",
+      includeInlayParameterNameHintsWhenArgumentMatchesName: false,
+      includeInlayFunctionParameterTypeHints: true,
+      includeInlayVariableTypeHints: true,
+      includeInlayPropertyDeclarationTypeHints: true,
+      includeInlayFunctionLikeReturnTypeHints: true,
+      includeInlayEnumMemberValueHints: true,
+    });
     expect(monacoStub.typescript.typescriptDefaults.getEagerModelSync()).toBe(true);
   });
 });

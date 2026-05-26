@@ -3,7 +3,7 @@
     "dev": "vite --host 127.0.0.1",
     "test": "vitest run",
     "test:e2e": "playwright test --pass-with-no-tests",
-    "build": "tsc --noEmit && vite build"
+    "build": "tsc --noEmit --project tsconfig.build.json && vite build"
   },
   "dependencies": {
     "monaco-editor": "0.55.1"
