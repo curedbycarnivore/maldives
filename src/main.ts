@@ -2,6 +2,7 @@ import * as monaco from "monaco-editor";
 import activeThemeXml from "../ssot/colors/active-theme.icls?raw";
 import keymapXml from "../ssot/keymaps/leet hax.xml?raw";
 import editorOptionsXml from "../ssot/options/editor.xml?raw";
+import { stripTrailingWhitespaceFromModel } from "./hooks/trailing-whitespace";
 import { registerKeybindings, type RegisteredMaldivesAction } from "./keybindings";
 import { parseEditorOptions } from "./parsers/editor-options-parser";
 import { parseIcls } from "./parsers/icls-parser";
@@ -69,6 +70,16 @@ window.__maldivesExecuteKeybinding = (wsActionId) => {
   editor.trigger("maldives", registered.commandId, null);
   return true;
 };
+
+if (editorOptions.trimAutoWhitespace) {
+  editor.onDidBlurEditorText(() => {
+    const model = editor.getModel();
+
+    if (model) {
+      stripTrailingWhitespaceFromModel(monaco, model);
+    }
+  });
+}
 
 if (editorOptions.insertFinalNewline) {
   editor.onDidBlurEditorText(() => {

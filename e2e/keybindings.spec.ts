@@ -49,6 +49,20 @@ test("registered addCommand keybindings work across groups", async ({ page }) =>
   await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getPosition()?.column ?? 1)).toBeGreaterThan(1);
 
   await page.evaluate(() => {
+    window.__maldivesEditor.setValue("camelCaseWord");
+    window.__maldivesEditor.setPosition({ lineNumber: 1, column: 6 });
+    return window.__maldivesExecuteKeybinding("EditorDeleteToWordEndInDifferentHumpsMode");
+  });
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getValue())).toBe("camelWord");
+
+  await page.evaluate(() => {
+    window.__maldivesEditor.setValue("camelCaseWord");
+    window.__maldivesEditor.setPosition({ lineNumber: 1, column: 10 });
+    return window.__maldivesExecuteKeybinding("EditorDeleteToWordStartInDifferentHumpsMode");
+  });
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getValue())).toBe("camelWord");
+
+  await page.evaluate(() => {
     window.__maldivesEditor.setValue("one\ntwo");
     window.__maldivesEditor.setPosition({ lineNumber: 1, column: 1 });
     return window.__maldivesExecuteKeybinding("MoveLineDown");

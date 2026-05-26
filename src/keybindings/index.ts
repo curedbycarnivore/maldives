@@ -12,11 +12,15 @@ export interface RegisteredMaldivesAction extends MaldivesAction {
 }
 
 type Monaco = typeof import("monaco-editor");
+type EditorSelection = NonNullable<ReturnType<editor.IStandaloneCodeEditor["getSelections"]>>[number];
 
 type MonacoTarget =
   | { type: "action"; id: string }
   | { type: "command"; id: string }
-  | { type: "custom"; id: "removeLastSelection" };
+  | {
+      type: "custom";
+      id: "removeLastSelection" | "toggleCase" | "toggleCamelDashCase" | "increaseFontSize" | "decreaseFontSize" | "resetFontSize";
+    };
 
 const actionTargets: Record<string, MonacoTarget> = {
   MoveLineDown: { type: "action", id: "editor.action.moveLinesDownAction" },
@@ -44,7 +48,11 @@ const actionTargets: Record<string, MonacoTarget> = {
   ReformatCode: { type: "action", id: "editor.action.formatDocument" },
   EditorDeleteToWordStartInDifferentHumpsMode: { type: "command", id: "deleteWordPartLeft" },
   EditorDeleteToWordEndInDifferentHumpsMode: { type: "command", id: "deleteWordPartRight" },
-  EditorToggleCase: { type: "action", id: "editor.action.transformToUppercase" },
+  EditorToggleCase: { type: "custom", id: "toggleCase" },
+  toggleCamelDashCase: { type: "custom", id: "toggleCamelDashCase" },
+  EditorIncreaseFontSize: { type: "custom", id: "increaseFontSize" },
+  EditorDecreaseFontSize: { type: "custom", id: "decreaseFontSize" },
+  EditorResetFontSize: { type: "custom", id: "resetFontSize" },
   SelectNextOccurrence: { type: "action", id: "editor.action.addSelectionToNextFindMatch" },
   SelectAllOccurrences: { type: "action", id: "editor.action.selectHighlights" },
   UnselectPreviousOccurrence: { type: "custom", id: "removeLastSelection" },
@@ -63,8 +71,22 @@ export function registerKeybindings(
   monaco: Monaco,
   config: KeymapConfig,
 ): RegisteredMaldivesAction[] {
+  const addedSelections: EditorSelection[] = [];
+
   return buildKeybindings(config, monaco).flatMap((action) => {
-    const commandId = editor.addCommand(action.monacoBinding, () => action.handler(editor));
+    const commandId = editor.addCommand(action.monacoBinding, () => {
+      if (action.wsActionId === "SelectNextOccurrence") {
+        trackAddedSelection(editor, addedSelections, () => action.handler(editor));
+        return;
+      }
+
+      if (action.wsActionId === "UnselectPreviousOccurrence") {
+        removeTrackedSelection(editor, addedSelections);
+        return;
+      }
+
+      action.handler(editor);
+    });
 
     return commandId ? [{ ...action, commandId }] : [];
   });
@@ -132,6 +154,7 @@ function keyCodeForToken(token: string, monaco: Monaco): number | undefined {
     f2: monaco.KeyCode.F2,
     f6: monaco.KeyCode.F6,
     f7: monaco.KeyCode.F7,
+    "0": monaco.KeyCode.Digit0,
     "1": monaco.KeyCode.Digit1,
     "2": monaco.KeyCode.Digit2,
   };
@@ -156,7 +179,102 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
     };
   }
 
+  if (target.id === "toggleCase") {
+    return (editor) => replaceSelections(editor, toggleCaseText);
+  }
+
+  if (target.id === "toggleCamelDashCase") {
+    return (editor) => replaceSelections(editor, toggleCamelDashCaseText);
+  }
+
+  if (target.id === "increaseFontSize") {
+    return (editor) => updateFontSize(editor, 1);
+  }
+
+  if (target.id === "decreaseFontSize") {
+    return (editor) => updateFontSize(editor, -1);
+  }
+
+  if (target.id === "resetFontSize") {
+    return (editor) => setFontSize(editor, DEFAULT_FONT_SIZE);
+  }
+
   return removeLastSelection;
+}
+
+const DEFAULT_FONT_SIZE = 14;
+const MIN_FONT_SIZE = 8;
+const MAX_FONT_SIZE = 32;
+const fontSizesByEditor = new WeakMap<editor.IStandaloneCodeEditor, number>();
+
+export function toggleCaseText(value: string): string {
+  return value === value.toUpperCase() ? value.toLowerCase() : value.toUpperCase();
+}
+
+export function toggleCamelDashCaseText(value: string): string {
+  if (value.includes("-")) {
+    return value.replaceAll("-", "_");
+  }
+
+  if (value.includes("_")) {
+    return value.replace(/_([a-zA-Z0-9])/g, (_, character: string) => character.toUpperCase());
+  }
+
+  return value.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+}
+
+function replaceSelections(editor: editor.IStandaloneCodeEditor, transform: (value: string) => string): void {
+  const model = editor.getModel();
+  const selections = editor.getSelections()?.filter((selection) => !selection.isEmpty());
+
+  if (!model || !selections?.length) {
+    return;
+  }
+
+  editor.executeEdits(
+    "maldives",
+    selections.map((selection) => ({ range: selection, text: transform(model.getValueInRange(selection)) })),
+  );
+}
+
+function updateFontSize(editor: editor.IStandaloneCodeEditor, delta: number): void {
+  setFontSize(editor, (fontSizesByEditor.get(editor) ?? DEFAULT_FONT_SIZE) + delta);
+}
+
+function setFontSize(editor: editor.IStandaloneCodeEditor, fontSize: number): void {
+  const clamped = Math.min(MAX_FONT_SIZE, Math.max(MIN_FONT_SIZE, fontSize));
+
+  fontSizesByEditor.set(editor, clamped);
+  editor.updateOptions({ fontSize: clamped });
+}
+
+function trackAddedSelection(
+  editor: Pick<editor.IStandaloneCodeEditor, "getSelections">,
+  addedSelections: EditorSelection[],
+  run: () => void,
+): void {
+  const before = editor.getSelections() ?? [];
+
+  run();
+
+  const after = editor.getSelections() ?? [];
+  const added = after.find((selection) => !before.some((existing) => selection.equalsSelection(existing)));
+
+  if (added) {
+    addedSelections.push(added);
+  }
+}
+
+function removeTrackedSelection(
+  editor: Pick<editor.IStandaloneCodeEditor, "getSelections" | "setSelections">,
+  addedSelections: EditorSelection[],
+): void {
+  if (addedSelections.length === 0) {
+    return;
+  }
+
+  addedSelections.pop();
+  removeLastSelection(editor);
 }
 
 export function removeLastSelection(editor: Pick<editor.IStandaloneCodeEditor, "getSelections" | "setSelections">): void {
