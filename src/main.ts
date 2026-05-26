@@ -56,6 +56,18 @@ const editor = monaco.editor.create(app, {
   fontFamily: `${themeConfig.fontFamily}, Fira Code, monospace`,
   fontSize: themeConfig.fontSize,
   trimAutoWhitespace: editorOptions.trimAutoWhitespace,
+  "semanticHighlighting.enabled": true,
+  bracketPairColorization: {
+    enabled: true,
+    independentColorPoolPerBracketType: true,
+  },
+  guides: { bracketPairs: true, indentation: true },
+  stickyScroll: { enabled: true, maxLineCount: 5 },
+  inlayHints: {
+    enabled: "on",
+    fontSize: 12,
+    fontFamily: "JetBrains Mono",
+  },
 });
 const registeredKeybindings = registerKeybindings(editor, monaco, keymapConfig);
 window.__maldivesEditor = editor;
