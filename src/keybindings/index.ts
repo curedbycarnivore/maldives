@@ -19,7 +19,15 @@ type MonacoTarget =
   | { type: "command"; id: string }
   | {
       type: "custom";
-      id: "removeLastSelection" | "toggleCase" | "toggleCamelDashCase" | "increaseFontSize" | "decreaseFontSize" | "resetFontSize";
+      id:
+        | "removeLastSelection"
+        | "humpDeleteLeft"
+        | "humpDeleteRight"
+        | "toggleCase"
+        | "toggleCamelDashCase"
+        | "increaseFontSize"
+        | "decreaseFontSize"
+        | "resetFontSize";
     };
 
 const actionTargets: Record<string, MonacoTarget> = {
@@ -46,8 +54,8 @@ const actionTargets: Record<string, MonacoTarget> = {
   RenameElement: { type: "action", id: "editor.action.rename" },
   ShowUsages: { type: "action", id: "editor.action.referenceSearch.trigger" },
   ReformatCode: { type: "action", id: "editor.action.formatDocument" },
-  EditorDeleteToWordStartInDifferentHumpsMode: { type: "command", id: "deleteWordPartLeft" },
-  EditorDeleteToWordEndInDifferentHumpsMode: { type: "command", id: "deleteWordPartRight" },
+  EditorDeleteToWordStartInDifferentHumpsMode: { type: "custom", id: "humpDeleteLeft" },
+  EditorDeleteToWordEndInDifferentHumpsMode: { type: "custom", id: "humpDeleteRight" },
   EditorToggleCase: { type: "custom", id: "toggleCase" },
   toggleCamelDashCase: { type: "custom", id: "toggleCamelDashCase" },
   EditorIncreaseFontSize: { type: "custom", id: "increaseFontSize" },
@@ -179,6 +187,14 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
     };
   }
 
+  if (target.id === "humpDeleteLeft") {
+    return (editor) => deleteToWordPart(editor, "left");
+  }
+
+  if (target.id === "humpDeleteRight") {
+    return (editor) => deleteToWordPart(editor, "right");
+  }
+
   if (target.id === "toggleCase") {
     return (editor) => replaceSelections(editor, toggleCaseText);
   }
@@ -221,6 +237,39 @@ export function toggleCamelDashCaseText(value: string): string {
   }
 
   return value.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+}
+
+function deleteToWordPart(editor: editor.IStandaloneCodeEditor, direction: "left" | "right"): void {
+  const start = editor.getPosition();
+
+  if (!start) {
+    return;
+  }
+
+  editor.trigger("maldives", direction === "left" ? "cursorWordPartLeft" : "cursorWordPartRight", null);
+
+  const end = editor.getPosition();
+
+  if (!end || (end.lineNumber === start.lineNumber && end.column === start.column)) {
+    return;
+  }
+
+  const range =
+    direction === "left"
+      ? {
+          startLineNumber: end.lineNumber,
+          startColumn: end.column,
+          endLineNumber: start.lineNumber,
+          endColumn: start.column,
+        }
+      : {
+          startLineNumber: start.lineNumber,
+          startColumn: start.column,
+          endLineNumber: end.lineNumber,
+          endColumn: end.column,
+        };
+
+  editor.executeEdits("maldives", [{ range, text: "" }]);
 }
 
 function replaceSelections(editor: editor.IStandaloneCodeEditor, transform: (value: string) => string): void {
@@ -273,8 +322,24 @@ function removeTrackedSelection(
     return;
   }
 
-  addedSelections.pop();
-  removeLastSelection(editor);
+  removeSelection(editor, addedSelections.pop());
+}
+
+function removeSelection(
+  editor: Pick<editor.IStandaloneCodeEditor, "getSelections" | "setSelections">,
+  selectionToRemove: EditorSelection | undefined,
+): void {
+  const selections = editor.getSelections();
+
+  if (!selections || selections.length <= 1 || !selectionToRemove) {
+    return;
+  }
+
+  const remainingSelections = selections.filter((selection) => !selection.equalsSelection(selectionToRemove));
+
+  if (remainingSelections.length !== selections.length) {
+    editor.setSelections(remainingSelections);
+  }
 }
 
 export function removeLastSelection(editor: Pick<editor.IStandaloneCodeEditor, "getSelections" | "setSelections">): void {

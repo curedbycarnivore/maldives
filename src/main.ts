@@ -2,7 +2,7 @@ import * as monaco from "monaco-editor";
 import activeThemeXml from "../ssot/colors/active-theme.icls?raw";
 import keymapXml from "../ssot/keymaps/leet hax.xml?raw";
 import editorOptionsXml from "../ssot/options/editor.xml?raw";
-import { stripTrailingWhitespaceFromModel } from "./hooks/trailing-whitespace";
+import { cleanOnBlurFromModel } from "./hooks/trailing-whitespace";
 import { registerKeybindings, type RegisteredMaldivesAction } from "./keybindings";
 import { parseEditorOptions } from "./parsers/editor-options-parser";
 import { parseIcls } from "./parsers/icls-parser";
@@ -71,30 +71,16 @@ window.__maldivesExecuteKeybinding = (wsActionId) => {
   return true;
 };
 
-if (editorOptions.trimAutoWhitespace) {
+if (
+  editorOptions.removeTrailingBlankLines ||
+  editorOptions.trimAutoWhitespace ||
+  editorOptions.insertFinalNewline
+) {
   editor.onDidBlurEditorText(() => {
     const model = editor.getModel();
 
     if (model) {
-      stripTrailingWhitespaceFromModel(monaco, model);
-    }
-  });
-}
-
-if (editorOptions.insertFinalNewline) {
-  editor.onDidBlurEditorText(() => {
-    const model = editor.getModel();
-    const value = model?.getValue();
-
-    if (model && value && !value.endsWith("\n")) {
-      const line = model.getLineCount();
-      const column = model.getLineMaxColumn(line);
-
-      model.pushEditOperations(
-        [],
-        [{ range: new monaco.Range(line, column, line, column), text: "\n" }],
-        () => null,
-      );
+      cleanOnBlurFromModel(model, editorOptions);
     }
   });
 }
