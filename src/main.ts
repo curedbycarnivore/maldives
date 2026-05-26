@@ -2,6 +2,7 @@ import * as monaco from "monaco-editor";
 import activeThemeXml from "../ssot/colors/active-theme.icls?raw";
 import keymapXml from "../ssot/keymaps/leet hax.xml?raw";
 import editorOptionsXml from "../ssot/options/editor.xml?raw";
+import { registerEffectSnippets } from "./effect-snippets";
 import { cleanOnBlurFromModel } from "./hooks/trailing-whitespace";
 import { registerKeybindings, type RegisteredMaldivesAction } from "./keybindings";
 import { parseEditorOptions } from "./parsers/editor-options-parser";
@@ -49,6 +50,7 @@ const keymapConfig = parseKeymap(keymapXml);
 
 registerTheme(monaco, themeConfig);
 configureTypeScriptWorker(monaco);
+registerEffectSnippets(monaco);
 
 window.__monaco = monaco;
 const editor = monaco.editor.create(app, {
