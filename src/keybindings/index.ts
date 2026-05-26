@@ -1,4 +1,5 @@
 import type { editor } from "monaco-editor";
+import { completeStatementWhenReady, expandAstSelectionWhenReady } from "../ast-smart-selection";
 import type { KeyAction, KeymapConfig } from "../parsers/keymap-parser";
 
 export interface MaldivesAction {
@@ -20,6 +21,8 @@ type MonacoTarget =
   | {
       type: "custom";
       id:
+        | "astSmartSelect"
+        | "completeStatement"
         | "removeLastSelection"
         | "humpDeleteLeft"
         | "humpDeleteRight"
@@ -36,7 +39,8 @@ const actionTargets: Record<string, MonacoTarget> = {
   MoveStatementDown: { type: "action", id: "editor.action.moveCaretToLogicalLineDown" },
   MoveStatementUp: { type: "action", id: "editor.action.moveCaretToLogicalLineUp" },
   EditorDeleteLine: { type: "action", id: "editor.action.deleteLines" },
-  EditorSelectWord: { type: "action", id: "editor.action.smartSelect.expand" },
+  EditorSelectWord: { type: "custom", id: "astSmartSelect" },
+  EditorCompleteStatement: { type: "custom", id: "completeStatement" },
   EditorUnSelectWord: { type: "action", id: "editor.action.smartSelect.shrink" },
   EditorLineStart: { type: "command", id: "cursorHome" },
   EditorLineEnd: { type: "command", id: "cursorEnd" },
@@ -240,6 +244,14 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
     return (editor) => {
       editor.trigger("maldives", target.id, null);
     };
+  }
+
+  if (target.id === "astSmartSelect") {
+    return (editor) => expandAstSelectionWhenReady(editor, () => void editor.getAction("editor.action.smartSelect.expand")?.run());
+  }
+
+  if (target.id === "completeStatement") {
+    return completeStatementWhenReady;
   }
 
   if (target.id === "humpDeleteLeft") {

@@ -2,6 +2,8 @@ import * as monaco from "monaco-editor";
 import activeThemeXml from "../ssot/colors/active-theme.icls?raw";
 import keymapXml from "../ssot/keymaps/leet hax.xml?raw";
 import editorOptionsXml from "../ssot/options/editor.xml?raw";
+import { initializeAstSmartSelection } from "./ast-smart-selection";
+import { registerAstStructuralSearchAction } from "./ast-structural-search";
 import { registerEffectSnippets } from "./effect-snippets";
 import { cleanOnBlurFromModel } from "./hooks/trailing-whitespace";
 import { registerKeybindings, type RegisteredMaldivesAction } from "./keybindings";
@@ -51,6 +53,7 @@ const keymapConfig = parseKeymap(keymapXml);
 registerTheme(monaco, themeConfig);
 configureTypeScriptWorker(monaco);
 registerEffectSnippets(monaco);
+void initializeAstSmartSelection().catch(() => undefined);
 
 window.__monaco = monaco;
 const editor = monaco.editor.create(app, {
@@ -64,6 +67,7 @@ const editor = monaco.editor.create(app, {
   ...maldivesProFeatureOptions,
 });
 const registeredKeybindings = registerKeybindings(editor, monaco, keymapConfig);
+registerAstStructuralSearchAction(editor);
 window.__maldivesEditor = editor;
 window.__maldivesKeybindings = registeredKeybindings;
 window.__maldivesExecuteKeybinding = (wsActionId) => {
