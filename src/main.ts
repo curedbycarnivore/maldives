@@ -7,7 +7,9 @@ import { registerKeybindings, type RegisteredMaldivesAction } from "./keybinding
 import { parseEditorOptions } from "./parsers/editor-options-parser";
 import { parseIcls } from "./parsers/icls-parser";
 import { parseKeymap } from "./parsers/keymap-parser";
+import { maldivesProFeatureOptions } from "./pro-features";
 import { registerTheme, THEME_NAME } from "./theme";
+import { configureTypeScriptWorker } from "./typescript-worker";
 
 declare global {
   interface Window {
@@ -46,6 +48,7 @@ const editorOptions = parseEditorOptions(editorOptionsXml);
 const keymapConfig = parseKeymap(keymapXml);
 
 registerTheme(monaco, themeConfig);
+configureTypeScriptWorker(monaco);
 
 window.__monaco = monaco;
 const editor = monaco.editor.create(app, {
@@ -56,18 +59,7 @@ const editor = monaco.editor.create(app, {
   fontFamily: `${themeConfig.fontFamily}, Fira Code, monospace`,
   fontSize: themeConfig.fontSize,
   trimAutoWhitespace: editorOptions.trimAutoWhitespace,
-  "semanticHighlighting.enabled": true,
-  bracketPairColorization: {
-    enabled: true,
-    independentColorPoolPerBracketType: true,
-  },
-  guides: { bracketPairs: true, indentation: true },
-  stickyScroll: { enabled: true, maxLineCount: 5 },
-  inlayHints: {
-    enabled: "on",
-    fontSize: 12,
-    fontFamily: "JetBrains Mono",
-  },
+  ...maldivesProFeatureOptions,
 });
 const registeredKeybindings = registerKeybindings(editor, monaco, keymapConfig);
 window.__maldivesEditor = editor;

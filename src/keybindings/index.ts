@@ -80,8 +80,11 @@ export function registerKeybindings(
   config: KeymapConfig,
 ): RegisteredMaldivesAction[] {
   const addedSelections: EditorSelection[] = [];
+  const actions = buildKeybindings(config, monaco);
 
-  return buildKeybindings(config, monaco).flatMap((action) => {
+  registerCustomEditorActions(editor, actions);
+
+  return actions.flatMap((action) => {
     const commandId = editor.addCommand(action.monacoBinding, () => {
       if (action.wsActionId === "SelectNextOccurrence") {
         trackAddedSelection(editor, addedSelections, () => action.handler(editor));
@@ -98,6 +101,44 @@ export function registerKeybindings(
 
     return commandId ? [{ ...action, commandId }] : [];
   });
+}
+
+const customEditorActions: Partial<Record<string, { id: string; label: string }>> = {
+  EditorToggleCase: { id: "maldives.toggleCase", label: "Toggle Case" },
+  toggleCamelDashCase: { id: "maldives.toggleCamelDashCase", label: "Toggle Camel/Dash/Snake Case" },
+  EditorIncreaseFontSize: { id: "maldives.increaseFontSize", label: "Increase Font Size" },
+  EditorDecreaseFontSize: { id: "maldives.decreaseFontSize", label: "Decrease Font Size" },
+  EditorResetFontSize: { id: "maldives.resetFontSize", label: "Reset Font Size" },
+};
+
+function registerCustomEditorActions(editor: editor.IStandaloneCodeEditor, actions: MaldivesAction[]): void {
+  if (typeof editor.addAction !== "function") {
+    return;
+  }
+
+  const actionsById = new Map<string, MaldivesAction[]>();
+
+  for (const action of actions) {
+    if (customEditorActions[action.wsActionId]) {
+      actionsById.set(action.wsActionId, [...(actionsById.get(action.wsActionId) ?? []), action]);
+    }
+  }
+
+  for (const [wsActionId, registeredActions] of actionsById) {
+    const metadata = customEditorActions[wsActionId];
+    const handler = registeredActions[0]?.handler;
+
+    if (!metadata || !handler) {
+      continue;
+    }
+
+    editor.addAction({
+      id: metadata.id,
+      label: metadata.label,
+      keybindings: registeredActions.map((action) => action.monacoBinding),
+      run: handler,
+    });
+  }
 }
 
 function keybindingsForAction(action: KeyAction, monaco: Monaco): MaldivesAction[] {
