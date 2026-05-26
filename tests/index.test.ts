@@ -11,8 +11,9 @@ const monacoStub = vi.hoisted(() => {
   };
 
   const editor = {
-    addAction: vi.fn(),
+    addAction: vi.fn(() => ({ dispose: vi.fn() })),
     addCommand: vi.fn(() => "command-id"),
+    createDecorationsCollection: vi.fn(() => ({ clear: vi.fn() })),
     getAction: vi.fn(() => ({ run: vi.fn() })),
     trigger: vi.fn(),
     getModel: vi.fn(() => null),
