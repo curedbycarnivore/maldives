@@ -174,7 +174,7 @@ describe("buildKeybindings", () => {
   });
 
   test("omits unmapped actions", () => {
-    expect(bindings.some((action) => action.wsActionId === "AceJumpAction")).toBe(false);
+    expect(bindings.some((action) => action.wsActionId === "DefinitelyNotAnAction")).toBe(false);
   });
 });
 
