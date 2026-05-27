@@ -132,6 +132,11 @@ describe("buildKeybindings", () => {
     expect(bindingFor("CollapseAllRegions", M.Shift | M.WinCtrl | K.Minus)).toBe(M.Shift | M.WinCtrl | K.Minus);
     expect(bindingFor("ExpandAllRegions", M.Shift | M.CtrlCmd | K.Equal)).toBe(M.Shift | M.CtrlCmd | K.Equal);
     expect(bindingFor("CommentByBlockComment", M.CtrlCmd | M.Alt | K.Slash)).toBe(M.CtrlCmd | M.Alt | K.Slash);
+    expect(bindingFor("HippieCompletion", M.Shift | M.CtrlCmd | K.Slash)).toBe(M.Shift | M.CtrlCmd | K.Slash);
+    expect(bindingFor("HippieCompletion", M.WinCtrl | K.KeyL)).toBe(M.WinCtrl | K.KeyL);
+    expect(bindingFor("HippieBackwardCompletion", M.Shift | M.Alt | K.Slash)).toBe(M.Shift | M.Alt | K.Slash);
+    expect(bindingFor("HippieBackwardCompletion", M.Shift | M.CtrlCmd | M.Alt | K.Slash)).toBe(M.Shift | M.CtrlCmd | M.Alt | K.Slash);
+    expect(bindingFor("HippieBackwardCompletion", M.WinCtrl | K.KeyD)).toBe(M.WinCtrl | K.KeyD);
     expect(bindingFor("GotoNextError", K.F2)).toBe(K.F2);
     expect(bindingFor("GotoTypeDeclaration", M.Shift | M.WinCtrl | K.KeyB)).toBe(M.Shift | M.WinCtrl | K.KeyB);
     expect(bindingFor("FileStructurePopup", M.CtrlCmd | K.F12)).toBe(M.CtrlCmd | K.F12);

@@ -290,6 +290,10 @@ function keyCodeForToken(token: string, monaco: Monaco): number | undefined {
 function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCodeEditor) => void {
   if (target.type === "action") {
     return (editor) => {
+      if (target.id === "editor.action.quickOutline" || target.id === "editor.action.quickCommand") {
+        editor.focus();
+      }
+
       void editor.getAction(target.id)?.run();
     };
   }
