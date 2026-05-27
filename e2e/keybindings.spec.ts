@@ -171,6 +171,23 @@ test("alt number tab keybindings switch deterministic models", async ({ page }) 
   await page.screenshot({ path: "proof/tab-switching-proof.png" });
 });
 
+test("move tab right reorders deterministic model tabs", async ({ page }) => {
+  await loadEditor(page);
+
+  const moved = await page.evaluate(() => window.__maldivesExecuteKeybinding("MoveTabRight"));
+
+  expect(moved).toBe(true);
+
+  const switchedToSecondSlot = await page.evaluate(() => window.__maldivesExecuteKeybinding("GoToTab2"));
+
+  expect(switchedToSecondSlot).toBe(true);
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getModel()?.uri.path)).toBe("/maldives/sample.ts");
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.hasTextFocus())).toBe(true);
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/move-tab-right-proof.png" });
+});
+
 test("goto file opens the Maldives file switcher", async ({ page }) => {
   await loadEditor(page);
 
@@ -187,6 +204,44 @@ test("goto file opens the Maldives file switcher", async ({ page }) => {
 
   await page.locator(".maldives-file-switcher-item").first().click();
   await expect(page.locator(".maldives-file-switcher")).toHaveCount(0);
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.hasTextFocus())).toBe(true);
+});
+
+test("recent locations overlay restores a deterministic model position", async ({ page }) => {
+  await loadEditor(page);
+
+  const opened = await page.evaluate(() => {
+    const sampleModel = window.__monaco.editor.getModel(window.__monaco.Uri.parse("file:///maldives/sample.ts"));
+    const secondModel = window.__monaco.editor.getModel(window.__monaco.Uri.parse("file:///maldives/second.ts"));
+
+    if (!sampleModel || !secondModel) {
+      return false;
+    }
+
+    window.__maldivesEditor.setModel(sampleModel);
+    window.__maldivesEditor.setPosition({ lineNumber: 2, column: 7 });
+    window.__maldivesEditor.setModel(secondModel);
+    window.__maldivesEditor.setPosition({ lineNumber: 2, column: 14 });
+
+    return window.__maldivesExecuteKeybinding("RecentLocations");
+  });
+
+  expect(opened).toBe(true);
+  await page.locator(".maldives-recent-locations").waitFor({ state: "visible", timeout: 8000 });
+  await expect(page.locator(".maldives-recent-locations")).toContainText("Recent Locations");
+  await expect(page.locator(".maldives-recent-locations")).toContainText("/maldives/second.ts:2:14");
+
+  const sampleLocation = page.locator(".maldives-recent-locations-item").filter({ hasText: "/maldives/sample.ts:2:7" }).first();
+  await expect(sampleLocation).toContainText("const camelCaseWord");
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/recent-locations-proof.png" });
+
+  await sampleLocation.click();
+
+  await expect(page.locator(".maldives-recent-locations")).toHaveCount(0);
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getModel()?.uri.path)).toBe("/maldives/sample.ts");
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getPosition())).toEqual({ lineNumber: 2, column: 7 });
   await expect.poll(() => page.evaluate(() => window.__maldivesEditor.hasTextFocus())).toBe(true);
 });
 

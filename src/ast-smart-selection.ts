@@ -2,6 +2,7 @@ import { initializeTreeSitter, parse, registerDynamicLanguage, type SgNode } fro
 import type { editor } from "monaco-editor";
 
 const TYPESCRIPT_LANGUAGE = "typescript";
+const COMPLETE_STATEMENT_READY_TIMEOUT_MS = 50;
 let initPromise: Promise<void> | undefined;
 
 export function initializeAstSmartSelection(): Promise<void> {
@@ -80,14 +81,45 @@ interface StructuralMoveEdit {
 }
 
 export function completeStatementWhenReady(editor: editor.IStandaloneCodeEditor): void {
+  if (editor.hasWidgetFocus()) {
+    return;
+  }
+
   if (!initPromise) {
     initPromise = initializeAstSmartSelection();
   }
 
-  void initPromise.then(
-    () => completeStatement(editor),
-    () => undefined,
-  );
+  let handled = false;
+  let timeoutId: ReturnType<typeof globalThis.setTimeout>;
+  const fallback = () => {
+    if (handled) {
+      return;
+    }
+
+    handled = true;
+    if (!editor.hasWidgetFocus()) {
+      completeStatementFallback(editor);
+    }
+  };
+  const tryCompleteStatement = () => {
+    if (handled) {
+      return;
+    }
+
+    globalThis.clearTimeout(timeoutId);
+    if (editor.hasWidgetFocus() || completeStatement(editor)) {
+      handled = true;
+      return;
+    }
+
+    fallback();
+  };
+
+  timeoutId = globalThis.setTimeout(fallback, COMPLETE_STATEMENT_READY_TIMEOUT_MS);
+  void initPromise.then(tryCompleteStatement, () => {
+    globalThis.clearTimeout(timeoutId);
+    fallback();
+  });
 }
 
 export function moveStatementWhenReady(editor: editor.IStandaloneCodeEditor, direction: "up" | "down"): void {
@@ -152,6 +184,30 @@ export function completionForCursor(source: string, offset: number): CompleteSta
   }
 
   return undefined;
+}
+
+function completeStatementFallback(editor: editor.IStandaloneCodeEditor): boolean {
+  const model = editor.getModel();
+  const position = editor.getPosition();
+
+  if (!model || !position) {
+    return false;
+  }
+
+  const lineEndColumn = model.getLineMaxColumn(position.lineNumber);
+  editor.executeEdits("maldives", [
+    {
+      range: {
+        startLineNumber: position.lineNumber,
+        startColumn: lineEndColumn,
+        endLineNumber: position.lineNumber,
+        endColumn: lineEndColumn,
+      },
+      text: ";\n",
+    },
+  ]);
+  editor.setPosition({ lineNumber: position.lineNumber + 1, column: 1 });
+  return true;
 }
 
 function completeStatement(editor: editor.IStandaloneCodeEditor): boolean {

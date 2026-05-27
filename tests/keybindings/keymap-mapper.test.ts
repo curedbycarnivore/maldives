@@ -147,6 +147,8 @@ describe("buildKeybindings", () => {
     expect(bindingFor("FileStructurePopup", M.Shift | M.CtrlCmd | K.KeyS)).toBe(M.Shift | M.CtrlCmd | K.KeyS);
     expect(bindingFor("GotoClass", M.Shift | M.CtrlCmd | K.KeyO)).toBe(M.Shift | M.CtrlCmd | K.KeyO);
     expect(bindingFor("GotoFile", M.CtrlCmd | K.KeyO)).toBe(M.CtrlCmd | K.KeyO);
+    expect(bindingFor("MoveTabRight", M.Shift | M.WinCtrl | K.KeyI)).toBe(M.Shift | M.WinCtrl | K.KeyI);
+    expect(bindingFor("RecentLocations", M.CtrlCmd | M.Alt | K.KeyL)).toBe(M.CtrlCmd | M.Alt | K.KeyL);
     expect(bindingFor("SearchEverywhere", M.WinCtrl | M.CtrlCmd | M.Alt | K.KeyF)).toBe(M.WinCtrl | M.CtrlCmd | M.Alt | K.KeyF);
     expect(bindingFor("ShowIntentionActions", M.Shift | M.Alt | K.Enter)).toBe(M.Shift | M.Alt | K.Enter);
     expect(bindingFor("EditorStartNewLine", M.Alt | K.Enter)).toBe(M.Alt | K.Enter);

@@ -9,8 +9,10 @@ import {
 import {
   applyActiveTabSwitcherItem,
   moveActiveTabSwitcherItem,
+  moveCurrentModelTabRight,
   openGotoFileSwitcher,
   openRecentLocationsOverlay,
+  openShowNavBarOverlay,
   openTabSwitcher,
   switchToLastModelTab,
   switchToModelTab,
@@ -59,6 +61,7 @@ type MonacoTarget =
         | "gotoFile"
         | "tabSwitcher"
         | "recentLocations"
+        | "showNavBar"
         | "switchApply"
         | "switchDown"
         | "switchUp"
@@ -66,7 +69,8 @@ type MonacoTarget =
         | "switchRight"
         | "switchNextModelTab"
         | "switchPreviousModelTab"
-        | "switchLastModelTab";
+        | "switchLastModelTab"
+        | "moveTabRight";
     }
   | { type: "custom"; id: "switchModelTab"; tabIndex: number };
 
@@ -83,6 +87,7 @@ const actionTargets: Record<string, MonacoTarget> = {
   NextTab: { type: "custom", id: "switchNextModelTab" },
   "TabSwitcherExtreme.NextTab": { type: "custom", id: "switchNextModelTab" },
   PreviousTab: { type: "custom", id: "switchPreviousModelTab" },
+  MoveTabRight: { type: "custom", id: "moveTabRight" },
   GoToLastTab: { type: "custom", id: "switchLastModelTab" },
   "Switch To Last Tab": { type: "custom", id: "switchLastModelTab" },
   AceJumpAction: { type: "custom", id: "aceJump" },
@@ -135,6 +140,7 @@ const actionTargets: Record<string, MonacoTarget> = {
   GotoFile: { type: "custom", id: "gotoFile" },
   Switcher: { type: "custom", id: "tabSwitcher" },
   RecentLocations: { type: "custom", id: "recentLocations" },
+  ShowNavBar: { type: "custom", id: "showNavBar" },
   SwitchApply: { type: "custom", id: "switchApply" },
   SwitchDown: { type: "custom", id: "switchDown" },
   SwitchUp: { type: "custom", id: "switchUp" },
@@ -291,7 +297,9 @@ function keyCodeForToken(token: string, monaco: Monaco): number | undefined {
     back_space: monaco.KeyCode.Backspace,
     delete: monaco.KeyCode.Delete,
     enter: monaco.KeyCode.Enter,
+    escape: monaco.KeyCode.Escape,
     space: monaco.KeyCode.Space,
+    back_quote: monaco.KeyCode.Backquote,
     tab: monaco.KeyCode.Tab,
     page_up: monaco.KeyCode.PageUp,
     page_down: monaco.KeyCode.PageDown,
@@ -438,6 +446,10 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
     return openRecentLocationsOverlay;
   }
 
+  if (target.id === "showNavBar") {
+    return openShowNavBarOverlay;
+  }
+
   if (target.id === "switchApply") {
     return () => applyActiveTabSwitcherItem();
   }
@@ -464,6 +476,10 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
 
   if (target.id === "switchLastModelTab") {
     return (editor) => void switchToLastModelTab(editor);
+  }
+
+  if (target.id === "moveTabRight") {
+    return (editor) => void moveCurrentModelTabRight(editor);
   }
 
   return removeLastSelection;

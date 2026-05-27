@@ -11,6 +11,10 @@ export interface RecentLocationItem extends FileSwitcherItem {
   column: number;
 }
 
+export type NavBarItem =
+  | { kind: "path"; label: string; description: string }
+  | ({ kind: "model" } & FileSwitcherItem);
+
 const modelTabs: editor.ITextModel[] = [];
 const recentLocations: RecentLocationItem[] = [];
 const maxRecentLocations = 12;
@@ -47,6 +51,31 @@ export function switchToLastModelTab(editor: editor.IStandaloneCodeEditor): bool
   return switchToModel(editor, models.at(-1));
 }
 
+export function moveCurrentModelTabRight(editor: editor.IStandaloneCodeEditor): boolean {
+  const currentModel = editor.getModel();
+  const models = modelsForSwitcher(editor);
+  const currentLiveIndex = models.findIndex((model) => model === currentModel);
+  const nextModel = models[currentLiveIndex + 1];
+
+  if (!currentModel || !nextModel) {
+    editor.focus();
+    return false;
+  }
+
+  const currentIndex = modelTabs.indexOf(currentModel);
+  const nextIndex = modelTabs.indexOf(nextModel);
+
+  if (currentIndex === -1 || nextIndex === -1) {
+    editor.focus();
+    return false;
+  }
+
+  modelTabs[currentIndex] = nextModel;
+  modelTabs[nextIndex] = currentModel;
+  editor.focus();
+  return true;
+}
+
 function switchToModel(editor: editor.IStandaloneCodeEditor, model: editor.ITextModel | undefined): boolean {
   if (!model) {
     editor.focus();
@@ -69,6 +98,89 @@ export function openTabSwitcher(editor: editor.IStandaloneCodeEditor): void {
 export function openRecentLocationsOverlay(editor: editor.IStandaloneCodeEditor): void {
   recordCurrentRecentLocation(editor);
   openRecentLocationSwitcher(editor);
+}
+
+export function navBarItems(editor: editor.IStandaloneCodeEditor): NavBarItem[] {
+  const modelItems = fileSwitcherItems(editor);
+  const currentModel = editor.getModel();
+  const currentPath = currentModel ? pathForModel(currentModel) : modelItems[0]?.description;
+  const pathItems = currentPath
+    ? pathSegmentsForPath(currentPath).map((item): NavBarItem => ({ kind: "path", ...item }))
+    : [];
+
+  return [...pathItems, ...modelItems.map((item): NavBarItem => ({ kind: "model", ...item }))];
+}
+
+export function openShowNavBarOverlay(editor: editor.IStandaloneCodeEditor): void {
+  const items = navBarItems(editor);
+
+  if (items.length === 0) {
+    editor.focus();
+    return;
+  }
+
+  document.querySelector(".maldives-nav-bar")?.remove();
+
+  const overlay = document.createElement("div");
+  overlay.className = "maldives-nav-bar";
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-label", "Nav Bar");
+  overlay.style.cssText = [
+    "position:fixed",
+    "top:48px",
+    "left:50%",
+    "transform:translateX(-50%)",
+    "z-index:10000",
+    "width:min(560px, calc(100vw - 32px))",
+    "background:#1e1e1e",
+    "color:#d4d4d4",
+    "border:1px solid #454545",
+    "box-shadow:0 12px 32px rgba(0,0,0,.45)",
+    "font:13px system-ui, sans-serif",
+  ].join(";");
+
+  const heading = document.createElement("div");
+  heading.textContent = "Nav Bar";
+  heading.style.cssText = "padding:10px 12px;border-bottom:1px solid #333;color:#fff;font-weight:600";
+  overlay.append(heading);
+
+  const pathRow = document.createElement("div");
+  pathRow.style.cssText = "display:flex;gap:6px;align-items:center;padding:8px 12px;border-bottom:1px solid #333;color:#9cdcfe";
+  for (const item of items.filter((item) => item.kind === "path")) {
+    const segment = document.createElement("span");
+    segment.className = "maldives-nav-bar-segment";
+    segment.title = item.description;
+    segment.textContent = item.label;
+    segment.style.cssText = "padding:2px 6px;border-radius:3px;background:#252526";
+    pathRow.append(segment);
+  }
+  overlay.append(pathRow);
+
+  for (const item of items.filter((item): item is { kind: "model" } & FileSwitcherItem => item.kind === "model")) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "maldives-nav-bar-item";
+    button.setAttribute("aria-label", `${item.label} ${item.description}`);
+    button.style.cssText = [
+      "display:block",
+      "width:100%",
+      "padding:10px 12px",
+      "border:0",
+      "background:transparent",
+      "color:inherit",
+      "text-align:left",
+      "cursor:pointer",
+    ].join(";");
+    button.innerHTML = `<div>${escapeHtml(item.label)}</div><div style="color:#9cdcfe;font-size:12px">${escapeHtml(item.description)}</div>`;
+    button.addEventListener("click", () => {
+      switchToModel(editor, item.model);
+      overlay.remove();
+    });
+    overlay.append(button);
+  }
+
+  document.body.append(overlay);
+  overlay.querySelector<HTMLButtonElement>("button")?.focus();
 }
 
 export function registerRecentLocationTracking(editor: editor.IStandaloneCodeEditor): { dispose: () => void } {
@@ -347,10 +459,23 @@ function modelsForSwitcher(editor: editor.IStandaloneCodeEditor): editor.ITextMo
 }
 
 function itemForModel(model: editor.ITextModel): FileSwitcherItem {
-  const path = model.uri.scheme === "inmemory" ? "/maldives/sample.ts" : model.uri.path || "/maldives/sample.ts";
+  const path = pathForModel(model);
   const label = path.split("/").filter(Boolean).at(-1) || "sample.ts";
 
   return { label, description: path, model };
+}
+
+function pathForModel(model: editor.ITextModel): string {
+  return model.uri.scheme === "inmemory" ? "/maldives/sample.ts" : model.uri.path || "/maldives/sample.ts";
+}
+
+function pathSegmentsForPath(path: string): Array<{ label: string; description: string }> {
+  const segments = path.split("/").filter(Boolean);
+
+  return segments.map((label, index) => ({
+    label,
+    description: `/${segments.slice(0, index + 1).join("/")}`,
+  }));
 }
 
 function escapeHtml(value: string): string {
