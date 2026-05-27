@@ -16,7 +16,7 @@ export type NavBarItem =
   | ({ kind: "model" } & FileSwitcherItem);
 
 const modelTabs: editor.ITextModel[] = [];
-const closedTabStack: editor.ITextModel[] = [];
+const closedTabStack: string[] = [];
 const recentLocations: RecentLocationItem[] = [];
 const maxClosedTabs = 10;
 const maxRecentLocations = 12;
@@ -79,12 +79,18 @@ export function moveCurrentModelTabRight(editor: editor.IStandaloneCodeEditor): 
 }
 
 export function reopenClosedTab(editor: editor.IStandaloneCodeEditor): boolean {
-  const currentModel = editor.getModel();
+  const currentModelUri = editor.getModel()?.uri.toString();
 
   while (closedTabStack.length > 0) {
-    const model = closedTabStack.pop();
+    const modelUri = closedTabStack.pop();
 
-    if (!model || model.isDisposed() || model === currentModel) {
+    if (!modelUri || modelUri === currentModelUri) {
+      continue;
+    }
+
+    const model = modelForUri(modelUri);
+
+    if (!model) {
       continue;
     }
 
@@ -129,10 +135,16 @@ function recordClosedTabForSwitch(editor: editor.IStandaloneCodeEditor, targetMo
     return;
   }
 
-  if (closedTabStack.at(-1) !== currentModel) {
-    closedTabStack.push(currentModel);
+  const currentModelUri = currentModel.uri.toString();
+
+  if (closedTabStack.at(-1) !== currentModelUri) {
+    closedTabStack.push(currentModelUri);
     closedTabStack.splice(0, Math.max(0, closedTabStack.length - maxClosedTabs));
   }
+}
+
+function modelForUri(uri: string): editor.ITextModel | undefined {
+  return modelTabs.find((model) => !model.isDisposed() && model.uri.toString() === uri);
 }
 
 export function openGotoFileSwitcher(editor: editor.IStandaloneCodeEditor): void {

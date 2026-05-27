@@ -43,6 +43,7 @@ type MonacoTarget =
       id:
         | "astSmartSelect"
         | "completeStatement"
+        | "chooseLookupAndComplete"
         | "moveElementLeft"
         | "moveElementRight"
         | "methodDown"
@@ -108,6 +109,7 @@ const actionTargets: Record<string, MonacoTarget> = {
   MoveStatementUp: { type: "custom", id: "moveStatementUp" },
   EditorDeleteLine: { type: "action", id: "editor.action.deleteLines" },
   EditorSelectWord: { type: "custom", id: "astSmartSelect" },
+  EditorChooseLookupItemCompleteStatement: { type: "custom", id: "chooseLookupAndComplete" },
   EditorCompleteStatement: { type: "custom", id: "completeStatement" },
   EditorStartNewLine: { type: "action", id: "editor.action.insertLineAfter" },
   EditorStartNewLineBefore: { type: "action", id: "editor.action.insertLineBefore" },
@@ -151,9 +153,11 @@ const actionTargets: Record<string, MonacoTarget> = {
   SwitchRight: { type: "custom", id: "switchRight" },
   SearchEverywhere: { type: "action", id: "editor.action.quickCommand" },
   ShowIntentionActions: { type: "action", id: "editor.action.quickFix" },
+  IntroduceActionsGroup: { type: "action", id: "editor.action.refactor" },
   RenameElement: { type: "action", id: "editor.action.rename" },
   ShowUsages: { type: "action", id: "editor.action.referenceSearch.trigger" },
   ReformatCode: { type: "action", id: "editor.action.formatDocument" },
+  RearrangeCode: { type: "action", id: "editor.action.organizeImports" },
   EditorDeleteToWordStartInDifferentHumpsMode: { type: "custom", id: "humpDeleteLeft" },
   EditorDeleteToWordEndInDifferentHumpsMode: { type: "custom", id: "humpDeleteRight" },
   EditorToggleCase: { type: "custom", id: "toggleCase" },
@@ -271,6 +275,10 @@ function shortcutsForAction(action: KeyAction): string[] {
     return action.shortcuts.filter((shortcut) => allowedForwardShortcuts.includes(shortcut));
   }
 
+  if (action.id === "EditorChooseLookupItemCompleteStatement") {
+    return action.shortcuts.filter((shortcut) => shortcut !== "enter");
+  }
+
   return action.shortcuts;
 }
 
@@ -377,6 +385,10 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
     return completeStatementWhenReady;
   }
 
+  if (target.id === "chooseLookupAndComplete") {
+    return chooseLookupAndCompleteStatement;
+  }
+
   if (target.id === "moveElementLeft") {
     return (editor) => moveElementWhenReady(editor, "left");
   }
@@ -434,7 +446,10 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
   }
 
   if (target.id === "aceJump") {
-    return () => undefined;
+    return (editor) => {
+      editor.focus();
+      void editor.getAction("editor.action.gotoLine")?.run();
+    };
   }
 
   if (target.id === "gotoFile") {
@@ -490,6 +505,11 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
   }
 
   return removeLastSelection;
+}
+
+function chooseLookupAndCompleteStatement(editor: editor.IStandaloneCodeEditor): void {
+  editor.trigger("keyboard", "acceptSelectedSuggestion", {});
+  globalThis.setTimeout(() => completeStatementWhenReady(editor), 0);
 }
 
 const DEFAULT_FONT_SIZE = 14;

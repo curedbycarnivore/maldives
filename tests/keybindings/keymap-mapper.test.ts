@@ -156,6 +156,7 @@ describe("buildKeybindings", () => {
     expect(bindingFor("EditorStartNewLineBefore", M.CtrlCmd | K.Enter)).toBe(M.CtrlCmd | K.Enter);
     expect(bindingFor("EditorStartNewLineBefore", M.CtrlCmd | M.Shift | K.Space)).toBe(M.CtrlCmd | M.Shift | K.Space);
     expect(bindingFor("RenameElement", M.CtrlCmd | K.KeyR)).toBe(M.CtrlCmd | K.KeyR);
+    expect(bindingFor("RenameElement", M.Shift | K.F6)).toBe(M.Shift | K.F6);
     expect(bindingFor("ShowUsages", M.CtrlCmd | M.Alt | K.F7)).toBe(M.CtrlCmd | M.Alt | K.F7);
     expect(bindingFor("ReformatCode", M.Shift | M.CtrlCmd | K.Semicolon)).toBe(M.Shift | M.CtrlCmd | K.Semicolon);
     expect(bindingFor("EditorDeleteToWordStartInDifferentHumpsMode", M.CtrlCmd | K.KeyK)).toBe(M.CtrlCmd | K.KeyK);

@@ -153,6 +153,24 @@ test("search everywhere opens Monaco command palette", async ({ page }) => {
   await page.screenshot({ path: "proof/search-everywhere-proof.png" });
 });
 
+test("rename element opens Monaco inline rename input", async ({ page }) => {
+  await loadEditor(page);
+  await waitForXmlParserSymbol(page);
+
+  const opened = await page.evaluate(() => {
+    window.__maldivesEditor.setPosition({ lineNumber: 2, column: 8 });
+    window.__maldivesEditor.focus();
+
+    return window.__maldivesExecuteKeybinding("RenameElement");
+  });
+
+  expect(opened).toBe(true);
+  await page.locator(".rename-box .rename-input").waitFor({ state: "visible", timeout: 8000 });
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/p5a-rename-element-proof.png" });
+});
+
 test("alt number tab keybindings switch deterministic models", async ({ page }) => {
   await loadEditor(page);
 
