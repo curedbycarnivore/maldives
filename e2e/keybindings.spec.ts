@@ -79,6 +79,39 @@ test("line navigation keybindings move and delete within the current line", asyn
   await page.screenshot({ path: "proof/line-nav-proof.png" });
 });
 
+test("editor move and scroll keybindings scroll without moving the cursor", async ({ page }) => {
+  await loadEditor(page);
+
+  const initial = await page.evaluate(() => {
+    const editor = window.__maldivesEditor;
+
+    editor.setValue(Array.from({ length: 200 }, (_, index) => `line ${index + 1}`).join("\n"));
+    editor.setPosition({ lineNumber: 50, column: 3 });
+    editor.setScrollTop(400);
+    editor.focus();
+
+    return {
+      position: editor.getPosition(),
+      scrollTop: editor.getScrollTop(),
+      moved: window.__maldivesExecuteKeybinding("EditorMoveDownAndScroll"),
+    };
+  });
+
+  expect(initial.moved).toBe(true);
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getScrollTop())).toBeGreaterThan(initial.scrollTop);
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getPosition())).toEqual(initial.position);
+
+  const afterDownScrollTop = await page.evaluate(() => window.__maldivesEditor.getScrollTop());
+  const movedUp = await page.evaluate(() => window.__maldivesExecuteKeybinding("EditorMoveUpAndScroll"));
+
+  expect(movedUp).toBe(true);
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getScrollTop())).toBeLessThan(afterDownScrollTop);
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getPosition())).toEqual(initial.position);
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/editor-scroll-without-cursor-proof.png" });
+});
+
 test("file structure popup opens Monaco quick outline", async ({ page }) => {
   await loadEditor(page);
   await waitForXmlParserSymbol(page);
@@ -118,6 +151,25 @@ test("search everywhere opens Monaco command palette", async ({ page }) => {
 
   await mkdir("proof", { recursive: true });
   await page.screenshot({ path: "proof/search-everywhere-proof.png" });
+});
+
+test("goto file opens the Maldives file switcher", async ({ page }) => {
+  await loadEditor(page);
+
+  const opened = await page.evaluate(() => window.__maldivesExecuteKeybinding("GotoFile"));
+
+  expect(opened).toBe(true);
+  await page.locator(".maldives-file-switcher").waitFor({ state: "visible", timeout: 8000 });
+  await expect(page.locator(".maldives-file-switcher")).toContainText("Goto File");
+  await expect(page.locator(".maldives-file-switcher-item")).toContainText("sample.ts");
+  await expect(page.locator(".maldives-file-switcher-item")).toContainText("/maldives/sample.ts");
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/goto-file-switcher-proof.png" });
+
+  await page.locator(".maldives-file-switcher-item").click();
+  await expect(page.locator(".maldives-file-switcher")).toHaveCount(0);
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.hasTextFocus())).toBe(true);
 });
 
 test("registered addCommand keybindings work across groups", async ({ page }) => {

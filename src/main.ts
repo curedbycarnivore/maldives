@@ -5,6 +5,7 @@ import editorOptionsXml from "../ssot/options/editor.xml?raw";
 import { initializeAstSmartSelection } from "./ast-smart-selection";
 import { registerAstStructuralSearchAction } from "./ast-structural-search";
 import { registerEffectSnippets } from "./effect-snippets";
+import { registerModelTab } from "./file-switcher";
 import { cleanOnBlurFromModel } from "./hooks/trailing-whitespace";
 import { registerKeybindings, type RegisteredMaldivesAction } from "./keybindings";
 import { parseEditorOptions } from "./parsers/editor-options-parser";
@@ -46,6 +47,10 @@ camelCaseWord;
 camelCaseWord;
 `;
 
+const secondDocument = `// Maldives deterministic second tab
+export const secondTab = true;
+`;
+
 const themeConfig = parseIcls(activeThemeXml);
 const editorOptions = parseEditorOptions(editorOptionsXml);
 const keymapConfig = parseKeymap(keymapXml);
@@ -57,6 +62,9 @@ void initializeAstSmartSelection().catch(() => undefined);
 
 window.__monaco = monaco;
 const sampleModel = monaco.editor.createModel(sampleDocument, "typescript", monaco.Uri.parse("file:///maldives/sample.ts"));
+const secondModel = monaco.editor.createModel(secondDocument, "typescript", monaco.Uri.parse("file:///maldives/second.ts"));
+registerModelTab(sampleModel);
+registerModelTab(secondModel);
 const editor = monaco.editor.create(app, {
   model: sampleModel,
   automaticLayout: true,

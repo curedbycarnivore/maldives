@@ -6,7 +6,13 @@ import {
   moveStatementWhenReady,
   navigateMethodWhenReady,
 } from "../ast-smart-selection";
-import { openGotoFileSwitcher } from "../file-switcher";
+import {
+  openGotoFileSwitcher,
+  switchToLastModelTab,
+  switchToModelTab,
+  switchToNextModelTab,
+  switchToPreviousModelTab,
+} from "../file-switcher";
 import type { KeyAction, KeymapConfig } from "../parsers/keymap-parser";
 
 export interface MaldivesAction {
@@ -45,10 +51,28 @@ type MonacoTarget =
         | "decreaseFontSize"
         | "resetFontSize"
         | "aceJump"
-        | "gotoFile";
-    };
+        | "gotoFile"
+        | "switchNextModelTab"
+        | "switchPreviousModelTab"
+        | "switchLastModelTab";
+    }
+  | { type: "custom"; id: "switchModelTab"; tabIndex: number };
+
+function tabActionTargets(prefix: string, count: number): Record<string, MonacoTarget> {
+  return Object.fromEntries(
+    Array.from({ length: count }, (_, index) => [prefix + String(index + 1), { type: "custom", id: "switchModelTab", tabIndex: index + 1 }]),
+  );
+}
 
 const actionTargets: Record<string, MonacoTarget> = {
+  ...tabActionTargets("GoToTab", 8),
+  ...tabActionTargets("Go To Tab #", 10),
+  ...tabActionTargets("Switch To Tab #", 10),
+  NextTab: { type: "custom", id: "switchNextModelTab" },
+  "TabSwitcherExtreme.NextTab": { type: "custom", id: "switchNextModelTab" },
+  PreviousTab: { type: "custom", id: "switchPreviousModelTab" },
+  GoToLastTab: { type: "custom", id: "switchLastModelTab" },
+  "Switch To Last Tab": { type: "custom", id: "switchLastModelTab" },
   AceJumpAction: { type: "custom", id: "aceJump" },
   Back: { type: "action", id: "cursorUndo" },
   Forward: { type: "action", id: "cursorRedo" },
@@ -248,6 +272,7 @@ function keyCodeForToken(token: string, monaco: Monaco): number | undefined {
     delete: monaco.KeyCode.Delete,
     enter: monaco.KeyCode.Enter,
     space: monaco.KeyCode.Space,
+    tab: monaco.KeyCode.Tab,
     page_up: monaco.KeyCode.PageUp,
     page_down: monaco.KeyCode.PageDown,
     home: monaco.KeyCode.Home,
@@ -264,10 +289,13 @@ function keyCodeForToken(token: string, monaco: Monaco): number | undefined {
     add: monaco.KeyCode.NumpadAdd,
     semicolon: monaco.KeyCode.Semicolon,
     colon: monaco.KeyCode.Semicolon,
+    period: monaco.KeyCode.Period,
     slash: monaco.KeyCode.Slash,
     divide: monaco.KeyCode.NumpadDivide,
     open_bracket: monaco.KeyCode.BracketLeft,
     close_bracket: monaco.KeyCode.BracketRight,
+    braceleft: monaco.KeyCode.BracketLeft,
+    braceright: monaco.KeyCode.BracketRight,
     f2: monaco.KeyCode.F2,
     f4: monaco.KeyCode.F4,
     f6: monaco.KeyCode.F6,
@@ -376,6 +404,22 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
 
   if (target.id === "gotoFile") {
     return openGotoFileSwitcher;
+  }
+
+  if (target.id === "switchModelTab") {
+    return (editor) => void switchToModelTab(editor, target.tabIndex);
+  }
+
+  if (target.id === "switchNextModelTab") {
+    return (editor) => void switchToNextModelTab(editor);
+  }
+
+  if (target.id === "switchPreviousModelTab") {
+    return (editor) => void switchToPreviousModelTab(editor);
+  }
+
+  if (target.id === "switchLastModelTab") {
+    return (editor) => void switchToLastModelTab(editor);
   }
 
   return removeLastSelection;

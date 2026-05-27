@@ -1,9 +1,54 @@
 import type { editor } from "monaco-editor";
 
-interface FileSwitcherItem {
+export interface FileSwitcherItem {
   label: string;
   description: string;
   model: editor.ITextModel;
+}
+
+const modelTabs: editor.ITextModel[] = [];
+
+export function registerModelTab(model: editor.ITextModel): void {
+  if (!modelTabs.includes(model)) {
+    modelTabs.push(model);
+  }
+}
+
+export function switchToModelTab(editor: editor.IStandaloneCodeEditor, oneBasedIndex: number): boolean {
+  return switchToModel(editor, modelsForSwitcher(editor)[oneBasedIndex - 1]);
+}
+
+export function switchToNextModelTab(editor: editor.IStandaloneCodeEditor): boolean {
+  const models = modelsForSwitcher(editor);
+  const currentIndex = models.findIndex((model) => model === editor.getModel());
+  const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % models.length;
+
+  return switchToModel(editor, models[nextIndex]);
+}
+
+export function switchToPreviousModelTab(editor: editor.IStandaloneCodeEditor): boolean {
+  const models = modelsForSwitcher(editor);
+  const currentIndex = models.findIndex((model) => model === editor.getModel());
+  const previousIndex = currentIndex === -1 ? models.length - 1 : (currentIndex - 1 + models.length) % models.length;
+
+  return switchToModel(editor, models[previousIndex]);
+}
+
+export function switchToLastModelTab(editor: editor.IStandaloneCodeEditor): boolean {
+  const models = modelsForSwitcher(editor);
+
+  return switchToModel(editor, models.at(-1));
+}
+
+function switchToModel(editor: editor.IStandaloneCodeEditor, model: editor.ITextModel | undefined): boolean {
+  if (!model) {
+    editor.focus();
+    return false;
+  }
+
+  editor.setModel(model);
+  editor.focus();
+  return true;
 }
 
 export function openGotoFileSwitcher(editor: editor.IStandaloneCodeEditor): void {
@@ -67,13 +112,23 @@ export function openGotoFileSwitcher(editor: editor.IStandaloneCodeEditor): void
 }
 
 export function fileSwitcherItems(editor: editor.IStandaloneCodeEditor): FileSwitcherItem[] {
+  return modelsForSwitcher(editor).map(itemForModel);
+}
+
+function modelsForSwitcher(editor: editor.IStandaloneCodeEditor): editor.ITextModel[] {
+  const registeredModels = modelTabs.filter((model) => !model.isDisposed());
+
+  if (registeredModels.length > 0) {
+    return registeredModels;
+  }
+
   const model = editor.getModel();
 
-  return model ? [itemForModel(model)] : [];
+  return model ? [model] : [];
 }
 
 function itemForModel(model: editor.ITextModel): FileSwitcherItem {
-  const path = model.uri.path || "/maldives/sample.ts";
+  const path = model.uri.scheme === "inmemory" ? "/maldives/sample.ts" : model.uri.path || "/maldives/sample.ts";
   const label = path.split("/").filter(Boolean).at(-1) || "sample.ts";
 
   return { label, description: path, model };
