@@ -17,6 +17,9 @@ const monacoStub = vi.hoisted(() => {
     getAction: vi.fn(() => ({ run: vi.fn() })),
     trigger: vi.fn(),
     getModel: vi.fn(() => null),
+    getPosition: vi.fn(() => ({ lineNumber: 1, column: 1 })),
+    onDidChangeCursorPosition: vi.fn(() => ({ dispose: vi.fn() })),
+    onDidChangeModel: vi.fn(() => ({ dispose: vi.fn() })),
     onDidBlurEditorText: vi.fn(() => ({
       dispose() {
         state.blurDisposed = true;
