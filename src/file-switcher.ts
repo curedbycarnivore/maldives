@@ -52,6 +52,14 @@ function switchToModel(editor: editor.IStandaloneCodeEditor, model: editor.IText
 }
 
 export function openGotoFileSwitcher(editor: editor.IStandaloneCodeEditor): void {
+  openModelSwitcher(editor, "Goto File", "maldives-file-switcher", "maldives-file-switcher-item");
+}
+
+export function openTabSwitcher(editor: editor.IStandaloneCodeEditor): void {
+  openModelSwitcher(editor, "Switcher", "maldives-tab-switcher", "maldives-tab-switcher-item");
+}
+
+function openModelSwitcher(editor: editor.IStandaloneCodeEditor, title: string, overlayClass: string, itemClass: string): void {
   const items = fileSwitcherItems(editor);
 
   if (items.length === 0) {
@@ -59,12 +67,12 @@ export function openGotoFileSwitcher(editor: editor.IStandaloneCodeEditor): void
     return;
   }
 
-  document.querySelector(".maldives-file-switcher")?.remove();
+  document.querySelector(`.${overlayClass}`)?.remove();
 
   const overlay = document.createElement("div");
-  overlay.className = "maldives-file-switcher";
+  overlay.className = overlayClass;
   overlay.setAttribute("role", "dialog");
-  overlay.setAttribute("aria-label", "Goto File");
+  overlay.setAttribute("aria-label", title);
   overlay.style.cssText = [
     "position:fixed",
     "top:72px",
@@ -80,14 +88,15 @@ export function openGotoFileSwitcher(editor: editor.IStandaloneCodeEditor): void
   ].join(";");
 
   const heading = document.createElement("div");
-  heading.textContent = "Goto File";
+  heading.textContent = title;
   heading.style.cssText = "padding:10px 12px;border-bottom:1px solid #333;color:#fff;font-weight:600";
   overlay.append(heading);
 
   for (const item of items) {
     const button = document.createElement("button");
     button.type = "button";
-    button.className = "maldives-file-switcher-item";
+    button.className = itemClass;
+    button.setAttribute("aria-label", `${item.label} ${item.description}`);
     button.style.cssText = [
       "display:block",
       "width:100%",

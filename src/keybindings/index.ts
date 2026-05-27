@@ -8,6 +8,7 @@ import {
 } from "../ast-smart-selection";
 import {
   openGotoFileSwitcher,
+  openTabSwitcher,
   switchToLastModelTab,
   switchToModelTab,
   switchToNextModelTab,
@@ -52,6 +53,7 @@ type MonacoTarget =
         | "resetFontSize"
         | "aceJump"
         | "gotoFile"
+        | "tabSwitcher"
         | "switchNextModelTab"
         | "switchPreviousModelTab"
         | "switchLastModelTab";
@@ -121,6 +123,7 @@ const actionTargets: Record<string, MonacoTarget> = {
   FileStructurePopup: { type: "action", id: "editor.action.quickOutline" },
   GotoClass: { type: "action", id: "editor.action.quickOutline" },
   GotoFile: { type: "custom", id: "gotoFile" },
+  Switcher: { type: "custom", id: "tabSwitcher" },
   SearchEverywhere: { type: "action", id: "editor.action.quickCommand" },
   ShowIntentionActions: { type: "action", id: "editor.action.quickFix" },
   RenameElement: { type: "action", id: "editor.action.rename" },
@@ -404,6 +407,10 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
 
   if (target.id === "gotoFile") {
     return openGotoFileSwitcher;
+  }
+
+  if (target.id === "tabSwitcher") {
+    return openTabSwitcher;
   }
 
   if (target.id === "switchModelTab") {

@@ -24,6 +24,7 @@ const monaco = {
     RightArrow: 17,
     DownArrow: 18,
     Delete: 20,
+    Digit0: 21,
     Digit1: 22,
     Digit2: 23,
     Digit3: 24,
@@ -165,6 +166,18 @@ describe("buildKeybindings", () => {
     expect(bindingFor("EditorPreviousWordInDifferentHumpsMode", M.CtrlCmd | M.Alt | K.LeftArrow)).toBe(M.CtrlCmd | M.Alt | K.LeftArrow);
     expect(bindingFor("EditorNextWordInDifferentHumpsModeWithSelection", M.Shift | M.CtrlCmd | M.Alt | K.RightArrow)).toBe(M.Shift | M.CtrlCmd | M.Alt | K.RightArrow);
     expect(bindingFor("EditorPreviousWordInDifferentHumpsModeWithSelection", M.Shift | M.CtrlCmd | M.Alt | K.LeftArrow)).toBe(M.Shift | M.CtrlCmd | M.Alt | K.LeftArrow);
+  });
+
+  test("maps WebStorm alt+number tab shortcuts to deterministic Monaco bindings", () => {
+    const M = monaco.KeyMod;
+    const K = monaco.KeyCode;
+
+    expect(bindingFor("GoToTab1", M.Alt | K.Digit1)).toBe(M.Alt | K.Digit1);
+    expect(bindingFor("GoToTab2", M.Alt | K.Digit2)).toBe(M.Alt | K.Digit2);
+    expect(bindingFor("Go To Tab #9", M.Alt | K.Digit9)).toBe(M.Alt | K.Digit9);
+    expect(bindingFor("Switch To Tab #9", M.Alt | K.Digit9)).toBe(M.Alt | K.Digit9);
+    expect(bindingFor("Go To Tab #10", M.Alt | K.Digit0)).toBe(M.Alt | K.Digit0);
+    expect(bindingFor("Switch To Tab #10", M.Alt | K.Digit0)).toBe(M.Alt | K.Digit0);
   });
 
   test("maps digit key tokens 3 through 9 to Monaco digit key codes", () => {
