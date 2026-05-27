@@ -7,6 +7,8 @@ import {
   navigateMethodWhenReady,
 } from "../ast-smart-selection";
 import {
+  applyActiveTabSwitcherItem,
+  moveActiveTabSwitcherItem,
   openGotoFileSwitcher,
   openTabSwitcher,
   switchToLastModelTab,
@@ -54,6 +56,11 @@ type MonacoTarget =
         | "aceJump"
         | "gotoFile"
         | "tabSwitcher"
+        | "switchApply"
+        | "switchDown"
+        | "switchUp"
+        | "switchLeft"
+        | "switchRight"
         | "switchNextModelTab"
         | "switchPreviousModelTab"
         | "switchLastModelTab";
@@ -124,6 +131,11 @@ const actionTargets: Record<string, MonacoTarget> = {
   GotoClass: { type: "action", id: "editor.action.quickOutline" },
   GotoFile: { type: "custom", id: "gotoFile" },
   Switcher: { type: "custom", id: "tabSwitcher" },
+  SwitchApply: { type: "custom", id: "switchApply" },
+  SwitchDown: { type: "custom", id: "switchDown" },
+  SwitchUp: { type: "custom", id: "switchUp" },
+  SwitchLeft: { type: "custom", id: "switchLeft" },
+  SwitchRight: { type: "custom", id: "switchRight" },
   SearchEverywhere: { type: "action", id: "editor.action.quickCommand" },
   ShowIntentionActions: { type: "action", id: "editor.action.quickFix" },
   RenameElement: { type: "action", id: "editor.action.rename" },
@@ -411,6 +423,18 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
 
   if (target.id === "tabSwitcher") {
     return openTabSwitcher;
+  }
+
+  if (target.id === "switchApply") {
+    return () => applyActiveTabSwitcherItem();
+  }
+
+  if (target.id === "switchDown" || target.id === "switchRight") {
+    return () => moveActiveTabSwitcherItem("next");
+  }
+
+  if (target.id === "switchUp" || target.id === "switchLeft") {
+    return () => moveActiveTabSwitcherItem("previous");
   }
 
   if (target.id === "switchModelTab") {

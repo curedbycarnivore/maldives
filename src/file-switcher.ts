@@ -59,6 +59,35 @@ export function openTabSwitcher(editor: editor.IStandaloneCodeEditor): void {
   openModelSwitcher(editor, "Switcher", "maldives-tab-switcher", "maldives-tab-switcher-item");
 }
 
+export function moveActiveTabSwitcherItem(direction: "next" | "previous"): void {
+  const buttons = tabSwitcherButtons();
+
+  if (buttons.length === 0) {
+    return;
+  }
+
+  const activeIndex = Math.max(
+    0,
+    buttons.findIndex((button) => button === document.activeElement),
+  );
+  const delta = direction === "next" ? 1 : -1;
+  const nextIndex = (activeIndex + delta + buttons.length) % buttons.length;
+
+  activateTabSwitcherButton(buttons[nextIndex]);
+}
+
+export function applyActiveTabSwitcherItem(): void {
+  const buttons = tabSwitcherButtons();
+
+  if (buttons.length === 0) {
+    return;
+  }
+
+  const activeButton = buttons.find((button) => button === document.activeElement) ?? buttons[0];
+
+  activeButton.click();
+}
+
 function openModelSwitcher(editor: editor.IStandaloneCodeEditor, title: string, overlayClass: string, itemClass: string): void {
   const items = fileSwitcherItems(editor);
 
@@ -108,6 +137,11 @@ function openModelSwitcher(editor: editor.IStandaloneCodeEditor, title: string, 
       "cursor:pointer",
     ].join(";");
     button.innerHTML = `<div>${escapeHtml(item.label)}</div><div style="color:#9cdcfe;font-size:12px">${escapeHtml(item.description)}</div>`;
+    button.addEventListener("focus", () => {
+      if (overlayClass === "maldives-tab-switcher") {
+        activateTabSwitcherButton(button);
+      }
+    });
     button.addEventListener("click", () => {
       editor.setModel(item.model);
       overlay.remove();
@@ -117,7 +151,33 @@ function openModelSwitcher(editor: editor.IStandaloneCodeEditor, title: string, 
   }
 
   document.body.append(overlay);
-  (overlay.querySelector("button") as HTMLButtonElement | null)?.focus();
+  const firstButton = overlay.querySelector("button") as HTMLButtonElement | null;
+
+  if (overlayClass === "maldives-tab-switcher" && firstButton) {
+    activateTabSwitcherButton(firstButton);
+    return;
+  }
+
+  firstButton?.focus();
+}
+
+function tabSwitcherButtons(): HTMLButtonElement[] {
+  return Array.from(document.querySelectorAll<HTMLButtonElement>(".maldives-tab-switcher .maldives-tab-switcher-item"));
+}
+
+function activateTabSwitcherButton(button: HTMLButtonElement | undefined): void {
+  if (!button) {
+    return;
+  }
+
+  for (const item of tabSwitcherButtons()) {
+    const isActive = item === button;
+
+    item.setAttribute("aria-selected", String(isActive));
+    item.style.background = isActive ? "#04395e" : "transparent";
+  }
+
+  button.focus();
 }
 
 export function fileSwitcherItems(editor: editor.IStandaloneCodeEditor): FileSwitcherItem[] {
