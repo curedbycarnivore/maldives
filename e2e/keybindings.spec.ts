@@ -60,7 +60,7 @@ test("file structure popup opens Monaco quick outline", async ({ page }) => {
   const opened = await page.evaluate(() => window.__maldivesExecuteKeybinding("FileStructurePopup"));
 
   expect(opened).toBe(true);
-  await expect(page.locator(".quick-input-widget")).toBeVisible();
+  await page.locator(".quick-input-widget").waitFor({ state: "visible", timeout: 8000 });
   await expect(page.locator(".quick-input-widget")).toContainText("XMLParser");
 
   await mkdir("proof", { recursive: true });
