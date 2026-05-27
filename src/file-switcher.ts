@@ -367,9 +367,9 @@ function openModelSwitcher(editor: editor.IStandaloneCodeEditor, title: string, 
       }
     });
     button.addEventListener("click", () => {
-      editor.setModel(item.model);
-      overlay.remove();
-      editor.focus();
+      if (switchToModel(editor, item.model)) {
+        overlay.remove();
+      }
     });
     overlay.append(button);
   }

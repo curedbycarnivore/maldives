@@ -3,9 +3,37 @@ import { expect, type Page, test } from "@playwright/test";
 
 declare global {
   interface Window {
+    __monaco: typeof import("monaco-editor");
     __maldivesEditor: import("monaco-editor").editor.IStandaloneCodeEditor;
-    __maldivesExecuteKeybinding: (wsActionId: string) => boolean;
+    __maldivesKeybindings: Array<{ wsActionId: string; monacoBinding: number; commandId: string }>;
   }
+}
+
+type EnterShortcut = "cmd+enter" | "opt+enter" | "shift+enter";
+
+async function executeEnterShortcut(page: Page, wsActionId: string, shortcut: EnterShortcut): Promise<boolean> {
+  return page.evaluate(
+    ({ wsActionId, shortcut }) => {
+      const { KeyCode, KeyMod } = window.__monaco;
+      const expectedBinding =
+        shortcut === "cmd+enter"
+          ? KeyMod.CtrlCmd | KeyCode.Enter
+          : shortcut === "opt+enter"
+            ? KeyMod.Alt | KeyCode.Enter
+            : KeyMod.Shift | KeyCode.Enter;
+      const registered = window.__maldivesKeybindings.find(
+        (action) => action.wsActionId === wsActionId && action.monacoBinding === expectedBinding,
+      );
+
+      if (!registered) {
+        return false;
+      }
+
+      window.__maldivesEditor.trigger("maldives", registered.commandId, null);
+      return true;
+    },
+    { wsActionId, shortcut },
+  );
 }
 
 async function loadEditor(page: Page): Promise<void> {
@@ -19,15 +47,15 @@ async function expectSuggestWidgetHidden(page: Page): Promise<void> {
   await expect(page.locator(".suggest-widget")).toBeHidden();
 }
 
-test("enter-key WebStorm actions fire when Monaco suggestions are hidden", async ({ page }) => {
+test("cmd/opt/shift enter WebStorm actions fire when Monaco suggestions are hidden", async ({ page }) => {
   await loadEditor(page);
   await expectSuggestWidgetHidden(page);
 
-  const insertedBefore = await page.evaluate(() => {
+  await page.evaluate(() => {
     window.__maldivesEditor.setValue("one\ntwo");
     window.__maldivesEditor.setPosition({ lineNumber: 2, column: 2 });
-    return window.__maldivesExecuteKeybinding("EditorStartNewLineBefore");
   });
+  const insertedBefore = await executeEnterShortcut(page, "EditorStartNewLineBefore", "cmd+enter");
 
   expect(insertedBefore).toBe(true);
   await expectSuggestWidgetHidden(page);
@@ -35,11 +63,11 @@ test("enter-key WebStorm actions fire when Monaco suggestions are hidden", async
   await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getPosition()?.lineNumber)).toBe(2);
   await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getPosition()?.column)).toBe(1);
 
-  const insertedAfter = await page.evaluate(() => {
+  await page.evaluate(() => {
     window.__maldivesEditor.setValue("one\ntwo");
     window.__maldivesEditor.setPosition({ lineNumber: 1, column: 2 });
-    return window.__maldivesExecuteKeybinding("EditorStartNewLine");
   });
+  const insertedAfter = await executeEnterShortcut(page, "EditorStartNewLine", "opt+enter");
 
   expect(insertedAfter).toBe(true);
   await expectSuggestWidgetHidden(page);
@@ -47,11 +75,11 @@ test("enter-key WebStorm actions fire when Monaco suggestions are hidden", async
   await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getPosition()?.lineNumber)).toBe(2);
   await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getPosition()?.column)).toBe(1);
 
-  const completedStatement = await page.evaluate(() => {
+  await page.evaluate(() => {
     window.__maldivesEditor.setValue("const value = 1");
     window.__maldivesEditor.setPosition({ lineNumber: 1, column: 16 });
-    return window.__maldivesExecuteKeybinding("EditorCompleteStatement");
   });
+  const completedStatement = await executeEnterShortcut(page, "EditorCompleteStatement", "shift+enter");
 
   expect(completedStatement).toBe(true);
   await expectSuggestWidgetHidden(page);
@@ -65,6 +93,7 @@ test("enter-key WebStorm actions fire when Monaco suggestions are hidden", async
 test.skip("visible Monaco suggestions keep Enter/Shift+Enter in suggestion-acceptance mode", async () => {
   // Documentation-only: when .suggest-widget is visible, Monaco binds Enter to
   // acceptSelectedSuggestion and Shift+Enter to acceptAlternativeSelectedSuggestion.
-  // Maldives' completeStatementWhenReady also intentionally avoids running while
-  // editor.hasWidgetFocus() is true, so the proof above keeps the widget hidden.
+  // Maldives' shift+enter complete-statement handler also intentionally avoids
+  // running while editor.hasWidgetFocus() is true, so the executable proof above
+  // keeps the widget hidden for the cmd+enter/opt+enter/shift+enter baseline.
 });
