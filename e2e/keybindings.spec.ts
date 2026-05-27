@@ -54,6 +54,32 @@ test("line navigation keybindings move and delete within the current line", asyn
   await page.screenshot({ path: "proof/line-nav-proof.png" });
 });
 
+test("file structure popup opens Monaco quick outline", async ({ page }) => {
+  await loadEditor(page);
+
+  const opened = await page.evaluate(() => window.__maldivesExecuteKeybinding("FileStructurePopup"));
+
+  expect(opened).toBe(true);
+  await expect(page.locator(".quick-input-widget")).toBeVisible();
+  await expect(page.locator(".quick-input-widget")).toContainText("XMLParser");
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/file-structure-popup-proof.png" });
+});
+
+test("search everywhere opens Monaco command palette", async ({ page }) => {
+  await loadEditor(page);
+
+  const opened = await page.evaluate(() => window.__maldivesExecuteKeybinding("SearchEverywhere"));
+
+  expect(opened).toBe(true);
+  await expect(page.locator(".quick-input-widget")).toBeVisible();
+  await expect(page.locator(".quick-input-widget input")).toHaveValue(">");
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/search-everywhere-proof.png" });
+});
+
 test("registered addCommand keybindings work across groups", async ({ page }) => {
   await loadEditor(page);
 
