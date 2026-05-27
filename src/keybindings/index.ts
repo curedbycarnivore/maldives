@@ -42,10 +42,12 @@ type MonacoTarget =
         | "toggleCamelDashCase"
         | "increaseFontSize"
         | "decreaseFontSize"
-        | "resetFontSize";
+        | "resetFontSize"
+        | "aceJump";
     };
 
 const actionTargets: Record<string, MonacoTarget> = {
+  AceJumpAction: { type: "custom", id: "aceJump" },
   Back: { type: "action", id: "cursorUndo" },
   Forward: { type: "action", id: "cursorRedo" },
   MoveLineDown: { type: "action", id: "editor.action.moveLinesDownAction" },
@@ -195,7 +197,9 @@ function keybindingsForAction(action: KeyAction, monaco: Monaco): MaldivesAction
 
 function shortcutsForAction(action: KeyAction): string[] {
   if (action.id === "Back") {
-    return action.shortcuts.filter((shortcut) => shortcut === "home" || shortcut === "meta open_bracket");
+    const allowedBackShortcuts = ["home", "meta open_bracket"];
+
+    return action.shortcuts.filter((shortcut) => allowedBackShortcuts.includes(shortcut));
   }
 
   if (action.id === "Forward") {
@@ -348,6 +352,10 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
 
   if (target.id === "resetFontSize") {
     return (editor) => setFontSize(editor, DEFAULT_FONT_SIZE);
+  }
+
+  if (target.id === "aceJump") {
+    return () => undefined;
   }
 
   return removeLastSelection;

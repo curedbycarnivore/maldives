@@ -71,7 +71,9 @@ registerAstStructuralSearchAction(editor);
 window.__maldivesEditor = editor;
 window.__maldivesKeybindings = registeredKeybindings;
 window.__maldivesExecuteKeybinding = (wsActionId) => {
-  const registered = registeredKeybindings.find((action) => action.wsActionId === wsActionId);
+  const registered = registeredKeybindings.find(
+    (action) => action.wsActionId === wsActionId || (wsActionId === "AceJump" && action.wsActionId === "AceJumpAction"),
+  );
 
   if (!registered) {
     return false;

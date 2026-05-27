@@ -26,6 +26,13 @@ const monaco = {
     Delete: 20,
     Digit1: 22,
     Digit2: 23,
+    Digit3: 24,
+    Digit4: 25,
+    Digit5: 26,
+    Digit6: 27,
+    Digit7: 28,
+    Digit8: 29,
+    Digit9: 30,
     KeyA: 31,
     KeyB: 32,
     KeyC: 33,
@@ -143,6 +150,27 @@ describe("buildKeybindings", () => {
     expect(bindingFor("EditorPreviousWordInDifferentHumpsMode", M.CtrlCmd | M.Alt | K.LeftArrow)).toBe(M.CtrlCmd | M.Alt | K.LeftArrow);
     expect(bindingFor("EditorNextWordInDifferentHumpsModeWithSelection", M.Shift | M.CtrlCmd | M.Alt | K.RightArrow)).toBe(M.Shift | M.CtrlCmd | M.Alt | K.RightArrow);
     expect(bindingFor("EditorPreviousWordInDifferentHumpsModeWithSelection", M.Shift | M.CtrlCmd | M.Alt | K.LeftArrow)).toBe(M.Shift | M.CtrlCmd | M.Alt | K.LeftArrow);
+  });
+
+  test("maps digit key tokens 3 through 9 to Monaco digit key codes", () => {
+    const digitBindings = buildKeybindings(
+      {
+        name: "digits",
+        parent: "",
+        actions: [{ id: "EditorResetFontSize", shortcuts: ["3", "4", "5", "6", "7", "8", "9"] }],
+      },
+      monaco,
+    );
+
+    expect(digitBindings.map((action) => action.monacoBinding)).toEqual([
+      monaco.KeyCode.Digit3,
+      monaco.KeyCode.Digit4,
+      monaco.KeyCode.Digit5,
+      monaco.KeyCode.Digit6,
+      monaco.KeyCode.Digit7,
+      monaco.KeyCode.Digit8,
+      monaco.KeyCode.Digit9,
+    ]);
   });
 
   test("omits unmapped actions", () => {
