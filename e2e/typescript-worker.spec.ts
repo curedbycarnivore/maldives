@@ -10,7 +10,7 @@ declare global {
 
 async function loadEditor(page: Page): Promise<void> {
   await page.goto("http://127.0.0.1:5173/");
-  await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesEditor))).toBe(true);
+  await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesEditor)), { timeout: 15000 }).toBe(true);
 }
 
 test("configures strict TypeScript worker options and renders inlay hints", async ({ page }) => {

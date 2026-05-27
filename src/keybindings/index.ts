@@ -1,5 +1,10 @@
 import type { editor } from "monaco-editor";
-import { completeStatementWhenReady, expandAstSelectionWhenReady } from "../ast-smart-selection";
+import {
+  completeStatementWhenReady,
+  expandAstSelectionWhenReady,
+  moveElementWhenReady,
+  moveStatementWhenReady,
+} from "../ast-smart-selection";
 import type { KeyAction, KeymapConfig } from "../parsers/keymap-parser";
 
 export interface MaldivesAction {
@@ -23,6 +28,10 @@ type MonacoTarget =
       id:
         | "astSmartSelect"
         | "completeStatement"
+        | "moveElementLeft"
+        | "moveElementRight"
+        | "moveStatementDown"
+        | "moveStatementUp"
         | "removeLastSelection"
         | "humpDeleteLeft"
         | "humpDeleteRight"
@@ -34,10 +43,14 @@ type MonacoTarget =
     };
 
 const actionTargets: Record<string, MonacoTarget> = {
+  Back: { type: "action", id: "cursorUndo" },
+  Forward: { type: "action", id: "cursorRedo" },
   MoveLineDown: { type: "action", id: "editor.action.moveLinesDownAction" },
   MoveLineUp: { type: "action", id: "editor.action.moveLinesUpAction" },
-  MoveStatementDown: { type: "action", id: "editor.action.moveCaretToLogicalLineDown" },
-  MoveStatementUp: { type: "action", id: "editor.action.moveCaretToLogicalLineUp" },
+  MoveElementLeft: { type: "custom", id: "moveElementLeft" },
+  MoveElementRight: { type: "custom", id: "moveElementRight" },
+  MoveStatementDown: { type: "custom", id: "moveStatementDown" },
+  MoveStatementUp: { type: "custom", id: "moveStatementUp" },
   EditorDeleteLine: { type: "action", id: "editor.action.deleteLines" },
   EditorSelectWord: { type: "custom", id: "astSmartSelect" },
   EditorCompleteStatement: { type: "custom", id: "completeStatement" },
@@ -221,6 +234,7 @@ function keyCodeForToken(token: string, monaco: Monaco): number | undefined {
     slash: monaco.KeyCode.Slash,
     divide: monaco.KeyCode.NumpadDivide,
     open_bracket: monaco.KeyCode.BracketLeft,
+    close_bracket: monaco.KeyCode.BracketRight,
     f2: monaco.KeyCode.F2,
     f6: monaco.KeyCode.F6,
     f7: monaco.KeyCode.F7,
@@ -255,6 +269,22 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
 
   if (target.id === "completeStatement") {
     return completeStatementWhenReady;
+  }
+
+  if (target.id === "moveElementLeft") {
+    return (editor) => moveElementWhenReady(editor, "left");
+  }
+
+  if (target.id === "moveElementRight") {
+    return (editor) => moveElementWhenReady(editor, "right");
+  }
+
+  if (target.id === "moveStatementDown") {
+    return (editor) => moveStatementWhenReady(editor, "down");
+  }
+
+  if (target.id === "moveStatementUp") {
+    return (editor) => moveStatementWhenReady(editor, "up");
   }
 
   if (target.id === "humpDeleteLeft") {

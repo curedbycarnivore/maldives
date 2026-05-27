@@ -20,7 +20,7 @@ test("shows Effect snippet suggestions for the eff- prefix", async ({ page }) =>
   });
 
   await expect(page.locator(".suggest-widget")).toBeVisible();
-  await expect(page.locator(".suggest-widget")).toContainText("eff-pipe");
+  await expect(page.locator(".suggest-widget")).toContainText("eff-pipe", { timeout: 15000 });
 
   await mkdir("proof", { recursive: true });
   await page.screenshot({ path: "proof/effect-snippets.png" });

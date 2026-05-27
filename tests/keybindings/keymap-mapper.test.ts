@@ -14,6 +14,7 @@ const monaco = {
   KeyCode: {
     Backspace: 1,
     Enter: 3,
+    Space: 10,
     PageUp: 11,
     PageDown: 12,
     Home: 13,
@@ -49,6 +50,7 @@ const monaco = {
     Minus: 88,
     Slash: 90,
     BracketLeft: 92,
+    BracketRight: 93,
     NumpadAdd: 109,
     NumpadSubtract: 111,
     NumpadDivide: 113,
@@ -71,6 +73,8 @@ describe("buildKeybindings", () => {
     expect(bindingFor("MoveLineUp", M.Shift | M.Alt | K.UpArrow)).toBe(M.Shift | M.Alt | K.UpArrow);
     expect(bindingFor("MoveStatementDown", M.Shift | M.CtrlCmd | K.DownArrow)).toBe(M.Shift | M.CtrlCmd | K.DownArrow);
     expect(bindingFor("MoveStatementUp", M.Shift | M.CtrlCmd | K.UpArrow)).toBe(M.Shift | M.CtrlCmd | K.UpArrow);
+    expect(bindingFor("Back", M.CtrlCmd | K.BracketLeft)).toBe(M.CtrlCmd | K.BracketLeft);
+    expect(bindingFor("Forward", M.CtrlCmd | K.BracketRight)).toBe(M.CtrlCmd | K.BracketRight);
     expect(bindingFor("EditorDeleteLine", M.Shift | K.Backspace)).toBe(M.Shift | K.Backspace);
     expect(bindingFor("EditorSelectWord", M.Alt | K.UpArrow)).toBe(M.Alt | K.UpArrow);
     expect(bindingFor("EditorUnSelectWord", M.Alt | K.DownArrow)).toBe(M.Alt | K.DownArrow);
@@ -111,6 +115,10 @@ describe("buildKeybindings", () => {
     expect(bindingFor("GotoNextError", K.F2)).toBe(K.F2);
     expect(bindingFor("GotoTypeDeclaration", M.Shift | M.WinCtrl | K.KeyB)).toBe(M.Shift | M.WinCtrl | K.KeyB);
     expect(bindingFor("ShowIntentionActions", M.Shift | M.Alt | K.Enter)).toBe(M.Shift | M.Alt | K.Enter);
+    expect(bindingFor("EditorStartNewLine", M.Alt | K.Enter)).toBe(M.Alt | K.Enter);
+    expect(bindingFor("EditorStartNewLine", M.Alt | K.Space)).toBe(M.Alt | K.Space);
+    expect(bindingFor("EditorStartNewLineBefore", M.CtrlCmd | K.Enter)).toBe(M.CtrlCmd | K.Enter);
+    expect(bindingFor("EditorStartNewLineBefore", M.CtrlCmd | M.Shift | K.Space)).toBe(M.CtrlCmd | M.Shift | K.Space);
     expect(bindingFor("RenameElement", M.CtrlCmd | K.KeyR)).toBe(M.CtrlCmd | K.KeyR);
     expect(bindingFor("ShowUsages", M.CtrlCmd | M.Alt | K.F7)).toBe(M.CtrlCmd | M.Alt | K.F7);
     expect(bindingFor("ReformatCode", M.Shift | M.CtrlCmd | K.Semicolon)).toBe(M.Shift | M.CtrlCmd | K.Semicolon);

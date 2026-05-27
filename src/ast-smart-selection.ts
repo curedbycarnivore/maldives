@@ -72,6 +72,13 @@ interface CompleteStatementEdit {
   cursorOffset: number;
 }
 
+interface StructuralMoveEdit {
+  startOffset: number;
+  endOffset: number;
+  text: string;
+  cursorOffset: number;
+}
+
 export function completeStatementWhenReady(editor: editor.IStandaloneCodeEditor): void {
   if (!initPromise) {
     initPromise = initializeAstSmartSelection();
@@ -79,6 +86,28 @@ export function completeStatementWhenReady(editor: editor.IStandaloneCodeEditor)
 
   void initPromise.then(
     () => completeStatement(editor),
+    () => undefined,
+  );
+}
+
+export function moveStatementWhenReady(editor: editor.IStandaloneCodeEditor, direction: "up" | "down"): void {
+  if (!initPromise) {
+    initPromise = initializeAstSmartSelection();
+  }
+
+  void initPromise.then(
+    () => moveStatement(editor, direction),
+    () => undefined,
+  );
+}
+
+export function moveElementWhenReady(editor: editor.IStandaloneCodeEditor, direction: "left" | "right"): void {
+  if (!initPromise) {
+    initPromise = initializeAstSmartSelection();
+  }
+
+  void initPromise.then(
+    () => moveElement(editor, direction),
     () => undefined,
   );
 }
@@ -143,6 +172,245 @@ function completeStatement(editor: editor.IStandaloneCodeEditor): boolean {
   editor.setPosition(model.getPositionAt(edit.cursorOffset + eolOffsetBeforeCursor(model.getEOL(), edit)));
   return true;
 }
+
+function moveStatement(editor: editor.IStandaloneCodeEditor, direction: "up" | "down"): boolean {
+  const model = editor.getModel();
+  const selection = editor.getSelection();
+
+  if (!model || !selection || model.getLanguageId() !== TYPESCRIPT_LANGUAGE) {
+    return false;
+  }
+
+  const edit = statementMoveForCursor(model.getValue(), model.getOffsetAt(selection.getPosition()), direction);
+
+  return applyStructuralMove(editor, edit);
+}
+
+function moveElement(editor: editor.IStandaloneCodeEditor, direction: "left" | "right"): boolean {
+  const model = editor.getModel();
+  const selection = editor.getSelection();
+
+  if (!model || !selection || model.getLanguageId() !== TYPESCRIPT_LANGUAGE) {
+    return false;
+  }
+
+  const edit = elementMoveForCursor(model.getValue(), model.getOffsetAt(selection.getPosition()), direction);
+
+  return applyStructuralMove(editor, edit);
+}
+
+function applyStructuralMove(
+  editor: editor.IStandaloneCodeEditor,
+  edit: StructuralMoveEdit | undefined,
+): boolean {
+  const model = editor.getModel();
+
+  if (!model || !edit) {
+    return false;
+  }
+
+  const start = model.getPositionAt(edit.startOffset);
+  const end = model.getPositionAt(edit.endOffset);
+  editor.executeEdits("maldives", [
+    {
+      range: {
+        startLineNumber: start.lineNumber,
+        startColumn: start.column,
+        endLineNumber: end.lineNumber,
+        endColumn: end.column,
+      },
+      text: edit.text,
+    },
+  ]);
+  editor.setPosition(model.getPositionAt(edit.cursorOffset));
+  return true;
+}
+
+export function statementMoveForCursor(
+  source: string,
+  offset: number,
+  direction: "up" | "down",
+): StructuralMoveEdit | undefined {
+  try {
+    const statement = movableStatementAt(nodeAtOffset(parse(TYPESCRIPT_LANGUAGE, source).root(), offset));
+    const parent = statement?.parent_node();
+
+    if (!statement || !parent) {
+      return undefined;
+    }
+
+    const siblings = parent.children_nodes().filter(isMovableStatement);
+    const statementRange = statement.range();
+    const index = siblings.findIndex((sibling) => sameRange(sibling, statementRange.start.index, statementRange.end.index));
+    const target = siblings[index + (direction === "up" ? -1 : 1)];
+
+    if (!target) {
+      return undefined;
+    }
+
+    return swapAdjacentStatements(source, statement, target);
+  } catch {
+    return undefined;
+  }
+}
+
+export function elementMoveForCursor(
+  source: string,
+  offset: number,
+  direction: "left" | "right",
+): StructuralMoveEdit | undefined {
+  try {
+    const element = movableElementAt(nodeAtOffset(parse(TYPESCRIPT_LANGUAGE, source).root(), offset));
+    const parent = element?.parent_node();
+
+    if (!element || !parent) {
+      return undefined;
+    }
+
+    const siblings = movableElementSiblings(parent);
+    const elementRange = element.range();
+    const index = siblings.findIndex((sibling) => sameRange(sibling, elementRange.start.index, elementRange.end.index));
+    const target = siblings[index + (direction === "left" ? -1 : 1)];
+
+    if (!target) {
+      return undefined;
+    }
+
+    return swapAdjacentNodes(source, element, target);
+  } catch {
+    return undefined;
+  }
+}
+
+function swapAdjacentStatements(source: string, statement: SgNode, target: SgNode): StructuralMoveEdit | undefined {
+  const statementRange = statement.range();
+  const targetRange = target.range();
+  const first = statementRange.start.index < targetRange.start.index ? statementRange : targetRange;
+  const second = first === statementRange ? targetRange : statementRange;
+
+  if (first.end.index > second.start.index) {
+    return undefined;
+  }
+
+  const firstText = source.slice(first.start.index, first.end.index);
+  const betweenText = source.slice(first.end.index, second.start.index);
+  const secondText = source.slice(second.start.index, second.end.index);
+  const statementIsFirst = first === statementRange;
+
+  return {
+    startOffset: first.start.index,
+    endOffset: second.end.index,
+    text: secondText + betweenText + firstText,
+    cursorOffset: statementIsFirst ? first.start.index + secondText.length + betweenText.length : first.start.index,
+  };
+}
+
+function swapAdjacentNodes(source: string, node: SgNode, target: SgNode): StructuralMoveEdit | undefined {
+  const nodeRange = node.range();
+  const targetRange = target.range();
+  const first = nodeRange.start.index < targetRange.start.index ? nodeRange : targetRange;
+  const second = first === nodeRange ? targetRange : nodeRange;
+
+  if (first.end.index > second.start.index) {
+    return undefined;
+  }
+
+  const firstText = source.slice(first.start.index, first.end.index);
+  const betweenText = source.slice(first.end.index, second.start.index);
+  const secondText = source.slice(second.start.index, second.end.index);
+  const nodeIsFirst = first === nodeRange;
+
+  return {
+    startOffset: first.start.index,
+    endOffset: second.end.index,
+    text: secondText + betweenText + firstText,
+    cursorOffset: nodeIsFirst ? first.start.index + secondText.length + betweenText.length : first.start.index,
+  };
+}
+
+function movableStatementAt(node: SgNode): SgNode | undefined {
+  let current: SgNode | undefined = node;
+
+  while (current) {
+    if (isMovableStatement(current)) {
+      return current;
+    }
+
+    current = current.parent_node();
+  }
+
+  return undefined;
+}
+
+function isMovableStatement(node: SgNode): boolean {
+  return MOVABLE_STATEMENT_KINDS.has(node.kind());
+}
+
+function movableElementAt(node: SgNode): SgNode | undefined {
+  let current: SgNode | undefined = node;
+
+  while (current) {
+    const candidate: SgNode = current;
+    const parent: SgNode | undefined = candidate.parent_node();
+
+    if (parent && movableElementSiblings(parent).some((sibling) => sameRangeNode(sibling, candidate))) {
+      return candidate;
+    }
+
+    current = parent;
+  }
+
+  return undefined;
+}
+
+function movableElementSiblings(parent: SgNode): SgNode[] {
+  if (parent.kind() === "arguments" || parent.kind() === "array") {
+    return parent.children_nodes().filter((child) => !ELEMENT_DELIMITER_KINDS.has(child.kind()) && child.kind() !== "comment");
+  }
+
+  if (parent.kind() === "object") {
+    return parent.children_nodes().filter((child) => child.kind() === "pair");
+  }
+
+  return [];
+}
+
+function sameRangeNode(a: SgNode, b: SgNode): boolean {
+  const range = b.range();
+
+  return sameRange(a, range.start.index, range.end.index);
+}
+
+function sameRange(node: SgNode, startOffset: number, endOffset: number): boolean {
+  const range = node.range();
+
+  return range.start.index === startOffset && range.end.index === endOffset;
+}
+
+const ELEMENT_DELIMITER_KINDS = new Set(["(", ")", "[", "]", ","]);
+
+const MOVABLE_STATEMENT_KINDS = new Set([
+  "break_statement",
+  "class_declaration",
+  "continue_statement",
+  "do_statement",
+  "export_statement",
+  "expression_statement",
+  "for_in_statement",
+  "for_statement",
+  "function_declaration",
+  "if_statement",
+  "import_statement",
+  "interface_declaration",
+  "lexical_declaration",
+  "return_statement",
+  "switch_statement",
+  "throw_statement",
+  "try_statement",
+  "type_alias_declaration",
+  "variable_declaration",
+  "while_statement",
+]);
 
 function eolOffsetBeforeCursor(eol: string, edit: CompleteStatementEdit): number {
   const insertedCursorOffset = edit.cursorOffset - edit.insertOffset;

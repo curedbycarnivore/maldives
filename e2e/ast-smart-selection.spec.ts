@@ -10,7 +10,13 @@ declare global {
 
 async function loadEditor(page: Page): Promise<void> {
   await page.goto("http://127.0.0.1:5173/");
-  await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesEditor))).toBe(true);
+  // double-check: wait for editor, then verify still mounted 300ms later (survives Vite HMR reload)
+  await expect.poll(async () => {
+    const mounted = await page.evaluate(() => Boolean(window.__maldivesEditor)).catch(() => false);
+    if (!mounted) return false;
+    await page.waitForTimeout(300);
+    return page.evaluate(() => Boolean(window.__maldivesEditor)).catch(() => false);
+  }, { timeout: 15000 }).toBe(true);
 }
 
 test("EditorSelectWord expands selection through AST boundaries", async ({ page }) => {
