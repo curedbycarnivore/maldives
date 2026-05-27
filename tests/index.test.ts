@@ -48,6 +48,7 @@ const monacoStub = vi.hoisted(() => {
           state.snippetDisposed = true;
         },
       })),
+      registerCodeActionProvider: vi.fn(() => ({ dispose: vi.fn() })),
     },
     typescript: {
       ScriptTarget: { ESNext: 99 },
