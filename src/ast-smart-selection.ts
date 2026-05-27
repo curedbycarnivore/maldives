@@ -2,7 +2,7 @@ import { initializeTreeSitter, parse, registerDynamicLanguage, type SgNode } fro
 import type { editor } from "monaco-editor";
 
 const TYPESCRIPT_LANGUAGE = "typescript";
-const COMPLETE_STATEMENT_READY_TIMEOUT_MS = 50;
+export const COMPLETE_STATEMENT_READY_TIMEOUT_MS = 50;
 let initPromise: Promise<void> | undefined;
 
 export function initializeAstSmartSelection(): Promise<void> {
@@ -80,15 +80,15 @@ interface StructuralMoveEdit {
   cursorOffset: number;
 }
 
-export function completeStatementWhenReady(editor: editor.IStandaloneCodeEditor): void {
+export function completeStatementWhenReady(
+  editor: editor.IStandaloneCodeEditor,
+  astReady?: Promise<void>,
+): void {
   if (editor.hasWidgetFocus()) {
     return;
   }
 
-  if (!initPromise) {
-    initPromise = initializeAstSmartSelection();
-  }
-
+  const ready = astReady ?? initializeAstSmartSelection();
   let handled = false;
   let timeoutId: ReturnType<typeof globalThis.setTimeout>;
   const fallback = () => {
@@ -116,7 +116,7 @@ export function completeStatementWhenReady(editor: editor.IStandaloneCodeEditor)
   };
 
   timeoutId = globalThis.setTimeout(fallback, COMPLETE_STATEMENT_READY_TIMEOUT_MS);
-  void initPromise.then(tryCompleteStatement, () => {
+  void ready.then(tryCompleteStatement, () => {
     globalThis.clearTimeout(timeoutId);
     fallback();
   });

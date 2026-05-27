@@ -14,6 +14,7 @@ import {
   openRecentLocationsOverlay,
   openShowNavBarOverlay,
   openTabSwitcher,
+  reopenClosedTab,
   switchToLastModelTab,
   switchToModelTab,
   switchToNextModelTab,
@@ -70,7 +71,8 @@ type MonacoTarget =
         | "switchNextModelTab"
         | "switchPreviousModelTab"
         | "switchLastModelTab"
-        | "moveTabRight";
+        | "moveTabRight"
+        | "reopenClosedTab";
     }
   | { type: "custom"; id: "switchModelTab"; tabIndex: number };
 
@@ -88,6 +90,7 @@ const actionTargets: Record<string, MonacoTarget> = {
   "TabSwitcherExtreme.NextTab": { type: "custom", id: "switchNextModelTab" },
   PreviousTab: { type: "custom", id: "switchPreviousModelTab" },
   MoveTabRight: { type: "custom", id: "moveTabRight" },
+  ReopenClosedTab: { type: "custom", id: "reopenClosedTab" },
   GoToLastTab: { type: "custom", id: "switchLastModelTab" },
   "Switch To Last Tab": { type: "custom", id: "switchLastModelTab" },
   AceJumpAction: { type: "custom", id: "aceJump" },
@@ -480,6 +483,10 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
 
   if (target.id === "moveTabRight") {
     return (editor) => void moveCurrentModelTabRight(editor);
+  }
+
+  if (target.id === "reopenClosedTab") {
+    return (editor) => void reopenClosedTab(editor);
   }
 
   return removeLastSelection;

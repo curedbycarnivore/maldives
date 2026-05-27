@@ -16,7 +16,9 @@ export type NavBarItem =
   | ({ kind: "model" } & FileSwitcherItem);
 
 const modelTabs: editor.ITextModel[] = [];
+const closedTabStack: editor.ITextModel[] = [];
 const recentLocations: RecentLocationItem[] = [];
+const maxClosedTabs = 10;
 const maxRecentLocations = 12;
 
 export function registerModelTab(model: editor.ITextModel): void {
@@ -76,15 +78,61 @@ export function moveCurrentModelTabRight(editor: editor.IStandaloneCodeEditor): 
   return true;
 }
 
-function switchToModel(editor: editor.IStandaloneCodeEditor, model: editor.ITextModel | undefined): boolean {
+export function reopenClosedTab(editor: editor.IStandaloneCodeEditor): boolean {
+  const currentModel = editor.getModel();
+
+  while (closedTabStack.length > 0) {
+    const model = closedTabStack.pop();
+
+    if (!model || model.isDisposed() || model === currentModel) {
+      continue;
+    }
+
+    registerModelTab(model);
+    return switchToModel(editor, model, { recordClosedTab: false });
+  }
+
+  editor.focus();
+  return false;
+}
+
+function switchToModel(
+  editor: editor.IStandaloneCodeEditor,
+  model: editor.ITextModel | undefined,
+  options: { recordClosedTab?: boolean } = {},
+): boolean {
   if (!model) {
     editor.focus();
     return false;
   }
 
+  if (options.recordClosedTab !== false) {
+    recordClosedTabForSwitch(editor, model);
+  }
+
   editor.setModel(model);
   editor.focus();
   return true;
+}
+
+function recordClosedTabForSwitch(editor: editor.IStandaloneCodeEditor, targetModel: editor.ITextModel): void {
+  const currentModel = editor.getModel();
+  const liveRegisteredModels = modelTabs.filter((model) => !model.isDisposed());
+
+  if (
+    !currentModel ||
+    currentModel === targetModel ||
+    currentModel.isDisposed() ||
+    !liveRegisteredModels.includes(currentModel) ||
+    !liveRegisteredModels.includes(targetModel)
+  ) {
+    return;
+  }
+
+  if (closedTabStack.at(-1) !== currentModel) {
+    closedTabStack.push(currentModel);
+    closedTabStack.splice(0, Math.max(0, closedTabStack.length - maxClosedTabs));
+  }
 }
 
 export function openGotoFileSwitcher(editor: editor.IStandaloneCodeEditor): void {
@@ -173,8 +221,8 @@ export function openShowNavBarOverlay(editor: editor.IStandaloneCodeEditor): voi
     ].join(";");
     button.innerHTML = `<div>${escapeHtml(item.label)}</div><div style="color:#9cdcfe;font-size:12px">${escapeHtml(item.description)}</div>`;
     button.addEventListener("click", () => {
-      switchToModel(editor, item.model);
       overlay.remove();
+      switchToModel(editor, item.model);
     });
     overlay.append(button);
   }
