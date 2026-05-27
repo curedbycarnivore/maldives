@@ -52,6 +52,7 @@ const monaco = {
     F2: 60,
     F6: 64,
     F7: 65,
+    F12: 70,
     Semicolon: 85,
     Equal: 86,
     Minus: 88,
@@ -93,6 +94,7 @@ describe("buildKeybindings", () => {
     expect(bindingFor("Back", K.Home)).toBe(K.Home);
     expect(bindingFor("Back", M.CtrlCmd | K.BracketLeft)).toBe(M.CtrlCmd | K.BracketLeft);
     expect(bindingFor("Forward", M.CtrlCmd | K.BracketRight)).toBe(M.CtrlCmd | K.BracketRight);
+    expect(bindingFor("Forward", K.End)).toBe(K.End);
     expect(bindingFor("EditorDeleteLine", M.Shift | K.Backspace)).toBe(M.Shift | K.Backspace);
     expect(bindingFor("EditorSelectWord", M.Alt | K.UpArrow)).toBe(M.Alt | K.UpArrow);
     expect(bindingFor("EditorUnSelectWord", M.Alt | K.DownArrow)).toBe(M.Alt | K.DownArrow);
@@ -132,6 +134,8 @@ describe("buildKeybindings", () => {
     expect(bindingFor("CommentByBlockComment", M.CtrlCmd | M.Alt | K.Slash)).toBe(M.CtrlCmd | M.Alt | K.Slash);
     expect(bindingFor("GotoNextError", K.F2)).toBe(K.F2);
     expect(bindingFor("GotoTypeDeclaration", M.Shift | M.WinCtrl | K.KeyB)).toBe(M.Shift | M.WinCtrl | K.KeyB);
+    expect(bindingFor("FileStructurePopup", M.CtrlCmd | K.F12)).toBe(M.CtrlCmd | K.F12);
+    expect(bindingFor("FileStructurePopup", M.Shift | M.CtrlCmd | K.KeyS)).toBe(M.Shift | M.CtrlCmd | K.KeyS);
     expect(bindingFor("SearchEverywhere", M.WinCtrl | M.CtrlCmd | M.Alt | K.KeyF)).toBe(M.WinCtrl | M.CtrlCmd | M.Alt | K.KeyF);
     expect(bindingFor("ShowIntentionActions", M.Shift | M.Alt | K.Enter)).toBe(M.Shift | M.Alt | K.Enter);
     expect(bindingFor("EditorStartNewLine", M.Alt | K.Enter)).toBe(M.Alt | K.Enter);
