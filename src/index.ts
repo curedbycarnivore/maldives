@@ -5,6 +5,7 @@ import editorOptionsXml from "../ssot/options/editor.xml?raw";
 import { initializeAstSmartSelection } from "./ast-smart-selection";
 import { registerAstStructuralSearchAction } from "./ast-structural-search";
 import { registerEffectSnippets } from "./effect-snippets";
+import { registerRecentLocationTracking } from "./file-switcher";
 import { cleanOnBlurFromModel } from "./hooks/trailing-whitespace";
 import { registerKeybindings } from "./keybindings";
 import { parseEditorOptions } from "./parsers/editor-options-parser";
@@ -48,6 +49,7 @@ export function createMaldivesEditor(
   });
 
   registerKeybindings(editor, monaco, keymapConfig);
+  const recentLocationsDisposable = registerRecentLocationTracking(editor);
   const astStructuralSearchDisposable = registerAstStructuralSearchAction(editor);
 
   const blurDisposable =
@@ -65,6 +67,7 @@ export function createMaldivesEditor(
     editor,
     dispose() {
       blurDisposable?.dispose();
+      recentLocationsDisposable.dispose();
       astStructuralSearchDisposable.dispose();
       snippetsDisposable.dispose();
       editor.dispose();

@@ -5,7 +5,7 @@ import editorOptionsXml from "../ssot/options/editor.xml?raw";
 import { initializeAstSmartSelection } from "./ast-smart-selection";
 import { registerAstStructuralSearchAction } from "./ast-structural-search";
 import { registerEffectSnippets } from "./effect-snippets";
-import { registerModelTab } from "./file-switcher";
+import { registerModelTab, registerRecentLocationTracking } from "./file-switcher";
 import { cleanOnBlurFromModel } from "./hooks/trailing-whitespace";
 import { registerKeybindings, type RegisteredMaldivesAction } from "./keybindings";
 import { parseEditorOptions } from "./parsers/editor-options-parser";
@@ -75,6 +75,7 @@ const editor = monaco.editor.create(app, {
   ...maldivesProFeatureOptions,
 });
 const registeredKeybindings = registerKeybindings(editor, monaco, keymapConfig);
+registerRecentLocationTracking(editor);
 registerAstStructuralSearchAction(editor);
 window.__maldivesEditor = editor;
 window.__maldivesKeybindings = registeredKeybindings;

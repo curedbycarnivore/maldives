@@ -10,6 +10,7 @@ import {
   applyActiveTabSwitcherItem,
   moveActiveTabSwitcherItem,
   openGotoFileSwitcher,
+  openRecentLocationsOverlay,
   openTabSwitcher,
   switchToLastModelTab,
   switchToModelTab,
@@ -50,12 +51,14 @@ type MonacoTarget =
         | "humpDeleteRight"
         | "toggleCase"
         | "toggleCamelDashCase"
+        | "surroundWith"
         | "increaseFontSize"
         | "decreaseFontSize"
         | "resetFontSize"
         | "aceJump"
         | "gotoFile"
         | "tabSwitcher"
+        | "recentLocations"
         | "switchApply"
         | "switchDown"
         | "switchUp"
@@ -131,6 +134,7 @@ const actionTargets: Record<string, MonacoTarget> = {
   GotoClass: { type: "action", id: "editor.action.quickOutline" },
   GotoFile: { type: "custom", id: "gotoFile" },
   Switcher: { type: "custom", id: "tabSwitcher" },
+  RecentLocations: { type: "custom", id: "recentLocations" },
   SwitchApply: { type: "custom", id: "switchApply" },
   SwitchDown: { type: "custom", id: "switchDown" },
   SwitchUp: { type: "custom", id: "switchUp" },
@@ -145,6 +149,7 @@ const actionTargets: Record<string, MonacoTarget> = {
   EditorDeleteToWordEndInDifferentHumpsMode: { type: "custom", id: "humpDeleteRight" },
   EditorToggleCase: { type: "custom", id: "toggleCase" },
   toggleCamelDashCase: { type: "custom", id: "toggleCamelDashCase" },
+  SurroundWith: { type: "custom", id: "surroundWith" },
   EditorIncreaseFontSize: { type: "custom", id: "increaseFontSize" },
   EditorDecreaseFontSize: { type: "custom", id: "decreaseFontSize" },
   EditorResetFontSize: { type: "custom", id: "resetFontSize" },
@@ -401,6 +406,10 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
     return (editor) => replaceSelections(editor, toggleCamelDashCaseText);
   }
 
+  if (target.id === "surroundWith") {
+    return openSurroundWithOverlay;
+  }
+
   if (target.id === "increaseFontSize") {
     return (editor) => updateFontSize(editor, 1);
   }
@@ -423,6 +432,10 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
 
   if (target.id === "tabSwitcher") {
     return openTabSwitcher;
+  }
+
+  if (target.id === "recentLocations") {
+    return openRecentLocationsOverlay;
   }
 
   if (target.id === "switchApply") {
@@ -477,6 +490,27 @@ export function toggleCamelDashCaseText(value: string): string {
   return value.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
 }
 
+export type SurroundWithKind = "braces" | "parentheses" | "if";
+
+export function surroundSelectionText(value: string, kind: SurroundWithKind): string {
+  if (kind === "parentheses") {
+    return `(${value})`;
+  }
+
+  if (kind === "if") {
+    return `if (true) {\n${indentSurroundedText(value)}\n}`;
+  }
+
+  return `{\n${indentSurroundedText(value)}\n}`;
+}
+
+function indentSurroundedText(value: string): string {
+  return value
+    .split("\n")
+    .map((line) => (line.length === 0 ? line : `  ${line}`))
+    .join("\n");
+}
+
 export function deleteToWordPart(editor: editor.IStandaloneCodeEditor, direction: "left" | "right"): void {
   const start = editor.getPosition();
 
@@ -522,6 +556,76 @@ function replaceSelections(editor: editor.IStandaloneCodeEditor, transform: (val
     "maldives",
     selections.map((selection) => ({ range: selection, text: transform(model.getValueInRange(selection)) })),
   );
+}
+
+function openSurroundWithOverlay(editor: editor.IStandaloneCodeEditor): void {
+  const model = editor.getModel();
+  const selections = editor.getSelections()?.filter((selection) => !selection.isEmpty());
+
+  if (!model || !selections?.length) {
+    editor.focus();
+    return;
+  }
+
+  document.querySelector(".maldives-surround-with")?.remove();
+
+  const overlay = document.createElement("div");
+  overlay.className = "maldives-surround-with";
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-label", "Surround With");
+  overlay.style.cssText = [
+    "position:fixed",
+    "top:72px",
+    "left:50%",
+    "transform:translateX(-50%)",
+    "z-index:10000",
+    "width:min(360px, calc(100vw - 32px))",
+    "background:#1e1e1e",
+    "color:#d4d4d4",
+    "border:1px solid #454545",
+    "box-shadow:0 12px 32px rgba(0,0,0,.45)",
+    "font:13px system-ui, sans-serif",
+  ].join(";");
+
+  const heading = document.createElement("div");
+  heading.textContent = "Surround With";
+  heading.style.cssText = "padding:10px 12px;border-bottom:1px solid #333;color:#fff;font-weight:600";
+  overlay.append(heading);
+
+  const options: { label: string; kind: SurroundWithKind }[] = [
+    { label: "Braces block", kind: "braces" },
+    { label: "Parentheses", kind: "parentheses" },
+    { label: "if (...) { ... }", kind: "if" },
+  ];
+
+  for (const option of options) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "maldives-surround-with-item";
+    button.textContent = option.label;
+    button.style.cssText = [
+      "display:block",
+      "width:100%",
+      "padding:10px 12px",
+      "border:0",
+      "background:transparent",
+      "color:inherit",
+      "text-align:left",
+      "cursor:pointer",
+    ].join(";");
+    button.addEventListener("click", () => {
+      editor.executeEdits(
+        "maldives",
+        selections.map((selection) => ({ range: selection, text: surroundSelectionText(model.getValueInRange(selection), option.kind) })),
+      );
+      overlay.remove();
+      editor.focus();
+    });
+    overlay.append(button);
+  }
+
+  document.body.append(overlay);
+  (overlay.querySelector("button") as HTMLButtonElement | null)?.focus();
 }
 
 function updateFontSize(editor: editor.IStandaloneCodeEditor, delta: number): void {
