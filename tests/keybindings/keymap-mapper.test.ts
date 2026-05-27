@@ -72,7 +72,13 @@ describe("buildKeybindings", () => {
     expect(bindingFor("MoveLineDown", M.Shift | M.Alt | K.DownArrow)).toBe(M.Shift | M.Alt | K.DownArrow);
     expect(bindingFor("MoveLineUp", M.Shift | M.Alt | K.UpArrow)).toBe(M.Shift | M.Alt | K.UpArrow);
     expect(bindingFor("MoveStatementDown", M.Shift | M.CtrlCmd | K.DownArrow)).toBe(M.Shift | M.CtrlCmd | K.DownArrow);
+    expect(bindingFor("MoveStatementDown", M.Alt | K.KeyL)).toBe(M.Alt | K.KeyL);
     expect(bindingFor("MoveStatementUp", M.Shift | M.CtrlCmd | K.UpArrow)).toBe(M.Shift | M.CtrlCmd | K.UpArrow);
+    expect(bindingFor("MoveStatementUp", M.Alt | K.KeyF)).toBe(M.Alt | K.KeyF);
+    expect(bindingFor("MoveElementLeft", M.Alt | K.Home)).toBe(M.Alt | K.Home);
+    expect(bindingFor("MoveElementLeft", M.Shift | M.WinCtrl | M.Alt | K.LeftArrow)).toBe(M.Shift | M.WinCtrl | M.Alt | K.LeftArrow);
+    expect(bindingFor("MoveElementRight", M.Alt | K.End)).toBe(M.Alt | K.End);
+    expect(bindingFor("MoveElementRight", M.Shift | M.WinCtrl | M.Alt | K.RightArrow)).toBe(M.Shift | M.WinCtrl | M.Alt | K.RightArrow);
     expect(bindingFor("Back", M.CtrlCmd | K.BracketLeft)).toBe(M.CtrlCmd | K.BracketLeft);
     expect(bindingFor("Forward", M.CtrlCmd | K.BracketRight)).toBe(M.CtrlCmd | K.BracketRight);
     expect(bindingFor("EditorDeleteLine", M.Shift | K.Backspace)).toBe(M.Shift | K.Backspace);

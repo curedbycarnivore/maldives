@@ -1,0 +1,44 @@
+import { mkdir } from "node:fs/promises";
+import { expect, type Page, test } from "@playwright/test";
+
+declare global {
+  interface Window {
+    __maldivesEditor: import("monaco-editor").editor.IStandaloneCodeEditor;
+    __maldivesExecuteKeybinding: (wsActionId: string) => boolean;
+  }
+}
+
+async function loadEditor(page: Page): Promise<void> {
+  await page.goto("http://127.0.0.1:5173/");
+  // double-check: editor mounted + still mounted 300ms later (survives Vite HMR); then WASM init
+  await expect.poll(async () => {
+    const mounted = await page.evaluate(() => Boolean(window.__maldivesEditor)).catch(() => false);
+    if (!mounted) return false;
+    await page.waitForTimeout(300);
+    return page.evaluate(() => Boolean(window.__maldivesEditor)).catch(() => false);
+  }, { timeout: 15000 }).toBe(true);
+  await page.waitForTimeout(3000);
+}
+
+test("MoveStatementDown and MoveStatementUp reorder adjacent TypeScript statements", async ({ page }) => {
+  await loadEditor(page);
+
+  await page.evaluate(() => {
+    window.__maldivesEditor.setValue("function demo() {\n  const first = 1;\n  const second = 2;\n}\n");
+    window.__maldivesEditor.setPosition({ lineNumber: 2, column: 10 });
+    return window.__maldivesExecuteKeybinding("MoveStatementDown");
+  });
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getValue().replaceAll("\r\n", "\n"))).toBe(
+    "function demo() {\n  const second = 2;\n  const first = 1;\n}\n",
+  );
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getPosition()?.lineNumber)).toBe(3);
+
+  await page.evaluate(() => window.__maldivesExecuteKeybinding("MoveStatementUp"));
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getValue().replaceAll("\r\n", "\n"))).toBe(
+    "function demo() {\n  const first = 1;\n  const second = 2;\n}\n",
+  );
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getPosition()?.lineNumber)).toBe(2);
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/move-statement-proof.png" });
+});

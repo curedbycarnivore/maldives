@@ -179,13 +179,25 @@ function keybindingsForAction(action: KeyAction, monaco: Monaco): MaldivesAction
     return [];
   }
 
-  return action.shortcuts.flatMap((shortcut) => {
+  return shortcutsForAction(action).flatMap((shortcut) => {
     const monacoBinding = bindingForShortcut(shortcut, monaco);
 
     return monacoBinding === undefined
       ? []
       : [{ wsActionId: action.id, monacoBinding, handler: handlerForTarget(target) }];
   });
+}
+
+function shortcutsForAction(action: KeyAction): string[] {
+  if (action.id === "Back") {
+    return action.shortcuts.filter((shortcut) => shortcut === "meta open_bracket");
+  }
+
+  if (action.id === "Forward") {
+    return action.shortcuts.filter((shortcut) => shortcut === "meta close_bracket");
+  }
+
+  return action.shortcuts;
 }
 
 function bindingForShortcut(shortcut: string, monaco: Monaco): number | undefined {
