@@ -153,6 +153,24 @@ test("search everywhere opens Monaco command palette", async ({ page }) => {
   await page.screenshot({ path: "proof/search-everywhere-proof.png" });
 });
 
+test("alt number tab keybindings switch deterministic models", async ({ page }) => {
+  await loadEditor(page);
+
+  const switchedToSecond = await page.evaluate(() => window.__maldivesExecuteKeybinding("GoToTab2"));
+
+  expect(switchedToSecond).toBe(true);
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getModel()?.uri.path)).toBe("/maldives/second.ts");
+
+  const switchedToFirst = await page.evaluate(() => window.__maldivesExecuteKeybinding("GoToTab1"));
+
+  expect(switchedToFirst).toBe(true);
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getModel()?.uri.path)).toBe("/maldives/sample.ts");
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.hasTextFocus())).toBe(true);
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/tab-switching-proof.png" });
+});
+
 test("goto file opens the Maldives file switcher", async ({ page }) => {
   await loadEditor(page);
 
@@ -161,13 +179,13 @@ test("goto file opens the Maldives file switcher", async ({ page }) => {
   expect(opened).toBe(true);
   await page.locator(".maldives-file-switcher").waitFor({ state: "visible", timeout: 8000 });
   await expect(page.locator(".maldives-file-switcher")).toContainText("Goto File");
-  await expect(page.locator(".maldives-file-switcher-item")).toContainText("sample.ts");
-  await expect(page.locator(".maldives-file-switcher-item")).toContainText("/maldives/sample.ts");
+  await expect(page.locator(".maldives-file-switcher-item").first()).toContainText("sample.ts");
+  await expect(page.locator(".maldives-file-switcher-item").first()).toContainText("/maldives/sample.ts");
 
   await mkdir("proof", { recursive: true });
   await page.screenshot({ path: "proof/goto-file-switcher-proof.png" });
 
-  await page.locator(".maldives-file-switcher-item").click();
+  await page.locator(".maldives-file-switcher-item").first().click();
   await expect(page.locator(".maldives-file-switcher")).toHaveCount(0);
   await expect.poll(() => page.evaluate(() => window.__maldivesEditor.hasTextFocus())).toBe(true);
 });
