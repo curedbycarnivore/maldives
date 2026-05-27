@@ -50,6 +50,8 @@ const actionTargets: Record<string, MonacoTarget> = {
   AceJumpAction: { type: "custom", id: "aceJump" },
   Back: { type: "action", id: "cursorUndo" },
   Forward: { type: "action", id: "cursorRedo" },
+  HippieCompletion: { type: "action", id: "editor.action.triggerSuggest" },
+  HippieBackwardCompletion: { type: "action", id: "editor.action.triggerSuggest" },
   MoveLineDown: { type: "action", id: "editor.action.moveLinesDownAction" },
   MoveLineUp: { type: "action", id: "editor.action.moveLinesUpAction" },
   MoveElementLeft: { type: "custom", id: "moveElementLeft" },
@@ -205,7 +207,9 @@ function shortcutsForAction(action: KeyAction): string[] {
   }
 
   if (action.id === "Forward") {
-    return action.shortcuts.filter((shortcut) => shortcut === "meta close_bracket");
+    const allowedForwardShortcuts = ["end", "meta close_bracket"];
+
+    return action.shortcuts.filter((shortcut) => allowedForwardShortcuts.includes(shortcut));
   }
 
   return action.shortcuts;
