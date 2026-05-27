@@ -132,6 +132,7 @@ describe("buildKeybindings", () => {
     expect(bindingFor("CommentByBlockComment", M.CtrlCmd | M.Alt | K.Slash)).toBe(M.CtrlCmd | M.Alt | K.Slash);
     expect(bindingFor("GotoNextError", K.F2)).toBe(K.F2);
     expect(bindingFor("GotoTypeDeclaration", M.Shift | M.WinCtrl | K.KeyB)).toBe(M.Shift | M.WinCtrl | K.KeyB);
+    expect(bindingFor("SearchEverywhere", M.WinCtrl | M.CtrlCmd | M.Alt | K.KeyF)).toBe(M.WinCtrl | M.CtrlCmd | M.Alt | K.KeyF);
     expect(bindingFor("ShowIntentionActions", M.Shift | M.Alt | K.Enter)).toBe(M.Shift | M.Alt | K.Enter);
     expect(bindingFor("EditorStartNewLine", M.Alt | K.Enter)).toBe(M.Alt | K.Enter);
     expect(bindingFor("EditorStartNewLine", M.Alt | K.Space)).toBe(M.Alt | K.Space);

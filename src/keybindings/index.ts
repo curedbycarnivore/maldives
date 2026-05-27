@@ -88,6 +88,8 @@ const actionTargets: Record<string, MonacoTarget> = {
   CommentByLineComment: { type: "action", id: "editor.action.commentLine" },
   GotoNextError: { type: "action", id: "editor.action.marker.next" },
   GotoTypeDeclaration: { type: "action", id: "editor.action.goToTypeDefinition" },
+  FileStructurePopup: { type: "action", id: "editor.action.quickOutline" },
+  SearchEverywhere: { type: "action", id: "editor.action.quickCommand" },
   ShowIntentionActions: { type: "action", id: "editor.action.quickFix" },
   RenameElement: { type: "action", id: "editor.action.rename" },
   ShowUsages: { type: "action", id: "editor.action.referenceSearch.trigger" },
