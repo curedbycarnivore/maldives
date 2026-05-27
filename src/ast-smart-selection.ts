@@ -112,6 +112,17 @@ export function moveElementWhenReady(editor: editor.IStandaloneCodeEditor, direc
   );
 }
 
+export function navigateMethodWhenReady(editor: editor.IStandaloneCodeEditor, direction: "up" | "down"): void {
+  if (!initPromise) {
+    initPromise = initializeAstSmartSelection();
+  }
+
+  void initPromise.then(
+    () => navigateMethod(editor, direction),
+    () => undefined,
+  );
+}
+
 export function completionForCursor(source: string, offset: number): CompleteStatementEdit | undefined {
   const lineStart = source.lastIndexOf("\n", Math.max(0, offset - 1)) + 1;
   const nextLineBreak = source.indexOf("\n", offset);
@@ -199,6 +210,24 @@ function moveElement(editor: editor.IStandaloneCodeEditor, direction: "left" | "
   return applyStructuralMove(editor, edit);
 }
 
+function navigateMethod(editor: editor.IStandaloneCodeEditor, direction: "up" | "down"): boolean {
+  const model = editor.getModel();
+  const selection = editor.getSelection();
+
+  if (!model || !selection || model.getLanguageId() !== TYPESCRIPT_LANGUAGE) {
+    return false;
+  }
+
+  const target = methodNavigationTargetForCursor(model.getValue(), model.getOffsetAt(selection.getPosition()), direction);
+
+  if (target === undefined) {
+    return false;
+  }
+
+  editor.setPosition(model.getPositionAt(target));
+  return true;
+}
+
 function applyStructuralMove(
   editor: editor.IStandaloneCodeEditor,
   edit: StructuralMoveEdit | undefined,
@@ -280,6 +309,61 @@ export function elementMoveForCursor(
   } catch {
     return undefined;
   }
+}
+
+export function methodNavigationTargets(source: string): number[] {
+  try {
+    const targets: number[] = [];
+
+    collectMethodNavigationTargets(parse(TYPESCRIPT_LANGUAGE, source).root(), targets);
+    return targets.sort((a, b) => a - b);
+  } catch {
+    return [];
+  }
+}
+
+export function methodNavigationTargetForCursor(
+  source: string,
+  offset: number,
+  direction: "up" | "down",
+): number | undefined {
+  const targets = methodNavigationTargets(source);
+
+  if (direction === "down") {
+    return targets.find((target) => target > offset);
+  }
+
+  for (let index = targets.length - 1; index >= 0; index -= 1) {
+    if (targets[index] < offset) {
+      return targets[index];
+    }
+  }
+
+  return undefined;
+}
+
+function collectMethodNavigationTargets(node: SgNode, targets: number[]): void {
+  if (isMethodNavigationNode(node)) {
+    targets.push(node.range().start.index);
+    return;
+  }
+
+  for (const child of node.children_nodes()) {
+    collectMethodNavigationTargets(child, targets);
+  }
+}
+
+function isMethodNavigationNode(node: SgNode): boolean {
+  const kind = node.kind();
+
+  return (
+    METHOD_NAVIGATION_KINDS.has(kind) ||
+    ((kind === "lexical_declaration" || kind === "public_field_definition") && hasDescendantKind(node, "arrow_function"))
+  );
+}
+
+function hasDescendantKind(node: SgNode, kind: string): boolean {
+  return node.children_nodes().some((child) => child.kind() === kind || hasDescendantKind(child, kind));
 }
 
 function swapAdjacentStatements(source: string, statement: SgNode, target: SgNode): StructuralMoveEdit | undefined {
@@ -388,6 +472,14 @@ function sameRange(node: SgNode, startOffset: number, endOffset: number): boolea
 }
 
 const ELEMENT_DELIMITER_KINDS = new Set(["(", ")", "[", "]", ","]);
+
+const METHOD_NAVIGATION_KINDS = new Set([
+  "abstract_method_signature",
+  "function_declaration",
+  "generator_function_declaration",
+  "method_definition",
+  "method_signature",
+]);
 
 const MOVABLE_STATEMENT_KINDS = new Set([
   "break_statement",

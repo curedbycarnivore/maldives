@@ -4,6 +4,7 @@ import {
   expandAstSelectionWhenReady,
   moveElementWhenReady,
   moveStatementWhenReady,
+  navigateMethodWhenReady,
 } from "../ast-smart-selection";
 import type { KeyAction, KeymapConfig } from "../parsers/keymap-parser";
 
@@ -30,6 +31,8 @@ type MonacoTarget =
         | "completeStatement"
         | "moveElementLeft"
         | "moveElementRight"
+        | "methodDown"
+        | "methodUp"
         | "moveStatementDown"
         | "moveStatementUp"
         | "removeLastSelection"
@@ -49,6 +52,8 @@ const actionTargets: Record<string, MonacoTarget> = {
   MoveLineUp: { type: "action", id: "editor.action.moveLinesUpAction" },
   MoveElementLeft: { type: "custom", id: "moveElementLeft" },
   MoveElementRight: { type: "custom", id: "moveElementRight" },
+  MethodDown: { type: "custom", id: "methodDown" },
+  MethodUp: { type: "custom", id: "methodUp" },
   MoveStatementDown: { type: "custom", id: "moveStatementDown" },
   MoveStatementUp: { type: "custom", id: "moveStatementUp" },
   EditorDeleteLine: { type: "action", id: "editor.action.deleteLines" },
@@ -190,7 +195,7 @@ function keybindingsForAction(action: KeyAction, monaco: Monaco): MaldivesAction
 
 function shortcutsForAction(action: KeyAction): string[] {
   if (action.id === "Back") {
-    return action.shortcuts.filter((shortcut) => shortcut === "meta open_bracket");
+    return action.shortcuts.filter((shortcut) => shortcut === "home" || shortcut === "meta open_bracket");
   }
 
   if (action.id === "Forward") {
@@ -248,11 +253,21 @@ function keyCodeForToken(token: string, monaco: Monaco): number | undefined {
     open_bracket: monaco.KeyCode.BracketLeft,
     close_bracket: monaco.KeyCode.BracketRight,
     f2: monaco.KeyCode.F2,
+    f4: monaco.KeyCode.F4,
     f6: monaco.KeyCode.F6,
     f7: monaco.KeyCode.F7,
+    f9: monaco.KeyCode.F9,
+    f12: monaco.KeyCode.F12,
     "0": monaco.KeyCode.Digit0,
     "1": monaco.KeyCode.Digit1,
     "2": monaco.KeyCode.Digit2,
+    "3": monaco.KeyCode.Digit3,
+    "4": monaco.KeyCode.Digit4,
+    "5": monaco.KeyCode.Digit5,
+    "6": monaco.KeyCode.Digit6,
+    "7": monaco.KeyCode.Digit7,
+    "8": monaco.KeyCode.Digit8,
+    "9": monaco.KeyCode.Digit9,
   };
 
   if (/^[a-z]$/.test(token)) {
@@ -289,6 +304,14 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
 
   if (target.id === "moveElementRight") {
     return (editor) => moveElementWhenReady(editor, "right");
+  }
+
+  if (target.id === "methodDown") {
+    return (editor) => navigateMethodWhenReady(editor, "down");
+  }
+
+  if (target.id === "methodUp") {
+    return (editor) => navigateMethodWhenReady(editor, "up");
   }
 
   if (target.id === "moveStatementDown") {

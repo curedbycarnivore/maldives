@@ -79,6 +79,11 @@ describe("buildKeybindings", () => {
     expect(bindingFor("MoveElementLeft", M.Shift | M.WinCtrl | M.Alt | K.LeftArrow)).toBe(M.Shift | M.WinCtrl | M.Alt | K.LeftArrow);
     expect(bindingFor("MoveElementRight", M.Alt | K.End)).toBe(M.Alt | K.End);
     expect(bindingFor("MoveElementRight", M.Shift | M.WinCtrl | M.Alt | K.RightArrow)).toBe(M.Shift | M.WinCtrl | M.Alt | K.RightArrow);
+    expect(bindingFor("MethodDown", M.WinCtrl | K.DownArrow)).toBe(M.WinCtrl | K.DownArrow);
+    expect(bindingFor("MethodDown", M.CtrlCmd | M.Alt | K.KeyD)).toBe(M.CtrlCmd | M.Alt | K.KeyD);
+    expect(bindingFor("MethodUp", M.WinCtrl | K.UpArrow)).toBe(M.WinCtrl | K.UpArrow);
+    expect(bindingFor("MethodUp", M.CtrlCmd | M.Alt | K.KeyR)).toBe(M.CtrlCmd | M.Alt | K.KeyR);
+    expect(bindingFor("Back", K.Home)).toBe(K.Home);
     expect(bindingFor("Back", M.CtrlCmd | K.BracketLeft)).toBe(M.CtrlCmd | K.BracketLeft);
     expect(bindingFor("Forward", M.CtrlCmd | K.BracketRight)).toBe(M.CtrlCmd | K.BracketRight);
     expect(bindingFor("EditorDeleteLine", M.Shift | K.Backspace)).toBe(M.Shift | K.Backspace);

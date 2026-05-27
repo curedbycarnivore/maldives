@@ -1,7 +1,14 @@
 import { initializeTreeSitter, parse, registerDynamicLanguage } from "@ast-grep/wasm";
 import { resolve } from "node:path";
 import { beforeAll, describe, expect, test } from "vitest";
-import { elementMoveForCursor, nextLargerNode, nodeAtOffset, statementMoveForCursor } from "../src/ast-smart-selection";
+import {
+  elementMoveForCursor,
+  methodNavigationTargetForCursor,
+  methodNavigationTargets,
+  nextLargerNode,
+  nodeAtOffset,
+  statementMoveForCursor,
+} from "../src/ast-smart-selection";
 
 const typescriptWasmPath = resolve("node_modules/tree-sitter-typescript/tree-sitter-typescript.wasm");
 
@@ -75,6 +82,37 @@ describe("statementMoveForCursor", () => {
   test("does not move past statement boundaries", () => {
     expect(statementMoveForCursor(source, source.indexOf("first"), "up")).toBeUndefined();
     expect(statementMoveForCursor(source, source.indexOf("second"), "down")).toBeUndefined();
+  });
+});
+
+describe("methodNavigationTargetForCursor", () => {
+  const source = [
+    "function topLevel() {}",
+    "const arrow = () => {};",
+    "class Demo {",
+    "  first() {}",
+    "  second = () => {};",
+    "}",
+    "interface Contract {",
+    "  run(): void;",
+    "}",
+  ].join("\n");
+
+  test("finds function-like and method-like declarations in source order", () => {
+    expect(methodNavigationTargets(source)).toEqual([
+      source.indexOf("function topLevel"),
+      source.indexOf("const arrow"),
+      source.indexOf("first"),
+      source.indexOf("second"),
+      source.indexOf("run"),
+    ]);
+  });
+
+  test("moves to the next and previous method target around the cursor", () => {
+    expect(methodNavigationTargetForCursor(source, source.indexOf("topLevel"), "down")).toBe(
+      source.indexOf("const arrow"),
+    );
+    expect(methodNavigationTargetForCursor(source, source.indexOf("second"), "up")).toBe(source.indexOf("first"));
   });
 });
 
