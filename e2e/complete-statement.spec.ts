@@ -35,6 +35,30 @@ test("EditorCompleteStatement falls back visibly through the registered keybindi
   await page.screenshot({ path: "proof/p4b-complete-statement-fallback-proof.png" });
 });
 
+test("EditorChooseLookupItemCompleteStatement accepts a visible suggestion then completes the statement", async ({ page }) => {
+  await loadEditor(page);
+
+  await page.evaluate(() => {
+    const model = window.__monaco.editor.createModel("const alphaValue = 1;\nalphaVal", "typescript");
+
+    window.__maldivesEditor.setModel(model);
+    window.__maldivesEditor.setPosition({ lineNumber: 2, column: 9 });
+    window.__maldivesEditor.focus();
+    window.__maldivesEditor.trigger("test", "editor.action.triggerSuggest", {});
+  });
+
+  await expect(page.locator(".suggest-widget")).toBeVisible({ timeout: 15000 });
+  await expect(page.locator(".suggest-widget")).toContainText("alphaValue", { timeout: 15000 });
+
+  const completed = await page.evaluate(() => window.__maldivesExecuteKeybinding("EditorChooseLookupItemCompleteStatement"));
+
+  expect(completed).toBe(true);
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getValue().replaceAll("\r\n", "\n"))).toBe("const alphaValue = 1;\nalphaValue;");
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/p5b-choose-lookup-complete-proof.png" });
+});
+
 test("EditorCompleteStatement completes statements through the registered keybinding", async ({ page }) => {
   await loadEditor(page);
 

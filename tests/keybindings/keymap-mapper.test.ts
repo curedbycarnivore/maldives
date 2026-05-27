@@ -148,6 +148,9 @@ describe("buildKeybindings", () => {
     expect(bindingFor("GotoClass", M.Shift | M.CtrlCmd | K.KeyO)).toBe(M.Shift | M.CtrlCmd | K.KeyO);
     expect(bindingFor("GotoFile", M.CtrlCmd | K.KeyO)).toBe(M.CtrlCmd | K.KeyO);
     expect(bindingFor("MoveTabRight", M.Shift | M.WinCtrl | K.KeyI)).toBe(M.Shift | M.WinCtrl | K.KeyI);
+    expect(bindingFor("AceJumpAction", M.CtrlCmd | K.Semicolon)).toBe(M.CtrlCmd | K.Semicolon);
+    expect(bindingFor("AceJumpAction", M.WinCtrl | K.Semicolon)).toBe(M.WinCtrl | K.Semicolon);
+    expect(bindingFor("AceJumpAction", M.CtrlCmd | K.KeyI)).toBe(M.CtrlCmd | K.KeyI);
     expect(bindingFor("RecentLocations", M.CtrlCmd | M.Alt | K.KeyL)).toBe(M.CtrlCmd | M.Alt | K.KeyL);
     expect(bindingFor("SearchEverywhere", M.WinCtrl | M.CtrlCmd | M.Alt | K.KeyF)).toBe(M.WinCtrl | M.CtrlCmd | M.Alt | K.KeyF);
     expect(bindingFor("ShowIntentionActions", M.Shift | M.Alt | K.Enter)).toBe(M.Shift | M.Alt | K.Enter);
@@ -155,10 +158,12 @@ describe("buildKeybindings", () => {
     expect(bindingFor("EditorStartNewLine", M.Alt | K.Space)).toBe(M.Alt | K.Space);
     expect(bindingFor("EditorStartNewLineBefore", M.CtrlCmd | K.Enter)).toBe(M.CtrlCmd | K.Enter);
     expect(bindingFor("EditorStartNewLineBefore", M.CtrlCmd | M.Shift | K.Space)).toBe(M.CtrlCmd | M.Shift | K.Space);
+    expect(bindingFor("IntroduceActionsGroup", M.Shift | M.CtrlCmd | K.KeyE)).toBe(M.Shift | M.CtrlCmd | K.KeyE);
     expect(bindingFor("RenameElement", M.CtrlCmd | K.KeyR)).toBe(M.CtrlCmd | K.KeyR);
     expect(bindingFor("RenameElement", M.Shift | K.F6)).toBe(M.Shift | K.F6);
     expect(bindingFor("ShowUsages", M.CtrlCmd | M.Alt | K.F7)).toBe(M.CtrlCmd | M.Alt | K.F7);
     expect(bindingFor("ReformatCode", M.Shift | M.CtrlCmd | K.Semicolon)).toBe(M.Shift | M.CtrlCmd | K.Semicolon);
+    expect(bindingFor("RearrangeCode", M.Shift | M.CtrlCmd | K.KeyI)).toBe(M.Shift | M.CtrlCmd | K.KeyI);
     expect(bindingFor("EditorDeleteToWordStartInDifferentHumpsMode", M.CtrlCmd | K.KeyK)).toBe(M.CtrlCmd | K.KeyK);
     expect(bindingFor("EditorDeleteToWordEndInDifferentHumpsMode", M.CtrlCmd | K.KeyU)).toBe(M.CtrlCmd | K.KeyU);
     expect(bindingFor("EditorToggleCase", M.Shift | M.CtrlCmd | K.KeyU)).toBe(M.Shift | M.CtrlCmd | K.KeyU);
@@ -169,6 +174,14 @@ describe("buildKeybindings", () => {
     expect(bindingFor("EditorPreviousWordInDifferentHumpsMode", M.CtrlCmd | M.Alt | K.LeftArrow)).toBe(M.CtrlCmd | M.Alt | K.LeftArrow);
     expect(bindingFor("EditorNextWordInDifferentHumpsModeWithSelection", M.Shift | M.CtrlCmd | M.Alt | K.RightArrow)).toBe(M.Shift | M.CtrlCmd | M.Alt | K.RightArrow);
     expect(bindingFor("EditorPreviousWordInDifferentHumpsModeWithSelection", M.Shift | M.CtrlCmd | M.Alt | K.LeftArrow)).toBe(M.Shift | M.CtrlCmd | M.Alt | K.LeftArrow);
+  });
+
+  test("maps choose lookup complete statement to shift-cmd-enter only", () => {
+    const M = monaco.KeyMod;
+    const K = monaco.KeyCode;
+
+    expect(bindingFor("EditorChooseLookupItemCompleteStatement", M.Shift | M.CtrlCmd | K.Enter)).toBe(M.Shift | M.CtrlCmd | K.Enter);
+    expect(bindingFor("EditorChooseLookupItemCompleteStatement", K.Enter)).toBeUndefined();
   });
 
   test("maps WebStorm alt+number tab shortcuts to deterministic Monaco bindings", () => {
@@ -259,6 +272,80 @@ describe("registerKeybindings", () => {
     commands.get(M.Shift | M.Alt | K.KeyG)?.();
 
     expect(setSelections).toHaveBeenCalledWith([first, second]);
+  });
+
+  test("ace jump focuses the editor and opens Monaco goto line", () => {
+    const commands = new Map<number, () => void>();
+    const focus = vi.fn();
+    const gotoLineAction = { run: vi.fn() };
+    const getAction = vi.fn((id: string) => (id === "editor.action.gotoLine" ? gotoLineAction : undefined));
+    const editor = {
+      addCommand: vi.fn((binding: number, handler: () => void) => {
+        commands.set(binding, handler);
+        return `command-${binding}`;
+      }),
+      focus,
+      getAction,
+    } as never;
+    const binding = monaco.KeyMod.CtrlCmd | monaco.KeyCode.Semicolon;
+
+    registerKeybindings(editor, monaco, {
+      name: "test",
+      parent: "",
+      actions: [{ id: "AceJumpAction", shortcuts: ["meta semicolon"] }],
+    });
+
+    commands.get(binding)?.();
+
+    expect(focus).toHaveBeenCalled();
+    expect(getAction).toHaveBeenCalledWith("editor.action.gotoLine");
+    expect(gotoLineAction.run).toHaveBeenCalled();
+  });
+
+  test("choose lookup complete accepts the selected suggestion before completing the statement", async () => {
+    vi.resetModules();
+    const completeStatementWhenReady = vi.fn();
+    vi.doMock("../../src/ast-smart-selection", () => ({
+      completeStatementWhenReady,
+      expandAstSelectionWhenReady: vi.fn(),
+      moveElementWhenReady: vi.fn(),
+      moveStatementWhenReady: vi.fn(),
+      navigateMethodWhenReady: vi.fn(),
+    }));
+    const { registerKeybindings: registerWithMockedAst } = await import("../../src/keybindings");
+    const commands = new Map<number, () => void>();
+    const trigger = vi.fn();
+    const editor = {
+      addCommand: vi.fn((binding: number, handler: () => void) => {
+        commands.set(binding, handler);
+        return `command-${binding}`;
+      }),
+      trigger,
+    } as never;
+    const binding = monaco.KeyMod.Shift | monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter;
+
+    vi.useFakeTimers();
+    try {
+      registerWithMockedAst(editor, monaco, {
+        name: "test",
+        parent: "",
+        actions: [{ id: "EditorChooseLookupItemCompleteStatement", shortcuts: ["shift meta enter", "enter"] }],
+      });
+
+      commands.get(binding)?.();
+
+      expect(commands.has(monaco.KeyCode.Enter)).toBe(false);
+      expect(trigger).toHaveBeenCalledWith("keyboard", "acceptSelectedSuggestion", {});
+      expect(completeStatementWhenReady).not.toHaveBeenCalled();
+
+      vi.runOnlyPendingTimers();
+
+      expect(completeStatementWhenReady).toHaveBeenCalledWith(editor);
+    } finally {
+      vi.useRealTimers();
+      vi.doUnmock("../../src/ast-smart-selection");
+      vi.resetModules();
+    }
   });
 });
 

@@ -171,6 +171,41 @@ test("rename element opens Monaco inline rename input", async ({ page }) => {
   await page.screenshot({ path: "proof/p5a-rename-element-proof.png" });
 });
 
+test("ace jump opens Monaco goto line quick input", async ({ page }) => {
+  await loadEditor(page);
+
+  const opened = await page.evaluate(() => window.__maldivesExecuteKeybinding("AceJump"));
+
+  expect(opened).toBe(true);
+  await page.locator(".quick-input-widget").waitFor({ state: "visible", timeout: 8000 });
+  await expect(page.locator(".quick-input-widget input")).toHaveValue(":", { timeout: 8000 });
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/p5c-acejump-proof.png" });
+});
+
+test("introduce actions and rearrange code keybindings execute Monaco equivalents", async ({ page }) => {
+  await loadEditor(page);
+  await waitForXmlParserSymbol(page);
+
+  const rearranged = await page.evaluate(() => window.__maldivesExecuteKeybinding("RearrangeCode"));
+
+  expect(rearranged).toBe(true);
+
+  const opened = await page.evaluate(() => {
+    window.__maldivesEditor.setSelection({ startLineNumber: 6, startColumn: 12, endLineNumber: 6, endColumn: 48 });
+    window.__maldivesEditor.focus();
+
+    return window.__maldivesExecuteKeybinding("IntroduceActionsGroup");
+  });
+
+  expect(opened).toBe(true);
+  await page.locator(".action-widget").waitFor({ state: "visible", timeout: 8000 });
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/p4e-introduce-rearrange-proof.png" });
+});
+
 test("alt number tab keybindings switch deterministic models", async ({ page }) => {
   await loadEditor(page);
 

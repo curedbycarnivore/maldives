@@ -2,6 +2,8 @@ export interface ThemeConfig {
   background: string;
   gutterBackground: string;
   lineHighlight: string;
+  foldedTextBackground: string;
+  matchedBraceBackground: string;
   selectionBackground: string;
   caretColor: string;
   lineNumbersColor: string;
@@ -35,6 +37,12 @@ export function parseIcls(xmlContent: string): ThemeConfig {
     defaultForeground: color(optionValue(textBlock, "FOREGROUND")),
     gutterBackground: color(optionValue(xmlContent, "GUTTER_BACKGROUND")),
     lineHighlight: color(optionValue(xmlContent, "CARET_ROW_COLOR")),
+    foldedTextBackground: color(
+      optionValue(blockFor(xmlContent, "FOLDED_TEXT_ATTRIBUTES"), "BACKGROUND"),
+    ),
+    matchedBraceBackground: color(
+      optionValue(blockFor(xmlContent, "MATCHED_BRACE_ATTRIBUTES"), "BACKGROUND"),
+    ),
     selectionBackground: color(optionValue(xmlContent, "SELECTION_BACKGROUND")),
     caretColor: color(optionValue(xmlContent, "CARET_COLOR")),
     lineNumbersColor: color(optionValue(xmlContent, "LINE_NUMBERS_COLOR")),

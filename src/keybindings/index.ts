@@ -64,6 +64,7 @@ type MonacoTarget =
         | "tabSwitcher"
         | "recentLocations"
         | "showNavBar"
+        | "replaceInPath"
         | "switchApply"
         | "switchDown"
         | "switchUp"
@@ -152,6 +153,8 @@ const actionTargets: Record<string, MonacoTarget> = {
   SwitchLeft: { type: "custom", id: "switchLeft" },
   SwitchRight: { type: "custom", id: "switchRight" },
   SearchEverywhere: { type: "action", id: "editor.action.quickCommand" },
+  Replace: { type: "action", id: "editor.action.startFindReplaceAction" },
+  ReplaceInPath: { type: "custom", id: "replaceInPath" },
   ShowIntentionActions: { type: "action", id: "editor.action.quickFix" },
   IntroduceActionsGroup: { type: "action", id: "editor.action.refactor" },
   RenameElement: { type: "action", id: "editor.action.rename" },
@@ -246,6 +249,8 @@ function registerCustomEditorActions(editor: editor.IStandaloneCodeEditor, actio
   }
 }
 
+const shortcutlessActionIds = new Set(["Replace"]);
+
 function keybindingsForAction(action: KeyAction, monaco: Monaco): MaldivesAction[] {
   const target = actionTargets[action.id];
 
@@ -253,7 +258,13 @@ function keybindingsForAction(action: KeyAction, monaco: Monaco): MaldivesAction
     return [];
   }
 
-  return shortcutsForAction(action).flatMap((shortcut) => {
+  const shortcuts = shortcutsForAction(action);
+
+  if (shortcuts.length === 0 && shortcutlessActionIds.has(action.id)) {
+    return [{ wsActionId: action.id, monacoBinding: 0, handler: handlerForTarget(target) }];
+  }
+
+  return shortcuts.flatMap((shortcut) => {
     const monacoBinding = bindingForShortcut(shortcut, monaco);
 
     return monacoBinding === undefined
@@ -363,7 +374,11 @@ function keyCodeForToken(token: string, monaco: Monaco): number | undefined {
 function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCodeEditor) => void {
   if (target.type === "action") {
     return (editor) => {
-      if (target.id === "editor.action.quickOutline" || target.id === "editor.action.quickCommand") {
+      if (
+        target.id === "editor.action.quickOutline" ||
+        target.id === "editor.action.quickCommand" ||
+        target.id === "editor.action.startFindReplaceAction"
+      ) {
         editor.focus();
       }
 
@@ -466,6 +481,10 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
 
   if (target.id === "showNavBar") {
     return openShowNavBarOverlay;
+  }
+
+  if (target.id === "replaceInPath") {
+    return openReplaceInPathPlaceholder;
   }
 
   if (target.id === "switchApply") {
@@ -599,6 +618,50 @@ function replaceSelections(editor: editor.IStandaloneCodeEditor, transform: (val
     "maldives",
     selections.map((selection) => ({ range: selection, text: transform(model.getValueInRange(selection)) })),
   );
+}
+
+function openReplaceInPathPlaceholder(editor: editor.IStandaloneCodeEditor): void {
+  document.querySelector(".maldives-replace-in-path")?.remove();
+
+  const overlay = document.createElement("div");
+  overlay.className = "maldives-replace-in-path";
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-label", "Replace in Path");
+  overlay.style.cssText = [
+    "position:fixed",
+    "top:72px",
+    "left:50%",
+    "transform:translateX(-50%)",
+    "z-index:10000",
+    "width:min(420px, calc(100vw - 32px))",
+    "background:#1e1e1e",
+    "color:#d4d4d4",
+    "border:1px solid #454545",
+    "box-shadow:0 12px 32px rgba(0,0,0,.45)",
+    "font:13px system-ui, sans-serif",
+    "padding:12px",
+  ].join(";");
+
+  const heading = document.createElement("div");
+  heading.textContent = "Replace in Path";
+  heading.style.cssText = "color:#fff;font-weight:600;margin-bottom:6px";
+
+  const message = document.createElement("div");
+  message.textContent = "Multi-file replace is not available in standalone Monaco yet. Use Replace for the current editor.";
+  message.style.cssText = "line-height:1.4";
+
+  const close = document.createElement("button");
+  close.type = "button";
+  close.textContent = "Close";
+  close.style.cssText = "margin-top:12px;padding:6px 10px;background:#2d2d2d;color:inherit;border:1px solid #555;cursor:pointer";
+  close.addEventListener("click", () => {
+    overlay.remove();
+    editor.focus();
+  });
+
+  overlay.append(heading, message, close);
+  document.body.append(overlay);
+  close.focus();
 }
 
 function openSurroundWithOverlay(editor: editor.IStandaloneCodeEditor): void {
