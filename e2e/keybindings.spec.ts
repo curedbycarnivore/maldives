@@ -4,6 +4,7 @@ import { expect, type Page, test } from "@playwright/test";
 declare global {
   interface Window {
     __maldivesEditor: import("monaco-editor").editor.IStandaloneCodeEditor;
+    __monaco: typeof import("monaco-editor");
     __maldivesExecuteKeybinding: (wsActionId: string) => boolean;
   }
 }
@@ -11,6 +12,30 @@ declare global {
 async function loadEditor(page: Page): Promise<void> {
   await page.goto("http://127.0.0.1:5173/");
   await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesEditor))).toBe(true);
+}
+
+async function waitForXmlParserSymbol(page: Page): Promise<void> {
+  await page.waitForFunction(
+    async () => {
+      const model = window.__maldivesEditor.getModel();
+
+      if (!model) {
+        return false;
+      }
+
+      try {
+        const getWorker = await window.__monaco.languages.typescript.getTypeScriptWorker();
+        const worker = await getWorker(model.uri);
+        const tree = await worker.getNavigationTree(model.uri.toString());
+
+        return JSON.stringify(tree).includes("XMLParser");
+      } catch {
+        return false;
+      }
+    },
+    undefined,
+    { timeout: 5000 },
+  );
 }
 
 test("unselect previous occurrence removes the last occurrence selection", async ({ page }) => {
@@ -56,6 +81,7 @@ test("line navigation keybindings move and delete within the current line", asyn
 
 test("file structure popup opens Monaco quick outline", async ({ page }) => {
   await loadEditor(page);
+  await waitForXmlParserSymbol(page);
 
   const opened = await page.evaluate(() => window.__maldivesExecuteKeybinding("FileStructurePopup"));
 
@@ -67,14 +93,28 @@ test("file structure popup opens Monaco quick outline", async ({ page }) => {
   await page.screenshot({ path: "proof/file-structure-popup-proof.png" });
 });
 
+test("goto class opens Monaco quick outline", async ({ page }) => {
+  await loadEditor(page);
+  await waitForXmlParserSymbol(page);
+
+  const opened = await page.evaluate(() => window.__maldivesExecuteKeybinding("GotoClass"));
+
+  expect(opened).toBe(true);
+  await page.locator(".quick-input-widget").waitFor({ state: "visible", timeout: 8000 });
+  await expect(page.locator(".quick-input-widget")).toContainText("XMLParser");
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/goto-class-quick-outline-proof.png" });
+});
+
 test("search everywhere opens Monaco command palette", async ({ page }) => {
   await loadEditor(page);
 
   const opened = await page.evaluate(() => window.__maldivesExecuteKeybinding("SearchEverywhere"));
 
   expect(opened).toBe(true);
-  await expect(page.locator(".quick-input-widget")).toBeVisible();
-  await expect(page.locator(".quick-input-widget input")).toHaveValue(">");
+  await page.locator(".quick-input-widget").waitFor({ state: "visible", timeout: 8000 });
+  await expect(page.locator(".quick-input-widget input")).toHaveValue(">", { timeout: 8000 });
 
   await mkdir("proof", { recursive: true });
   await page.screenshot({ path: "proof/search-everywhere-proof.png" });

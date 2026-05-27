@@ -6,6 +6,7 @@ import {
   moveStatementWhenReady,
   navigateMethodWhenReady,
 } from "../ast-smart-selection";
+import { openGotoFileSwitcher } from "../file-switcher";
 import type { KeyAction, KeymapConfig } from "../parsers/keymap-parser";
 
 export interface MaldivesAction {
@@ -43,7 +44,8 @@ type MonacoTarget =
         | "increaseFontSize"
         | "decreaseFontSize"
         | "resetFontSize"
-        | "aceJump";
+        | "aceJump"
+        | "gotoFile";
     };
 
 const actionTargets: Record<string, MonacoTarget> = {
@@ -94,6 +96,7 @@ const actionTargets: Record<string, MonacoTarget> = {
   GotoTypeDeclaration: { type: "action", id: "editor.action.goToTypeDefinition" },
   FileStructurePopup: { type: "action", id: "editor.action.quickOutline" },
   GotoClass: { type: "action", id: "editor.action.quickOutline" },
+  GotoFile: { type: "custom", id: "gotoFile" },
   SearchEverywhere: { type: "action", id: "editor.action.quickCommand" },
   ShowIntentionActions: { type: "action", id: "editor.action.quickFix" },
   RenameElement: { type: "action", id: "editor.action.rename" },
@@ -369,6 +372,10 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
 
   if (target.id === "aceJump") {
     return () => undefined;
+  }
+
+  if (target.id === "gotoFile") {
+    return openGotoFileSwitcher;
   }
 
   return removeLastSelection;

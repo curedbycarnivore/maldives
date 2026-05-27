@@ -43,6 +43,7 @@ const monaco = {
     KeyH: 38,
     KeyI: 39,
     KeyK: 41,
+    KeyO: 45,
     KeyL: 42,
     KeyR: 48,
     KeyS: 49,
@@ -123,6 +124,8 @@ describe("buildKeybindings", () => {
     expect(bindingFor("EditorDownWithSelection", M.Shift | M.Alt | K.KeyS)).toBe(M.Shift | M.Alt | K.KeyS);
     expect(bindingFor("EditorUpWithSelection", M.Shift | M.Alt | K.KeyR)).toBe(M.Shift | M.Alt | K.KeyR);
     expect(bindingFor("EditorUpWithSelection", M.Shift | M.Alt | K.KeyH)).toBe(M.Shift | M.Alt | K.KeyH);
+    expect(bindingFor("EditorMoveDownAndScroll", M.Shift | M.WinCtrl | K.PageDown)).toBe(M.Shift | M.WinCtrl | K.PageDown);
+    expect(bindingFor("EditorMoveUpAndScroll", M.Shift | M.WinCtrl | K.PageUp)).toBe(M.Shift | M.WinCtrl | K.PageUp);
     expect(bindingFor("EditorCloneCaretAbove", K.PageUp)).toBe(K.PageUp);
     expect(bindingFor("EditorCloneCaretBelow", K.PageDown)).toBe(K.PageDown);
     expect(bindingFor("CollapseRegion", M.Alt | K.Minus)).toBe(M.Alt | K.Minus);
@@ -141,6 +144,7 @@ describe("buildKeybindings", () => {
     expect(bindingFor("GotoTypeDeclaration", M.Shift | M.WinCtrl | K.KeyB)).toBe(M.Shift | M.WinCtrl | K.KeyB);
     expect(bindingFor("FileStructurePopup", M.CtrlCmd | K.F12)).toBe(M.CtrlCmd | K.F12);
     expect(bindingFor("FileStructurePopup", M.Shift | M.CtrlCmd | K.KeyS)).toBe(M.Shift | M.CtrlCmd | K.KeyS);
+    expect(bindingFor("GotoClass", M.Shift | M.CtrlCmd | K.KeyO)).toBe(M.Shift | M.CtrlCmd | K.KeyO);
     expect(bindingFor("SearchEverywhere", M.WinCtrl | M.CtrlCmd | M.Alt | K.KeyF)).toBe(M.WinCtrl | M.CtrlCmd | M.Alt | K.KeyF);
     expect(bindingFor("ShowIntentionActions", M.Shift | M.Alt | K.Enter)).toBe(M.Shift | M.Alt | K.Enter);
     expect(bindingFor("EditorStartNewLine", M.Alt | K.Enter)).toBe(M.Alt | K.Enter);

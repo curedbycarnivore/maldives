@@ -56,9 +56,9 @@ registerEffectSnippets(monaco);
 void initializeAstSmartSelection().catch(() => undefined);
 
 window.__monaco = monaco;
+const sampleModel = monaco.editor.createModel(sampleDocument, "typescript", monaco.Uri.parse("file:///maldives/sample.ts"));
 const editor = monaco.editor.create(app, {
-  value: sampleDocument,
-  language: "typescript",
+  model: sampleModel,
   automaticLayout: true,
   theme: THEME_NAME,
   fontFamily: `${themeConfig.fontFamily}, Fira Code, monospace`,
