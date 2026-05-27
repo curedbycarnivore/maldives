@@ -19,6 +19,30 @@ async function loadEditor(page: Page): Promise<void> {
   }, { timeout: 15000 }).toBe(true);
 }
 
+test("MethodDown and MethodUp navigate between TypeScript method targets", async ({ page }) => {
+  await loadEditor(page);
+
+  await page.evaluate(() => {
+    window.__maldivesEditor.setValue([
+      "function first() {}",
+      "const second = () => {};",
+      "class Example {",
+      "  method() {}",
+      "}",
+    ].join("\n"));
+    window.__maldivesEditor.setPosition({ lineNumber: 1, column: 1 });
+  });
+
+  await page.evaluate(() => window.__maldivesExecuteKeybinding("MethodDown"));
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getPosition()?.lineNumber)).toBe(2);
+
+  await page.evaluate(() => window.__maldivesExecuteKeybinding("MethodUp"));
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getPosition()?.lineNumber)).toBe(1);
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/method-navigation-proof.png" });
+});
+
 test("EditorSelectWord expands selection through AST boundaries", async ({ page }) => {
   await loadEditor(page);
 
