@@ -23,6 +23,11 @@ test("renders the SSOT theme background and editor typography", async ({ page })
     .poll(() => page.locator(".monaco-editor .view-line").first().evaluate((element) => getComputedStyle(element).fontFamily))
     .toContain("JetBrains Mono");
 
+  await expect
+    .poll(() => page.locator(".monaco-editor .view-overlays .current-line").first().evaluate((element) => getComputedStyle(element).backgroundColor))
+    .toBe("rgb(40, 57, 50)");
+
   await mkdir("proof", { recursive: true });
   await page.screenshot({ path: "proof/theme-proof.png" });
+  await page.screenshot({ path: "proof/p5d-color-gaps-proof.png" });
 });

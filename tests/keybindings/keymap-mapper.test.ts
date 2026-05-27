@@ -135,6 +135,9 @@ describe("buildKeybindings", () => {
     expect(bindingFor("ExpandRegionRecursively", M.CtrlCmd | M.Alt | K.Equal)).toBe(M.CtrlCmd | M.Alt | K.Equal);
     expect(bindingFor("CollapseAllRegions", M.Shift | M.WinCtrl | K.Minus)).toBe(M.Shift | M.WinCtrl | K.Minus);
     expect(bindingFor("ExpandAllRegions", M.Shift | M.CtrlCmd | K.Equal)).toBe(M.Shift | M.CtrlCmd | K.Equal);
+    expect(bindingFor("CollapseAll", 0)).toBe(0);
+    expect(bindingFor("ExpandAll", 0)).toBe(0);
+    expect(bindingFor("CollapseSelection", 0)).toBe(0);
     expect(bindingFor("CommentByBlockComment", M.CtrlCmd | M.Alt | K.Slash)).toBe(M.CtrlCmd | M.Alt | K.Slash);
     expect(bindingFor("HippieCompletion", M.Shift | M.CtrlCmd | K.Slash)).toBe(M.Shift | M.CtrlCmd | K.Slash);
     expect(bindingFor("HippieCompletion", M.WinCtrl | K.KeyL)).toBe(M.WinCtrl | K.KeyL);
@@ -153,6 +156,8 @@ describe("buildKeybindings", () => {
     expect(bindingFor("AceJumpAction", M.CtrlCmd | K.KeyI)).toBe(M.CtrlCmd | K.KeyI);
     expect(bindingFor("RecentLocations", M.CtrlCmd | M.Alt | K.KeyL)).toBe(M.CtrlCmd | M.Alt | K.KeyL);
     expect(bindingFor("SearchEverywhere", M.WinCtrl | M.CtrlCmd | M.Alt | K.KeyF)).toBe(M.WinCtrl | M.CtrlCmd | M.Alt | K.KeyF);
+    expect(bindingFor("Replace", 0)).toBe(0);
+    expect(bindingFor("ReplaceInPath", M.CtrlCmd | M.Alt | K.KeyR)).toBe(M.CtrlCmd | M.Alt | K.KeyR);
     expect(bindingFor("ShowIntentionActions", M.Shift | M.Alt | K.Enter)).toBe(M.Shift | M.Alt | K.Enter);
     expect(bindingFor("EditorStartNewLine", M.Alt | K.Enter)).toBe(M.Alt | K.Enter);
     expect(bindingFor("EditorStartNewLine", M.Alt | K.Space)).toBe(M.Alt | K.Space);
@@ -300,6 +305,100 @@ describe("registerKeybindings", () => {
     expect(focus).toHaveBeenCalled();
     expect(getAction).toHaveBeenCalledWith("editor.action.gotoLine");
     expect(gotoLineAction.run).toHaveBeenCalled();
+  });
+
+  test("replace opens Monaco's find/replace action without a shortcut", () => {
+    const commands = new Map<number, () => void>();
+    const focus = vi.fn();
+    const replaceAction = { run: vi.fn() };
+    const getAction = vi.fn((id: string) => (id === "editor.action.startFindReplaceAction" ? replaceAction : undefined));
+    const editor = {
+      addCommand: vi.fn((binding: number, handler: () => void) => {
+        commands.set(binding, handler);
+        return `command-${binding}`;
+      }),
+      focus,
+      getAction,
+    } as never;
+
+    registerKeybindings(editor, monaco, {
+      name: "test",
+      parent: "",
+      actions: [{ id: "Replace", shortcuts: [] }],
+    });
+
+    commands.get(0)?.();
+
+    expect(focus).toHaveBeenCalled();
+    expect(getAction).toHaveBeenCalledWith("editor.action.startFindReplaceAction");
+    expect(replaceAction.run).toHaveBeenCalled();
+  });
+
+  test("shortcutless folding actions run Monaco's built-in folding actions", () => {
+    const commands = new Map<string, () => void>();
+    const monacoActions = new Map([
+      ["editor.foldAll", { run: vi.fn() }],
+      ["editor.unfoldAll", { run: vi.fn() }],
+      ["editor.fold", { run: vi.fn() }],
+    ]);
+    const getAction = vi.fn((id: string) => monacoActions.get(id));
+    const editor = {
+      addCommand: vi.fn((_binding: number, handler: () => void) => {
+        const commandId = `command-${commands.size + 1}`;
+
+        commands.set(commandId, handler);
+        return commandId;
+      }),
+      getAction,
+    } as never;
+
+    const registered = registerKeybindings(editor, monaco, {
+      name: "test",
+      parent: "",
+      actions: [
+        { id: "CollapseAll", shortcuts: [] },
+        { id: "ExpandAll", shortcuts: [] },
+        { id: "CollapseSelection", shortcuts: [] },
+      ],
+    });
+
+    for (const [wsActionId, monacoActionId] of [
+      ["CollapseAll", "editor.foldAll"],
+      ["ExpandAll", "editor.unfoldAll"],
+      ["CollapseSelection", "editor.fold"],
+    ] as const) {
+      const registeredAction = registered.find((action) => action.wsActionId === wsActionId);
+
+      expect(registeredAction?.monacoBinding).toBe(0);
+      commands.get(registeredAction?.commandId ?? "")?.();
+      expect(getAction).toHaveBeenCalledWith(monacoActionId);
+      expect(monacoActions.get(monacoActionId)?.run).toHaveBeenCalled();
+    }
+  });
+
+  test("rename element runs Monaco's built-in rename action", () => {
+    const commands = new Map<number, () => void>();
+    const renameAction = { run: vi.fn() };
+    const getAction = vi.fn((id: string) => (id === "editor.action.rename" ? renameAction : undefined));
+    const editor = {
+      addCommand: vi.fn((binding: number, handler: () => void) => {
+        commands.set(binding, handler);
+        return `command-${binding}`;
+      }),
+      getAction,
+    } as never;
+    const binding = monaco.KeyMod.Shift | monaco.KeyCode.F6;
+
+    registerKeybindings(editor, monaco, {
+      name: "test",
+      parent: "",
+      actions: [{ id: "RenameElement", shortcuts: ["shift f6"] }],
+    });
+
+    commands.get(binding)?.();
+
+    expect(getAction).toHaveBeenCalledWith("editor.action.rename");
+    expect(renameAction.run).toHaveBeenCalled();
   });
 
   test("choose lookup complete accepts the selected suggestion before completing the statement", async () => {

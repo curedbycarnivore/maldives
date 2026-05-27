@@ -4,6 +4,7 @@ import keymapXml from "../ssot/keymaps/leet hax.xml?raw";
 import editorOptionsXml from "../ssot/options/editor.xml?raw";
 import { initializeAstSmartSelection } from "./ast-smart-selection";
 import { registerAstStructuralSearchAction } from "./ast-structural-search";
+import { registerMaldivesCodeActions } from "./code-actions";
 import { registerEffectSnippets } from "./effect-snippets";
 import { registerModelTab, registerRecentLocationTracking } from "./file-switcher";
 import { cleanOnBlurFromModel } from "./hooks/trailing-whitespace";
@@ -58,6 +59,7 @@ const keymapConfig = parseKeymap(keymapXml);
 registerTheme(monaco, themeConfig);
 configureTypeScriptWorker(monaco);
 registerEffectSnippets(monaco);
+registerMaldivesCodeActions(monaco);
 void initializeAstSmartSelection().catch(() => undefined);
 
 window.__monaco = monaco;

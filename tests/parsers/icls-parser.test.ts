@@ -9,6 +9,8 @@ test("parses editor colors and font from the active ICLS theme", () => {
   expect(theme.defaultForeground).toBe("#cccccc");
   expect(theme.gutterBackground).toBe("#2D2D2D");
   expect(theme.lineHighlight).toBe("#283932");
+  expect(theme.foldedTextBackground).toBe("#18191a");
+  expect(theme.matchedBraceBackground).toBe("#515151");
   expect(theme.selectionBackground).toBe("#5E404A");
   expect(theme.caretColor).toBe("#D4E3FE");
   expect(theme.lineNumbersColor).toBe("#CCCCCC");

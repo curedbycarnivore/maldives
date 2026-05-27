@@ -137,6 +137,9 @@ const actionTargets: Record<string, MonacoTarget> = {
   ExpandRegionRecursively: { type: "action", id: "editor.unfoldRecursively" },
   CollapseAllRegions: { type: "action", id: "editor.foldAll" },
   ExpandAllRegions: { type: "action", id: "editor.unfoldAll" },
+  CollapseAll: { type: "action", id: "editor.foldAll" },
+  ExpandAll: { type: "action", id: "editor.unfoldAll" },
+  CollapseSelection: { type: "action", id: "editor.fold" },
   CommentByBlockComment: { type: "action", id: "editor.action.blockComment" },
   CommentByLineComment: { type: "action", id: "editor.action.commentLine" },
   GotoNextError: { type: "action", id: "editor.action.marker.next" },
@@ -249,7 +252,7 @@ function registerCustomEditorActions(editor: editor.IStandaloneCodeEditor, actio
   }
 }
 
-const shortcutlessActionIds = new Set(["Replace"]);
+const shortcutlessActionIds = new Set(["Replace", "CollapseAll", "ExpandAll", "CollapseSelection"]);
 
 function keybindingsForAction(action: KeyAction, monaco: Monaco): MaldivesAction[] {
   const target = actionTargets[action.id];
@@ -526,9 +529,27 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
   return removeLastSelection;
 }
 
+const CHOOSE_LOOKUP_COMPLETE_SETTLE_ATTEMPTS = 12;
+const CHOOSE_LOOKUP_COMPLETE_SETTLE_DELAY_MS = 10;
+
 function chooseLookupAndCompleteStatement(editor: editor.IStandaloneCodeEditor): void {
   editor.trigger("keyboard", "acceptSelectedSuggestion", {});
-  globalThis.setTimeout(() => completeStatementWhenReady(editor), 0);
+  completeStatementAfterWidgetSettles(editor, CHOOSE_LOOKUP_COMPLETE_SETTLE_ATTEMPTS);
+}
+
+function completeStatementAfterWidgetSettles(editor: editor.IStandaloneCodeEditor, attemptsLeft: number): void {
+  globalThis.setTimeout(() => {
+    if (editorHasWidgetFocus(editor) && attemptsLeft > 0) {
+      completeStatementAfterWidgetSettles(editor, attemptsLeft - 1);
+      return;
+    }
+
+    completeStatementWhenReady(editor);
+  }, CHOOSE_LOOKUP_COMPLETE_SETTLE_DELAY_MS);
+}
+
+function editorHasWidgetFocus(editor: editor.IStandaloneCodeEditor): boolean {
+  return typeof editor.hasWidgetFocus === "function" && editor.hasWidgetFocus();
 }
 
 const DEFAULT_FONT_SIZE = 14;

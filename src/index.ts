@@ -4,6 +4,7 @@ import keymapXml from "../ssot/keymaps/leet hax.xml?raw";
 import editorOptionsXml from "../ssot/options/editor.xml?raw";
 import { initializeAstSmartSelection } from "./ast-smart-selection";
 import { registerAstStructuralSearchAction } from "./ast-structural-search";
+import { registerMaldivesCodeActions } from "./code-actions";
 import { registerEffectSnippets } from "./effect-snippets";
 import { registerModelTab, registerRecentLocationTracking } from "./file-switcher";
 import { cleanOnBlurFromModel } from "./hooks/trailing-whitespace";
@@ -35,6 +36,7 @@ export function createMaldivesEditor(
   registerTheme(monaco, themeConfig);
   configureTypeScriptWorker(monaco);
   const snippetsDisposable = registerEffectSnippets(monaco);
+  const codeActionsDisposable = registerMaldivesCodeActions(monaco);
   void initializeAstSmartSelection().catch(() => undefined);
 
   const editor = monaco.editor.create(container, {
@@ -75,6 +77,7 @@ export function createMaldivesEditor(
       blurDisposable?.dispose();
       recentLocationsDisposable.dispose();
       astStructuralSearchDisposable.dispose();
+      codeActionsDisposable.dispose();
       snippetsDisposable.dispose();
       editor.dispose();
     },

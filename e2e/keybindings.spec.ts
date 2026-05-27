@@ -38,6 +38,17 @@ async function waitForXmlParserSymbol(page: Page): Promise<void> {
   );
 }
 
+async function expectLineVisible(page: Page, lineNumber: number, visible: boolean): Promise<void> {
+  await expect
+    .poll(() =>
+      page.evaluate(
+        (line) => window.__maldivesEditor.getScrolledVisiblePosition({ lineNumber: line, column: 1 }) !== null,
+        lineNumber,
+      ),
+    )
+    .toBe(visible);
+}
+
 test("unselect previous occurrence removes the last occurrence selection", async ({ page }) => {
   await loadEditor(page);
 
@@ -151,6 +162,30 @@ test("search everywhere opens Monaco command palette", async ({ page }) => {
 
   await mkdir("proof", { recursive: true });
   await page.screenshot({ path: "proof/search-everywhere-proof.png" });
+});
+
+test("replace actions open current-editor replace and replace-in-path placeholder", async ({ page }) => {
+  await loadEditor(page);
+
+  const opened = await page.evaluate(() => {
+    window.__maldivesEditor.focus();
+
+    return window.__maldivesExecuteKeybinding("Replace");
+  });
+
+  expect(opened).toBe(true);
+  await page.locator(".find-widget.visible").waitFor({ state: "visible", timeout: 8000 });
+  await expect(page.locator(".find-widget.visible .replace-part")).toBeVisible({ timeout: 8000 });
+
+  const placeholderOpened = await page.evaluate(() => window.__maldivesExecuteKeybinding("ReplaceInPath"));
+
+  expect(placeholderOpened).toBe(true);
+  await page.locator(".maldives-replace-in-path").waitFor({ state: "visible", timeout: 8000 });
+  await expect(page.locator(".maldives-replace-in-path")).toContainText("Replace in Path");
+  await expect(page.locator(".maldives-replace-in-path")).toContainText("Multi-file replace is not available");
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/p6a-replace-proof.png" });
 });
 
 test("rename element opens Monaco inline rename input", async ({ page }) => {
@@ -296,6 +331,46 @@ test("recent locations overlay restores a deterministic model position", async (
   await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getModel()?.uri.path)).toBe("/maldives/sample.ts");
   await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getPosition())).toEqual({ lineNumber: 2, column: 7 });
   await expect.poll(() => page.evaluate(() => window.__maldivesEditor.hasTextFocus())).toBe(true);
+});
+
+test("folding keybindings collapse selection and all regions", async ({ page }) => {
+  await loadEditor(page);
+
+  await page.evaluate(() => {
+    window.__maldivesEditor.setValue([
+      "function alpha() {",
+      "  const one = 1;",
+      "  return one;",
+      "}",
+      "",
+      "function beta() {",
+      "  const two = 2;",
+      "  return two;",
+      "}",
+    ].join("\n"));
+    window.__maldivesEditor.setPosition({ lineNumber: 1, column: 1 });
+    window.__maldivesEditor.setScrollTop(0);
+    window.__maldivesEditor.focus();
+  });
+  await expectLineVisible(page, 2, true);
+  await expectLineVisible(page, 7, true);
+
+  expect(await page.evaluate(() => window.__maldivesExecuteKeybinding("CollapseSelection"))).toBe(true);
+  await expectLineVisible(page, 2, false);
+
+  expect(await page.evaluate(() => window.__maldivesExecuteKeybinding("ExpandAll"))).toBe(true);
+  await expectLineVisible(page, 2, true);
+
+  expect(await page.evaluate(() => window.__maldivesExecuteKeybinding("CollapseAll"))).toBe(true);
+  await expectLineVisible(page, 2, false);
+  await expectLineVisible(page, 7, false);
+
+  expect(await page.evaluate(() => window.__maldivesExecuteKeybinding("ExpandAll"))).toBe(true);
+  await expectLineVisible(page, 2, true);
+  await expectLineVisible(page, 7, true);
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/p6b-folding-proof.png" });
 });
 
 test("registered addCommand keybindings work across groups", async ({ page }) => {
