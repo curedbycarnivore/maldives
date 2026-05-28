@@ -5,6 +5,7 @@ import editorOptionsXml from "../ssot/options/editor.xml?raw";
 import { initializeAstSmartSelection } from "./ast-smart-selection";
 import { registerAstStructuralSearchAction } from "./ast-structural-search";
 import { registerMaldivesCodeActions } from "./code-actions";
+import { installEffectDevToolsButton, openEffectDevToolsPanel, type OpenEffectDevToolsOptions } from "./effect-devtools";
 import { registerEffectSnippets } from "./effect-snippets";
 import { registerModelTab, registerRecentLocationTracking } from "./file-switcher";
 import { cleanOnBlurFromModel } from "./hooks/trailing-whitespace";
@@ -23,8 +24,11 @@ declare global {
     __maldivesKeybindings: RegisteredMaldivesAction[];
     __maldivesExecuteKeybinding: (wsActionId: string) => boolean;
     __maldivesRegisterEffectDtsFiles: (files: EffectDtsFiles) => monaco.IDisposable;
+    __maldivesOpenEffectDevTools: (options: OpenEffectDevToolsOptions) => void;
   }
 }
+
+declare const __MALDIVES_DEVTOOLS_ENABLED__: boolean;
 
 const app = document.querySelector<HTMLDivElement>("#app");
 
@@ -65,6 +69,7 @@ void initializeAstSmartSelection().catch(() => undefined);
 
 window.__monaco = monaco;
 window.__maldivesRegisterEffectDtsFiles = (files) => registerEffectDtsFiles(monaco, files);
+window.__maldivesOpenEffectDevTools = (options) => openEffectDevToolsPanel(options);
 const sampleModel = monaco.editor.createModel(sampleDocument, "typescript", monaco.Uri.parse("file:///maldives/sample.ts"));
 const secondModel = monaco.editor.createModel(secondDocument, "typescript", monaco.Uri.parse("file:///maldives/second.ts"));
 registerModelTab(sampleModel);
@@ -81,6 +86,10 @@ const editor = monaco.editor.create(app, {
 const registeredKeybindings = registerKeybindings(editor, monaco, keymapConfig);
 registerRecentLocationTracking(editor);
 registerAstStructuralSearchAction(editor);
+installEffectDevToolsButton(document.body, {
+  enabled: __MALDIVES_DEVTOOLS_ENABLED__,
+  token: window.localStorage.getItem("maldives.devtools.token") ?? "",
+});
 window.__maldivesEditor = editor;
 window.__maldivesKeybindings = registeredKeybindings;
 window.__maldivesExecuteKeybinding = (wsActionId) => {

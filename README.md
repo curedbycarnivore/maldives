@@ -36,3 +36,15 @@ const effectDtsDisposable = registerEffectDtsFiles(monaco, effectDtsFiles);
 ```
 
 `registerEffectDtsFiles` remaps files such as `effect/dist/dts/Effect.d.ts` to stable virtual paths like `file:///node_modules/effect/Effect.d.ts`, so sibling imports inside Effect's declarations resolve correctly.
+
+## Opt-in Effect DevTools panel
+
+The runtime DevTools bridge is off by default. To show the local panel in development, start Vite with:
+
+```sh
+MALDIVES_DEVTOOLS=1 bun run dev
+```
+
+The browser client only connects to `ws://127.0.0.1:34437` / `ws://localhost:34437`, sends a pre-shared token as its first frame, bounds incoming frames/events, and renders all wire data with `textContent` (no trusted HTML). Store the token at `~/.config/maldives/devtools.token` with file mode `0600` and copy it into `localStorage.maldives.devtools.token` for the local UI.
+
+Never enable DevTools against a process holding production secrets; Effect spans and metrics can include raw attribute values.
