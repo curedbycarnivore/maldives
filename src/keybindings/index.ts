@@ -65,6 +65,8 @@ type MonacoTarget =
         | "recentLocations"
         | "showNavBar"
         | "replaceInPath"
+        | "scrollCurrentLineToCenter"
+        | "splitLineAtCursor"
         | "switchApply"
         | "switchDown"
         | "switchUp"
@@ -129,6 +131,10 @@ const actionTargets: Record<string, MonacoTarget> = {
   EditorUpWithSelection: { type: "command", id: "cursorUpSelect" },
   EditorMoveDownAndScroll: { type: "command", id: "scrollLineDown" },
   EditorMoveUpAndScroll: { type: "command", id: "scrollLineUp" },
+  EditorPageUp: { type: "command", id: "cursorPageUp" },
+  EditorPageDown: { type: "command", id: "cursorPageDown" },
+  EditorScrollToCenter: { type: "custom", id: "scrollCurrentLineToCenter" },
+  EditorSplitLine: { type: "custom", id: "splitLineAtCursor" },
   EditorCloneCaretAbove: { type: "action", id: "editor.action.insertCursorAbove" },
   EditorCloneCaretBelow: { type: "action", id: "editor.action.insertCursorBelow" },
   CollapseRegion: { type: "action", id: "editor.fold" },
@@ -252,7 +258,16 @@ function registerCustomEditorActions(editor: editor.IStandaloneCodeEditor, actio
   }
 }
 
-const shortcutlessActionIds = new Set(["Replace", "CollapseAll", "ExpandAll", "CollapseSelection"]);
+const shortcutlessActionIds = new Set([
+  "Replace",
+  "CollapseAll",
+  "ExpandAll",
+  "CollapseSelection",
+  "EditorPageUp",
+  "EditorPageDown",
+  "EditorScrollToCenter",
+  "EditorSplitLine",
+]);
 
 function keybindingsForAction(action: KeyAction, monaco: Monaco): MaldivesAction[] {
   const target = actionTargets[action.id];
@@ -490,6 +505,14 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
     return openReplaceInPathPlaceholder;
   }
 
+  if (target.id === "scrollCurrentLineToCenter") {
+    return scrollCurrentLineToCenter;
+  }
+
+  if (target.id === "splitLineAtCursor") {
+    return splitLineAtCursor;
+  }
+
   if (target.id === "switchApply") {
     return () => applyActiveTabSwitcherItem();
   }
@@ -604,6 +627,39 @@ function indentSurroundedText(value: string): string {
     .split("\n")
     .map((line) => (line.length === 0 ? line : `  ${line}`))
     .join("\n");
+}
+
+export function scrollCurrentLineToCenter(editor: editor.IStandaloneCodeEditor): void {
+  const position = editor.getPosition();
+
+  if (!position) {
+    return;
+  }
+
+  editor.revealLineInCenter(position.lineNumber);
+  editor.focus();
+}
+
+export function splitLineAtCursor(editor: editor.IStandaloneCodeEditor): void {
+  const position = editor.getPosition();
+
+  if (!position) {
+    return;
+  }
+
+  editor.executeEdits("maldives", [
+    {
+      range: {
+        startLineNumber: position.lineNumber,
+        startColumn: position.column,
+        endLineNumber: position.lineNumber,
+        endColumn: position.column,
+      },
+      text: "\n",
+    },
+  ]);
+  editor.setPosition(position);
+  editor.focus();
 }
 
 export function deleteToWordPart(editor: editor.IStandaloneCodeEditor, direction: "left" | "right"): void {

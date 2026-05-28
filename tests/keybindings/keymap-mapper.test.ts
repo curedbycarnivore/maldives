@@ -127,6 +127,10 @@ describe("buildKeybindings", () => {
     expect(bindingFor("EditorUpWithSelection", M.Shift | M.Alt | K.KeyH)).toBe(M.Shift | M.Alt | K.KeyH);
     expect(bindingFor("EditorMoveDownAndScroll", M.Shift | M.WinCtrl | K.PageDown)).toBe(M.Shift | M.WinCtrl | K.PageDown);
     expect(bindingFor("EditorMoveUpAndScroll", M.Shift | M.WinCtrl | K.PageUp)).toBe(M.Shift | M.WinCtrl | K.PageUp);
+    expect(bindingFor("EditorPageUp", 0)).toBe(0);
+    expect(bindingFor("EditorPageDown", 0)).toBe(0);
+    expect(bindingFor("EditorScrollToCenter", 0)).toBe(0);
+    expect(bindingFor("EditorSplitLine", 0)).toBe(0);
     expect(bindingFor("EditorCloneCaretAbove", K.PageUp)).toBe(K.PageUp);
     expect(bindingFor("EditorCloneCaretBelow", K.PageDown)).toBe(K.PageDown);
     expect(bindingFor("CollapseRegion", M.Alt | K.Minus)).toBe(M.Alt | K.Minus);

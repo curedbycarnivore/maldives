@@ -337,6 +337,74 @@ test("recent locations overlay restores a deterministic model position", async (
   await expect.poll(() => page.evaluate(() => window.__maldivesEditor.hasTextFocus())).toBe(true);
 });
 
+test("viewport and split-line keybindings move the cursor, center the viewport, and split a line", async ({ page }) => {
+  await loadEditor(page);
+
+  const pageDownResult = await page.evaluate(() => {
+    window.__maldivesEditor.setValue(Array.from({ length: 160 }, (_, index) => `line ${index + 1}`).join("\n"));
+    window.__maldivesEditor.setPosition({ lineNumber: 40, column: 3 });
+    window.__maldivesEditor.setScrollTop(0);
+    window.__maldivesEditor.focus();
+
+    return {
+      executed: window.__maldivesExecuteKeybinding("EditorPageDown"),
+      position: window.__maldivesEditor.getPosition(),
+    };
+  });
+
+  expect(pageDownResult.executed).toBe(true);
+  expect(pageDownResult.position?.lineNumber ?? 0).toBeGreaterThan(40);
+
+  const pageUpResult = await page.evaluate(() => {
+    const before = window.__maldivesEditor.getPosition();
+
+    return {
+      before,
+      executed: window.__maldivesExecuteKeybinding("EditorPageUp"),
+      after: window.__maldivesEditor.getPosition(),
+    };
+  });
+
+  expect(pageUpResult.executed).toBe(true);
+  expect(pageUpResult.after?.lineNumber ?? Number.POSITIVE_INFINITY).toBeLessThan(pageUpResult.before?.lineNumber ?? 0);
+
+  const centered = await page.evaluate(() => {
+    window.__maldivesEditor.setPosition({ lineNumber: 120, column: 1 });
+    window.__maldivesEditor.setScrollTop(0);
+
+    return window.__maldivesExecuteKeybinding("EditorScrollToCenter");
+  });
+
+  expect(centered).toBe(true);
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const position = window.__maldivesEditor.getScrolledVisiblePosition({ lineNumber: 120, column: 1 });
+
+        return position ? position.top : -1;
+      }),
+    )
+    .toBeGreaterThan(100);
+
+  const splitResult = await page.evaluate(() => {
+    window.__maldivesEditor.setValue("alpha beta");
+    window.__maldivesEditor.setPosition({ lineNumber: 1, column: 7 });
+
+    return {
+      executed: window.__maldivesExecuteKeybinding("EditorSplitLine"),
+      value: window.__maldivesEditor.getValue(),
+      position: window.__maldivesEditor.getPosition(),
+    };
+  });
+
+  expect(splitResult.executed).toBe(true);
+  expect(splitResult.value.replace(/\r\n/g, "\n")).toBe("alpha \nbeta");
+  expect(splitResult.position).toEqual({ lineNumber: 1, column: 7 });
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/p6c-viewport-proof.png" });
+});
+
 test("folding keybindings collapse selection and all regions", async ({ page }) => {
   await loadEditor(page);
 
