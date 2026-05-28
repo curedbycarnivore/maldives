@@ -4,15 +4,18 @@ export interface ThemeConfig {
   lineHighlight: string;
   foldedTextBackground: string;
   matchedBraceBackground: string;
+  unmatchedBraceForeground: string;
   selectionBackground: string;
   caretColor: string;
   lineNumbersColor: string;
   indentGuide: string;
+  selectedIndentGuide: string;
   whitespaceForeground: string;
   errorForeground: string;
   warningForeground: string;
   findMatchBackground: string;
   selectionHighlightBackground: string;
+  rightMarginColor: string;
   defaultForeground: string;
   fontFamily: string;
   fontSize: number;
@@ -43,6 +46,7 @@ const tokenNames = [
   "DEFAULT_OPERATION_SIGN",
   "DEFAULT_BRACES",
   "DEFAULT_BRACKETS",
+  "DEFAULT_PARENTHS",
   "DEFAULT_CONSTANT",
   "DEFAULT_METADATA",
   "TS.DECORATOR",
@@ -64,15 +68,20 @@ export function parseIcls(xmlContent: string): ThemeConfig {
     matchedBraceBackground: color(
       optionValue(blockFor(xmlContent, "MATCHED_BRACE_ATTRIBUTES"), "BACKGROUND"),
     ),
+    unmatchedBraceForeground: color(
+      optionValue(blockFor(xmlContent, "UNMATCHED_BRACE_ATTRIBUTES"), "FOREGROUND"),
+    ),
     selectionBackground: color(optionValue(xmlContent, "SELECTION_BACKGROUND")),
     caretColor: color(optionValue(xmlContent, "CARET_COLOR")),
     lineNumbersColor: color(optionValue(xmlContent, "LINE_NUMBERS_COLOR")),
     indentGuide: color(optionValue(xmlContent, "INDENT_GUIDE")),
+    selectedIndentGuide: color(optionValue(xmlContent, "SELECTED_INDENT_GUIDE")),
     whitespaceForeground: color(optionValue(xmlContent, "WHITESPACES")),
     errorForeground: color(optionValue(blockFor(xmlContent, "ERRORS_ATTRIBUTES"), "EFFECT_COLOR")),
     warningForeground: color(optionValue(blockFor(xmlContent, "WARNING_ATTRIBUTES"), "EFFECT_COLOR")),
     findMatchBackground: color(optionValue(blockFor(xmlContent, "TEXT_SEARCH_RESULT_ATTRIBUTES"), "BACKGROUND")),
     selectionHighlightBackground: color(optionValue(blockFor(xmlContent, "SEARCH_RESULT_ATTRIBUTES"), "BACKGROUND")),
+    rightMarginColor: color(optionValue(xmlContent, "RIGHT_MARGIN_COLOR")),
     fontFamily: optionValue(fontBlock, "EDITOR_FONT_NAME"),
     fontSize: Number(optionValue(fontBlock, "EDITOR_FONT_SIZE")),
     tokens: tokenNames.map((name) => tokenRule(xmlContent, name)),

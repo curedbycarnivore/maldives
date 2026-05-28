@@ -106,3 +106,31 @@ const CONSTANT_VALUE = 1;
   await mkdir("proof", { recursive: true });
   await page.screenshot({ path: "proof/p7a-token-colors-proof.png" });
 });
+
+test("renders a compact theme coverage audit sample", async ({ page }) => {
+  await loadEditor(page);
+
+  await page.evaluate(() => {
+    const sample = `function coverageAudit() {
+  if (true) {
+    return "theme";
+  }
+}
+`;
+    window.__maldivesEditor.setModel(window.__monaco.editor.createModel(sample, "typescript", window.__monaco.Uri.parse("file:///maldives/theme-audit.ts")));
+    window.__maldivesEditor.updateOptions({ rulers: [4], renderWhitespace: "all", guides: { indentation: true, bracketPairs: true } });
+    window.__maldivesEditor.setPosition({ lineNumber: 3, column: 5 });
+    window.__maldivesEditor.focus();
+  });
+
+  await expect
+    .poll(() => page.locator(".monaco-editor .view-ruler").first().evaluate((element) => getComputedStyle(element).boxShadow), { timeout: 10000 })
+    .toContain("rgb(81, 81, 81)");
+
+  await expect
+    .poll(() => page.locator(".monaco-editor .view-overlays .current-line").first().evaluate((element) => getComputedStyle(element).backgroundColor))
+    .toBe("rgb(40, 57, 50)");
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/p8-theme-coverage-audit-proof.png" });
+});
