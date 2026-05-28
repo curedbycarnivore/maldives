@@ -5,6 +5,7 @@ import editorOptionsXml from "../ssot/options/editor.xml?raw";
 import { initializeAstSmartSelection } from "./ast-smart-selection";
 import { registerAstStructuralSearchAction } from "./ast-structural-search";
 import { registerMaldivesCodeActions } from "./code-actions";
+import { registerSchemaJsonSchemaAction } from "./schema-jsonschema";
 import { installEffectDevToolsButton, openEffectDevToolsPanel, type OpenEffectDevToolsOptions } from "./effect-devtools";
 import { registerEffectSnippets } from "./effect-snippets";
 import { registerModelTab, registerRecentLocationTracking } from "./file-switcher";
@@ -86,6 +87,7 @@ const editor = monaco.editor.create(app, {
 const registeredKeybindings = registerKeybindings(editor, monaco, keymapConfig);
 registerRecentLocationTracking(editor);
 registerAstStructuralSearchAction(editor);
+registerSchemaJsonSchemaAction(editor);
 installEffectDevToolsButton(document.body, {
   enabled: __MALDIVES_DEVTOOLS_ENABLED__,
   token: window.localStorage.getItem("maldives.devtools.token") ?? "",

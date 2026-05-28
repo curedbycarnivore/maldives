@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@ast-grep/wasm": "^0.43.0",
+    "effect": "3.21.2",
     "monaco-editor": "0.55.1",
     "tree-sitter-typescript": "^0.23.2",
     "web-tree-sitter": "^0.26.9"
