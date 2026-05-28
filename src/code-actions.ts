@@ -1,13 +1,14 @@
 import type * as monaco from "monaco-editor";
+import { convertPromiseFunctionToEffectGen } from "./effect-refactor";
 
-const providedCodeActionKinds = ["refactor.extract", "source.organizeImports"];
+const providedCodeActionKinds = ["refactor.extract", "refactor.rewrite", "source.organizeImports"];
 
 export function registerMaldivesCodeActions(monacoApi: typeof monaco): monaco.IDisposable {
   return monacoApi.languages.registerCodeActionProvider(
     "typescript",
     {
       provideCodeActions(model, range, context) {
-        const actions = [extractSelectionAction(model, range), organizeImportsAction(model)].filter(
+        const actions = [promiseToEffectGenAction(model, range), extractSelectionAction(model, range), organizeImportsAction(model)].filter(
           (action): action is monaco.languages.CodeAction =>
             action !== undefined && matchesRequestedKind(action.kind ?? "", context.only),
         );
@@ -20,6 +21,35 @@ export function registerMaldivesCodeActions(monacoApi: typeof monaco): monaco.ID
     },
     { providedCodeActionKinds },
   );
+}
+
+function promiseToEffectGenAction(
+  model: monaco.editor.ITextModel,
+  range: monaco.IRange,
+): monaco.languages.CodeAction | undefined {
+  const offset = typeof model.getOffsetAt === "function" ? model.getOffsetAt({ lineNumber: range.startLineNumber, column: range.startColumn }) : 0;
+  const text = convertPromiseFunctionToEffectGen(model.getValue(), offset);
+
+  if (!text || text === model.getValue()) {
+    return undefined;
+  }
+
+  return {
+    title: "Convert to Effect.gen",
+    kind: "refactor.rewrite",
+    edit: {
+      edits: [
+        {
+          resource: model.uri,
+          versionId: undefined,
+          textEdit: {
+            range: model.getFullModelRange(),
+            text,
+          },
+        },
+      ],
+    },
+  };
 }
 
 function extractSelectionAction(
