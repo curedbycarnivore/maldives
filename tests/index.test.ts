@@ -59,6 +59,7 @@ const monacoStub = vi.hoisted(() => {
         setDiagnosticsOptions: vi.fn(),
         setInlayHintsOptions: vi.fn(),
         setEagerModelSync: vi.fn(),
+        addExtraLib: vi.fn(() => ({ dispose: vi.fn() })),
       },
     },
     KeyMod: { CtrlCmd: 1, WinCtrl: 2, Shift: 4, Alt: 8 },

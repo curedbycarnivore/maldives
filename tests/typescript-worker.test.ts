@@ -11,6 +11,7 @@ function createMonacoStub() {
   let diagnosticsOptions: DiagnosticsOptions = {};
   let inlayHintsOptions: InlayHintsOptions = {};
   let eagerModelSync = false;
+  const extraLibs: Record<string, { content: string }> = {};
 
   return {
     typescript: {
@@ -41,6 +42,17 @@ function createMonacoStub() {
         },
         getEagerModelSync() {
           return eagerModelSync;
+        },
+        addExtraLib(content: string, filePath = "file:///anonymous.d.ts") {
+          extraLibs[filePath] = { content };
+          return {
+            dispose() {
+              delete extraLibs[filePath];
+            },
+          };
+        },
+        getExtraLibs() {
+          return extraLibs;
         },
       },
     },
@@ -79,5 +91,24 @@ describe("configureTypeScriptWorker", () => {
       includeInlayEnumMemberValueHints: true,
     });
     expect(monacoStub.typescript.typescriptDefaults.getEagerModelSync()).toBe(true);
+  });
+
+  test("registers self-contained Effect type stubs with the TypeScript worker", () => {
+    const monacoStub = createMonacoStub();
+
+    configureTypeScriptWorker(monacoStub);
+
+    const extraLibs = monacoStub.typescript.typescriptDefaults.getExtraLibs();
+    const effectStub = extraLibs["file:///node_modules/@types/effect-stub/index.d.ts"]?.content;
+
+    expect(effectStub).toContain('declare module "effect"');
+    expect(effectStub).toContain("function gen");
+    expect(effectStub).toContain("function map");
+    expect(effectStub).toContain("export const pipe");
+    expect(effectStub).toContain("export namespace Option");
+    expect(effectStub).toContain("export namespace Either");
+    expect(effectStub).toContain("export namespace Schema");
+    expect(effectStub).not.toContain("import ");
+    expect(effectStub).not.toContain("from \"./");
   });
 });
