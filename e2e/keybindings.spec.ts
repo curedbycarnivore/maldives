@@ -42,7 +42,11 @@ async function expectLineVisible(page: Page, lineNumber: number, visible: boolea
   await expect
     .poll(() =>
       page.evaluate(
-        (line) => window.__maldivesEditor.getScrolledVisiblePosition({ lineNumber: line, column: 1 }) !== null,
+        (line) => {
+          const visiblePosition = window.__maldivesEditor.getScrolledVisiblePosition({ lineNumber: line, column: 1 });
+
+          return Boolean(visiblePosition && visiblePosition.height > 0);
+        },
         lineNumber,
       ),
     )
