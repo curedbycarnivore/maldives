@@ -1,4 +1,5 @@
 import type * as monaco from "monaco-editor";
+import * as ts from "typescript";
 
 export interface EffectHoverDoc {
   summary: string;
@@ -83,9 +84,43 @@ export function effectHoverSymbolFromQuickInfo(displayText: string): EffectHover
   return symbols.find((symbol) => displayText.includes(symbol));
 }
 
+export function layerDependencyDiagramForSourceAtOffset(source: string, offset: number): string | undefined {
+  const sourceFile = ts.createSourceFile("effect-layer-hover.ts", source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
+  const call = layerCompositionCallAtOffset(sourceFile, offset);
+
+  if (!call) {
+    return undefined;
+  }
+
+  const graph = collectLayerGraph(call, sourceFile);
+
+  if (graph.layers.length === 0) {
+    return undefined;
+  }
+
+  return [
+    "Layer dependency diagram",
+    "Layers:",
+    ...graph.layers.map((layer) => `- ${layer}`),
+    "Edges:",
+    ...(graph.edges.length > 0 ? graph.edges.map((edge) => `- ${edge.from} -> ${edge.to}`) : ["- none"]),
+  ].join("\n");
+}
+
 export function registerEffectHoverProvider(monacoApi: MonacoApi): monaco.IDisposable {
   return monacoApi.languages.registerHoverProvider("typescript", {
     async provideHover(model, position) {
+      const layerDiagram = layerDependencyDiagramForSourceAtOffset(model.getValue(), model.getOffsetAt(position));
+
+      if (layerDiagram) {
+        return {
+          contents: [
+            { value: "**Layer dependency diagram**" },
+            { value: `\`\`\`text\n${layerDiagram}\n\`\`\`` },
+          ],
+        };
+      }
+
       const quickInfo = await quickInfoAtPosition(monacoApi, model, position);
       const symbol = quickInfo ? effectHoverSymbolFromQuickInfo(displayPartsToString(quickInfo.displayParts)) : undefined;
       const doc = symbol ? effectHoverDocForSymbol(symbol) : undefined;
@@ -120,6 +155,142 @@ async function quickInfoAtPosition(
   const getWorker = await getTypeScriptWorker();
   const worker = await getWorker(model.uri);
   return worker.getQuickInfoAtPosition(model.uri.toString(), model.getOffsetAt(position));
+}
+
+interface LayerGraph {
+  layers: string[];
+  edges: Array<{ from: string; to: string }>;
+}
+
+function layerCompositionCallAtOffset(sourceFile: ts.SourceFile, offset: number): ts.CallExpression | undefined {
+  let found: ts.CallExpression | undefined;
+
+  function visit(node: ts.Node): void {
+    if (offset < node.getFullStart() || offset > node.getEnd()) {
+      return;
+    }
+
+    if (ts.isCallExpression(node) && layerCompositionMethod(node)) {
+      found = node;
+    }
+
+    ts.forEachChild(node, visit);
+  }
+
+  visit(sourceFile);
+  return found;
+}
+
+function collectLayerGraph(expression: ts.Expression, sourceFile: ts.SourceFile): LayerGraph {
+  const layers: string[] = [];
+  const edges: Array<{ from: string; to: string }> = [];
+
+  function addLayer(layer: string): void {
+    if (!layers.includes(layer)) {
+      layers.push(layer);
+    }
+  }
+
+  function addEdge(from: string, to: string): void {
+    if (!edges.some((edge) => edge.from === from && edge.to === to)) {
+      edges.push({ from, to });
+    }
+  }
+
+  function collect(expr: ts.Expression): string[] {
+    if (ts.isCallExpression(expr)) {
+      const method = layerCompositionMethod(expr);
+
+      if (method === "merge") {
+        return expr.arguments.flatMap((argument) => collect(argument));
+      }
+
+      if (method === "provide" || method === "provideMerge") {
+        const targetLayers = expr.arguments[0] ? collect(expr.arguments[0]) : [];
+        const providerLayers = expr.arguments[1] ? collect(expr.arguments[1]) : [];
+
+        for (const provider of providerLayers) {
+          for (const target of targetLayers) {
+            addEdge(provider, target);
+          }
+        }
+
+        return targetLayers.length > 0 ? targetLayers : providerLayers;
+      }
+    }
+
+    const label = layerExpressionLabel(expr, sourceFile);
+    addLayer(label);
+    return [label];
+  }
+
+  collect(expression);
+  return { layers, edges };
+}
+
+function layerCompositionMethod(call: ts.CallExpression): "merge" | "provide" | "provideMerge" | undefined {
+  if (!ts.isPropertyAccessExpression(call.expression)) {
+    return undefined;
+  }
+
+  if (!ts.isIdentifier(call.expression.expression) || call.expression.expression.text !== "Layer") {
+    return undefined;
+  }
+
+  const method = call.expression.name.text;
+  return method === "merge" || method === "provide" || method === "provideMerge" ? method : undefined;
+}
+
+function layerExpressionLabel(expression: ts.Expression, sourceFile: ts.SourceFile): string {
+  if (ts.isIdentifier(expression)) {
+    return expression.text;
+  }
+
+  if (ts.isPropertyAccessExpression(expression)) {
+    return expression.getText(sourceFile);
+  }
+
+  if (ts.isStringLiteral(expression) || ts.isNoSubstitutionTemplateLiteral(expression)) {
+    return expression.text;
+  }
+
+  if (ts.isCallExpression(expression)) {
+    const effectLayerName = layerEffectName(expression);
+
+    if (effectLayerName) {
+      return effectLayerName;
+    }
+
+    return expression.expression.getText(sourceFile);
+  }
+
+  return expression.getText(sourceFile);
+}
+
+function layerEffectName(call: ts.CallExpression): string | undefined {
+  if (!ts.isPropertyAccessExpression(call.expression)) {
+    return undefined;
+  }
+
+  if (!ts.isIdentifier(call.expression.expression) || call.expression.expression.text !== "Layer") {
+    return undefined;
+  }
+
+  if (call.expression.name.text !== "effect") {
+    return undefined;
+  }
+
+  const firstArgument = call.arguments[0];
+
+  if (firstArgument && (ts.isStringLiteral(firstArgument) || ts.isNoSubstitutionTemplateLiteral(firstArgument))) {
+    return firstArgument.text;
+  }
+
+  if (firstArgument && ts.isIdentifier(firstArgument)) {
+    return firstArgument.text;
+  }
+
+  return undefined;
 }
 
 function displayPartsToString(parts: QuickInfoDisplayPart[] | undefined): string {

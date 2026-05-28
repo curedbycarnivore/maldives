@@ -37,6 +37,37 @@ const stream = Stream.fromIterable([1, 2, 3]);
 const fiber = Fiber.interrupt;
 `;
 
+test("Layer composition hover shows a dependency mini-diagram", async ({ page }) => {
+  await page.goto("http://127.0.0.1:5173/");
+  await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesEditor)), { timeout: 15000 }).toBe(true);
+
+  await page.evaluate(() => {
+    const source = `import { Effect, Layer } from "effect";
+
+const A = Layer.effect("A", Effect.succeed(1));
+const B = Layer.effect("B", Effect.succeed(2));
+const C = Layer.effect("C", Effect.succeed(3));
+const Live = Layer.merge(A, Layer.provide(B, C));
+`;
+    const model = window.__monaco.editor.createModel(source, "typescript", window.__monaco.Uri.parse("file:///maldives/effect-layer-hover.ts"));
+    window.__maldivesEditor.setModel(model);
+    window.__maldivesEditor.focus();
+    const lineNumber = model.getValue().split("\n").findIndex((line) => line.includes("Layer.merge")) + 1;
+    const startColumn = model.getLineContent(lineNumber).indexOf("Layer.merge") + 1;
+    window.__maldivesEditor.setPosition({ lineNumber, column: startColumn + 1 });
+    void window.__maldivesEditor.getAction("editor.action.showHover")?.run();
+  });
+
+  await expect(page.locator(".monaco-hover")).toContainText("Layer dependency diagram", { timeout: 15000 });
+  await expect(page.locator(".monaco-hover")).toContainText("- A", { timeout: 15000 });
+  await expect(page.locator(".monaco-hover")).toContainText("- B", { timeout: 15000 });
+  await expect(page.locator(".monaco-hover")).toContainText("- C", { timeout: 15000 });
+  await expect(page.locator(".monaco-hover")).toContainText("C -> B", { timeout: 15000 });
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/p12d-layer-diagram-proof.png" });
+});
+
 test("Effect API hovers show docs links and examples for canonical symbols", async ({ page }) => {
   await page.goto("http://127.0.0.1:5173/");
   await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesEditor)), { timeout: 15000 }).toBe(true);
