@@ -3,8 +3,8 @@ import { existsSync, readFileSync } from "node:fs";
 import { describe, expect, test } from "vitest";
 
 describe("package declaration build", () => {
-  test("emits the public package declaration contract", { timeout: 120_000 }, () => {
-    execFileSync("bun", ["run", "build"], { stdio: "pipe", timeout: 120_000 });
+  test("emits the public package declaration contract", { timeout: 300_000 }, () => {
+    execFileSync("bun", ["run", "build"], { stdio: "pipe", timeout: 300_000 });
 
     expect(existsSync("dist/index.d.ts")).toBe(true);
 

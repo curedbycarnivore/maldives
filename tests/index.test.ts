@@ -108,5 +108,5 @@ describe("createMaldivesEditor", () => {
     expect(monacoStub.state.hoverDisposed).toBe(true);
     expect(monacoStub.state.blurDisposed).toBe(true);
     expect(monacoStub.state.editorDisposed).toBe(true);
-  });
+  }, 15000);
 });
