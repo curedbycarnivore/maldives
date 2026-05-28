@@ -529,22 +529,34 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
   return removeLastSelection;
 }
 
-const CHOOSE_LOOKUP_COMPLETE_SETTLE_ATTEMPTS = 12;
+const CHOOSE_LOOKUP_COMPLETE_SETTLE_ATTEMPTS = 20;
 const CHOOSE_LOOKUP_COMPLETE_SETTLE_DELAY_MS = 10;
 
 function chooseLookupAndCompleteStatement(editor: editor.IStandaloneCodeEditor): void {
+  const model = typeof editor.getModel === "function" ? editor.getModel() : undefined;
+  const beforeValue = model?.getValue();
+
   editor.trigger("keyboard", "acceptSelectedSuggestion", {});
-  completeStatementAfterWidgetSettles(editor, CHOOSE_LOOKUP_COMPLETE_SETTLE_ATTEMPTS);
+  completeStatementAfterSuggestionSettles(editor, beforeValue, CHOOSE_LOOKUP_COMPLETE_SETTLE_ATTEMPTS);
 }
 
-function completeStatementAfterWidgetSettles(editor: editor.IStandaloneCodeEditor, attemptsLeft: number): void {
+function completeStatementAfterSuggestionSettles(
+  editor: editor.IStandaloneCodeEditor,
+  beforeValue: string | undefined,
+  attemptsLeft: number,
+): void {
   globalThis.setTimeout(() => {
-    if (editorHasWidgetFocus(editor) && attemptsLeft > 0) {
-      completeStatementAfterWidgetSettles(editor, attemptsLeft - 1);
+    const model = typeof editor.getModel === "function" ? editor.getModel() : undefined;
+    const contentChanged = beforeValue === undefined || model?.getValue() !== beforeValue;
+    const widgetSettled = !editorHasWidgetFocus(editor);
+
+    if ((!contentChanged || !widgetSettled) && attemptsLeft > 0) {
+      completeStatementAfterSuggestionSettles(editor, beforeValue, attemptsLeft - 1);
       return;
     }
 
-    completeStatementWhenReady(editor);
+    editor.focus?.();
+    completeStatementWhenReady(editor, undefined, { ignoreWidgetFocus: true });
   }, CHOOSE_LOOKUP_COMPLETE_SETTLE_DELAY_MS);
 }
 

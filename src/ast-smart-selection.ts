@@ -83,8 +83,11 @@ interface StructuralMoveEdit {
 export function completeStatementWhenReady(
   editor: editor.IStandaloneCodeEditor,
   astReady?: Promise<void>,
+  options?: { ignoreWidgetFocus?: boolean },
 ): void {
-  if (editor.hasWidgetFocus()) {
+  const hasBlockingWidgetFocus = () => !options?.ignoreWidgetFocus && editor.hasWidgetFocus();
+
+  if (hasBlockingWidgetFocus()) {
     return;
   }
 
@@ -97,7 +100,7 @@ export function completeStatementWhenReady(
     }
 
     handled = true;
-    if (!editor.hasWidgetFocus()) {
+    if (!hasBlockingWidgetFocus()) {
       completeStatementFallback(editor);
     }
   };
@@ -107,7 +110,7 @@ export function completeStatementWhenReady(
     }
 
     globalThis.clearTimeout(timeoutId);
-    if (editor.hasWidgetFocus() || completeStatement(editor)) {
+    if (hasBlockingWidgetFocus() || completeStatement(editor)) {
       handled = true;
       return;
     }

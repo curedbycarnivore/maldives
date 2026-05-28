@@ -439,7 +439,7 @@ describe("registerKeybindings", () => {
 
       vi.runOnlyPendingTimers();
 
-      expect(completeStatementWhenReady).toHaveBeenCalledWith(editor);
+      expect(completeStatementWhenReady).toHaveBeenCalledWith(editor, undefined, { ignoreWidgetFocus: true });
     } finally {
       vi.useRealTimers();
       vi.doUnmock("../../src/ast-smart-selection");
