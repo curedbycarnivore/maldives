@@ -19,13 +19,28 @@ export interface TokenRule {
   fontStyle?: "bold" | "italic" | "bold italic" | "";
 }
 
-const jsTokenNames = [
+const tokenNames = [
   "JS.KEYWORD",
   "JS.LINE_COMMENT",
   "JS.NUMBER",
   "JS.STRING",
   "JS.INSTANCE_MEMBER_FUNCTION",
   "JS.GLOBAL_FUNCTION",
+  "DEFAULT_FUNCTION_DECLARATION",
+  "DEFAULT_FUNCTION_CALL",
+  "TS.CLASS",
+  "TS.TYPE.ALIAS",
+  "DEFAULT_INTERFACE_NAME",
+  "JS.LOCAL_VARIABLE",
+  "DEFAULT_INSTANCE_FIELD",
+  "JS.PARAMETER",
+  "DEFAULT_OPERATION_SIGN",
+  "DEFAULT_BRACES",
+  "DEFAULT_BRACKETS",
+  "DEFAULT_CONSTANT",
+  "DEFAULT_METADATA",
+  "TS.DECORATOR",
+  "JS.DOC_COMMENT",
 ];
 
 export function parseIcls(xmlContent: string): ThemeConfig {
@@ -48,7 +63,7 @@ export function parseIcls(xmlContent: string): ThemeConfig {
     lineNumbersColor: color(optionValue(xmlContent, "LINE_NUMBERS_COLOR")),
     fontFamily: optionValue(fontBlock, "EDITOR_FONT_NAME"),
     fontSize: Number(optionValue(fontBlock, "EDITOR_FONT_SIZE")),
-    tokens: jsTokenNames.map((name) => tokenRule(xmlContent, name)),
+    tokens: tokenNames.map((name) => tokenRule(xmlContent, name)),
   };
 }
 

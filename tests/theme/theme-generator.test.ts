@@ -30,14 +30,36 @@ test("maps editor colors to Monaco theme color ids", () => {
 });
 
 test("maps parsed JavaScript tokens to Monaco token rules", () => {
-  expect(theme.rules).toEqual([
-    { token: "keyword", foreground: "cc8a9b" },
-    { token: "comment", foreground: "969696", fontStyle: "italic" },
-    { token: "number", foreground: "f99157" },
-    { token: "string", foreground: "e2844e" },
-    { token: "method", foreground: "74aee8", fontStyle: "bold" },
-    { token: "function", foreground: "e3b775" },
-  ]);
+  expect(theme.rules).toEqual(
+    expect.arrayContaining([
+      { token: "keyword", foreground: "cc8a9b" },
+      { token: "comment", foreground: "969696", fontStyle: "italic" },
+      { token: "number", foreground: "f99157" },
+      { token: "string", foreground: "e2844e" },
+      { token: "method", foreground: "74aee8", fontStyle: "bold" },
+      { token: "function", foreground: "e3b775" },
+    ]),
+  );
+});
+
+test("maps the extended ICLS token scheme to Monaco token rules", () => {
+  expect(theme.rules).toEqual(
+    expect.arrayContaining([
+      { token: "function", foreground: "e3b775" },
+      { token: "function.call", foreground: "74aee8", fontStyle: "bold" },
+      { token: "class", foreground: "e4a38e" },
+      { token: "type", foreground: "959ee6" },
+      { token: "interface", foreground: "959ee6" },
+      { token: "variable", foreground: "959ee6" },
+      { token: "parameter", foreground: "99cc99" },
+      { token: "operator", foreground: "66cccc" },
+      { token: "delimiter", foreground: "f2777a", fontStyle: "italic" },
+      { token: "constant", foreground: "cc8a9b", fontStyle: "bold italic" },
+      { token: "meta.decorator", foreground: "29b0ab" },
+      { token: "decorator", foreground: "e4a38e" },
+      { token: "comment.doc", foreground: "969696", fontStyle: "italic" },
+    ]),
+  );
 });
 
 test("registers the generated Monaco theme", () => {

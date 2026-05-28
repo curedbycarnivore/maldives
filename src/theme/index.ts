@@ -4,13 +4,28 @@ import type { ThemeConfig, TokenRule } from "../parsers/icls-parser";
 export const THEME_NAME = "tomorrow-night-eighties";
 export const MALDIVES_THEME_NAME = THEME_NAME;
 
-const tokenScopes: Record<string, string> = {
-  "JS.KEYWORD": "keyword",
-  "JS.LINE_COMMENT": "comment",
-  "JS.NUMBER": "number",
-  "JS.STRING": "string",
-  "JS.INSTANCE_MEMBER_FUNCTION": "method",
-  "JS.GLOBAL_FUNCTION": "function",
+const tokenScopes: Record<string, string[]> = {
+  "JS.KEYWORD": ["keyword"],
+  "JS.LINE_COMMENT": ["comment"],
+  "JS.NUMBER": ["number"],
+  "JS.STRING": ["string"],
+  "JS.INSTANCE_MEMBER_FUNCTION": ["method"],
+  "JS.GLOBAL_FUNCTION": ["function"],
+  "DEFAULT_FUNCTION_DECLARATION": ["function", "entity.name.function"],
+  "DEFAULT_FUNCTION_CALL": ["function.call", "support.function"],
+  "TS.CLASS": ["class", "entity.name.type.class"],
+  "TS.TYPE.ALIAS": ["type", "entity.name.type"],
+  "DEFAULT_INTERFACE_NAME": ["interface", "entity.name.type.interface"],
+  "JS.LOCAL_VARIABLE": ["variable"],
+  "DEFAULT_INSTANCE_FIELD": ["variable.member", "property"],
+  "JS.PARAMETER": ["parameter", "variable.parameter"],
+  "DEFAULT_OPERATION_SIGN": ["operator", "keyword.operator"],
+  "DEFAULT_BRACES": ["delimiter", "delimiter.bracket"],
+  "DEFAULT_BRACKETS": ["delimiter.array"],
+  "DEFAULT_CONSTANT": ["constant", "variable.constant"],
+  "DEFAULT_METADATA": ["meta.decorator"],
+  "TS.DECORATOR": ["decorator", "support.type.decorator"],
+  "JS.DOC_COMMENT": ["comment.doc", "comment.block.documentation"],
 };
 
 export function buildMonacoTheme(theme: ThemeConfig): editor.IStandaloneThemeData {
@@ -29,7 +44,7 @@ export function buildMonacoTheme(theme: ThemeConfig): editor.IStandaloneThemeDat
       "editorCursor.foreground": theme.caretColor,
       "editorLineNumber.foreground": theme.lineNumbersColor,
     },
-    rules: theme.tokens.map(toTokenThemeRule),
+    rules: theme.tokens.flatMap(toTokenThemeRules),
   };
 }
 
@@ -39,10 +54,12 @@ export function registerTheme(monaco: typeof import("monaco-editor"), config: Th
   monaco.editor.defineTheme(THEME_NAME, buildMonacoTheme(config));
 }
 
-function toTokenThemeRule(rule: TokenRule): editor.ITokenThemeRule {
-  return {
-    token: tokenScopes[rule.name] ?? rule.name,
+function toTokenThemeRules(rule: TokenRule): editor.ITokenThemeRule[] {
+  const scopes = tokenScopes[rule.name] ?? [rule.name];
+
+  return scopes.map((scope) => ({
+    token: scope,
     foreground: rule.foreground?.replace(/^#/, ""),
     ...(rule.fontStyle ? { fontStyle: rule.fontStyle } : {}),
-  };
+  }));
 }
