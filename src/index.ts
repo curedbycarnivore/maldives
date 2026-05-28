@@ -86,3 +86,4 @@ export function createMaldivesEditor(
 }
 
 export { registerEffectDtsFiles } from "./typescript-worker";
+export type { EffectDtsFiles } from "./typescript-worker";

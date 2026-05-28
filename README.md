@@ -21,12 +21,13 @@ Maldives registers a lightweight built-in `effect` stub by default. Apps that in
 
 ```ts
 import { createMaldivesEditor, registerEffectDtsFiles } from "maldives";
+import type { EffectDtsFiles } from "maldives";
 
 const effectDtsFiles = import.meta.glob('/node_modules/effect/dist/dts/**/*.d.ts', {
   query: '?raw',
   import: 'default',
   eager: true,
-}) as Record<string, string>;
+}) as EffectDtsFiles;
 
 const { editor, dispose } = createMaldivesEditor(container, { effectDtsFiles });
 
