@@ -6,6 +6,7 @@ const monacoStub = vi.hoisted(() => {
     definedThemes: [] as Array<{ name: string; data: monaco.editor.IStandaloneThemeData }>,
     createdEditors: [] as Array<monaco.editor.IStandaloneEditorConstructionOptions>,
     snippetDisposed: false,
+    hoverDisposed: false,
     editorDisposed: false,
     blurDisposed: false,
   };
@@ -46,6 +47,11 @@ const monacoStub = vi.hoisted(() => {
       registerCompletionItemProvider: vi.fn(() => ({
         dispose() {
           state.snippetDisposed = true;
+        },
+      })),
+      registerHoverProvider: vi.fn(() => ({
+        dispose() {
+          state.hoverDisposed = true;
         },
       })),
       registerCodeActionProvider: vi.fn(() => ({ dispose: vi.fn() })),
@@ -93,11 +99,13 @@ describe("createMaldivesEditor", () => {
     });
     expect(monacoStub.editor.addCommand).toHaveBeenCalled();
     expect(monacoStub.api.languages.registerCompletionItemProvider).toHaveBeenCalledWith("typescript", expect.any(Object));
+    expect(monacoStub.api.languages.registerHoverProvider).toHaveBeenCalledWith("typescript", expect.any(Object));
     expect(monacoStub.editor.onDidBlurEditorText).toHaveBeenCalledWith(expect.any(Function));
 
     result.dispose();
 
     expect(monacoStub.state.snippetDisposed).toBe(true);
+    expect(monacoStub.state.hoverDisposed).toBe(true);
     expect(monacoStub.state.blurDisposed).toBe(true);
     expect(monacoStub.state.editorDisposed).toBe(true);
   });

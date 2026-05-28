@@ -91,6 +91,10 @@ export function completeStatementWhenReady(
     return;
   }
 
+  if (!astReady && completeStatement(editor)) {
+    return;
+  }
+
   const ready = astReady ?? initializeAstSmartSelection();
   let handled = false;
   let timeoutId: ReturnType<typeof globalThis.setTimeout>;

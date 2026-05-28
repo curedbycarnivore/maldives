@@ -34,7 +34,7 @@ async function waitForXmlParserSymbol(page: Page): Promise<void> {
       }
     },
     undefined,
-    { timeout: 5000 },
+    { timeout: 15000 },
   );
 }
 

@@ -59,6 +59,33 @@ declare module "effect" {
     const Number: Schema<number>;
     function Struct<F extends Record<string, Schema<any>>>(fields: F): Schema<{ [K in keyof F]: F[K]["Type"] }>;
   }
+
+  export namespace Layer {
+    interface Layer<ROut = never, E = never, RIn = never> { readonly _ROut: ROut; readonly _E: E; readonly _RIn: RIn; }
+    function effect<Tag, A, E = never, R = never>(tag: Tag, effect: Effect.Effect<A, E, R>): Layer<Tag, E, R>;
+  }
+
+  export namespace Match {
+    interface Matcher<A> { readonly value: A; }
+    function value<A>(input: A): Matcher<A>;
+    function when<A, B>(predicate: A, f: (value: A) => B): (self: Matcher<A>) => Matcher<A | B>;
+    function orElse<A, B>(f: () => B): (self: Matcher<A>) => B;
+  }
+
+  export namespace Schedule {
+    interface Schedule<Out = unknown, In = unknown, R = never> { readonly _Out: Out; readonly _In: In; readonly _R: R; }
+    function exponential(duration: string): Schedule;
+  }
+
+  export namespace Stream {
+    interface Stream<A, E = never, R = never> { readonly _A: A; readonly _E: E; readonly _R: R; }
+    function fromIterable<A>(iterable: Iterable<A>): Stream<A>;
+  }
+
+  export namespace Fiber {
+    interface RuntimeFiber<A = unknown, E = unknown> { readonly _A: A; readonly _E: E; }
+    function interrupt<A, E>(fiber: RuntimeFiber<A, E>): Effect.Effect<void>;
+  }
 }
 `;
 

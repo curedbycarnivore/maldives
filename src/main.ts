@@ -7,6 +7,7 @@ import { registerAstStructuralSearchAction } from "./ast-structural-search";
 import { registerMaldivesCodeActions } from "./code-actions";
 import { registerSchemaJsonSchemaAction } from "./schema-jsonschema";
 import { installEffectDevToolsButton, openEffectDevToolsPanel, type OpenEffectDevToolsOptions } from "./effect-devtools";
+import { registerEffectHoverProvider } from "./effect-hover";
 import { registerEffectSnippets } from "./effect-snippets";
 import { registerModelTab, registerRecentLocationTracking } from "./file-switcher";
 import { cleanOnBlurFromModel } from "./hooks/trailing-whitespace";
@@ -65,6 +66,7 @@ const keymapConfig = parseKeymap(keymapXml);
 registerTheme(monaco, themeConfig);
 configureTypeScriptWorker(monaco);
 registerEffectSnippets(monaco);
+registerEffectHoverProvider(monaco);
 registerMaldivesCodeActions(monaco);
 void initializeAstSmartSelection().catch(() => undefined);
 

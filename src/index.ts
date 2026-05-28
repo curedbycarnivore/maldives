@@ -6,6 +6,7 @@ import { initializeAstSmartSelection } from "./ast-smart-selection";
 import { registerAstStructuralSearchAction } from "./ast-structural-search";
 import { registerMaldivesCodeActions } from "./code-actions";
 import { registerSchemaJsonSchemaAction } from "./schema-jsonschema";
+import { registerEffectHoverProvider } from "./effect-hover";
 import { registerEffectSnippets } from "./effect-snippets";
 import { registerModelTab, registerRecentLocationTracking } from "./file-switcher";
 import { cleanOnBlurFromModel } from "./hooks/trailing-whitespace";
@@ -38,6 +39,7 @@ export function createMaldivesEditor(
   registerTheme(monaco, themeConfig);
   configureTypeScriptWorker(monaco, { effectDtsFiles: _opts.effectDtsFiles });
   const snippetsDisposable = registerEffectSnippets(monaco);
+  const hoverDisposable = registerEffectHoverProvider(monaco);
   const codeActionsDisposable = registerMaldivesCodeActions(monaco);
   void initializeAstSmartSelection().catch(() => undefined);
 
@@ -82,6 +84,7 @@ export function createMaldivesEditor(
       astStructuralSearchDisposable.dispose();
       schemaJsonSchemaDisposable.dispose();
       codeActionsDisposable.dispose();
+      hoverDisposable.dispose();
       snippetsDisposable.dispose();
       editor.dispose();
     },
