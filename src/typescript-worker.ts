@@ -10,6 +10,13 @@ type StrictCompilerOptions = MonacoCompilerOptions & {
 };
 
 const bundlerModuleResolution = 100 as MonacoCompilerOptions["moduleResolution"];
+const effectDtsMarker = "effect/dist/dts/";
+
+export type EffectDtsFiles = Record<string, string>;
+
+export interface ConfigureTypeScriptWorkerOptions {
+  effectDtsFiles?: EffectDtsFiles;
+}
 
 export const EFFECT_TYPE_STUB = `
 declare module "effect" {
@@ -55,7 +62,38 @@ declare module "effect" {
 }
 `;
 
-export function configureTypeScriptWorker(monacoApi: MonacoApi): void {
+export function registerEffectDtsFiles(monacoApi: MonacoApi, effectDtsFiles: EffectDtsFiles): monaco.IDisposable {
+  const disposables = Object.entries(effectDtsFiles)
+    .map(([path, content]) => {
+      const virtualPath = effectDtsVirtualPath(path);
+      return virtualPath
+        ? monacoApi.typescript.typescriptDefaults.addExtraLib(content, virtualPath)
+        : undefined;
+    })
+    .filter((disposable): disposable is monaco.IDisposable => Boolean(disposable));
+
+  return {
+    dispose() {
+      for (const disposable of disposables) {
+        disposable.dispose();
+      }
+    },
+  };
+}
+
+function effectDtsVirtualPath(path: string): string | undefined {
+  const normalized = path.replaceAll("\\", "/");
+  const markerIndex = normalized.indexOf(effectDtsMarker);
+
+  if (markerIndex === -1 || !normalized.endsWith(".d.ts")) {
+    return undefined;
+  }
+
+  const relativePath = normalized.slice(markerIndex + effectDtsMarker.length);
+  return `file:///node_modules/effect/${relativePath}`;
+}
+
+export function configureTypeScriptWorker(monacoApi: MonacoApi, options: ConfigureTypeScriptWorkerOptions = {}): void {
   const { typescript } = monacoApi;
 
   const compilerOptions: StrictCompilerOptions = {
@@ -88,6 +126,12 @@ export function configureTypeScriptWorker(monacoApi: MonacoApi): void {
     includeInlayEnumMemberValueHints: true,
   });
   typescript.typescriptDefaults.setEagerModelSync(true);
+
+  if (options.effectDtsFiles && Object.keys(options.effectDtsFiles).length > 0) {
+    registerEffectDtsFiles(monacoApi, options.effectDtsFiles);
+    return;
+  }
+
   typescript.typescriptDefaults.addExtraLib(
     EFFECT_TYPE_STUB,
     "file:///node_modules/@types/effect-stub/index.d.ts",

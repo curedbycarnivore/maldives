@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import type * as monaco from "monaco-editor";
-import { configureTypeScriptWorker } from "../src/typescript-worker";
+import { configureTypeScriptWorker, registerEffectDtsFiles } from "../src/typescript-worker";
 
 type CompilerOptions = monaco.typescript.CompilerOptions;
 type DiagnosticsOptions = monaco.languages.typescript.DiagnosticsOptions;
@@ -110,5 +110,25 @@ describe("configureTypeScriptWorker", () => {
     expect(effectStub).toContain("export namespace Schema");
     expect(effectStub).not.toContain("import ");
     expect(effectStub).not.toContain("from \"./");
+  });
+
+  test("remaps full Effect declaration files to stable virtual node_modules paths", () => {
+    const monacoStub = createMonacoStub();
+
+    const disposable = registerEffectDtsFiles(monacoStub, {
+      "/node_modules/effect/dist/dts/index.d.ts": 'export * as Effect from "./Effect.js";',
+      "/node_modules/effect/dist/dts/Effect.d.ts": "export declare const match: unique symbol;",
+      "effect/dist/dts/Predicate.d.ts": "export declare const isString: (value: unknown) => value is string;",
+    });
+
+    const extraLibs = monacoStub.typescript.typescriptDefaults.getExtraLibs();
+    expect(extraLibs["file:///node_modules/effect/index.d.ts"]?.content).toContain("./Effect.js");
+    expect(extraLibs["file:///node_modules/effect/Effect.d.ts"]?.content).toContain("match");
+    expect(extraLibs["file:///node_modules/effect/Predicate.d.ts"]?.content).toContain("isString");
+    expect(extraLibs["file:///node_modules/effect/dist/dts/Effect.d.ts"]).toBeUndefined();
+
+    disposable.dispose();
+
+    expect(monacoStub.typescript.typescriptDefaults.getExtraLibs()).toEqual({});
   });
 });

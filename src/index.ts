@@ -14,10 +14,11 @@ import { parseIcls } from "./parsers/icls-parser";
 import { parseKeymap } from "./parsers/keymap-parser";
 import { maldivesProFeatureOptions } from "./pro-features";
 import { registerTheme, THEME_NAME } from "./theme";
-import { configureTypeScriptWorker } from "./typescript-worker";
+import { configureTypeScriptWorker, type EffectDtsFiles } from "./typescript-worker";
 
 export interface CreateMaldivesEditorOptions {
   lspUrl?: string;
+  effectDtsFiles?: EffectDtsFiles;
 }
 
 export interface MaldivesEditorHandle {
@@ -34,7 +35,7 @@ export function createMaldivesEditor(
   const keymapConfig = parseKeymap(keymapXml);
 
   registerTheme(monaco, themeConfig);
-  configureTypeScriptWorker(monaco);
+  configureTypeScriptWorker(monaco, { effectDtsFiles: _opts.effectDtsFiles });
   const snippetsDisposable = registerEffectSnippets(monaco);
   const codeActionsDisposable = registerMaldivesCodeActions(monaco);
   void initializeAstSmartSelection().catch(() => undefined);
@@ -83,3 +84,5 @@ export function createMaldivesEditor(
     },
   };
 }
+
+export { registerEffectDtsFiles } from "./typescript-worker";
