@@ -117,6 +117,7 @@ const actionTargets: Record<string, MonacoTarget> = {
   MethodHierarchy: { type: "custom", id: "methodHierarchy" },
   MoveStatementDown: { type: "custom", id: "moveStatementDown" },
   MoveStatementUp: { type: "custom", id: "moveStatementUp" },
+  EditorBackSpace: { type: "command", id: "deleteLeft" },
   EditorDeleteLine: { type: "action", id: "editor.action.deleteLines" },
   EditorSelectWord: { type: "custom", id: "astSmartSelect" },
   EditorChooseLookupItemCompleteStatement: { type: "custom", id: "chooseLookupAndComplete" },
