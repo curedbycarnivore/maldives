@@ -6,6 +6,7 @@ import {
   moveStatementWhenReady,
   navigateMethodWhenReady,
 } from "../ast-smart-selection";
+import { openCodeNavigationOverlay } from "../code-navigation";
 import {
   applyActiveTabSwitcherItem,
   moveActiveTabSwitcherItem,
@@ -48,6 +49,9 @@ type MonacoTarget =
         | "moveElementRight"
         | "methodDown"
         | "methodUp"
+        | "gotoSuperMethod"
+        | "gotoTest"
+        | "methodHierarchy"
         | "moveStatementDown"
         | "moveStatementUp"
         | "removeLastSelection"
@@ -108,6 +112,9 @@ const actionTargets: Record<string, MonacoTarget> = {
   MoveElementRight: { type: "custom", id: "moveElementRight" },
   MethodDown: { type: "custom", id: "methodDown" },
   MethodUp: { type: "custom", id: "methodUp" },
+  GotoSuperMethod: { type: "custom", id: "gotoSuperMethod" },
+  GotoTest: { type: "custom", id: "gotoTest" },
+  MethodHierarchy: { type: "custom", id: "methodHierarchy" },
   MoveStatementDown: { type: "custom", id: "moveStatementDown" },
   MoveStatementUp: { type: "custom", id: "moveStatementUp" },
   EditorDeleteLine: { type: "action", id: "editor.action.deleteLines" },
@@ -267,6 +274,9 @@ const shortcutlessActionIds = new Set([
   "EditorPageDown",
   "EditorScrollToCenter",
   "EditorSplitLine",
+  "GotoSuperMethod",
+  "GotoTest",
+  "MethodHierarchy",
 ]);
 
 function keybindingsForAction(action: KeyAction, monaco: Monaco): MaldivesAction[] {
@@ -436,6 +446,10 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
 
   if (target.id === "methodUp") {
     return (editor) => navigateMethodWhenReady(editor, "up");
+  }
+
+  if (target.id === "gotoSuperMethod" || target.id === "gotoTest" || target.id === "methodHierarchy") {
+    return (editor) => openCodeNavigationOverlay(editor, target.id);
   }
 
   if (target.id === "moveStatementDown") {

@@ -149,7 +149,10 @@ describe("buildKeybindings", () => {
     expect(bindingFor("HippieBackwardCompletion", M.Shift | M.CtrlCmd | M.Alt | K.Slash)).toBe(M.Shift | M.CtrlCmd | M.Alt | K.Slash);
     expect(bindingFor("HippieBackwardCompletion", M.WinCtrl | K.KeyD)).toBe(M.WinCtrl | K.KeyD);
     expect(bindingFor("GotoNextError", K.F2)).toBe(K.F2);
+    expect(bindingFor("GotoSuperMethod", 0)).toBe(0);
+    expect(bindingFor("GotoTest", 0)).toBe(0);
     expect(bindingFor("GotoTypeDeclaration", M.Shift | M.WinCtrl | K.KeyB)).toBe(M.Shift | M.WinCtrl | K.KeyB);
+    expect(bindingFor("MethodHierarchy", 0)).toBe(0);
     expect(bindingFor("FileStructurePopup", M.CtrlCmd | K.F12)).toBe(M.CtrlCmd | K.F12);
     expect(bindingFor("FileStructurePopup", M.Shift | M.CtrlCmd | K.KeyS)).toBe(M.Shift | M.CtrlCmd | K.KeyS);
     expect(bindingFor("GotoClass", M.Shift | M.CtrlCmd | K.KeyO)).toBe(M.Shift | M.CtrlCmd | K.KeyO);
