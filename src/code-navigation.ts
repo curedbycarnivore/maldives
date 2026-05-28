@@ -15,6 +15,10 @@ export interface CodeNavigationContent {
 }
 
 type MonacoGlobal = typeof import("monaco-editor");
+type TypeScriptWorkerFactory = (
+  uri: editor.ITextModel["uri"],
+) => Promise<{ getNavigationTree(fileName: string): Promise<NavigationNode> }>;
+type TypeScriptWithWorker = { getTypeScriptWorker?: () => Promise<TypeScriptWorkerFactory> };
 
 const labels: Record<CodeNavigationKind, string> = {
   gotoSuperMethod: "Goto Super Method",
@@ -120,7 +124,13 @@ async function currentTypeScriptSymbol(editor: editor.IStandaloneCodeEditor): Pr
   }
 
   try {
-    const getWorker = await monacoApi.languages.typescript.getTypeScriptWorker();
+    const getTypeScriptWorker = (monacoApi.languages.typescript as unknown as TypeScriptWithWorker).getTypeScriptWorker;
+
+    if (!getTypeScriptWorker) {
+      return undefined;
+    }
+
+    const getWorker = await getTypeScriptWorker();
     const worker = await getWorker(model.uri);
     const tree = (await worker.getNavigationTree(model.uri.toString())) as NavigationNode;
 

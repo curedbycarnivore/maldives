@@ -1,10 +1,11 @@
 {
+  "types": "dist/index.d.ts",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "postinstall": "mkdir -p public/ast && cp node_modules/web-tree-sitter/web-tree-sitter.wasm public/tree-sitter.wasm && cp node_modules/web-tree-sitter/web-tree-sitter.wasm public/web-tree-sitter.wasm && cp node_modules/tree-sitter-typescript/tree-sitter-typescript.wasm public/ast/tree-sitter-typescript.wasm",
     "test": "vitest run",
     "test:e2e": "playwright test --pass-with-no-tests",
-    "build": "tsc --noEmit --project tsconfig.build.json && vite build"
+    "build": "tsc --noEmit --project tsconfig.build.json && vite build && tsc --project tsconfig.declarations.json"
   },
   "dependencies": {
     "@ast-grep/wasm": "^0.43.0",

@@ -6,7 +6,7 @@ import {
   moveStatementWhenReady,
   navigateMethodWhenReady,
 } from "../ast-smart-selection";
-import { openCodeNavigationOverlay } from "../code-navigation";
+import { openCodeNavigationOverlay, type CodeNavigationKind } from "../code-navigation";
 import {
   applyActiveTabSwitcherItem,
   moveActiveTabSwitcherItem,
@@ -450,7 +450,7 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
   }
 
   if (target.id === "gotoSuperMethod" || target.id === "gotoTest" || target.id === "methodHierarchy") {
-    return (editor) => openCodeNavigationOverlay(editor, target.id);
+    return (editor) => openCodeNavigationOverlay(editor, target.id as CodeNavigationKind);
   }
 
   if (target.id === "moveStatementDown") {
