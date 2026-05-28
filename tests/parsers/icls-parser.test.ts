@@ -18,6 +18,17 @@ test("parses editor colors and font from the active ICLS theme", () => {
   expect(theme.fontSize).toBe(14);
 });
 
+test("parses remaining UI color attributes from the active ICLS theme", () => {
+  expect(theme).toMatchObject({
+    indentGuide: "#515151",
+    whitespaceForeground: "#515151",
+    errorForeground: "#f2777a",
+    warningForeground: "#ffcc66",
+    findMatchBackground: "#ffcc66",
+    selectionHighlightBackground: "#ffcc66",
+  });
+});
+
 test("parses JavaScript token foregrounds and styles", () => {
   expect(theme.tokens).toEqual(
     expect.arrayContaining([

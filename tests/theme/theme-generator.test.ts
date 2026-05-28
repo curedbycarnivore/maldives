@@ -29,6 +29,18 @@ test("maps editor colors to Monaco theme color ids", () => {
   });
 });
 
+test("maps remaining SSOT UI colors to Monaco theme color ids", () => {
+  expect(theme.colors).toMatchObject({
+    "editorIndentGuide.background": "#515151",
+    "editorIndentGuide.background1": "#515151",
+    "editorWhitespace.foreground": "#515151",
+    "editorError.foreground": "#f2777a",
+    "editorWarning.foreground": "#ffcc66",
+    "editor.findMatchBackground": "#ffcc66",
+    "editor.selectionHighlightBackground": "#ffcc66",
+  });
+});
+
 test("maps parsed JavaScript tokens to Monaco token rules", () => {
   expect(theme.rules).toEqual(
     expect.arrayContaining([

@@ -33,6 +33,43 @@ test("renders the SSOT theme background and editor typography", async ({ page })
   await page.screenshot({ path: "proof/p5d-color-gaps-proof.png" });
 });
 
+test("renders remaining SSOT UI colors in the live editor", async ({ page }) => {
+  await loadEditor(page);
+
+  await page.evaluate(async () => {
+    const sample = `function demo() {
+  const target = 1;
+  if (target) {
+    return target;
+  }
+}
+`;
+    window.__maldivesEditor.setModel(window.__monaco.editor.createModel(sample, "typescript", window.__monaco.Uri.parse("file:///maldives/ui-colors.ts")));
+    window.__maldivesEditor.updateOptions({ renderWhitespace: "all", guides: { indentation: true, bracketPairs: true } });
+    window.__maldivesEditor.setPosition({ lineNumber: 4, column: 5 });
+    window.__maldivesEditor.focus();
+    await window.__maldivesEditor.getAction("actions.find")?.run();
+  });
+
+  await page.locator(".find-widget.visible").waitFor({ state: "visible", timeout: 8000 });
+  await page.locator(".find-widget.visible .input").first().fill("target");
+
+  await expect
+    .poll(() =>
+      page.locator(".monaco-editor .core-guide.bracket-indent-guide.vertical").first().evaluate((element) => getComputedStyle(element).boxShadow),
+    )
+    .toContain("rgb(81, 81, 81)");
+
+  await expect
+    .poll(() =>
+      page.locator(".monaco-editor .cdr.currentFindMatch").first().evaluate((element) => getComputedStyle(element).backgroundColor),
+    )
+    .toBe("rgb(255, 204, 102)");
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/p7b-ui-colors-proof.png" });
+});
+
 test("renders extended SSOT token colors in TypeScript code", async ({ page }) => {
   await loadEditor(page);
 

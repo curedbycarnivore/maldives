@@ -7,6 +7,12 @@ export interface ThemeConfig {
   selectionBackground: string;
   caretColor: string;
   lineNumbersColor: string;
+  indentGuide: string;
+  whitespaceForeground: string;
+  errorForeground: string;
+  warningForeground: string;
+  findMatchBackground: string;
+  selectionHighlightBackground: string;
   defaultForeground: string;
   fontFamily: string;
   fontSize: number;
@@ -61,6 +67,12 @@ export function parseIcls(xmlContent: string): ThemeConfig {
     selectionBackground: color(optionValue(xmlContent, "SELECTION_BACKGROUND")),
     caretColor: color(optionValue(xmlContent, "CARET_COLOR")),
     lineNumbersColor: color(optionValue(xmlContent, "LINE_NUMBERS_COLOR")),
+    indentGuide: color(optionValue(xmlContent, "INDENT_GUIDE")),
+    whitespaceForeground: color(optionValue(xmlContent, "WHITESPACES")),
+    errorForeground: color(optionValue(blockFor(xmlContent, "ERRORS_ATTRIBUTES"), "EFFECT_COLOR")),
+    warningForeground: color(optionValue(blockFor(xmlContent, "WARNING_ATTRIBUTES"), "EFFECT_COLOR")),
+    findMatchBackground: color(optionValue(blockFor(xmlContent, "TEXT_SEARCH_RESULT_ATTRIBUTES"), "BACKGROUND")),
+    selectionHighlightBackground: color(optionValue(blockFor(xmlContent, "SEARCH_RESULT_ATTRIBUTES"), "BACKGROUND")),
     fontFamily: optionValue(fontBlock, "EDITOR_FONT_NAME"),
     fontSize: Number(optionValue(fontBlock, "EDITOR_FONT_SIZE")),
     tokens: tokenNames.map((name) => tokenRule(xmlContent, name)),
