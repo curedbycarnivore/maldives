@@ -2,6 +2,13 @@ import type * as monaco from "monaco-editor";
 
 type MonacoApi = typeof monaco;
 type MonacoCompilerOptions = monaco.typescript.CompilerOptions;
+type TypeScriptWorkerClient = {
+  getNavigationTree(fileName: string): Promise<unknown>;
+};
+type TypeScriptWorkerFactory = (uri: monaco.Uri) => Promise<TypeScriptWorkerClient>;
+type TypeScriptLanguageApi = {
+  getTypeScriptWorker(): Promise<TypeScriptWorkerFactory>;
+};
 type StrictCompilerOptions = MonacoCompilerOptions & {
   exactOptionalPropertyTypes: true;
   noUncheckedIndexedAccess: true;
@@ -31,6 +38,10 @@ export type EffectDtsRegistration = monaco.IDisposable & { coverage: EffectDtsCo
 
 export interface ConfigureTypeScriptWorkerOptions {
   effectDtsFiles?: EffectDtsFiles;
+}
+
+export interface WarmTypeScriptWorkerOptions {
+  timeoutMs?: number;
 }
 
 let effectStubDisposable: monaco.IDisposable | undefined;
@@ -230,6 +241,34 @@ function effectPackageJsonForExports(exportVirtualPaths: string[]): string {
   }
 
   return JSON.stringify({ name: "effect", types: "./index.d.ts", exports: exportsMap }, null, 2);
+}
+
+export async function warmTypeScriptWorkerForModel(
+  monacoApi: MonacoApi,
+  model: monaco.editor.ITextModel,
+  options: WarmTypeScriptWorkerOptions = {},
+): Promise<void> {
+  const timeoutMs = options.timeoutMs ?? 5000;
+  const warmWorker = async () => {
+    const typeScriptApi = monacoApi.languages.typescript as unknown as TypeScriptLanguageApi;
+    const getWorker = await typeScriptApi.getTypeScriptWorker();
+    const worker = await getWorker(model.uri);
+    await worker.getNavigationTree(model.uri.toString());
+  };
+
+  await new Promise<void>((resolve) => {
+    const timer = globalThis.setTimeout(resolve, timeoutMs);
+    warmWorker().then(
+      () => {
+        globalThis.clearTimeout(timer);
+        resolve();
+      },
+      () => {
+        globalThis.clearTimeout(timer);
+        resolve();
+      },
+    );
+  });
 }
 
 export function configureTypeScriptWorker(monacoApi: MonacoApi, options: ConfigureTypeScriptWorkerOptions = {}): void {

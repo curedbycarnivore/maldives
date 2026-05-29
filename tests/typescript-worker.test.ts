@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import type * as monaco from "monaco-editor";
-import { configureTypeScriptWorker, registerEffectDtsFiles } from "../src/typescript-worker";
+import { configureTypeScriptWorker, registerEffectDtsFiles, warmTypeScriptWorkerForModel } from "../src/typescript-worker";
 
 type CompilerOptions = monaco.typescript.CompilerOptions;
 type DiagnosticsOptions = monaco.languages.typescript.DiagnosticsOptions;
@@ -60,6 +60,53 @@ function createMonacoStub() {
 }
 
 describe("configureTypeScriptWorker", () => {
+  test("warms the TypeScript worker against the live model before suggestion/navigation tests run", async () => {
+    const calls: string[] = [];
+    const model = { uri: { toString: () => "file:///maldives/sample.ts" } } as monaco.editor.ITextModel;
+    const monacoStub = {
+      languages: {
+        typescript: {
+          async getTypeScriptWorker() {
+            calls.push("get-worker-factory");
+            return async (uri: monaco.Uri) => {
+              calls.push(`get-worker:${uri.toString()}`);
+              return {
+                async getNavigationTree(path: string) {
+                  calls.push(`get-navigation-tree:${path}`);
+                },
+              };
+            };
+          },
+        },
+      },
+    } as unknown as typeof monaco;
+
+    await warmTypeScriptWorkerForModel(monacoStub, model);
+
+    expect(calls).toEqual([
+      "get-worker-factory",
+      "get-worker:file:///maldives/sample.ts",
+      "get-navigation-tree:file:///maldives/sample.ts",
+    ]);
+  });
+
+  test("does not let a stuck TypeScript worker block the live editor forever", async () => {
+    const model = { uri: { toString: () => "file:///maldives/sample.ts" } } as monaco.editor.ITextModel;
+    const monacoStub = {
+      languages: {
+        typescript: {
+          async getTypeScriptWorker() {
+            return async () => ({
+              getNavigationTree: () => new Promise(() => undefined),
+            });
+          },
+        },
+      },
+    } as unknown as typeof monaco;
+
+    await expect(warmTypeScriptWorkerForModel(monacoStub, model, { timeoutMs: 1 })).resolves.toBeUndefined();
+  });
+
   test("enables strict ESNext compiler options and eager model sync", () => {
     const monacoStub = createMonacoStub();
 

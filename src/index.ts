@@ -17,7 +17,7 @@ import { parseKeymap } from "./parsers/keymap-parser";
 import { setupDefaultMonacoWorkers } from "./monaco-workers";
 import { maldivesProFeatureOptions } from "./pro-features";
 import { registerTheme, THEME_NAME } from "./theme";
-import { configureTypeScriptWorker, type EffectDtsFiles } from "./typescript-worker";
+import { configureTypeScriptWorker, warmTypeScriptWorkerForModel, type EffectDtsFiles } from "./typescript-worker";
 
 export interface CreateMaldivesEditorOptions {
   lspUrl?: string;
@@ -60,6 +60,7 @@ export function createMaldivesEditor(
 
   if (model) {
     registerModelTab(model);
+    void warmTypeScriptWorkerForModel(monaco, model).catch(() => undefined);
   }
 
   registerKeybindings(editor, monaco, keymapConfig);

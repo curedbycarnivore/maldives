@@ -5,12 +5,14 @@ declare global {
   interface Window {
     __maldivesEditor: import("monaco-editor").editor.IStandaloneCodeEditor;
     __monaco: typeof import("monaco-editor");
+    __maldivesTypeScriptReady: Promise<void>;
   }
 }
 
 async function loadEditor(page: Page): Promise<void> {
   await page.goto("http://127.0.0.1:5173/");
   await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesEditor)), { timeout: 15000 }).toBe(true);
+  await page.evaluate(() => window.__maldivesTypeScriptReady);
 }
 
 test("Effect type stubs power TypeScript worker diagnostics and completions", async ({ page }) => {

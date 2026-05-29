@@ -31,12 +31,18 @@ declare global {
   interface Window {
     __maldivesEditor: import("monaco-editor").editor.IStandaloneCodeEditor;
     __maldivesExecuteKeybinding: (wsActionId: string) => boolean;
+    __maldivesTypeScriptReady: Promise<void>;
   }
 }
 
-test("shows Effect snippet suggestions for the eff- prefix", async ({ page }) => {
+async function loadReadyEditor(page: import("@playwright/test").Page): Promise<void> {
   await page.goto("http://127.0.0.1:5173/");
   await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesEditor))).toBe(true);
+  await page.evaluate(() => window.__maldivesTypeScriptReady);
+}
+
+test("shows Effect snippet suggestions for the eff- prefix", async ({ page }) => {
+  await loadReadyEditor(page);
 
   await page.evaluate(() => {
     const editor = window.__maldivesEditor;
@@ -54,8 +60,7 @@ test("shows Effect snippet suggestions for the eff- prefix", async ({ page }) =>
 });
 
 test("HippieCompletion keybinding opens Effect snippet suggestions", async ({ page }) => {
-  await page.goto("http://127.0.0.1:5173/");
-  await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesEditor))).toBe(true);
+  await loadReadyEditor(page);
 
   const opened = await page.evaluate(() => {
     const editor = window.__maldivesEditor;
@@ -74,8 +79,7 @@ test("HippieCompletion keybinding opens Effect snippet suggestions", async ({ pa
 });
 
 test("accepts every practical Effect snippet from the live completion list", async ({ page }) => {
-  await page.goto("http://127.0.0.1:5173/");
-  await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesEditor))).toBe(true);
+  await loadReadyEditor(page);
 
   for (const snippet of effectSnippetCases) {
     await page.evaluate((label) => {

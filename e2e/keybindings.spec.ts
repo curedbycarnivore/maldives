@@ -6,6 +6,7 @@ declare global {
     __maldivesEditor: import("monaco-editor").editor.IStandaloneCodeEditor;
     __monaco: typeof import("monaco-editor");
     __maldivesExecuteKeybinding: (wsActionId: string) => boolean;
+    __maldivesTypeScriptReady: Promise<void>;
   }
 }
 

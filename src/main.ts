@@ -18,7 +18,7 @@ import { parseKeymap } from "./parsers/keymap-parser";
 import { setupDefaultMonacoWorkers } from "./monaco-workers";
 import { maldivesProFeatureOptions } from "./pro-features";
 import { registerTheme, THEME_NAME } from "./theme";
-import { configureTypeScriptWorker, registerEffectDtsFiles, type EffectDtsFiles, type RegisterEffectDtsFilesOptions } from "./typescript-worker";
+import { configureTypeScriptWorker, registerEffectDtsFiles, warmTypeScriptWorkerForModel, type EffectDtsFiles, type RegisterEffectDtsFilesOptions } from "./typescript-worker";
 
 declare global {
   interface Window {
@@ -28,6 +28,7 @@ declare global {
     __maldivesExecuteKeybinding: (wsActionId: string) => boolean;
     __maldivesRegisterEffectDtsFiles: (files: EffectDtsFiles, options?: RegisterEffectDtsFilesOptions) => monaco.IDisposable;
     __maldivesOpenEffectDevTools: (options: OpenEffectDevToolsOptions) => void;
+    __maldivesTypeScriptReady: Promise<void>;
   }
 }
 
@@ -78,6 +79,7 @@ window.__maldivesRegisterEffectDtsFiles = (files, options) => registerEffectDtsF
 window.__maldivesOpenEffectDevTools = (options) => openEffectDevToolsPanel(options);
 const sampleModel = monaco.editor.createModel(sampleDocument, "typescript", monaco.Uri.parse("file:///maldives/sample.ts"));
 const secondModel = monaco.editor.createModel(secondDocument, "typescript", monaco.Uri.parse("file:///maldives/second.ts"));
+window.__maldivesTypeScriptReady = warmTypeScriptWorkerForModel(monaco, sampleModel).catch(() => undefined);
 registerModelTab(sampleModel);
 registerModelTab(secondModel);
 const editor = monaco.editor.create(app, {
