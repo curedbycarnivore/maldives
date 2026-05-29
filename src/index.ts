@@ -94,7 +94,7 @@ export function createMaldivesEditor(
   };
 }
 
-export { createMemoryFileSystemAdapter, FileSystemAdapterError, MemoryFileSystemAdapter } from "./fs";
-export type { FileSystemAdapter, FileSystemChange, FileSystemEntry, FileSystemEntryType, FileSystemWatcher } from "./fs";
+export { createMemoryFileSystemAdapter, FileSystemAccessAdapter, FileSystemAdapterError, fileUriForFsaPath, installOpenFileButton, MemoryFileSystemAdapter, openPickedFileInWorkspace } from "./fs";
+export type { FileSystemAccessHost, FileSystemAdapter, FileSystemChange, FileSystemDirectoryHandleLike, FileSystemEntry, FileSystemEntryType, FileSystemFileHandleLike, FileSystemHandleLike, FileSystemWatcher, OpenedFile, OpenedWorkspaceFile } from "./fs";
 export { registerEffectDtsFiles } from "./typescript-worker";
 export type { EffectDtsFiles } from "./typescript-worker";
