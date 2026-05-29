@@ -121,11 +121,48 @@ export function writeKeymapCoverageReport(keymap: KeymapConfig, outFile = "proof
   return report;
 }
 
+export function writeUnwiredActionSpecs(
+  keymap: KeymapConfig,
+  report = auditKeymapCoverage(keymap),
+  outFile = "proof/keymap-unwired-action-specs.md",
+): void {
+  const shortcutByAction = new Map(
+    keymap.actions.map((action) => [action.id, action.shortcuts.join(", ") || "no shortcut"]),
+  );
+  const lines = [
+    "# Keymap Unwired Action Specs",
+    "",
+    "Source: `ssot/keymaps/leet hax.xml` vs `src/keybindings/index.ts`.",
+    `Coverage summary: wired=${report.wired.length} deferred=${report.deferred.length} unwired=${report.unwired.length}.`,
+    "",
+  ];
+
+  if (report.unwired.length === 0) {
+    lines.push("No unwired shortcut-bearing SSOT actions remain.", "");
+  } else {
+    report.unwired.forEach((actionId, index) => {
+      if (index % 25 === 0) lines.push(`## Batch ${Math.floor(index / 25) + 1}`, "");
+      lines.push(
+        `- [ ] ${actionId} (${shortcutByAction.get(actionId) ?? "shortcut unknown"}) — preserve the WebStorm action semantics with a verified Monaco equivalent or record a defer/drop reason before implementation.`,
+      );
+    });
+    lines.push("");
+  }
+
+  mkdirSync(dirname(outFile), { recursive: true });
+  writeFileSync(outFile, `${lines.join("\n")}\n`);
+}
+
 if (import.meta.main) {
   const outIndex = process.argv.indexOf("--out");
+  const specsOutIndex = process.argv.indexOf("--unwired-specs-out");
   const outFile = outIndex === -1 ? "proof/keymap-coverage.json" : process.argv[outIndex + 1];
   const keymap = parseKeymap(readFileSync("ssot/keymaps/leet hax.xml", "utf-8"));
   const report = writeKeymapCoverageReport(keymap, outFile);
+
+  if (specsOutIndex !== -1) {
+    writeUnwiredActionSpecs(keymap, report, process.argv[specsOutIndex + 1] ?? "proof/keymap-unwired-action-specs.md");
+  }
 
   console.log(`keymap coverage: wired=${report.wired.length} deferred=${report.deferred.length} unwired=${report.unwired.length}`);
 }
