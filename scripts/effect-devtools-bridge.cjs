@@ -101,7 +101,7 @@ async function startEffectDevToolsBridge(options = {}) {
       authenticated.add(client);
       socket.on("close", () => authenticated.delete(client));
       for (const event of mailbox) {
-        sendEvent(client, event, maxEventsPerSecond);
+        sendSerializedEvent(client, JSON.stringify(event), maxEventsPerSecond);
       }
     };
 
@@ -114,7 +114,12 @@ async function startEffectDevToolsBridge(options = {}) {
     address: addressOf(server),
     publish(event) {
       if (!isEffectDevToolsEvent(event)) {
-        return;
+        return false;
+      }
+
+      const serialized = JSON.stringify(event);
+      if (Buffer.byteLength(serialized, "utf8") > maxFrameBytes) {
+        return false;
       }
 
       mailbox.push(event);
@@ -123,8 +128,9 @@ async function startEffectDevToolsBridge(options = {}) {
       }
 
       for (const client of authenticated) {
-        sendEvent(client, event, maxEventsPerSecond);
+        sendSerializedEvent(client, serialized, maxEventsPerSecond);
       }
+      return true;
     },
     clientCount: () => authenticated.size,
     close: () =>
@@ -255,9 +261,9 @@ function addressOf(server) {
   return { address: address.address, port: address.port };
 }
 
-function sendEvent(client, event, maxEventsPerSecond) {
+function sendSerializedEvent(client, serialized, maxEventsPerSecond) {
   if (!rateLimited(client, maxEventsPerSecond)) {
-    client.socket.write(encodeServerTextFrame(JSON.stringify(event)));
+    client.socket.write(encodeServerTextFrame(serialized));
   }
 }
 

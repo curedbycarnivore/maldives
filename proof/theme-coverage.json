@@ -1,0 +1,4567 @@
+{
+  "totalOptions": 1512,
+  "uniqueOptionNames": 627,
+  "mapped": [
+    "CARET_COLOR",
+    "CARET_ROW_COLOR",
+    "DEFAULT_BRACES",
+    "DEFAULT_BRACKETS",
+    "DEFAULT_CONSTANT",
+    "DEFAULT_FUNCTION_CALL",
+    "DEFAULT_FUNCTION_DECLARATION",
+    "DEFAULT_INSTANCE_FIELD",
+    "DEFAULT_INTERFACE_NAME",
+    "DEFAULT_METADATA",
+    "DEFAULT_OPERATION_SIGN",
+    "DEFAULT_PARENTHS",
+    "ERRORS_ATTRIBUTES",
+    "FOLDED_TEXT_ATTRIBUTES",
+    "GUTTER_BACKGROUND",
+    "INDENT_GUIDE",
+    "JS.DOC_COMMENT",
+    "JS.GLOBAL_FUNCTION",
+    "JS.INSTANCE_MEMBER_FUNCTION",
+    "JS.KEYWORD",
+    "JS.LINE_COMMENT",
+    "JS.LOCAL_VARIABLE",
+    "JS.NUMBER",
+    "JS.PARAMETER",
+    "JS.STRING",
+    "LINE_NUMBERS_COLOR",
+    "MATCHED_BRACE_ATTRIBUTES",
+    "RIGHT_MARGIN_COLOR",
+    "SEARCH_RESULT_ATTRIBUTES",
+    "SELECTED_INDENT_GUIDE",
+    "SELECTION_BACKGROUND",
+    "TEXT",
+    "TEXT_SEARCH_RESULT_ATTRIBUTES",
+    "TS.CLASS",
+    "TS.DECORATOR",
+    "TS.TYPE.ALIAS",
+    "UNMATCHED_BRACE_ATTRIBUTES",
+    "WARNING_ATTRIBUTES",
+    "WHITESPACES"
+  ],
+  "unmapped": [
+    {
+      "name": "FOREGROUND",
+      "occurrences": 503,
+      "samplePaths": [
+        "ABSTRACT_CLASS_NAME_ATTRIBUTES.FOREGROUND",
+        "ANNOTATION_NAME_ATTRIBUTES.FOREGROUND",
+        "APACHE_CONFIG.ARG_LEXEM.FOREGROUND",
+        "APACHE_CONFIG.COMMENT.FOREGROUND",
+        "APACHE_CONFIG.IDENTIFIER.FOREGROUND"
+      ]
+    },
+    {
+      "name": "FONT_TYPE",
+      "occurrences": 241,
+      "samplePaths": [
+        "ABSTRACT_CLASS_NAME_ATTRIBUTES.FONT_TYPE",
+        "APACHE_CONFIG.ARG_LEXEM.FONT_TYPE",
+        "APACHE_CONFIG.COMMENT.FONT_TYPE",
+        "APACHE_CONFIG.IDENTIFIER.FONT_TYPE",
+        "BLOCK_TERMINAL_COMMAND.FONT_TYPE"
+      ]
+    },
+    {
+      "name": "EFFECT_TYPE",
+      "occurrences": 55,
+      "samplePaths": [
+        "ANNOTATION_NAME_ATTRIBUTES.EFFECT_TYPE",
+        "BAD_CHARACTER.EFFECT_TYPE",
+        "BRACE_ATTR.EFFECT_TYPE",
+        "CPP.PARAMETER.EFFECT_TYPE",
+        "CPP.UNUSED.EFFECT_TYPE"
+      ]
+    },
+    {
+      "name": "BACKGROUND",
+      "occurrences": 53,
+      "samplePaths": [
+        "BAD_CHARACTER.BACKGROUND",
+        "BRACE_ATTR.BACKGROUND",
+        "BRACKET_ATTR.BACKGROUND",
+        "BREADCRUMBS_CURRENT.BACKGROUND",
+        "BREADCRUMBS_HOVERED.BACKGROUND"
+      ]
+    },
+    {
+      "name": "EFFECT_COLOR",
+      "occurrences": 19,
+      "samplePaths": [
+        "BOOKMARKS_ATTRIBUTES.EFFECT_COLOR",
+        "CTRL_CLICKABLE.EFFECT_COLOR",
+        "DEPRECATED_ATTRIBUTES.EFFECT_COLOR",
+        "DUPLICATE_FROM_SERVER.EFFECT_COLOR",
+        "ERRORS_ATTRIBUTES.EFFECT_COLOR"
+      ]
+    },
+    {
+      "name": "ERROR_STRIPE_COLOR",
+      "occurrences": 18,
+      "samplePaths": [
+        "BAD_CHARACTER.ERROR_STRIPE_COLOR",
+        "BOOKMARKS_ATTRIBUTES.ERROR_STRIPE_COLOR",
+        "COFFEESCRIPT.BAD_CHARACTER.ERROR_STRIPE_COLOR",
+        "DIFF_CONFLICT.ERROR_STRIPE_COLOR",
+        "DIFF_DELETED.ERROR_STRIPE_COLOR"
+      ]
+    },
+    {
+      "name": "EDITOR_FONT_NAME",
+      "occurrences": 2,
+      "samplePaths": [
+        "EDITOR_FONT_NAME",
+        "EDITOR_FONT_NAME"
+      ]
+    },
+    {
+      "name": "EDITOR_FONT_SIZE",
+      "occurrences": 2,
+      "samplePaths": [
+        "EDITOR_FONT_SIZE",
+        "EDITOR_FONT_SIZE"
+      ]
+    },
+    {
+      "name": "ABSTRACT_CLASS_NAME_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "ABSTRACT_CLASS_NAME_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "ADDED_LINES_COLOR",
+      "occurrences": 1,
+      "samplePaths": [
+        "ADDED_LINES_COLOR"
+      ]
+    },
+    {
+      "name": "ANNOTATION_NAME_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "ANNOTATION_NAME_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "ANNOTATIONS_COLOR",
+      "occurrences": 1,
+      "samplePaths": [
+        "ANNOTATIONS_COLOR"
+      ]
+    },
+    {
+      "name": "ANNOTATIONS_MERGED_COLOR",
+      "occurrences": 1,
+      "samplePaths": [
+        "ANNOTATIONS_MERGED_COLOR"
+      ]
+    },
+    {
+      "name": "APACHE_CONFIG.ARG_LEXEM",
+      "occurrences": 1,
+      "samplePaths": [
+        "APACHE_CONFIG.ARG_LEXEM"
+      ]
+    },
+    {
+      "name": "APACHE_CONFIG.COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "APACHE_CONFIG.COMMENT"
+      ]
+    },
+    {
+      "name": "APACHE_CONFIG.IDENTIFIER",
+      "occurrences": 1,
+      "samplePaths": [
+        "APACHE_CONFIG.IDENTIFIER"
+      ]
+    },
+    {
+      "name": "BAD_CHARACTER",
+      "occurrences": 1,
+      "samplePaths": [
+        "BAD_CHARACTER"
+      ]
+    },
+    {
+      "name": "BASH.EXTERNAL_COMMAND",
+      "occurrences": 1,
+      "samplePaths": [
+        "BASH.EXTERNAL_COMMAND"
+      ]
+    },
+    {
+      "name": "BASH.HERE_DOC",
+      "occurrences": 1,
+      "samplePaths": [
+        "BASH.HERE_DOC"
+      ]
+    },
+    {
+      "name": "BLOCK_TERMINAL_COMMAND",
+      "occurrences": 1,
+      "samplePaths": [
+        "BLOCK_TERMINAL_COMMAND"
+      ]
+    },
+    {
+      "name": "BOOKMARKS_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "BOOKMARKS_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "BRACE_ATTR",
+      "occurrences": 1,
+      "samplePaths": [
+        "BRACE_ATTR"
+      ]
+    },
+    {
+      "name": "BRACKET_ATTR",
+      "occurrences": 1,
+      "samplePaths": [
+        "BRACKET_ATTR"
+      ]
+    },
+    {
+      "name": "BREADCRUMBS_CURRENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "BREADCRUMBS_CURRENT"
+      ]
+    },
+    {
+      "name": "BREADCRUMBS_HOVERED",
+      "occurrences": 1,
+      "samplePaths": [
+        "BREADCRUMBS_HOVERED"
+      ]
+    },
+    {
+      "name": "BREAKPOINT_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "BREAKPOINT_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "BUILDOUT.KEY",
+      "occurrences": 1,
+      "samplePaths": [
+        "BUILDOUT.KEY"
+      ]
+    },
+    {
+      "name": "BUILDOUT.KEY_VALUE_SEPARATOR",
+      "occurrences": 1,
+      "samplePaths": [
+        "BUILDOUT.KEY_VALUE_SEPARATOR"
+      ]
+    },
+    {
+      "name": "BUILDOUT.LINE_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "BUILDOUT.LINE_COMMENT"
+      ]
+    },
+    {
+      "name": "BUILDOUT.SECTION_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "BUILDOUT.SECTION_NAME"
+      ]
+    },
+    {
+      "name": "BUILDOUT.VALUE",
+      "occurrences": 1,
+      "samplePaths": [
+        "BUILDOUT.VALUE"
+      ]
+    },
+    {
+      "name": "C.KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "C.KEYWORD"
+      ]
+    },
+    {
+      "name": "CLASS_NAME_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CLASS_NAME_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CLASS_REFERENCE",
+      "occurrences": 1,
+      "samplePaths": [
+        "CLASS_REFERENCE"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.BAD_CHARACTER",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.BAD_CHARACTER"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.BLOCK_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.BLOCK_COMMENT"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.BOOLEAN",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.BOOLEAN"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.CLASS_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.CLASS_NAME"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.ESCAPE_SEQUENCE",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.ESCAPE_SEQUENCE"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.EXISTENTIAL",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.EXISTENTIAL"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.EXPRESSIONS_SUBSTITUTION_MARK",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.EXPRESSIONS_SUBSTITUTION_MARK"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.FUNCTION",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.FUNCTION"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.FUNCTION_BINDING",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.FUNCTION_BINDING"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.FUNCTION_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.FUNCTION_NAME"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.GLOBAL_VARIABLE",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.GLOBAL_VARIABLE"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.HEREDOC_CONTENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.HEREDOC_CONTENT"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.HEREDOC_ID",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.HEREDOC_ID"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.HEREGEX_ID",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.HEREGEX_ID"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.JAVASCRIPT_ID",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.JAVASCRIPT_ID"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.KEYWORD"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.LINE_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.LINE_COMMENT"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.LOCAL_VARIABLE",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.LOCAL_VARIABLE"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.NUMBER"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.OBJECT_KEY",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.OBJECT_KEY"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.OPERATIONS",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.OPERATIONS"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.PROTOTYPE",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.PROTOTYPE"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.REGULAR_EXPRESSION_CONTENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.REGULAR_EXPRESSION_CONTENT"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.REGULAR_EXPRESSION_ID",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.REGULAR_EXPRESSION_ID"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.STRING"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.STRING_LITERAL",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.STRING_LITERAL"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.THIS",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.THIS"
+      ]
+    },
+    {
+      "name": "CONDITIONALLY_NOT_COMPILED",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONDITIONALLY_NOT_COMPILED"
+      ]
+    },
+    {
+      "name": "CONSOLE_BACKGROUND_KEY",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_BACKGROUND_KEY"
+      ]
+    },
+    {
+      "name": "CONSOLE_BLACK_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_BLACK_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_BLUE_BRIGHT_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_BLUE_BRIGHT_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_BLUE_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_BLUE_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_CYAN_BRIGHT_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_CYAN_BRIGHT_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_CYAN_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_CYAN_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_DARKGRAY_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_DARKGRAY_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_ERROR_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_ERROR_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_FONT_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_FONT_NAME"
+      ]
+    },
+    {
+      "name": "CONSOLE_FONT_SIZE",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_FONT_SIZE"
+      ]
+    },
+    {
+      "name": "CONSOLE_GRAY_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_GRAY_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_GREEN_BRIGHT_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_GREEN_BRIGHT_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_GREEN_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_GREEN_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_LINE_SPACING",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_LINE_SPACING"
+      ]
+    },
+    {
+      "name": "CONSOLE_MAGENTA_BRIGHT_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_MAGENTA_BRIGHT_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_MAGENTA_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_MAGENTA_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_NORMAL_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_NORMAL_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_RED_BRIGHT_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_RED_BRIGHT_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_RED_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_RED_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_SYSTEM_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_SYSTEM_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_USER_INPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_USER_INPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_WHITE_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_WHITE_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_YELLOW_BRIGHT_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_YELLOW_BRIGHT_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_YELLOW_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_YELLOW_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSTRUCTOR_CALL_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSTRUCTOR_CALL_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CONSTRUCTOR_DECLARATION_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSTRUCTOR_DECLARATION_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CPP.BLOCK_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.BLOCK_COMMENT"
+      ]
+    },
+    {
+      "name": "CPP.CONSTANT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.CONSTANT"
+      ]
+    },
+    {
+      "name": "CPP.DOT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.DOT"
+      ]
+    },
+    {
+      "name": "CPP.FIELD",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.FIELD"
+      ]
+    },
+    {
+      "name": "CPP.FUNCTION",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.FUNCTION"
+      ]
+    },
+    {
+      "name": "CPP.KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.KEYWORD"
+      ]
+    },
+    {
+      "name": "CPP.LABEL",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.LABEL"
+      ]
+    },
+    {
+      "name": "CPP.LINE_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.LINE_COMMENT"
+      ]
+    },
+    {
+      "name": "CPP.MACROS",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.MACROS"
+      ]
+    },
+    {
+      "name": "CPP.METHOD",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.METHOD"
+      ]
+    },
+    {
+      "name": "CPP.NAMESPACE",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.NAMESPACE"
+      ]
+    },
+    {
+      "name": "CPP.NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.NUMBER"
+      ]
+    },
+    {
+      "name": "CPP.OPERATION_SIGN",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.OPERATION_SIGN"
+      ]
+    },
+    {
+      "name": "CPP.PARAMETER",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.PARAMETER"
+      ]
+    },
+    {
+      "name": "CPP.PP_ARG",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.PP_ARG"
+      ]
+    },
+    {
+      "name": "CPP.PP_SKIPPED",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.PP_SKIPPED"
+      ]
+    },
+    {
+      "name": "CPP.STATIC",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.STATIC"
+      ]
+    },
+    {
+      "name": "CPP.STATIC_FUNCTION",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.STATIC_FUNCTION"
+      ]
+    },
+    {
+      "name": "CPP.STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.STRING"
+      ]
+    },
+    {
+      "name": "CPP.TYPE",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.TYPE"
+      ]
+    },
+    {
+      "name": "CPP.UNUSED",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.UNUSED"
+      ]
+    },
+    {
+      "name": "CSS.COLOR",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.COLOR"
+      ]
+    },
+    {
+      "name": "CSS.COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.COMMENT"
+      ]
+    },
+    {
+      "name": "CSS.FUNCTION",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.FUNCTION"
+      ]
+    },
+    {
+      "name": "CSS.IDENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.IDENT"
+      ]
+    },
+    {
+      "name": "CSS.IMPORTANT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.IMPORTANT"
+      ]
+    },
+    {
+      "name": "CSS.KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.KEYWORD"
+      ]
+    },
+    {
+      "name": "CSS.NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.NUMBER"
+      ]
+    },
+    {
+      "name": "CSS.OPERATORS",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.OPERATORS"
+      ]
+    },
+    {
+      "name": "CSS.PROPERTY_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.PROPERTY_NAME"
+      ]
+    },
+    {
+      "name": "CSS.PROPERTY_VALUE",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.PROPERTY_VALUE"
+      ]
+    },
+    {
+      "name": "CSS.STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.STRING"
+      ]
+    },
+    {
+      "name": "CSS.TAG_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.TAG_NAME"
+      ]
+    },
+    {
+      "name": "CSS.URL",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.URL"
+      ]
+    },
+    {
+      "name": "CTRL_CLICKABLE",
+      "occurrences": 1,
+      "samplePaths": [
+        "CTRL_CLICKABLE"
+      ]
+    },
+    {
+      "name": "CUSP_BRACKETS_ATTR",
+      "occurrences": 1,
+      "samplePaths": [
+        "CUSP_BRACKETS_ATTR"
+      ]
+    },
+    {
+      "name": "CUSTOM_INVALID_STRING_ESCAPE_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CUSTOM_INVALID_STRING_ESCAPE_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CUSTOM_KEYWORD1_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CUSTOM_KEYWORD1_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CUSTOM_KEYWORD2_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CUSTOM_KEYWORD2_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CUSTOM_KEYWORD3_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CUSTOM_KEYWORD3_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CUSTOM_KEYWORD4_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CUSTOM_KEYWORD4_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CUSTOM_LINE_COMMENT_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CUSTOM_LINE_COMMENT_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CUSTOM_MULTI_LINE_COMMENT_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CUSTOM_MULTI_LINE_COMMENT_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CUSTOM_NUMBER_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CUSTOM_NUMBER_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CUSTOM_STRING_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CUSTOM_STRING_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CUSTOM_VALID_STRING_ESCAPE_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CUSTOM_VALID_STRING_ESCAPE_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CY_VARIABLE",
+      "occurrences": 1,
+      "samplePaths": [
+        "CY_VARIABLE"
+      ]
+    },
+    {
+      "name": "CY_VARIABLE_SIGN",
+      "occurrences": 1,
+      "samplePaths": [
+        "CY_VARIABLE_SIGN"
+      ]
+    },
+    {
+      "name": "DEFAULT_ATTRIBUTE",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_ATTRIBUTE"
+      ]
+    },
+    {
+      "name": "DEFAULT_ENTITY",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_ENTITY"
+      ]
+    },
+    {
+      "name": "DEFAULT_IDENTIFIER",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_IDENTIFIER"
+      ]
+    },
+    {
+      "name": "DEFAULT_INSTANCE_METHOD",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_INSTANCE_METHOD"
+      ]
+    },
+    {
+      "name": "DEFAULT_INVALID_STRING_ESCAPE",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_INVALID_STRING_ESCAPE"
+      ]
+    },
+    {
+      "name": "DEFAULT_KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_KEYWORD"
+      ]
+    },
+    {
+      "name": "DEFAULT_NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_NUMBER"
+      ]
+    },
+    {
+      "name": "DEFAULT_STATIC_FIELD",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_STATIC_FIELD"
+      ]
+    },
+    {
+      "name": "DEFAULT_STATIC_METHOD",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_STATIC_METHOD"
+      ]
+    },
+    {
+      "name": "DEFAULT_STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_STRING"
+      ]
+    },
+    {
+      "name": "DEFAULT_TEMPLATE_LANGUAGE_COLOR",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_TEMPLATE_LANGUAGE_COLOR"
+      ]
+    },
+    {
+      "name": "DEFAULT_VALID_STRING_ESCAPE",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_VALID_STRING_ESCAPE"
+      ]
+    },
+    {
+      "name": "DELETED_LINES_COLOR",
+      "occurrences": 1,
+      "samplePaths": [
+        "DELETED_LINES_COLOR"
+      ]
+    },
+    {
+      "name": "DELETED_TEXT_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "DELETED_TEXT_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "DEPRECATED_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEPRECATED_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "DIFF_CONFLICT",
+      "occurrences": 1,
+      "samplePaths": [
+        "DIFF_CONFLICT"
+      ]
+    },
+    {
+      "name": "DIFF_DELETED",
+      "occurrences": 1,
+      "samplePaths": [
+        "DIFF_DELETED"
+      ]
+    },
+    {
+      "name": "DIFF_INSERTED",
+      "occurrences": 1,
+      "samplePaths": [
+        "DIFF_INSERTED"
+      ]
+    },
+    {
+      "name": "DIFF_MODIFIED",
+      "occurrences": 1,
+      "samplePaths": [
+        "DIFF_MODIFIED"
+      ]
+    },
+    {
+      "name": "DJANGO_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "DJANGO_COMMENT"
+      ]
+    },
+    {
+      "name": "DJANGO_FILTER",
+      "occurrences": 1,
+      "samplePaths": [
+        "DJANGO_FILTER"
+      ]
+    },
+    {
+      "name": "DJANGO_ID",
+      "occurrences": 1,
+      "samplePaths": [
+        "DJANGO_ID"
+      ]
+    },
+    {
+      "name": "DJANGO_KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "DJANGO_KEYWORD"
+      ]
+    },
+    {
+      "name": "DJANGO_NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "DJANGO_NUMBER"
+      ]
+    },
+    {
+      "name": "DJANGO_STRING_LITERAL",
+      "occurrences": 1,
+      "samplePaths": [
+        "DJANGO_STRING_LITERAL"
+      ]
+    },
+    {
+      "name": "DJANGO_TAG_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "DJANGO_TAG_NAME"
+      ]
+    },
+    {
+      "name": "DOUBLE_QUOTE_ATTR",
+      "occurrences": 1,
+      "samplePaths": [
+        "DOUBLE_QUOTE_ATTR"
+      ]
+    },
+    {
+      "name": "DUPLICATE_FROM_SERVER",
+      "occurrences": 1,
+      "samplePaths": [
+        "DUPLICATE_FROM_SERVER"
+      ]
+    },
+    {
+      "name": "EDITOR_LIGATURES",
+      "occurrences": 1,
+      "samplePaths": [
+        "EDITOR_LIGATURES"
+      ]
+    },
+    {
+      "name": "EL.BOUNDS",
+      "occurrences": 1,
+      "samplePaths": [
+        "EL.BOUNDS"
+      ]
+    },
+    {
+      "name": "EL.IDENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "EL.IDENT"
+      ]
+    },
+    {
+      "name": "EL.KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "EL.KEYWORD"
+      ]
+    },
+    {
+      "name": "EL.NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "EL.NUMBER"
+      ]
+    },
+    {
+      "name": "EL.STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "EL.STRING"
+      ]
+    },
+    {
+      "name": "ENUM_CONST",
+      "occurrences": 1,
+      "samplePaths": [
+        "ENUM_CONST"
+      ]
+    },
+    {
+      "name": "EXECUTIONPOINT_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "EXECUTIONPOINT_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "FILESTATUS_ADDED",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_ADDED"
+      ]
+    },
+    {
+      "name": "FILESTATUS_addedOutside",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_addedOutside"
+      ]
+    },
+    {
+      "name": "FILESTATUS_changelistConflict",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_changelistConflict"
+      ]
+    },
+    {
+      "name": "FILESTATUS_COPIED",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_COPIED"
+      ]
+    },
+    {
+      "name": "FILESTATUS_DELETED",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_DELETED"
+      ]
+    },
+    {
+      "name": "FILESTATUS_HIJACKED",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_HIJACKED"
+      ]
+    },
+    {
+      "name": "FILESTATUS_IDEA_FILESTATUS_DELETED_FROM_FILE_SYSTEM",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_IDEA_FILESTATUS_DELETED_FROM_FILE_SYSTEM"
+      ]
+    },
+    {
+      "name": "FILESTATUS_IDEA_FILESTATUS_IGNORED",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_IDEA_FILESTATUS_IGNORED"
+      ]
+    },
+    {
+      "name": "FILESTATUS_IDEA_FILESTATUS_MERGED_WITH_BOTH_CONFLICTS",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_IDEA_FILESTATUS_MERGED_WITH_BOTH_CONFLICTS"
+      ]
+    },
+    {
+      "name": "FILESTATUS_IDEA_FILESTATUS_MERGED_WITH_CONFLICTS",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_IDEA_FILESTATUS_MERGED_WITH_CONFLICTS"
+      ]
+    },
+    {
+      "name": "FILESTATUS_IDEA_FILESTATUS_MERGED_WITH_PROPERTY_CONFLICTS",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_IDEA_FILESTATUS_MERGED_WITH_PROPERTY_CONFLICTS"
+      ]
+    },
+    {
+      "name": "FILESTATUS_IDEA_SVN_FILESTATUS_EXTERNAL",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_IDEA_SVN_FILESTATUS_EXTERNAL"
+      ]
+    },
+    {
+      "name": "FILESTATUS_IDEA_SVN_FILESTATUS_OBSTRUCTED",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_IDEA_SVN_FILESTATUS_OBSTRUCTED"
+      ]
+    },
+    {
+      "name": "FILESTATUS_IDEA_SVN_REPLACED",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_IDEA_SVN_REPLACED"
+      ]
+    },
+    {
+      "name": "FILESTATUS_MERGED",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_MERGED"
+      ]
+    },
+    {
+      "name": "FILESTATUS_MODIFIED",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_MODIFIED"
+      ]
+    },
+    {
+      "name": "FILESTATUS_modifiedOutside",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_modifiedOutside"
+      ]
+    },
+    {
+      "name": "FILESTATUS_NOT_CHANGED_IMMEDIATE",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_NOT_CHANGED_IMMEDIATE"
+      ]
+    },
+    {
+      "name": "FILESTATUS_NOT_CHANGED_RECURSIVE",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_NOT_CHANGED_RECURSIVE"
+      ]
+    },
+    {
+      "name": "FILESTATUS_OBSOLETE",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_OBSOLETE"
+      ]
+    },
+    {
+      "name": "FILESTATUS_RENAMED",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_RENAMED"
+      ]
+    },
+    {
+      "name": "FILESTATUS_SUPPRESSED",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_SUPPRESSED"
+      ]
+    },
+    {
+      "name": "FILESTATUS_SWITCHED",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_SWITCHED"
+      ]
+    },
+    {
+      "name": "FILESTATUS_UNKNOWN",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_UNKNOWN"
+      ]
+    },
+    {
+      "name": "FOLLOWED_HYPERLINK_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "FOLLOWED_HYPERLINK_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "FONT_SCALE",
+      "occurrences": 1,
+      "samplePaths": [
+        "FONT_SCALE"
+      ]
+    },
+    {
+      "name": "GENERIC_SERVER_ERROR_OR_WARNING",
+      "occurrences": 1,
+      "samplePaths": [
+        "GENERIC_SERVER_ERROR_OR_WARNING"
+      ]
+    },
+    {
+      "name": "GHERKIN_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "GHERKIN_COMMENT"
+      ]
+    },
+    {
+      "name": "GHERKIN_KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "GHERKIN_KEYWORD"
+      ]
+    },
+    {
+      "name": "GHERKIN_OUTLINE_PARAMETER_SUBSTITUTION",
+      "occurrences": 1,
+      "samplePaths": [
+        "GHERKIN_OUTLINE_PARAMETER_SUBSTITUTION"
+      ]
+    },
+    {
+      "name": "GHERKIN_PYSTRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "GHERKIN_PYSTRING"
+      ]
+    },
+    {
+      "name": "GHERKIN_REGEXP_PARAMETER",
+      "occurrences": 1,
+      "samplePaths": [
+        "GHERKIN_REGEXP_PARAMETER"
+      ]
+    },
+    {
+      "name": "GHERKIN_TABLE_HEADER_CELL",
+      "occurrences": 1,
+      "samplePaths": [
+        "GHERKIN_TABLE_HEADER_CELL"
+      ]
+    },
+    {
+      "name": "GHERKIN_TABLE_PIPE",
+      "occurrences": 1,
+      "samplePaths": [
+        "GHERKIN_TABLE_PIPE"
+      ]
+    },
+    {
+      "name": "GHERKIN_TAG",
+      "occurrences": 1,
+      "samplePaths": [
+        "GHERKIN_TAG"
+      ]
+    },
+    {
+      "name": "GQL_ID",
+      "occurrences": 1,
+      "samplePaths": [
+        "GQL_ID"
+      ]
+    },
+    {
+      "name": "GQL_INT_LITERAL",
+      "occurrences": 1,
+      "samplePaths": [
+        "GQL_INT_LITERAL"
+      ]
+    },
+    {
+      "name": "GQL_KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "GQL_KEYWORD"
+      ]
+    },
+    {
+      "name": "GQL_STRING_LITERAL",
+      "occurrences": 1,
+      "samplePaths": [
+        "GQL_STRING_LITERAL"
+      ]
+    },
+    {
+      "name": "HAML_CLASS",
+      "occurrences": 1,
+      "samplePaths": [
+        "HAML_CLASS"
+      ]
+    },
+    {
+      "name": "HAML_FILTER",
+      "occurrences": 1,
+      "samplePaths": [
+        "HAML_FILTER"
+      ]
+    },
+    {
+      "name": "HAML_FILTER_CONTENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "HAML_FILTER_CONTENT"
+      ]
+    },
+    {
+      "name": "HAML_ID",
+      "occurrences": 1,
+      "samplePaths": [
+        "HAML_ID"
+      ]
+    },
+    {
+      "name": "HAML_RUBY_CODE",
+      "occurrences": 1,
+      "samplePaths": [
+        "HAML_RUBY_CODE"
+      ]
+    },
+    {
+      "name": "HAML_RUBY_START",
+      "occurrences": 1,
+      "samplePaths": [
+        "HAML_RUBY_START"
+      ]
+    },
+    {
+      "name": "HAML_STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "HAML_STRING"
+      ]
+    },
+    {
+      "name": "HAML_STRING_INTERPOLATED",
+      "occurrences": 1,
+      "samplePaths": [
+        "HAML_STRING_INTERPOLATED"
+      ]
+    },
+    {
+      "name": "HAML_TAG",
+      "occurrences": 1,
+      "samplePaths": [
+        "HAML_TAG"
+      ]
+    },
+    {
+      "name": "HAML_TAG_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "HAML_TAG_NAME"
+      ]
+    },
+    {
+      "name": "HAML_XHTML",
+      "occurrences": 1,
+      "samplePaths": [
+        "HAML_XHTML"
+      ]
+    },
+    {
+      "name": "HANDLEBARS.COMMENTS",
+      "occurrences": 1,
+      "samplePaths": [
+        "HANDLEBARS.COMMENTS"
+      ]
+    },
+    {
+      "name": "HANDLEBARS.IDENTIFIERS",
+      "occurrences": 1,
+      "samplePaths": [
+        "HANDLEBARS.IDENTIFIERS"
+      ]
+    },
+    {
+      "name": "HANDLEBARS.OPERATORS",
+      "occurrences": 1,
+      "samplePaths": [
+        "HANDLEBARS.OPERATORS"
+      ]
+    },
+    {
+      "name": "HANDLEBARS.STRINGS",
+      "occurrences": 1,
+      "samplePaths": [
+        "HANDLEBARS.STRINGS"
+      ]
+    },
+    {
+      "name": "HANDLEBARS.VALUES",
+      "occurrences": 1,
+      "samplePaths": [
+        "HANDLEBARS.VALUES"
+      ]
+    },
+    {
+      "name": "HTML_ATTRIBUTE_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "HTML_ATTRIBUTE_NAME"
+      ]
+    },
+    {
+      "name": "HTML_ATTRIBUTE_VALUE",
+      "occurrences": 1,
+      "samplePaths": [
+        "HTML_ATTRIBUTE_VALUE"
+      ]
+    },
+    {
+      "name": "HTML_CODE",
+      "occurrences": 1,
+      "samplePaths": [
+        "HTML_CODE"
+      ]
+    },
+    {
+      "name": "HTML_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "HTML_COMMENT"
+      ]
+    },
+    {
+      "name": "HTML_ENTITY_REFERENCE",
+      "occurrences": 1,
+      "samplePaths": [
+        "HTML_ENTITY_REFERENCE"
+      ]
+    },
+    {
+      "name": "HTML_TAG",
+      "occurrences": 1,
+      "samplePaths": [
+        "HTML_TAG"
+      ]
+    },
+    {
+      "name": "HTML_TAG_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "HTML_TAG_NAME"
+      ]
+    },
+    {
+      "name": "HTML_TAG_TREE_LEVEL0",
+      "occurrences": 1,
+      "samplePaths": [
+        "HTML_TAG_TREE_LEVEL0"
+      ]
+    },
+    {
+      "name": "HTML_TAG_TREE_LEVEL1",
+      "occurrences": 1,
+      "samplePaths": [
+        "HTML_TAG_TREE_LEVEL1"
+      ]
+    },
+    {
+      "name": "HTML_TAG_TREE_LEVEL2",
+      "occurrences": 1,
+      "samplePaths": [
+        "HTML_TAG_TREE_LEVEL2"
+      ]
+    },
+    {
+      "name": "HTML_TAG_TREE_LEVEL3",
+      "occurrences": 1,
+      "samplePaths": [
+        "HTML_TAG_TREE_LEVEL3"
+      ]
+    },
+    {
+      "name": "HTML_TAG_TREE_LEVEL4",
+      "occurrences": 1,
+      "samplePaths": [
+        "HTML_TAG_TREE_LEVEL4"
+      ]
+    },
+    {
+      "name": "HTML_TAG_TREE_LEVEL5",
+      "occurrences": 1,
+      "samplePaths": [
+        "HTML_TAG_TREE_LEVEL5"
+      ]
+    },
+    {
+      "name": "HYPERLINK_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "HYPERLINK_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "IDENTIFIER_UNDER_CARET_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "IDENTIFIER_UNDER_CARET_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "IMPLICIT_ANONYMOUS_CLASS_PARAMETER_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "IMPLICIT_ANONYMOUS_CLASS_PARAMETER_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "INFO_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "INFO_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "INJECTED_LANGUAGE_FRAGMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "INJECTED_LANGUAGE_FRAGMENT"
+      ]
+    },
+    {
+      "name": "INSTANCE_FIELD_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "INSTANCE_FIELD_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "INTERFACE_NAME_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "INTERFACE_NAME_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "IVAR",
+      "occurrences": 1,
+      "samplePaths": [
+        "IVAR"
+      ]
+    },
+    {
+      "name": "JAVA_BLOCK_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "JAVA_BLOCK_COMMENT"
+      ]
+    },
+    {
+      "name": "JAVA_DOC_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "JAVA_DOC_COMMENT"
+      ]
+    },
+    {
+      "name": "JAVA_DOC_MARKUP",
+      "occurrences": 1,
+      "samplePaths": [
+        "JAVA_DOC_MARKUP"
+      ]
+    },
+    {
+      "name": "JAVA_DOC_TAG",
+      "occurrences": 1,
+      "samplePaths": [
+        "JAVA_DOC_TAG"
+      ]
+    },
+    {
+      "name": "JAVA_INVALID_STRING_ESCAPE",
+      "occurrences": 1,
+      "samplePaths": [
+        "JAVA_INVALID_STRING_ESCAPE"
+      ]
+    },
+    {
+      "name": "JAVA_KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "JAVA_KEYWORD"
+      ]
+    },
+    {
+      "name": "JAVA_LINE_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "JAVA_LINE_COMMENT"
+      ]
+    },
+    {
+      "name": "JAVA_NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "JAVA_NUMBER"
+      ]
+    },
+    {
+      "name": "JAVA_OPERATION_SIGN",
+      "occurrences": 1,
+      "samplePaths": [
+        "JAVA_OPERATION_SIGN"
+      ]
+    },
+    {
+      "name": "JAVA_STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "JAVA_STRING"
+      ]
+    },
+    {
+      "name": "JAVA_VALID_STRING_ESCAPE",
+      "occurrences": 1,
+      "samplePaths": [
+        "JAVA_VALID_STRING_ESCAPE"
+      ]
+    },
+    {
+      "name": "JS.ATTRIBUTE",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.ATTRIBUTE"
+      ]
+    },
+    {
+      "name": "JS.BADCHARACTER",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.BADCHARACTER"
+      ]
+    },
+    {
+      "name": "JS.BLOCK_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.BLOCK_COMMENT"
+      ]
+    },
+    {
+      "name": "JS.BRACES",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.BRACES"
+      ]
+    },
+    {
+      "name": "JS.BRACKETS",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.BRACKETS"
+      ]
+    },
+    {
+      "name": "JS.CLASS",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.CLASS"
+      ]
+    },
+    {
+      "name": "JS.COMMA",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.COMMA"
+      ]
+    },
+    {
+      "name": "JS.DEBUGGER_STMT",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.DEBUGGER_STMT"
+      ]
+    },
+    {
+      "name": "JS.DECORATOR",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.DECORATOR"
+      ]
+    },
+    {
+      "name": "JS.DOC_MARKUP",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.DOC_MARKUP"
+      ]
+    },
+    {
+      "name": "JS.DOC_TAG",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.DOC_TAG"
+      ]
+    },
+    {
+      "name": "JS.DOT",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.DOT"
+      ]
+    },
+    {
+      "name": "JS.FUNCTION",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.FUNCTION"
+      ]
+    },
+    {
+      "name": "JS.GLOBAL_VARIABLE",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.GLOBAL_VARIABLE"
+      ]
+    },
+    {
+      "name": "JS.INSTANCE_MEMBER_VARIABLE",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.INSTANCE_MEMBER_VARIABLE"
+      ]
+    },
+    {
+      "name": "JS.INTERFACE",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.INTERFACE"
+      ]
+    },
+    {
+      "name": "JS.INVALID_STRING_ESCAPE",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.INVALID_STRING_ESCAPE"
+      ]
+    },
+    {
+      "name": "JS.MODULE_KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.MODULE_KEYWORD"
+      ]
+    },
+    {
+      "name": "JS.MODULE_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.MODULE_NAME"
+      ]
+    },
+    {
+      "name": "JS.OPERATION_SIGN",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.OPERATION_SIGN"
+      ]
+    },
+    {
+      "name": "JS.PARENTHS",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.PARENTHS"
+      ]
+    },
+    {
+      "name": "JS.REGEXP",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.REGEXP"
+      ]
+    },
+    {
+      "name": "JS.SEMICOLON",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.SEMICOLON"
+      ]
+    },
+    {
+      "name": "JS.STATIC_MEMBER_FUNCTION",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.STATIC_MEMBER_FUNCTION"
+      ]
+    },
+    {
+      "name": "JS.STATIC_MEMBER_VARIABLE",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.STATIC_MEMBER_VARIABLE"
+      ]
+    },
+    {
+      "name": "JS.THIS_SUPER",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.THIS_SUPER"
+      ]
+    },
+    {
+      "name": "JS.VALID_STRING_ESCAPE",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.VALID_STRING_ESCAPE"
+      ]
+    },
+    {
+      "name": "JS.VAR_DEF",
+      "occurrences": 1,
+      "samplePaths": [
+        "JS.VAR_DEF"
+      ]
+    },
+    {
+      "name": "JSON.KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "JSON.KEYWORD"
+      ]
+    },
+    {
+      "name": "JSON.PROPERTY_KEY",
+      "occurrences": 1,
+      "samplePaths": [
+        "JSON.PROPERTY_KEY"
+      ]
+    },
+    {
+      "name": "JSON.STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "JSON.STRING"
+      ]
+    },
+    {
+      "name": "JSON.VALID_ESCAPE",
+      "occurrences": 1,
+      "samplePaths": [
+        "JSON.VALID_ESCAPE"
+      ]
+    },
+    {
+      "name": "JSP_ATTRIBUTE_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "JSP_ATTRIBUTE_NAME"
+      ]
+    },
+    {
+      "name": "JSP_ATTRIBUTE_VALUE",
+      "occurrences": 1,
+      "samplePaths": [
+        "JSP_ATTRIBUTE_VALUE"
+      ]
+    },
+    {
+      "name": "JSP_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "JSP_COMMENT"
+      ]
+    },
+    {
+      "name": "JSP_DIRECTIVE_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "JSP_DIRECTIVE_NAME"
+      ]
+    },
+    {
+      "name": "JSP_SCRIPTING_BACKGROUND",
+      "occurrences": 1,
+      "samplePaths": [
+        "JSP_SCRIPTING_BACKGROUND"
+      ]
+    },
+    {
+      "name": "LABEL",
+      "occurrences": 1,
+      "samplePaths": [
+        "LABEL"
+      ]
+    },
+    {
+      "name": "LESS_INJECTED_CODE",
+      "occurrences": 1,
+      "samplePaths": [
+        "LESS_INJECTED_CODE"
+      ]
+    },
+    {
+      "name": "LESS_JS_CODE_DELIM",
+      "occurrences": 1,
+      "samplePaths": [
+        "LESS_JS_CODE_DELIM"
+      ]
+    },
+    {
+      "name": "LESS_KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "LESS_KEYWORD"
+      ]
+    },
+    {
+      "name": "LESS_VARIABLE",
+      "occurrences": 1,
+      "samplePaths": [
+        "LESS_VARIABLE"
+      ]
+    },
+    {
+      "name": "LINE_FULL_COVERAGE",
+      "occurrences": 1,
+      "samplePaths": [
+        "LINE_FULL_COVERAGE"
+      ]
+    },
+    {
+      "name": "LINE_NONE_COVERAGE",
+      "occurrences": 1,
+      "samplePaths": [
+        "LINE_NONE_COVERAGE"
+      ]
+    },
+    {
+      "name": "LINE_PARTIAL_COVERAGE",
+      "occurrences": 1,
+      "samplePaths": [
+        "LINE_PARTIAL_COVERAGE"
+      ]
+    },
+    {
+      "name": "LINE_SPACING",
+      "occurrences": 1,
+      "samplePaths": [
+        "LINE_SPACING"
+      ]
+    },
+    {
+      "name": "LOCAL_VARIABLE_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "LOCAL_VARIABLE_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "LOCALE.LINE_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "LOCALE.LINE_COMMENT"
+      ]
+    },
+    {
+      "name": "LOCALE.MSGCTXT_KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "LOCALE.MSGCTXT_KEYWORD"
+      ]
+    },
+    {
+      "name": "LOCALE.MSGID_KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "LOCALE.MSGID_KEYWORD"
+      ]
+    },
+    {
+      "name": "LOCALE.MSGID_PLURAL_KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "LOCALE.MSGID_PLURAL_KEYWORD"
+      ]
+    },
+    {
+      "name": "LOCALE.MSGSTR_KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "LOCALE.MSGSTR_KEYWORD"
+      ]
+    },
+    {
+      "name": "LOCALE.MSGSTR_PLURAL_KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "LOCALE.MSGSTR_PLURAL_KEYWORD"
+      ]
+    },
+    {
+      "name": "LOCALE.STRING_LITERAL",
+      "occurrences": 1,
+      "samplePaths": [
+        "LOCALE.STRING_LITERAL"
+      ]
+    },
+    {
+      "name": "LOG_ERROR_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "LOG_ERROR_OUTPUT"
+      ]
+    },
+    {
+      "name": "LOG_EXPIRED_ENTRY",
+      "occurrences": 1,
+      "samplePaths": [
+        "LOG_EXPIRED_ENTRY"
+      ]
+    },
+    {
+      "name": "LOG_INFO_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "LOG_INFO_OUTPUT"
+      ]
+    },
+    {
+      "name": "LOG_VERBOSE_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "LOG_VERBOSE_OUTPUT"
+      ]
+    },
+    {
+      "name": "LOG_WARNING_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "LOG_WARNING_OUTPUT"
+      ]
+    },
+    {
+      "name": "MACRONAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "MACRONAME"
+      ]
+    },
+    {
+      "name": "MARKDOWN_BLOCK_QUOTE",
+      "occurrences": 1,
+      "samplePaths": [
+        "MARKDOWN_BLOCK_QUOTE"
+      ]
+    },
+    {
+      "name": "MARKDOWN_BOLD",
+      "occurrences": 1,
+      "samplePaths": [
+        "MARKDOWN_BOLD"
+      ]
+    },
+    {
+      "name": "MARKDOWN_CODE_BLOCK",
+      "occurrences": 1,
+      "samplePaths": [
+        "MARKDOWN_CODE_BLOCK"
+      ]
+    },
+    {
+      "name": "MARKDOWN_CODE_FENCE",
+      "occurrences": 1,
+      "samplePaths": [
+        "MARKDOWN_CODE_FENCE"
+      ]
+    },
+    {
+      "name": "MARKDOWN_CODE_SPAN",
+      "occurrences": 1,
+      "samplePaths": [
+        "MARKDOWN_CODE_SPAN"
+      ]
+    },
+    {
+      "name": "MARKDOWN_HEADER_LEVEL_1",
+      "occurrences": 1,
+      "samplePaths": [
+        "MARKDOWN_HEADER_LEVEL_1"
+      ]
+    },
+    {
+      "name": "MARKDOWN_HEADER_LEVEL_2",
+      "occurrences": 1,
+      "samplePaths": [
+        "MARKDOWN_HEADER_LEVEL_2"
+      ]
+    },
+    {
+      "name": "MARKDOWN_HEADER_LEVEL_3",
+      "occurrences": 1,
+      "samplePaths": [
+        "MARKDOWN_HEADER_LEVEL_3"
+      ]
+    },
+    {
+      "name": "MARKDOWN_HEADER_LEVEL_4",
+      "occurrences": 1,
+      "samplePaths": [
+        "MARKDOWN_HEADER_LEVEL_4"
+      ]
+    },
+    {
+      "name": "MARKDOWN_HEADER_LEVEL_5",
+      "occurrences": 1,
+      "samplePaths": [
+        "MARKDOWN_HEADER_LEVEL_5"
+      ]
+    },
+    {
+      "name": "MARKDOWN_HEADER_LEVEL_6",
+      "occurrences": 1,
+      "samplePaths": [
+        "MARKDOWN_HEADER_LEVEL_6"
+      ]
+    },
+    {
+      "name": "MARKDOWN_INLINE_HTML",
+      "occurrences": 1,
+      "samplePaths": [
+        "MARKDOWN_INLINE_HTML"
+      ]
+    },
+    {
+      "name": "MARKDOWN_ITALIC",
+      "occurrences": 1,
+      "samplePaths": [
+        "MARKDOWN_ITALIC"
+      ]
+    },
+    {
+      "name": "MARKDOWN_LINK_DESTINATION",
+      "occurrences": 1,
+      "samplePaths": [
+        "MARKDOWN_LINK_DESTINATION"
+      ]
+    },
+    {
+      "name": "MARKDOWN_ORDERED_LIST",
+      "occurrences": 1,
+      "samplePaths": [
+        "MARKDOWN_ORDERED_LIST"
+      ]
+    },
+    {
+      "name": "MARKDOWN_STRIKE_THROUGH",
+      "occurrences": 1,
+      "samplePaths": [
+        "MARKDOWN_STRIKE_THROUGH"
+      ]
+    },
+    {
+      "name": "MARKDOWN_TABLE_SEPARATOR",
+      "occurrences": 1,
+      "samplePaths": [
+        "MARKDOWN_TABLE_SEPARATOR"
+      ]
+    },
+    {
+      "name": "MARKDOWN_UNORDERED_LIST",
+      "occurrences": 1,
+      "samplePaths": [
+        "MARKDOWN_UNORDERED_LIST"
+      ]
+    },
+    {
+      "name": "METHOD_CALL_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "METHOD_CALL_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "METHOD_DECLARATION_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "METHOD_DECLARATION_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "METHOD_SEPARATORS_COLOR",
+      "occurrences": 1,
+      "samplePaths": [
+        "METHOD_SEPARATORS_COLOR"
+      ]
+    },
+    {
+      "name": "MODIFIED_LINES_COLOR",
+      "occurrences": 1,
+      "samplePaths": [
+        "MODIFIED_LINES_COLOR"
+      ]
+    },
+    {
+      "name": "NOT_USED_ELEMENT_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "NOT_USED_ELEMENT_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "NOTIFICATION_BACKGROUND",
+      "occurrences": 1,
+      "samplePaths": [
+        "NOTIFICATION_BACKGROUND"
+      ]
+    },
+    {
+      "name": "OC_FORMAT_TOKEN",
+      "occurrences": 1,
+      "samplePaths": [
+        "OC_FORMAT_TOKEN"
+      ]
+    },
+    {
+      "name": "OC.BLOCK_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "OC.BLOCK_COMMENT"
+      ]
+    },
+    {
+      "name": "OC.CPP_KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "OC.CPP_KEYWORD"
+      ]
+    },
+    {
+      "name": "OC.DIRECTIVE",
+      "occurrences": 1,
+      "samplePaths": [
+        "OC.DIRECTIVE"
+      ]
+    },
+    {
+      "name": "OC.KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "OC.KEYWORD"
+      ]
+    },
+    {
+      "name": "OC.LINE_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "OC.LINE_COMMENT"
+      ]
+    },
+    {
+      "name": "OC.NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "OC.NUMBER"
+      ]
+    },
+    {
+      "name": "OC.SELFSUPERTHIS",
+      "occurrences": 1,
+      "samplePaths": [
+        "OC.SELFSUPERTHIS"
+      ]
+    },
+    {
+      "name": "OC.STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "OC.STRING"
+      ]
+    },
+    {
+      "name": "PARAMETER_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "PARAMETER_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "PARENTHESIS_ATTR",
+      "occurrences": 1,
+      "samplePaths": [
+        "PARENTHESIS_ATTR"
+      ]
+    },
+    {
+      "name": "PHP_BAD_CHARACTER",
+      "occurrences": 1,
+      "samplePaths": [
+        "PHP_BAD_CHARACTER"
+      ]
+    },
+    {
+      "name": "PHP_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "PHP_COMMENT"
+      ]
+    },
+    {
+      "name": "PHP_CONSTANT",
+      "occurrences": 1,
+      "samplePaths": [
+        "PHP_CONSTANT"
+      ]
+    },
+    {
+      "name": "PHP_DOC_COMMENT_ID",
+      "occurrences": 1,
+      "samplePaths": [
+        "PHP_DOC_COMMENT_ID"
+      ]
+    },
+    {
+      "name": "PHP_DOC_TAG",
+      "occurrences": 1,
+      "samplePaths": [
+        "PHP_DOC_TAG"
+      ]
+    },
+    {
+      "name": "PHP_ESCAPE_SEQUENCE",
+      "occurrences": 1,
+      "samplePaths": [
+        "PHP_ESCAPE_SEQUENCE"
+      ]
+    },
+    {
+      "name": "PHP_EXEC_COMMAND_ID",
+      "occurrences": 1,
+      "samplePaths": [
+        "PHP_EXEC_COMMAND_ID"
+      ]
+    },
+    {
+      "name": "PHP_HEREDOC_ID",
+      "occurrences": 1,
+      "samplePaths": [
+        "PHP_HEREDOC_ID"
+      ]
+    },
+    {
+      "name": "PHP_IDENTIFIER",
+      "occurrences": 1,
+      "samplePaths": [
+        "PHP_IDENTIFIER"
+      ]
+    },
+    {
+      "name": "PHP_KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "PHP_KEYWORD"
+      ]
+    },
+    {
+      "name": "PHP_NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "PHP_NUMBER"
+      ]
+    },
+    {
+      "name": "PHP_OPERATION_SIGN",
+      "occurrences": 1,
+      "samplePaths": [
+        "PHP_OPERATION_SIGN"
+      ]
+    },
+    {
+      "name": "PHP_PREDEFINED SYMBOL",
+      "occurrences": 1,
+      "samplePaths": [
+        "PHP_PREDEFINED SYMBOL"
+      ]
+    },
+    {
+      "name": "PHP_STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "PHP_STRING"
+      ]
+    },
+    {
+      "name": "PHP_TAG",
+      "occurrences": 1,
+      "samplePaths": [
+        "PHP_TAG"
+      ]
+    },
+    {
+      "name": "PHP_VAR",
+      "occurrences": 1,
+      "samplePaths": [
+        "PHP_VAR"
+      ]
+    },
+    {
+      "name": "PRE.KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "PRE.KEYWORD"
+      ]
+    },
+    {
+      "name": "PROPERTIES.INVALID_STRING_ESCAPE",
+      "occurrences": 1,
+      "samplePaths": [
+        "PROPERTIES.INVALID_STRING_ESCAPE"
+      ]
+    },
+    {
+      "name": "PROPERTIES.KEY",
+      "occurrences": 1,
+      "samplePaths": [
+        "PROPERTIES.KEY"
+      ]
+    },
+    {
+      "name": "PROPERTIES.KEY_VALUE_SEPARATOR",
+      "occurrences": 1,
+      "samplePaths": [
+        "PROPERTIES.KEY_VALUE_SEPARATOR"
+      ]
+    },
+    {
+      "name": "PROPERTIES.LINE_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "PROPERTIES.LINE_COMMENT"
+      ]
+    },
+    {
+      "name": "PROPERTIES.VALID_STRING_ESCAPE",
+      "occurrences": 1,
+      "samplePaths": [
+        "PROPERTIES.VALID_STRING_ESCAPE"
+      ]
+    },
+    {
+      "name": "PROPERTIES.VALUE",
+      "occurrences": 1,
+      "samplePaths": [
+        "PROPERTIES.VALUE"
+      ]
+    },
+    {
+      "name": "PROTOCOL_REFERENCE",
+      "occurrences": 1,
+      "samplePaths": [
+        "PROTOCOL_REFERENCE"
+      ]
+    },
+    {
+      "name": "PUPPET_ESCAPE_SEQUENCE",
+      "occurrences": 1,
+      "samplePaths": [
+        "PUPPET_ESCAPE_SEQUENCE"
+      ]
+    },
+    {
+      "name": "PUPPET_KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "PUPPET_KEYWORD"
+      ]
+    },
+    {
+      "name": "PUPPET_NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "PUPPET_NUMBER"
+      ]
+    },
+    {
+      "name": "PUPPET_RESOURCE_REFERENCE",
+      "occurrences": 1,
+      "samplePaths": [
+        "PUPPET_RESOURCE_REFERENCE"
+      ]
+    },
+    {
+      "name": "PUPPET_SQ_STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "PUPPET_SQ_STRING"
+      ]
+    },
+    {
+      "name": "PUPPET_STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "PUPPET_STRING"
+      ]
+    },
+    {
+      "name": "PUPPET_VARIABLE",
+      "occurrences": 1,
+      "samplePaths": [
+        "PUPPET_VARIABLE"
+      ]
+    },
+    {
+      "name": "PUPPET_VARIABLE_INTERPOLATION",
+      "occurrences": 1,
+      "samplePaths": [
+        "PUPPET_VARIABLE_INTERPOLATION"
+      ]
+    },
+    {
+      "name": "PUPPET_VARIABLE_INTERPOLATION_TAGS",
+      "occurrences": 1,
+      "samplePaths": [
+        "PUPPET_VARIABLE_INTERPOLATION_TAGS"
+      ]
+    },
+    {
+      "name": "PY.BUILTIN_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "PY.BUILTIN_NAME"
+      ]
+    },
+    {
+      "name": "PY.CLASS_DEFINITION",
+      "occurrences": 1,
+      "samplePaths": [
+        "PY.CLASS_DEFINITION"
+      ]
+    },
+    {
+      "name": "PY.DECORATOR",
+      "occurrences": 1,
+      "samplePaths": [
+        "PY.DECORATOR"
+      ]
+    },
+    {
+      "name": "PY.DOC_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "PY.DOC_COMMENT"
+      ]
+    },
+    {
+      "name": "PY.DOC_COMMENT_TAG",
+      "occurrences": 1,
+      "samplePaths": [
+        "PY.DOC_COMMENT_TAG"
+      ]
+    },
+    {
+      "name": "PY.FUNC_DEFINITION",
+      "occurrences": 1,
+      "samplePaths": [
+        "PY.FUNC_DEFINITION"
+      ]
+    },
+    {
+      "name": "PY.INVALID_STRING_ESCAPE",
+      "occurrences": 1,
+      "samplePaths": [
+        "PY.INVALID_STRING_ESCAPE"
+      ]
+    },
+    {
+      "name": "PY.KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "PY.KEYWORD"
+      ]
+    },
+    {
+      "name": "PY.LINE_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "PY.LINE_COMMENT"
+      ]
+    },
+    {
+      "name": "PY.NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "PY.NUMBER"
+      ]
+    },
+    {
+      "name": "PY.OPERATION_SIGN",
+      "occurrences": 1,
+      "samplePaths": [
+        "PY.OPERATION_SIGN"
+      ]
+    },
+    {
+      "name": "PY.PREDEFINED_DEFINITION",
+      "occurrences": 1,
+      "samplePaths": [
+        "PY.PREDEFINED_DEFINITION"
+      ]
+    },
+    {
+      "name": "PY.PREDEFINED_USAGE",
+      "occurrences": 1,
+      "samplePaths": [
+        "PY.PREDEFINED_USAGE"
+      ]
+    },
+    {
+      "name": "PY.STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "PY.STRING"
+      ]
+    },
+    {
+      "name": "PY.VALID_STRING_ESCAPE",
+      "occurrences": 1,
+      "samplePaths": [
+        "PY.VALID_STRING_ESCAPE"
+      ]
+    },
+    {
+      "name": "QL_ATTRIBUTE",
+      "occurrences": 1,
+      "samplePaths": [
+        "QL_ATTRIBUTE"
+      ]
+    },
+    {
+      "name": "QL_DATETIME",
+      "occurrences": 1,
+      "samplePaths": [
+        "QL_DATETIME"
+      ]
+    },
+    {
+      "name": "QL_ENTITY",
+      "occurrences": 1,
+      "samplePaths": [
+        "QL_ENTITY"
+      ]
+    },
+    {
+      "name": "QL_ID_VARIABLE",
+      "occurrences": 1,
+      "samplePaths": [
+        "QL_ID_VARIABLE"
+      ]
+    },
+    {
+      "name": "QL_KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "QL_KEYWORD"
+      ]
+    },
+    {
+      "name": "QL_NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "QL_NUMBER"
+      ]
+    },
+    {
+      "name": "QL_OPERATION_SIGN",
+      "occurrences": 1,
+      "samplePaths": [
+        "QL_OPERATION_SIGN"
+      ]
+    },
+    {
+      "name": "QL_PARAMETER",
+      "occurrences": 1,
+      "samplePaths": [
+        "QL_PARAMETER"
+      ]
+    },
+    {
+      "name": "QL_STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "QL_STRING"
+      ]
+    },
+    {
+      "name": "READONLY_BACKGROUND",
+      "occurrences": 1,
+      "samplePaths": [
+        "READONLY_BACKGROUND"
+      ]
+    },
+    {
+      "name": "READONLY_FRAGMENT_BACKGROUND",
+      "occurrences": 1,
+      "samplePaths": [
+        "READONLY_FRAGMENT_BACKGROUND"
+      ]
+    },
+    {
+      "name": "REASSIGNED_LOCAL_VARIABLE_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "REASSIGNED_LOCAL_VARIABLE_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "REASSIGNED_PARAMETER_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "REASSIGNED_PARAMETER_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "RECURSIVE_CALL_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "RECURSIVE_CALL_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "REGEXP.BAD_CHARACTER",
+      "occurrences": 1,
+      "samplePaths": [
+        "REGEXP.BAD_CHARACTER"
+      ]
+    },
+    {
+      "name": "REGEXP.CHAR_CLASS",
+      "occurrences": 1,
+      "samplePaths": [
+        "REGEXP.CHAR_CLASS"
+      ]
+    },
+    {
+      "name": "REGEXP.COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "REGEXP.COMMENT"
+      ]
+    },
+    {
+      "name": "REGEXP.ESC_CHARACTER",
+      "occurrences": 1,
+      "samplePaths": [
+        "REGEXP.ESC_CHARACTER"
+      ]
+    },
+    {
+      "name": "REGEXP.INVALID_STRING_ESCAPE",
+      "occurrences": 1,
+      "samplePaths": [
+        "REGEXP.INVALID_STRING_ESCAPE"
+      ]
+    },
+    {
+      "name": "REGEXP.META",
+      "occurrences": 1,
+      "samplePaths": [
+        "REGEXP.META"
+      ]
+    },
+    {
+      "name": "REGEXP.QUOTE_CHARACTER",
+      "occurrences": 1,
+      "samplePaths": [
+        "REGEXP.QUOTE_CHARACTER"
+      ]
+    },
+    {
+      "name": "REGEXP.REDUNDANT_ESCAPE",
+      "occurrences": 1,
+      "samplePaths": [
+        "REGEXP.REDUNDANT_ESCAPE"
+      ]
+    },
+    {
+      "name": "REST.BOLD",
+      "occurrences": 1,
+      "samplePaths": [
+        "REST.BOLD"
+      ]
+    },
+    {
+      "name": "REST.EXPLICIT",
+      "occurrences": 1,
+      "samplePaths": [
+        "REST.EXPLICIT"
+      ]
+    },
+    {
+      "name": "REST.FIELD",
+      "occurrences": 1,
+      "samplePaths": [
+        "REST.FIELD"
+      ]
+    },
+    {
+      "name": "REST.FIXED",
+      "occurrences": 1,
+      "samplePaths": [
+        "REST.FIXED"
+      ]
+    },
+    {
+      "name": "REST.INLINE",
+      "occurrences": 1,
+      "samplePaths": [
+        "REST.INLINE"
+      ]
+    },
+    {
+      "name": "REST.INTERPRETED",
+      "occurrences": 1,
+      "samplePaths": [
+        "REST.INTERPRETED"
+      ]
+    },
+    {
+      "name": "REST.ITALIC",
+      "occurrences": 1,
+      "samplePaths": [
+        "REST.ITALIC"
+      ]
+    },
+    {
+      "name": "REST.LINE_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "REST.LINE_COMMENT"
+      ]
+    },
+    {
+      "name": "REST.REF.NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "REST.REF.NAME"
+      ]
+    },
+    {
+      "name": "REST.SECTION.HEADER",
+      "occurrences": 1,
+      "samplePaths": [
+        "REST.SECTION.HEADER"
+      ]
+    },
+    {
+      "name": "RHTML_COMMENT_ID",
+      "occurrences": 1,
+      "samplePaths": [
+        "RHTML_COMMENT_ID"
+      ]
+    },
+    {
+      "name": "RHTML_OMIT_NEW_LINE_ID",
+      "occurrences": 1,
+      "samplePaths": [
+        "RHTML_OMIT_NEW_LINE_ID"
+      ]
+    },
+    {
+      "name": "RHTML_SCRIPTLET_START_ID",
+      "occurrences": 1,
+      "samplePaths": [
+        "RHTML_SCRIPTLET_START_ID"
+      ]
+    },
+    {
+      "name": "RUBY_BAD_CHARACTER",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_BAD_CHARACTER"
+      ]
+    },
+    {
+      "name": "RUBY_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_COMMENT"
+      ]
+    },
+    {
+      "name": "RUBY_CONSTANT",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_CONSTANT"
+      ]
+    },
+    {
+      "name": "RUBY_CONSTANT_DECLARATION",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_CONSTANT_DECLARATION"
+      ]
+    },
+    {
+      "name": "RUBY_CVAR",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_CVAR"
+      ]
+    },
+    {
+      "name": "RUBY_ESCAPE_SEQUENCE",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_ESCAPE_SEQUENCE"
+      ]
+    },
+    {
+      "name": "RUBY_EXPR_IN_STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_EXPR_IN_STRING"
+      ]
+    },
+    {
+      "name": "RUBY_GVAR",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_GVAR"
+      ]
+    },
+    {
+      "name": "RUBY_HASH_ASSOC",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_HASH_ASSOC"
+      ]
+    },
+    {
+      "name": "RUBY_HEREDOC_CONTENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_HEREDOC_CONTENT"
+      ]
+    },
+    {
+      "name": "RUBY_HEREDOC_ID",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_HEREDOC_ID"
+      ]
+    },
+    {
+      "name": "RUBY_IDENTIFIER",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_IDENTIFIER"
+      ]
+    },
+    {
+      "name": "RUBY_INTERPOLATED_STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_INTERPOLATED_STRING"
+      ]
+    },
+    {
+      "name": "RUBY_INVALID_ESCAPE_SEQUENCE",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_INVALID_ESCAPE_SEQUENCE"
+      ]
+    },
+    {
+      "name": "RUBY_IVAR",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_IVAR"
+      ]
+    },
+    {
+      "name": "RUBY_KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_KEYWORD"
+      ]
+    },
+    {
+      "name": "RUBY_LINE_CONTINUATION",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_LINE_CONTINUATION"
+      ]
+    },
+    {
+      "name": "RUBY_METHOD_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_METHOD_NAME"
+      ]
+    },
+    {
+      "name": "RUBY_NTH_REF",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_NTH_REF"
+      ]
+    },
+    {
+      "name": "RUBY_NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_NUMBER"
+      ]
+    },
+    {
+      "name": "RUBY_OPERATION_SIGN",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_OPERATION_SIGN"
+      ]
+    },
+    {
+      "name": "RUBY_PARAMDEF_CALL",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_PARAMDEF_CALL"
+      ]
+    },
+    {
+      "name": "RUBY_PARAMETER_ID",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_PARAMETER_ID"
+      ]
+    },
+    {
+      "name": "RUBY_REGEXP",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_REGEXP"
+      ]
+    },
+    {
+      "name": "RUBY_SPECIFIC_CALL",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_SPECIFIC_CALL"
+      ]
+    },
+    {
+      "name": "RUBY_STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_STRING"
+      ]
+    },
+    {
+      "name": "RUBY_SYMBOL",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_SYMBOL"
+      ]
+    },
+    {
+      "name": "RUBY_WORDS",
+      "occurrences": 1,
+      "samplePaths": [
+        "RUBY_WORDS"
+      ]
+    },
+    {
+      "name": "SASS_ATTRIBUTE",
+      "occurrences": 1,
+      "samplePaths": [
+        "SASS_ATTRIBUTE"
+      ]
+    },
+    {
+      "name": "SASS_CONSTANT",
+      "occurrences": 1,
+      "samplePaths": [
+        "SASS_CONSTANT"
+      ]
+    },
+    {
+      "name": "SASS_DIRECTIVE",
+      "occurrences": 1,
+      "samplePaths": [
+        "SASS_DIRECTIVE"
+      ]
+    },
+    {
+      "name": "SASS_MIXIN",
+      "occurrences": 1,
+      "samplePaths": [
+        "SASS_MIXIN"
+      ]
+    },
+    {
+      "name": "SASS_RULE",
+      "occurrences": 1,
+      "samplePaths": [
+        "SASS_RULE"
+      ]
+    },
+    {
+      "name": "SASS_STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "SASS_STRING"
+      ]
+    },
+    {
+      "name": "SASS_VARIABLE",
+      "occurrences": 1,
+      "samplePaths": [
+        "SASS_VARIABLE"
+      ]
+    },
+    {
+      "name": "Scala Abstract class",
+      "occurrences": 1,
+      "samplePaths": [
+        "Scala Abstract class"
+      ]
+    },
+    {
+      "name": "Scala Annotation name",
+      "occurrences": 1,
+      "samplePaths": [
+        "Scala Annotation name"
+      ]
+    },
+    {
+      "name": "Scala Assign",
+      "occurrences": 1,
+      "samplePaths": [
+        "Scala Assign"
+      ]
+    },
+    {
+      "name": "Scala Bad character",
+      "occurrences": 1,
+      "samplePaths": [
+        "Scala Bad character"
+      ]
+    },
+    {
+      "name": "Scala Block comment",
+      "occurrences": 1,
+      "samplePaths": [
+        "Scala Block comment"
+      ]
+    },
+    {
+      "name": "Scala Class",
+      "occurrences": 1,
+      "samplePaths": [
+        "Scala Class"
+      ]
+    },
+    {
+      "name": "Scala Class method call",
+      "occurrences": 1,
+      "samplePaths": [
+        "Scala Class method call"
+      ]
+    },
+    {
+      "name": "Scala Dot",
+      "occurrences": 1,
+      "samplePaths": [
+        "Scala Dot"
+      ]
+    },
+    {
+      "name": "Scala Invalid escape in string",
+      "occurrences": 1,
+      "samplePaths": [
+        "Scala Invalid escape in string"
+      ]
+    },
+    {
+      "name": "Scala Keyword",
+      "occurrences": 1,
+      "samplePaths": [
+        "Scala Keyword"
+      ]
+    },
+    {
+      "name": "Scala Line comment",
+      "occurrences": 1,
+      "samplePaths": [
+        "Scala Line comment"
+      ]
+    },
+    {
+      "name": "Scala Local method call",
+      "occurrences": 1,
+      "samplePaths": [
+        "Scala Local method call"
+      ]
+    },
+    {
+      "name": "Scala Method declaration",
+      "occurrences": 1,
+      "samplePaths": [
+        "Scala Method declaration"
+      ]
+    },
+    {
+      "name": "Scala Number",
+      "occurrences": 1,
+      "samplePaths": [
+        "Scala Number"
+      ]
+    },
+    {
+      "name": "Scala Object method call",
+      "occurrences": 1,
+      "samplePaths": [
+        "Scala Object method call"
+      ]
+    },
+    {
+      "name": "Scala Parameter",
+      "occurrences": 1,
+      "samplePaths": [
+        "Scala Parameter"
+      ]
+    },
+    {
+      "name": "Scala Predefined types",
+      "occurrences": 1,
+      "samplePaths": [
+        "Scala Predefined types"
+      ]
+    },
+    {
+      "name": "Scala String",
+      "occurrences": 1,
+      "samplePaths": [
+        "Scala String"
+      ]
+    },
+    {
+      "name": "Scala Template lazy val/var",
+      "occurrences": 1,
+      "samplePaths": [
+        "Scala Template lazy val/var"
+      ]
+    },
+    {
+      "name": "Scala Template val",
+      "occurrences": 1,
+      "samplePaths": [
+        "Scala Template val"
+      ]
+    },
+    {
+      "name": "Scala Template var",
+      "occurrences": 1,
+      "samplePaths": [
+        "Scala Template var"
+      ]
+    },
+    {
+      "name": "Scala Type parameter",
+      "occurrences": 1,
+      "samplePaths": [
+        "Scala Type parameter"
+      ]
+    },
+    {
+      "name": "Scala Valid escape in string",
+      "occurrences": 1,
+      "samplePaths": [
+        "Scala Valid escape in string"
+      ]
+    },
+    {
+      "name": "ScalaDoc comment",
+      "occurrences": 1,
+      "samplePaths": [
+        "ScalaDoc comment"
+      ]
+    },
+    {
+      "name": "ScalaDoc comment tag",
+      "occurrences": 1,
+      "samplePaths": [
+        "ScalaDoc comment tag"
+      ]
+    },
+    {
+      "name": "SELECTED_TEARLINE_COLOR",
+      "occurrences": 1,
+      "samplePaths": [
+        "SELECTED_TEARLINE_COLOR"
+      ]
+    },
+    {
+      "name": "SELECTION_FOREGROUND",
+      "occurrences": 1,
+      "samplePaths": [
+        "SELECTION_FOREGROUND"
+      ]
+    },
+    {
+      "name": "SLIM_CALL",
+      "occurrences": 1,
+      "samplePaths": [
+        "SLIM_CALL"
+      ]
+    },
+    {
+      "name": "SLIM_CLASS",
+      "occurrences": 1,
+      "samplePaths": [
+        "SLIM_CLASS"
+      ]
+    },
+    {
+      "name": "SLIM_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "SLIM_COMMENT"
+      ]
+    },
+    {
+      "name": "SLIM_DOCTYPE_KWD",
+      "occurrences": 1,
+      "samplePaths": [
+        "SLIM_DOCTYPE_KWD"
+      ]
+    },
+    {
+      "name": "SLIM_FILTER",
+      "occurrences": 1,
+      "samplePaths": [
+        "SLIM_FILTER"
+      ]
+    },
+    {
+      "name": "SLIM_FILTER_CONTENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "SLIM_FILTER_CONTENT"
+      ]
+    },
+    {
+      "name": "SLIM_ID",
+      "occurrences": 1,
+      "samplePaths": [
+        "SLIM_ID"
+      ]
+    },
+    {
+      "name": "SLIM_INTERPOLATION",
+      "occurrences": 1,
+      "samplePaths": [
+        "SLIM_INTERPOLATION"
+      ]
+    },
+    {
+      "name": "SLIM_RUBY_CODE",
+      "occurrences": 1,
+      "samplePaths": [
+        "SLIM_RUBY_CODE"
+      ]
+    },
+    {
+      "name": "SLIM_STRING_INTERPOLATED",
+      "occurrences": 1,
+      "samplePaths": [
+        "SLIM_STRING_INTERPOLATED"
+      ]
+    },
+    {
+      "name": "SLIM_TAG",
+      "occurrences": 1,
+      "samplePaths": [
+        "SLIM_TAG"
+      ]
+    },
+    {
+      "name": "SLIM_TAG_ATTR_KEY",
+      "occurrences": 1,
+      "samplePaths": [
+        "SLIM_TAG_ATTR_KEY"
+      ]
+    },
+    {
+      "name": "SMARTY_BAD_CHARACTER",
+      "occurrences": 1,
+      "samplePaths": [
+        "SMARTY_BAD_CHARACTER"
+      ]
+    },
+    {
+      "name": "SMARTY_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "SMARTY_COMMENT"
+      ]
+    },
+    {
+      "name": "SMARTY_IDENTIFIER",
+      "occurrences": 1,
+      "samplePaths": [
+        "SMARTY_IDENTIFIER"
+      ]
+    },
+    {
+      "name": "SMARTY_KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "SMARTY_KEYWORD"
+      ]
+    },
+    {
+      "name": "SMARTY_NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "SMARTY_NUMBER"
+      ]
+    },
+    {
+      "name": "SMARTY_OPERATION_SIGN",
+      "occurrences": 1,
+      "samplePaths": [
+        "SMARTY_OPERATION_SIGN"
+      ]
+    },
+    {
+      "name": "SMARTY_STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "SMARTY_STRING"
+      ]
+    },
+    {
+      "name": "SPY-JS.EXCEPTION",
+      "occurrences": 1,
+      "samplePaths": [
+        "SPY-JS.EXCEPTION"
+      ]
+    },
+    {
+      "name": "SPY-JS.FUNCTION_SCOPE",
+      "occurrences": 1,
+      "samplePaths": [
+        "SPY-JS.FUNCTION_SCOPE"
+      ]
+    },
+    {
+      "name": "SPY-JS.PATH_LEVEL_ONE",
+      "occurrences": 1,
+      "samplePaths": [
+        "SPY-JS.PATH_LEVEL_ONE"
+      ]
+    },
+    {
+      "name": "SPY-JS.PROGRAM_SCOPE",
+      "occurrences": 1,
+      "samplePaths": [
+        "SPY-JS.PROGRAM_SCOPE"
+      ]
+    },
+    {
+      "name": "SQL_COLUMN",
+      "occurrences": 1,
+      "samplePaths": [
+        "SQL_COLUMN"
+      ]
+    },
+    {
+      "name": "SQL_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "SQL_COMMENT"
+      ]
+    },
+    {
+      "name": "SQL_KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "SQL_KEYWORD"
+      ]
+    },
+    {
+      "name": "SQL_LOCAL_ALIAS",
+      "occurrences": 1,
+      "samplePaths": [
+        "SQL_LOCAL_ALIAS"
+      ]
+    },
+    {
+      "name": "SQL_NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "SQL_NUMBER"
+      ]
+    },
+    {
+      "name": "SQL_PARAMETER",
+      "occurrences": 1,
+      "samplePaths": [
+        "SQL_PARAMETER"
+      ]
+    },
+    {
+      "name": "SQL_SCHEMA",
+      "occurrences": 1,
+      "samplePaths": [
+        "SQL_SCHEMA"
+      ]
+    },
+    {
+      "name": "SQL_STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "SQL_STRING"
+      ]
+    },
+    {
+      "name": "SQL_TABLE",
+      "occurrences": 1,
+      "samplePaths": [
+        "SQL_TABLE"
+      ]
+    },
+    {
+      "name": "STATIC_FIELD_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "STATIC_FIELD_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "STATIC_FINAL_FIELD_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "STATIC_FINAL_FIELD_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "STATIC_METHOD_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "STATIC_METHOD_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "STRUCT_LIKE",
+      "occurrences": 1,
+      "samplePaths": [
+        "STRUCT_LIKE"
+      ]
+    },
+    {
+      "name": "TEARLINE_COLOR",
+      "occurrences": 1,
+      "samplePaths": [
+        "TEARLINE_COLOR"
+      ]
+    },
+    {
+      "name": "TEMPLATE_VARIABLE_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "TEMPLATE_VARIABLE_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "TERMINAL_COMMAND_TO_RUN_USING_IDE",
+      "occurrences": 1,
+      "samplePaths": [
+        "TERMINAL_COMMAND_TO_RUN_USING_IDE"
+      ]
+    },
+    {
+      "name": "TODO_DEFAULT_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "TODO_DEFAULT_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "TS.INTERFACE",
+      "occurrences": 1,
+      "samplePaths": [
+        "TS.INTERFACE"
+      ]
+    },
+    {
+      "name": "TS.MODULE_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "TS.MODULE_NAME"
+      ]
+    },
+    {
+      "name": "TS.TYPE_GUARD",
+      "occurrences": 1,
+      "samplePaths": [
+        "TS.TYPE_GUARD"
+      ]
+    },
+    {
+      "name": "TS.TYPE_PARAMETER",
+      "occurrences": 1,
+      "samplePaths": [
+        "TS.TYPE_PARAMETER"
+      ]
+    },
+    {
+      "name": "TWIG_BAD_CHARACTER",
+      "occurrences": 1,
+      "samplePaths": [
+        "TWIG_BAD_CHARACTER"
+      ]
+    },
+    {
+      "name": "TWIG_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "TWIG_COMMENT"
+      ]
+    },
+    {
+      "name": "TWIG_IDENTIFIER",
+      "occurrences": 1,
+      "samplePaths": [
+        "TWIG_IDENTIFIER"
+      ]
+    },
+    {
+      "name": "TWIG_KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "TWIG_KEYWORD"
+      ]
+    },
+    {
+      "name": "TWIG_NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "TWIG_NUMBER"
+      ]
+    },
+    {
+      "name": "TWIG_OPERATION_SIGN",
+      "occurrences": 1,
+      "samplePaths": [
+        "TWIG_OPERATION_SIGN"
+      ]
+    },
+    {
+      "name": "TWIG_STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "TWIG_STRING"
+      ]
+    },
+    {
+      "name": "TYPE_PARAMETER_NAME_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "TYPE_PARAMETER_NAME_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "TYPEDEF",
+      "occurrences": 1,
+      "samplePaths": [
+        "TYPEDEF"
+      ]
+    },
+    {
+      "name": "TYPO",
+      "occurrences": 1,
+      "samplePaths": [
+        "TYPO"
+      ]
+    },
+    {
+      "name": "VELOCITY_BAD_CHARACTER",
+      "occurrences": 1,
+      "samplePaths": [
+        "VELOCITY_BAD_CHARACTER"
+      ]
+    },
+    {
+      "name": "VELOCITY_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "VELOCITY_COMMENT"
+      ]
+    },
+    {
+      "name": "VELOCITY_DIRECTIVE",
+      "occurrences": 1,
+      "samplePaths": [
+        "VELOCITY_DIRECTIVE"
+      ]
+    },
+    {
+      "name": "VELOCITY_ESCAPE",
+      "occurrences": 1,
+      "samplePaths": [
+        "VELOCITY_ESCAPE"
+      ]
+    },
+    {
+      "name": "VELOCITY_KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "VELOCITY_KEYWORD"
+      ]
+    },
+    {
+      "name": "VELOCITY_NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "VELOCITY_NUMBER"
+      ]
+    },
+    {
+      "name": "VELOCITY_OPERATION_SIGN",
+      "occurrences": 1,
+      "samplePaths": [
+        "VELOCITY_OPERATION_SIGN"
+      ]
+    },
+    {
+      "name": "VELOCITY_REFERENCE",
+      "occurrences": 1,
+      "samplePaths": [
+        "VELOCITY_REFERENCE"
+      ]
+    },
+    {
+      "name": "VELOCITY_SCRIPTING_BACKGROUND",
+      "occurrences": 1,
+      "samplePaths": [
+        "VELOCITY_SCRIPTING_BACKGROUND"
+      ]
+    },
+    {
+      "name": "VELOCITY_STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "VELOCITY_STRING"
+      ]
+    },
+    {
+      "name": "WHITESPACES_MODIFIED_LINES_COLOR",
+      "occurrences": 1,
+      "samplePaths": [
+        "WHITESPACES_MODIFIED_LINES_COLOR"
+      ]
+    },
+    {
+      "name": "WRITE_IDENTIFIER_UNDER_CARET_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "WRITE_IDENTIFIER_UNDER_CARET_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "WRITE_SEARCH_RESULT_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "WRITE_SEARCH_RESULT_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "WRONG_REFERENCES_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "WRONG_REFERENCES_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "XML_ATTRIBUTE_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "XML_ATTRIBUTE_NAME"
+      ]
+    },
+    {
+      "name": "XML_ATTRIBUTE_VALUE",
+      "occurrences": 1,
+      "samplePaths": [
+        "XML_ATTRIBUTE_VALUE"
+      ]
+    },
+    {
+      "name": "XML_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "XML_COMMENT"
+      ]
+    },
+    {
+      "name": "XML_ENTITY_REFERENCE",
+      "occurrences": 1,
+      "samplePaths": [
+        "XML_ENTITY_REFERENCE"
+      ]
+    },
+    {
+      "name": "XML_TAG",
+      "occurrences": 1,
+      "samplePaths": [
+        "XML_TAG"
+      ]
+    },
+    {
+      "name": "XML_TAG_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "XML_TAG_NAME"
+      ]
+    },
+    {
+      "name": "XPATH.FUNCTION",
+      "occurrences": 1,
+      "samplePaths": [
+        "XPATH.FUNCTION"
+      ]
+    },
+    {
+      "name": "XPATH.KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "XPATH.KEYWORD"
+      ]
+    },
+    {
+      "name": "XPATH.NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "XPATH.NUMBER"
+      ]
+    },
+    {
+      "name": "XPATH.OPERATION_SIGN",
+      "occurrences": 1,
+      "samplePaths": [
+        "XPATH.OPERATION_SIGN"
+      ]
+    },
+    {
+      "name": "XPATH.STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "XPATH.STRING"
+      ]
+    },
+    {
+      "name": "XPATH.XPATH_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "XPATH.XPATH_NAME"
+      ]
+    },
+    {
+      "name": "XPATH.XPATH_VARIABLE",
+      "occurrences": 1,
+      "samplePaths": [
+        "XPATH.XPATH_VARIABLE"
+      ]
+    },
+    {
+      "name": "XSLT_DIRECTIVE",
+      "occurrences": 1,
+      "samplePaths": [
+        "XSLT_DIRECTIVE"
+      ]
+    },
+    {
+      "name": "YAML_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "YAML_COMMENT"
+      ]
+    },
+    {
+      "name": "YAML_SCALAR_DSTRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "YAML_SCALAR_DSTRING"
+      ]
+    },
+    {
+      "name": "YAML_SCALAR_KEY",
+      "occurrences": 1,
+      "samplePaths": [
+        "YAML_SCALAR_KEY"
+      ]
+    },
+    {
+      "name": "YAML_SCALAR_LIST",
+      "occurrences": 1,
+      "samplePaths": [
+        "YAML_SCALAR_LIST"
+      ]
+    },
+    {
+      "name": "YAML_SCALAR_STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "YAML_SCALAR_STRING"
+      ]
+    },
+    {
+      "name": "YAML_SCALAR_VALUE",
+      "occurrences": 1,
+      "samplePaths": [
+        "YAML_SCALAR_VALUE"
+      ]
+    }
+  ],
+  "top50Unmapped": [
+    {
+      "name": "FOREGROUND",
+      "occurrences": 503,
+      "samplePaths": [
+        "ABSTRACT_CLASS_NAME_ATTRIBUTES.FOREGROUND",
+        "ANNOTATION_NAME_ATTRIBUTES.FOREGROUND",
+        "APACHE_CONFIG.ARG_LEXEM.FOREGROUND",
+        "APACHE_CONFIG.COMMENT.FOREGROUND",
+        "APACHE_CONFIG.IDENTIFIER.FOREGROUND"
+      ]
+    },
+    {
+      "name": "FONT_TYPE",
+      "occurrences": 241,
+      "samplePaths": [
+        "ABSTRACT_CLASS_NAME_ATTRIBUTES.FONT_TYPE",
+        "APACHE_CONFIG.ARG_LEXEM.FONT_TYPE",
+        "APACHE_CONFIG.COMMENT.FONT_TYPE",
+        "APACHE_CONFIG.IDENTIFIER.FONT_TYPE",
+        "BLOCK_TERMINAL_COMMAND.FONT_TYPE"
+      ]
+    },
+    {
+      "name": "EFFECT_TYPE",
+      "occurrences": 55,
+      "samplePaths": [
+        "ANNOTATION_NAME_ATTRIBUTES.EFFECT_TYPE",
+        "BAD_CHARACTER.EFFECT_TYPE",
+        "BRACE_ATTR.EFFECT_TYPE",
+        "CPP.PARAMETER.EFFECT_TYPE",
+        "CPP.UNUSED.EFFECT_TYPE"
+      ]
+    },
+    {
+      "name": "BACKGROUND",
+      "occurrences": 53,
+      "samplePaths": [
+        "BAD_CHARACTER.BACKGROUND",
+        "BRACE_ATTR.BACKGROUND",
+        "BRACKET_ATTR.BACKGROUND",
+        "BREADCRUMBS_CURRENT.BACKGROUND",
+        "BREADCRUMBS_HOVERED.BACKGROUND"
+      ]
+    },
+    {
+      "name": "EFFECT_COLOR",
+      "occurrences": 19,
+      "samplePaths": [
+        "BOOKMARKS_ATTRIBUTES.EFFECT_COLOR",
+        "CTRL_CLICKABLE.EFFECT_COLOR",
+        "DEPRECATED_ATTRIBUTES.EFFECT_COLOR",
+        "DUPLICATE_FROM_SERVER.EFFECT_COLOR",
+        "ERRORS_ATTRIBUTES.EFFECT_COLOR"
+      ]
+    },
+    {
+      "name": "ERROR_STRIPE_COLOR",
+      "occurrences": 18,
+      "samplePaths": [
+        "BAD_CHARACTER.ERROR_STRIPE_COLOR",
+        "BOOKMARKS_ATTRIBUTES.ERROR_STRIPE_COLOR",
+        "COFFEESCRIPT.BAD_CHARACTER.ERROR_STRIPE_COLOR",
+        "DIFF_CONFLICT.ERROR_STRIPE_COLOR",
+        "DIFF_DELETED.ERROR_STRIPE_COLOR"
+      ]
+    },
+    {
+      "name": "EDITOR_FONT_NAME",
+      "occurrences": 2,
+      "samplePaths": [
+        "EDITOR_FONT_NAME",
+        "EDITOR_FONT_NAME"
+      ]
+    },
+    {
+      "name": "EDITOR_FONT_SIZE",
+      "occurrences": 2,
+      "samplePaths": [
+        "EDITOR_FONT_SIZE",
+        "EDITOR_FONT_SIZE"
+      ]
+    },
+    {
+      "name": "ABSTRACT_CLASS_NAME_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "ABSTRACT_CLASS_NAME_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "ADDED_LINES_COLOR",
+      "occurrences": 1,
+      "samplePaths": [
+        "ADDED_LINES_COLOR"
+      ]
+    },
+    {
+      "name": "ANNOTATION_NAME_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "ANNOTATION_NAME_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "ANNOTATIONS_COLOR",
+      "occurrences": 1,
+      "samplePaths": [
+        "ANNOTATIONS_COLOR"
+      ]
+    },
+    {
+      "name": "ANNOTATIONS_MERGED_COLOR",
+      "occurrences": 1,
+      "samplePaths": [
+        "ANNOTATIONS_MERGED_COLOR"
+      ]
+    },
+    {
+      "name": "APACHE_CONFIG.ARG_LEXEM",
+      "occurrences": 1,
+      "samplePaths": [
+        "APACHE_CONFIG.ARG_LEXEM"
+      ]
+    },
+    {
+      "name": "APACHE_CONFIG.COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "APACHE_CONFIG.COMMENT"
+      ]
+    },
+    {
+      "name": "APACHE_CONFIG.IDENTIFIER",
+      "occurrences": 1,
+      "samplePaths": [
+        "APACHE_CONFIG.IDENTIFIER"
+      ]
+    },
+    {
+      "name": "BAD_CHARACTER",
+      "occurrences": 1,
+      "samplePaths": [
+        "BAD_CHARACTER"
+      ]
+    },
+    {
+      "name": "BASH.EXTERNAL_COMMAND",
+      "occurrences": 1,
+      "samplePaths": [
+        "BASH.EXTERNAL_COMMAND"
+      ]
+    },
+    {
+      "name": "BASH.HERE_DOC",
+      "occurrences": 1,
+      "samplePaths": [
+        "BASH.HERE_DOC"
+      ]
+    },
+    {
+      "name": "BLOCK_TERMINAL_COMMAND",
+      "occurrences": 1,
+      "samplePaths": [
+        "BLOCK_TERMINAL_COMMAND"
+      ]
+    },
+    {
+      "name": "BOOKMARKS_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "BOOKMARKS_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "BRACE_ATTR",
+      "occurrences": 1,
+      "samplePaths": [
+        "BRACE_ATTR"
+      ]
+    },
+    {
+      "name": "BRACKET_ATTR",
+      "occurrences": 1,
+      "samplePaths": [
+        "BRACKET_ATTR"
+      ]
+    },
+    {
+      "name": "BREADCRUMBS_CURRENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "BREADCRUMBS_CURRENT"
+      ]
+    },
+    {
+      "name": "BREADCRUMBS_HOVERED",
+      "occurrences": 1,
+      "samplePaths": [
+        "BREADCRUMBS_HOVERED"
+      ]
+    },
+    {
+      "name": "BREAKPOINT_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "BREAKPOINT_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "BUILDOUT.KEY",
+      "occurrences": 1,
+      "samplePaths": [
+        "BUILDOUT.KEY"
+      ]
+    },
+    {
+      "name": "BUILDOUT.KEY_VALUE_SEPARATOR",
+      "occurrences": 1,
+      "samplePaths": [
+        "BUILDOUT.KEY_VALUE_SEPARATOR"
+      ]
+    },
+    {
+      "name": "BUILDOUT.LINE_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "BUILDOUT.LINE_COMMENT"
+      ]
+    },
+    {
+      "name": "BUILDOUT.SECTION_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "BUILDOUT.SECTION_NAME"
+      ]
+    },
+    {
+      "name": "BUILDOUT.VALUE",
+      "occurrences": 1,
+      "samplePaths": [
+        "BUILDOUT.VALUE"
+      ]
+    },
+    {
+      "name": "C.KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "C.KEYWORD"
+      ]
+    },
+    {
+      "name": "CLASS_NAME_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CLASS_NAME_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CLASS_REFERENCE",
+      "occurrences": 1,
+      "samplePaths": [
+        "CLASS_REFERENCE"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.BAD_CHARACTER",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.BAD_CHARACTER"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.BLOCK_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.BLOCK_COMMENT"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.BOOLEAN",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.BOOLEAN"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.CLASS_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.CLASS_NAME"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.ESCAPE_SEQUENCE",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.ESCAPE_SEQUENCE"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.EXISTENTIAL",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.EXISTENTIAL"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.EXPRESSIONS_SUBSTITUTION_MARK",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.EXPRESSIONS_SUBSTITUTION_MARK"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.FUNCTION",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.FUNCTION"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.FUNCTION_BINDING",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.FUNCTION_BINDING"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.FUNCTION_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.FUNCTION_NAME"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.GLOBAL_VARIABLE",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.GLOBAL_VARIABLE"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.HEREDOC_CONTENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.HEREDOC_CONTENT"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.HEREDOC_ID",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.HEREDOC_ID"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.HEREGEX_ID",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.HEREGEX_ID"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.JAVASCRIPT_ID",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.JAVASCRIPT_ID"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.KEYWORD"
+      ]
+    }
+  ]
+}

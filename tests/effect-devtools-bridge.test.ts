@@ -10,9 +10,10 @@ const { startEffectDevToolsBridge } = bridgeModule as {
     enabled?: boolean;
     tokenFile?: string;
     port?: number;
+    maxFrameBytes?: number;
   }) => Promise<{
     address: { address: string; port: number };
-    publish: (event: { type: "fiber" | "span" | "metric"; name: string; status?: string; attributes?: Record<string, unknown> }) => void;
+    publish: (event: { type: "fiber" | "span" | "metric"; name: string; status?: string; attributes?: Record<string, unknown> }) => boolean;
     clientCount: () => number;
     close: () => Promise<void>;
   }>;
@@ -65,7 +66,7 @@ describe("Effect DevTools localhost bridge", () => {
 
   test("streams authenticated Effect events from the real bridge", async () => {
     const tokenFile = await writeTokenFile("secret-token", 0o600);
-    const bridge = await startEffectDevToolsBridge({ tokenFile, port: 0, enabled: true });
+    const bridge = await startEffectDevToolsBridge({ tokenFile, port: 0, enabled: true, maxFrameBytes: 128 });
     cleanup.push(() => bridge.close());
 
     const socket = await openAuthenticatedSocket(
@@ -76,8 +77,10 @@ describe("Effect DevTools localhost bridge", () => {
     );
 
     await waitFor(() => bridge.clientCount() === 1);
+    // SG-P11D-4: oversized published events are rejected before framing.
+    expect(bridge.publish({ type: "span", name: "x".repeat(200), status: "too-large" })).toBe(false);
     // SG-P11D-4: authenticated clients receive bounded, rate-limited bridge events.
-    bridge.publish({ type: "span", name: "real-bridge-span", status: "completed", attributes: { route: "Effect.gen" } });
+    expect(bridge.publish({ type: "span", name: "real-bridge-span", status: "completed", attributes: { route: "Effect.gen" } })).toBe(true);
 
     await expect(readServerTextFrame(socket)).resolves.toContain("real-bridge-span");
   });
