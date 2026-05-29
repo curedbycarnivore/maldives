@@ -18,6 +18,14 @@ type TypeScriptWorker = {
 type TypeScriptWorkerFactory = (uri: monaco.editor.ITextModel["uri"]) => Promise<TypeScriptWorker>;
 type TypeScriptWithWorker = { getTypeScriptWorker?: () => Promise<TypeScriptWorkerFactory> };
 
+/*
+ * P12D Effect hover security gates:
+ * SG-P12D-1: Layer dependency diagrams only activate for a Layer namespace imported from "effect"
+ *             (including local aliases); local Layer lookalikes never get Effect hover UI.
+ * SG-P12D-2: Hover content is derived from the current Monaco model AST and emitted as markdown/text
+ *             only; no model text is executed or injected as HTML.
+ */
+
 export const EFFECT_HOVER_DOCS = {
   "Effect.gen": {
     summary: "Build an Effect by yielding other Effects in generator style.",
@@ -111,13 +119,14 @@ export function effectHoverSymbolFromSourceAtOffset(source: string, offset: numb
 
 export function layerDependencyDiagramForSourceAtOffset(source: string, offset: number): string | undefined {
   const sourceFile = ts.createSourceFile("effect-layer-hover.ts", source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
-  const call = layerCompositionCallAtOffset(sourceFile, offset);
+  const layerImports = effectNamedImportsFromSourceFile(sourceFile, "Layer");
+  const call = layerCompositionCallAtOffset(sourceFile, offset, layerImports);
 
   if (!call) {
     return undefined;
   }
 
-  const graph = collectLayerGraph(call, sourceFile);
+  const graph = collectLayerGraph(call, sourceFile, layerImports);
 
   if (graph.layers.length === 0) {
     return undefined;
@@ -211,11 +220,7 @@ type EffectImportSet = Set<string>;
 function effectImportsFromSourceFile(sourceFile: ts.SourceFile): EffectImportSet {
   const imports = new Set<string>();
 
-  for (const statement of sourceFile.statements) {
-    if (!ts.isImportDeclaration(statement) || !ts.isStringLiteral(statement.moduleSpecifier) || statement.moduleSpecifier.text !== "effect") {
-      continue;
-    }
-
+  for (const statement of effectImportDeclarations(sourceFile)) {
     const clause = statement.importClause;
     const namedBindings = clause?.namedBindings;
 
@@ -235,6 +240,35 @@ function effectImportsFromSourceFile(sourceFile: ts.SourceFile): EffectImportSet
   }
 
   return imports;
+}
+
+function effectNamedImportsFromSourceFile(sourceFile: ts.SourceFile, importedName: string): EffectImportSet {
+  const imports = new Set<string>();
+
+  for (const statement of effectImportDeclarations(sourceFile)) {
+    const namedBindings = statement.importClause?.namedBindings;
+
+    if (!namedBindings || !ts.isNamedImports(namedBindings)) {
+      continue;
+    }
+
+    for (const element of namedBindings.elements) {
+      const originalName = element.propertyName?.text ?? element.name.text;
+
+      if (originalName === importedName) {
+        imports.add(element.name.text);
+      }
+    }
+  }
+
+  return imports;
+}
+
+function effectImportDeclarations(sourceFile: ts.SourceFile): ts.ImportDeclaration[] {
+  return sourceFile.statements.filter(
+    (statement): statement is ts.ImportDeclaration =>
+      ts.isImportDeclaration(statement) && ts.isStringLiteral(statement.moduleSpecifier) && statement.moduleSpecifier.text === "effect",
+  );
 }
 
 function effectHoverSymbolForIdentifier(identifier: ts.Identifier, effectImports: EffectImportSet): EffectHoverSymbol | undefined {
@@ -266,7 +300,7 @@ function escapeRegExp(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-function layerCompositionCallAtOffset(sourceFile: ts.SourceFile, offset: number): ts.CallExpression | undefined {
+function layerCompositionCallAtOffset(sourceFile: ts.SourceFile, offset: number, layerImports: EffectImportSet): ts.CallExpression | undefined {
   let found: ts.CallExpression | undefined;
 
   function visit(node: ts.Node): void {
@@ -274,7 +308,7 @@ function layerCompositionCallAtOffset(sourceFile: ts.SourceFile, offset: number)
       return;
     }
 
-    if (ts.isCallExpression(node) && layerCompositionMethod(node)) {
+    if (ts.isCallExpression(node) && layerCompositionMethod(node, layerImports, sourceFile)) {
       found = node;
     }
 
@@ -285,7 +319,7 @@ function layerCompositionCallAtOffset(sourceFile: ts.SourceFile, offset: number)
   return found;
 }
 
-function collectLayerGraph(expression: ts.Expression, sourceFile: ts.SourceFile): LayerGraph {
+function collectLayerGraph(expression: ts.Expression, sourceFile: ts.SourceFile, layerImports: EffectImportSet): LayerGraph {
   const layers: string[] = [];
   const edges: Array<{ from: string; to: string }> = [];
 
@@ -303,7 +337,7 @@ function collectLayerGraph(expression: ts.Expression, sourceFile: ts.SourceFile)
 
   function collect(expr: ts.Expression): string[] {
     if (ts.isCallExpression(expr)) {
-      const method = layerCompositionMethod(expr);
+      const method = layerCompositionMethod(expr, layerImports, sourceFile);
 
       if (method === "merge") {
         return expr.arguments.flatMap((argument) => collect(argument));
@@ -323,7 +357,7 @@ function collectLayerGraph(expression: ts.Expression, sourceFile: ts.SourceFile)
       }
     }
 
-    const label = layerExpressionLabel(expr, sourceFile);
+    const label = layerExpressionLabel(expr, sourceFile, layerImports);
     addLayer(label);
     return [label];
   }
@@ -332,12 +366,17 @@ function collectLayerGraph(expression: ts.Expression, sourceFile: ts.SourceFile)
   return { layers, edges };
 }
 
-function layerCompositionMethod(call: ts.CallExpression): "merge" | "provide" | "provideMerge" | undefined {
+function layerCompositionMethod(
+  call: ts.CallExpression,
+  layerImports: EffectImportSet,
+  sourceFile: ts.SourceFile,
+): "merge" | "provide" | "provideMerge" | undefined {
   if (!ts.isPropertyAccessExpression(call.expression)) {
     return undefined;
   }
 
-  if (!ts.isIdentifier(call.expression.expression) || call.expression.expression.text !== "Layer") {
+  const namespace = call.expression.expression;
+  if (!ts.isIdentifier(namespace) || !layerImports.has(namespace.text) || isShadowedLocalBinding(namespace, sourceFile)) {
     return undefined;
   }
 
@@ -345,7 +384,79 @@ function layerCompositionMethod(call: ts.CallExpression): "merge" | "provide" | 
   return method === "merge" || method === "provide" || method === "provideMerge" ? method : undefined;
 }
 
-function layerExpressionLabel(expression: ts.Expression, sourceFile: ts.SourceFile): string {
+function isShadowedLocalBinding(identifier: ts.Identifier, sourceFile: ts.SourceFile): boolean {
+  const identifierStart = identifier.getStart(sourceFile);
+  let shadowed = false;
+
+  function visit(node: ts.Node): void {
+    if (shadowed || node === identifier) {
+      return;
+    }
+
+    const name = localDeclarationName(node);
+    if (name?.text === identifier.text && name.getStart(sourceFile) < identifierStart) {
+      const scope = lexicalScopeForDeclaration(node, sourceFile);
+      shadowed = scope.getStart(sourceFile) <= identifierStart && identifierStart <= scope.getEnd();
+      if (shadowed) {
+        return;
+      }
+    }
+
+    ts.forEachChild(node, visit);
+  }
+
+  visit(sourceFile);
+  return shadowed;
+}
+
+function localDeclarationName(node: ts.Node): ts.Identifier | undefined {
+  if (ts.isImportSpecifier(node)) {
+    return undefined;
+  }
+
+  if (
+    (ts.isVariableDeclaration(node) ||
+      ts.isParameter(node) ||
+      ts.isFunctionDeclaration(node) ||
+      ts.isClassDeclaration(node) ||
+      ts.isTypeAliasDeclaration(node) ||
+      ts.isInterfaceDeclaration(node) ||
+      ts.isEnumDeclaration(node)) &&
+    node.name &&
+    ts.isIdentifier(node.name)
+  ) {
+    return node.name;
+  }
+
+  return undefined;
+}
+
+function lexicalScopeForDeclaration(node: ts.Node, sourceFile: ts.SourceFile): ts.Node {
+  if (ts.isParameter(node)) {
+    const owner = node.parent;
+    if (
+      (ts.isFunctionDeclaration(owner) ||
+        ts.isFunctionExpression(owner) ||
+        ts.isArrowFunction(owner) ||
+        ts.isMethodDeclaration(owner) ||
+        ts.isConstructorDeclaration(owner)) &&
+      owner.body
+    ) {
+      return owner.body;
+    }
+    return owner ?? sourceFile;
+  }
+
+  let current = node.parent;
+
+  while (current && !ts.isSourceFile(current) && !ts.isBlock(current) && !ts.isModuleBlock(current)) {
+    current = current.parent;
+  }
+
+  return current ?? sourceFile;
+}
+
+function layerExpressionLabel(expression: ts.Expression, sourceFile: ts.SourceFile, layerImports: EffectImportSet): string {
   if (ts.isIdentifier(expression)) {
     return expression.text;
   }
@@ -359,7 +470,7 @@ function layerExpressionLabel(expression: ts.Expression, sourceFile: ts.SourceFi
   }
 
   if (ts.isCallExpression(expression)) {
-    const effectLayerName = layerEffectName(expression);
+    const effectLayerName = layerEffectName(expression, layerImports, sourceFile);
 
     if (effectLayerName) {
       return effectLayerName;
@@ -371,12 +482,13 @@ function layerExpressionLabel(expression: ts.Expression, sourceFile: ts.SourceFi
   return expression.getText(sourceFile);
 }
 
-function layerEffectName(call: ts.CallExpression): string | undefined {
+function layerEffectName(call: ts.CallExpression, layerImports: EffectImportSet, sourceFile: ts.SourceFile): string | undefined {
   if (!ts.isPropertyAccessExpression(call.expression)) {
     return undefined;
   }
 
-  if (!ts.isIdentifier(call.expression.expression) || call.expression.expression.text !== "Layer") {
+  const namespace = call.expression.expression;
+  if (!ts.isIdentifier(namespace) || !layerImports.has(namespace.text) || isShadowedLocalBinding(namespace, sourceFile)) {
     return undefined;
   }
 

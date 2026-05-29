@@ -103,6 +103,86 @@ const Live = Layer.merge(A, Layer.provide(B, C));
   await page.screenshot({ path: "proof/p12d-layer-diagram-proof.png" });
 });
 
+test("Layer hover supports aliased Effect layers and ignores local Layer lookalikes", async ({ page }) => {
+  await loadEditor(page);
+
+  await page.evaluate(() => {
+    const source = `import { Effect, Layer as L, Schema, pipe } from "effect";
+
+function logged(_target: unknown, _key: string, descriptor: PropertyDescriptor) {
+  return descriptor;
+}
+
+class Repository<T extends { id: string }> {
+  constructor(readonly rows: ReadonlyArray<T>) {}
+
+  @logged
+  find(id: string) {
+    return pipe(
+      Effect.succeed(this.rows.find((row) => row.id === id)),
+      Effect.map((row) => row)
+    );
+  }
+}
+
+const User = Schema.Struct({ id: Schema.String, name: Schema.String });
+const A = L.effect("A", Effect.succeed(new Repository([{ id: "1", name: "Ada" }])));
+const B = L.effect("B", Effect.succeed(User));
+const C = L.effect("C", Effect.succeed(1));
+const Live = L.provideMerge(L.merge(A, B), C);
+
+{
+  const L = { merge: (...layers: unknown[]) => layers };
+  const shadowedAlias = L.merge(A, B);
+}
+
+const Layer = { merge: (...layers: unknown[]) => layers };
+const localOnly = Layer.merge(A, B);
+`;
+    const model = window.__monaco.editor.createModel(source, "typescript", window.__monaco.Uri.parse("file:///maldives/effect-layer-hover-alias.tsx"));
+    window.__maldivesEditor.setModel(model);
+    window.__maldivesEditor.focus();
+  });
+
+  await page.evaluate(() => {
+    const editor = window.__maldivesEditor;
+    const model = editor.getModel();
+    if (!model) throw new Error("missing model");
+    const lineNumber = model.getValue().split("\n").findIndex((line) => line.includes("L.provideMerge")) + 1;
+    const startColumn = model.getLineContent(lineNumber).indexOf("L.provideMerge") + 1;
+    editor.setPosition({ lineNumber, column: startColumn + 1 });
+    editor.focus();
+    const action = editor.getAction("editor.action.showHover");
+    if (!action) throw new Error("editor.action.showHover is not registered");
+    void action.run();
+  });
+
+  await expect(page.locator(".monaco-hover")).toContainText("Layer dependency diagram", { timeout: 15000 });
+  await expect(page.locator(".monaco-hover")).toContainText("C -> A", { timeout: 15000 });
+  await expect(page.locator(".monaco-hover")).toContainText("C -> B", { timeout: 15000 });
+
+  await page.evaluate(() => {
+    const editor = window.__maldivesEditor;
+    const hideHover = editor.getAction("editor.action.hideHover");
+    if (!hideHover) throw new Error("editor.action.hideHover is not registered");
+    void hideHover.run();
+    const model = editor.getModel();
+    if (!model) throw new Error("missing model");
+    const lineNumber = model.getValue().split("\n").findIndex((line) => line.includes("shadowedAlias")) + 1;
+    const startColumn = model.getLineContent(lineNumber).indexOf("L.merge") + 1;
+    editor.setPosition({ lineNumber, column: startColumn + 1 });
+    editor.focus();
+    const action = editor.getAction("editor.action.showHover");
+    if (!action) throw new Error("editor.action.showHover is not registered");
+    void action.run();
+  });
+
+  await expect(page.locator(".monaco-hover")).not.toContainText("Layer dependency diagram", { timeout: 5000 });
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/p14h-layer-hover-alias-proof.png" });
+});
+
 test("Effect API hovers show docs links and examples for canonical symbols", async ({ page }) => {
   await loadEditor(page);
 

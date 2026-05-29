@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, test } from "vitest";
 import {
   EFFECT_HOVER_DOCS,
@@ -63,5 +64,60 @@ const Live = Layer.merge(A, Layer.provide(B, C));`;
     const diagram = layerDependencyDiagramForSourceAtOffset(source, source.indexOf("Layer.merge") + 1);
 
     expect(diagram).toBe(`Layer dependency diagram\nLayers:\n- A\n- B\n- C\nEdges:\n- C -> B`);
+  });
+
+  test("builds Layer diagrams for aliased Effect Layer provideMerge compositions", () => {
+    const source = `import { Layer as L } from "effect";
+const A = {};
+const B = {};
+const C = {};
+const Live = L.provideMerge(L.merge(A, B), C);`;
+
+    const diagram = layerDependencyDiagramForSourceAtOffset(source, source.indexOf("L.provideMerge") + 1);
+
+    expect(diagram).toBe(`Layer dependency diagram\nLayers:\n- A\n- B\n- C\nEdges:\n- C -> A\n- C -> B`);
+  });
+
+  test("does not build Layer diagrams for non-Effect Layer lookalikes", () => {
+    const source = `const Layer = { merge: (...layers: unknown[]) => layers, provide: (...layers: unknown[]) => layers };
+const A = {};
+const B = {};
+const Local = Layer.merge(A, B);`;
+
+    expect(layerDependencyDiagramForSourceAtOffset(source, source.indexOf("Layer.merge") + 1)).toBeUndefined();
+  });
+
+  test("does not build Layer diagrams for local bindings that shadow Effect Layer imports", () => {
+    const source = `import { Layer } from "effect";
+const A = {};
+const B = {};
+{
+  const Layer = { merge: (...layers: unknown[]) => layers };
+  const Local = Layer.merge(A, B);
+}`;
+
+    expect(layerDependencyDiagramForSourceAtOffset(source, source.indexOf("Layer.merge") + 1)).toBeUndefined();
+  });
+
+  test("keeps Effect Layer imports visible outside a same-named parameter scope", () => {
+    const source = `import { Layer } from "effect";
+const A = {};
+const B = {};
+function shadowed(Layer: { merge: (...layers: unknown[]) => unknown }) {
+  return Layer.merge(A, B);
+}
+const Live = Layer.merge(A, B);`;
+
+    const diagram = layerDependencyDiagramForSourceAtOffset(source, source.lastIndexOf("Layer.merge") + 1);
+
+    expect(diagram).toBe(`Layer dependency diagram\nLayers:\n- A\n- B\nEdges:\n- none`);
+  });
+
+  test("cites the P12D hover security gates in the provider source", () => {
+    // SG-P12D-1/2 must stay close to the provider because the verifier audits the feature claim.
+    const source = readFileSync(new URL("../src/effect-hover.ts", import.meta.url), "utf8");
+
+    expect(source).toContain("SG-P12D-1");
+    expect(source).toContain("SG-P12D-2");
   });
 });
