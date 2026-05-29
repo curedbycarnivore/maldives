@@ -394,7 +394,7 @@ function isShadowedLocalBinding(identifier: ts.Identifier, sourceFile: ts.Source
     }
 
     const name = localDeclarationName(node);
-    if (name?.text === identifier.text && name.getStart(sourceFile) < identifierStart) {
+    if (name?.text === identifier.text) {
       const scope = lexicalScopeForDeclaration(node, sourceFile);
       shadowed = scope.getStart(sourceFile) <= identifierStart && identifierStart <= scope.getEnd();
       if (shadowed) {
@@ -412,6 +412,10 @@ function isShadowedLocalBinding(identifier: ts.Identifier, sourceFile: ts.Source
 function localDeclarationName(node: ts.Node): ts.Identifier | undefined {
   if (ts.isImportSpecifier(node)) {
     return undefined;
+  }
+
+  if (ts.isBindingElement(node) && ts.isIdentifier(node.name)) {
+    return node.name;
   }
 
   if (

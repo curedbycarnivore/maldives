@@ -113,6 +113,27 @@ const Live = Layer.merge(A, B);`;
     expect(diagram).toBe(`Layer dependency diagram\nLayers:\n- A\n- B\nEdges:\n- none`);
   });
 
+  test("does not build Layer diagrams for destructured or later local Layer shadows", () => {
+    const destructured = `import { Layer } from "effect";
+const A = {};
+const B = {};
+const container = { Layer: { merge: (...layers: unknown[]) => layers } };
+{
+  const { Layer } = container;
+  const Local = Layer.merge(A, B);
+}`;
+    const laterSameScope = `import { Layer } from "effect";
+const A = {};
+const B = {};
+{
+  const Local = Layer.merge(A, B);
+  const Layer = { merge: (...layers: unknown[]) => layers };
+}`;
+
+    expect(layerDependencyDiagramForSourceAtOffset(destructured, destructured.indexOf("Layer.merge") + 1)).toBeUndefined();
+    expect(layerDependencyDiagramForSourceAtOffset(laterSameScope, laterSameScope.indexOf("Layer.merge") + 1)).toBeUndefined();
+  });
+
   test("cites the P12D hover security gates in the provider source", () => {
     // SG-P12D-1/2 must stay close to the provider because the verifier audits the feature claim.
     const source = readFileSync(new URL("../src/effect-hover.ts", import.meta.url), "utf8");
