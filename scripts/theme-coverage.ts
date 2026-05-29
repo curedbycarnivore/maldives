@@ -41,6 +41,34 @@ const classifiedTopLevelOptionNames = [
   "BASH.EXTERNAL_COMMAND",
   "BASH.HERE_DOC",
   "BLOCK_TERMINAL_COMMAND",
+  "COFFEESCRIPT.BAD_CHARACTER",
+  "COFFEESCRIPT.BLOCK_COMMENT",
+  "COFFEESCRIPT.BOOLEAN",
+  "COFFEESCRIPT.CLASS_NAME",
+  "COFFEESCRIPT.ESCAPE_SEQUENCE",
+  "COFFEESCRIPT.EXISTENTIAL",
+  "COFFEESCRIPT.EXPRESSIONS_SUBSTITUTION_MARK",
+  "COFFEESCRIPT.FUNCTION",
+  "COFFEESCRIPT.FUNCTION_BINDING",
+  "COFFEESCRIPT.FUNCTION_NAME",
+  "COFFEESCRIPT.GLOBAL_VARIABLE",
+  "COFFEESCRIPT.HEREDOC_CONTENT",
+  "COFFEESCRIPT.HEREDOC_ID",
+  "COFFEESCRIPT.HEREGEX_ID",
+  "COFFEESCRIPT.JAVASCRIPT_ID",
+  "COFFEESCRIPT.KEYWORD",
+  "COFFEESCRIPT.LINE_COMMENT",
+  "COFFEESCRIPT.LOCAL_VARIABLE",
+  "COFFEESCRIPT.NUMBER",
+  "COFFEESCRIPT.OBJECT_KEY",
+  "COFFEESCRIPT.OPERATIONS",
+  "COFFEESCRIPT.PROTOTYPE",
+  "COFFEESCRIPT.REGULAR_EXPRESSION_CONTENT",
+  "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG",
+  "COFFEESCRIPT.REGULAR_EXPRESSION_ID",
+  "COFFEESCRIPT.STRING",
+  "COFFEESCRIPT.STRING_LITERAL",
+  "COFFEESCRIPT.THIS",
 ];
 
 export interface IclsOptionNameIndex {
@@ -260,7 +288,49 @@ function classifiedTopLevelPathsFor(name: string): string[] {
     return ["BLOCK_TERMINAL_COMMAND.FOREGROUND", "BLOCK_TERMINAL_COMMAND.FONT_TYPE"];
   }
 
+  if (name.startsWith("COFFEESCRIPT.")) {
+    return coffeeScriptPathsFor(name);
+  }
+
   return [name];
+}
+
+function coffeeScriptPathsFor(name: string): string[] {
+  if (name === "COFFEESCRIPT.BAD_CHARACTER") {
+    return [
+      "COFFEESCRIPT.BAD_CHARACTER.FOREGROUND",
+      "COFFEESCRIPT.BAD_CHARACTER.BACKGROUND",
+      "COFFEESCRIPT.BAD_CHARACTER.ERROR_STRIPE_COLOR",
+    ];
+  }
+
+  if (name === "COFFEESCRIPT.JAVASCRIPT_ID") {
+    return [
+      "COFFEESCRIPT.JAVASCRIPT_ID.FOREGROUND",
+      "COFFEESCRIPT.JAVASCRIPT_ID.BACKGROUND",
+      "COFFEESCRIPT.JAVASCRIPT_ID.FONT_TYPE",
+    ];
+  }
+
+  if (name === "COFFEESCRIPT.HEREDOC_CONTENT") {
+    return ["COFFEESCRIPT.HEREDOC_CONTENT.FONT_TYPE"];
+  }
+
+  if ([
+    "COFFEESCRIPT.BLOCK_COMMENT",
+    "COFFEESCRIPT.BOOLEAN",
+    "COFFEESCRIPT.HEREDOC_ID",
+    "COFFEESCRIPT.HEREGEX_ID",
+    "COFFEESCRIPT.LINE_COMMENT",
+    "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG",
+    "COFFEESCRIPT.REGULAR_EXPRESSION_ID",
+    "COFFEESCRIPT.STRING_LITERAL",
+    "COFFEESCRIPT.THIS",
+  ].includes(name)) {
+    return [`${name}.FOREGROUND`, `${name}.FONT_TYPE`];
+  }
+
+  return [`${name}.FOREGROUND`];
 }
 
 function classifiedTopLevelDeferredReason(path: string): string {
@@ -300,6 +370,10 @@ function classifiedTopLevelDeferredReason(path: string): string {
     return "defer: terminal command block highlighting waits for the P23 terminal/editor-block subsystem; no Monaco grammar emits this token today";
   }
 
+  if (path.startsWith("COFFEESCRIPT.")) {
+    return coffeeScriptDeferredReason(path);
+  }
+
   if (path.endsWith(".BACKGROUND")) {
     return "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute";
   }
@@ -309,6 +383,54 @@ function classifiedTopLevelDeferredReason(path: string): string {
   }
 
   return "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet";
+}
+
+function coffeeScriptDeferredReason(path: string): string {
+  if (path.endsWith(".BACKGROUND")) {
+    return "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute";
+  }
+
+  if (path.endsWith(".ERROR_STRIPE_COLOR")) {
+    return "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute";
+  }
+
+  if (path.startsWith("COFFEESCRIPT.CLASS_NAME.")) {
+    return "unsupported: Monaco's CoffeeScript grammar does not emit a distinct class-name token";
+  }
+
+  if (path.startsWith("COFFEESCRIPT.FUNCTION_NAME.")) {
+    return "unsupported: Monaco's CoffeeScript grammar does not emit a distinct function-name token";
+  }
+
+  if (path.startsWith("COFFEESCRIPT.GLOBAL_VARIABLE.") || path.startsWith("COFFEESCRIPT.LOCAL_VARIABLE.")) {
+    return "unsupported: Monaco's CoffeeScript grammar does not distinguish local/global variable identifiers";
+  }
+
+  if (path.startsWith("COFFEESCRIPT.HEREDOC_CONTENT.")) {
+    return "unsupported: Monaco's CoffeeScript grammar emits heredoc contents as the generic string token";
+  }
+
+  if (path.startsWith("COFFEESCRIPT.HEREDOC_ID.") || path.startsWith("COFFEESCRIPT.HEREGEX_ID.")) {
+    return "unsupported: Monaco's CoffeeScript grammar does not emit distinct heredoc or heregex delimiter tokens";
+  }
+
+  if (path.startsWith("COFFEESCRIPT.JAVASCRIPT_ID.")) {
+    return "unsupported: Monaco's CoffeeScript grammar does not emit a distinct embedded-JavaScript delimiter token";
+  }
+
+  if (path.startsWith("COFFEESCRIPT.OBJECT_KEY.")) {
+    return "unsupported: Monaco's CoffeeScript grammar does not emit a distinct object-key token";
+  }
+
+  if (path.startsWith("COFFEESCRIPT.REGULAR_EXPRESSION_FLAG.") || path.startsWith("COFFEESCRIPT.REGULAR_EXPRESSION_ID.")) {
+    return "unsupported: Monaco's CoffeeScript grammar emits regex flags and delimiters as the generic regexp token";
+  }
+
+  if (path.startsWith("COFFEESCRIPT.STRING_LITERAL.")) {
+    return "unsupported: Monaco's CoffeeScript grammar does not distinguish literal string token variants";
+  }
+
+  return "defer: no concrete Monaco token or UI surface has been selected for this CoffeeScript ICLS attribute yet";
 }
 
 function deferredReason(path: string): string {
@@ -327,7 +449,11 @@ function deferredReason(path: string): string {
     return "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute";
   }
 
-  if (parent.startsWith("APACHE_CONFIG") || parent.startsWith("BASH") || parent.startsWith("COFFEESCRIPT")) {
+  if (parent.startsWith("COFFEESCRIPT")) {
+    return coffeeScriptDeferredReason(path);
+  }
+
+  if (parent.startsWith("APACHE_CONFIG") || parent.startsWith("BASH")) {
     return "defer: Maldives does not load this language grammar yet";
   }
 

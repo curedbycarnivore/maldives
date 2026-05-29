@@ -31,6 +31,34 @@
     "CARET_ROW_COLOR",
     "CLASS_NAME_ATTRIBUTES",
     "CLASS_REFERENCE",
+    "COFFEESCRIPT.BAD_CHARACTER",
+    "COFFEESCRIPT.BLOCK_COMMENT",
+    "COFFEESCRIPT.BOOLEAN",
+    "COFFEESCRIPT.CLASS_NAME",
+    "COFFEESCRIPT.ESCAPE_SEQUENCE",
+    "COFFEESCRIPT.EXISTENTIAL",
+    "COFFEESCRIPT.EXPRESSIONS_SUBSTITUTION_MARK",
+    "COFFEESCRIPT.FUNCTION",
+    "COFFEESCRIPT.FUNCTION_BINDING",
+    "COFFEESCRIPT.FUNCTION_NAME",
+    "COFFEESCRIPT.GLOBAL_VARIABLE",
+    "COFFEESCRIPT.HEREDOC_CONTENT",
+    "COFFEESCRIPT.HEREDOC_ID",
+    "COFFEESCRIPT.HEREGEX_ID",
+    "COFFEESCRIPT.JAVASCRIPT_ID",
+    "COFFEESCRIPT.KEYWORD",
+    "COFFEESCRIPT.LINE_COMMENT",
+    "COFFEESCRIPT.LOCAL_VARIABLE",
+    "COFFEESCRIPT.NUMBER",
+    "COFFEESCRIPT.OBJECT_KEY",
+    "COFFEESCRIPT.OPERATIONS",
+    "COFFEESCRIPT.PROTOTYPE",
+    "COFFEESCRIPT.REGULAR_EXPRESSION_CONTENT",
+    "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG",
+    "COFFEESCRIPT.REGULAR_EXPRESSION_ID",
+    "COFFEESCRIPT.STRING",
+    "COFFEESCRIPT.STRING_LITERAL",
+    "COFFEESCRIPT.THIS",
     "DEFAULT_BRACES",
     "DEFAULT_BRACKETS",
     "DEFAULT_CONSTANT",
@@ -77,202 +105,6 @@
     "WHITESPACES"
   ],
   "unmapped": [
-    {
-      "name": "COFFEESCRIPT.BAD_CHARACTER",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.BAD_CHARACTER"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.BLOCK_COMMENT",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.BLOCK_COMMENT"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.BOOLEAN",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.BOOLEAN"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.CLASS_NAME",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.CLASS_NAME"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.ESCAPE_SEQUENCE",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.ESCAPE_SEQUENCE"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.EXISTENTIAL",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.EXISTENTIAL"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.EXPRESSIONS_SUBSTITUTION_MARK",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.EXPRESSIONS_SUBSTITUTION_MARK"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.FUNCTION",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.FUNCTION"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.FUNCTION_BINDING",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.FUNCTION_BINDING"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.FUNCTION_NAME",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.FUNCTION_NAME"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.GLOBAL_VARIABLE",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.GLOBAL_VARIABLE"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.HEREDOC_CONTENT",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.HEREDOC_CONTENT"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.HEREDOC_ID",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.HEREDOC_ID"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.HEREGEX_ID",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.HEREGEX_ID"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.JAVASCRIPT_ID",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.JAVASCRIPT_ID"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.KEYWORD",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.KEYWORD"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.LINE_COMMENT",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.LINE_COMMENT"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.LOCAL_VARIABLE",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.LOCAL_VARIABLE"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.NUMBER",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.NUMBER"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.OBJECT_KEY",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.OBJECT_KEY"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.OPERATIONS",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.OPERATIONS"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.PROTOTYPE",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.PROTOTYPE"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.REGULAR_EXPRESSION_CONTENT",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.REGULAR_EXPRESSION_CONTENT"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.REGULAR_EXPRESSION_ID",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.REGULAR_EXPRESSION_ID"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.STRING",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.STRING"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.STRING_LITERAL",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.STRING_LITERAL"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.THIS",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.THIS"
-      ]
-    },
     {
       "name": "CONDITIONALLY_NOT_COMPILED",
       "occurrences": 1,
@@ -3958,202 +3790,6 @@
   ],
   "top50Unmapped": [
     {
-      "name": "COFFEESCRIPT.BAD_CHARACTER",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.BAD_CHARACTER"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.BLOCK_COMMENT",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.BLOCK_COMMENT"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.BOOLEAN",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.BOOLEAN"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.CLASS_NAME",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.CLASS_NAME"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.ESCAPE_SEQUENCE",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.ESCAPE_SEQUENCE"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.EXISTENTIAL",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.EXISTENTIAL"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.EXPRESSIONS_SUBSTITUTION_MARK",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.EXPRESSIONS_SUBSTITUTION_MARK"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.FUNCTION",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.FUNCTION"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.FUNCTION_BINDING",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.FUNCTION_BINDING"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.FUNCTION_NAME",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.FUNCTION_NAME"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.GLOBAL_VARIABLE",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.GLOBAL_VARIABLE"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.HEREDOC_CONTENT",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.HEREDOC_CONTENT"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.HEREDOC_ID",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.HEREDOC_ID"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.HEREGEX_ID",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.HEREGEX_ID"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.JAVASCRIPT_ID",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.JAVASCRIPT_ID"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.KEYWORD",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.KEYWORD"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.LINE_COMMENT",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.LINE_COMMENT"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.LOCAL_VARIABLE",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.LOCAL_VARIABLE"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.NUMBER",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.NUMBER"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.OBJECT_KEY",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.OBJECT_KEY"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.OPERATIONS",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.OPERATIONS"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.PROTOTYPE",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.PROTOTYPE"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.REGULAR_EXPRESSION_CONTENT",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.REGULAR_EXPRESSION_CONTENT"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.REGULAR_EXPRESSION_ID",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.REGULAR_EXPRESSION_ID"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.STRING",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.STRING"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.STRING_LITERAL",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.STRING_LITERAL"
-      ]
-    },
-    {
-      "name": "COFFEESCRIPT.THIS",
-      "occurrences": 1,
-      "samplePaths": [
-        "COFFEESCRIPT.THIS"
-      ]
-    },
-    {
       "name": "CONDITIONALLY_NOT_COMPILED",
       "occurrences": 1,
       "samplePaths": [
@@ -4306,6 +3942,202 @@
       "samplePaths": [
         "CONSOLE_USER_INPUT"
       ]
+    },
+    {
+      "name": "CONSOLE_WHITE_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_WHITE_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_YELLOW_BRIGHT_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_YELLOW_BRIGHT_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_YELLOW_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_YELLOW_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSTRUCTOR_CALL_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSTRUCTOR_CALL_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CONSTRUCTOR_DECLARATION_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSTRUCTOR_DECLARATION_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CPP.BLOCK_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.BLOCK_COMMENT"
+      ]
+    },
+    {
+      "name": "CPP.CONSTANT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.CONSTANT"
+      ]
+    },
+    {
+      "name": "CPP.DOT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.DOT"
+      ]
+    },
+    {
+      "name": "CPP.FIELD",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.FIELD"
+      ]
+    },
+    {
+      "name": "CPP.FUNCTION",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.FUNCTION"
+      ]
+    },
+    {
+      "name": "CPP.KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.KEYWORD"
+      ]
+    },
+    {
+      "name": "CPP.LABEL",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.LABEL"
+      ]
+    },
+    {
+      "name": "CPP.LINE_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.LINE_COMMENT"
+      ]
+    },
+    {
+      "name": "CPP.MACROS",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.MACROS"
+      ]
+    },
+    {
+      "name": "CPP.METHOD",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.METHOD"
+      ]
+    },
+    {
+      "name": "CPP.NAMESPACE",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.NAMESPACE"
+      ]
+    },
+    {
+      "name": "CPP.NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.NUMBER"
+      ]
+    },
+    {
+      "name": "CPP.OPERATION_SIGN",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.OPERATION_SIGN"
+      ]
+    },
+    {
+      "name": "CPP.PARAMETER",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.PARAMETER"
+      ]
+    },
+    {
+      "name": "CPP.PP_ARG",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.PP_ARG"
+      ]
+    },
+    {
+      "name": "CPP.PP_SKIPPED",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.PP_SKIPPED"
+      ]
+    },
+    {
+      "name": "CPP.STATIC",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.STATIC"
+      ]
+    },
+    {
+      "name": "CPP.STATIC_FUNCTION",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.STATIC_FUNCTION"
+      ]
+    },
+    {
+      "name": "CPP.STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.STRING"
+      ]
+    },
+    {
+      "name": "CPP.TYPE",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.TYPE"
+      ]
+    },
+    {
+      "name": "CPP.UNUSED",
+      "occurrences": 1,
+      "samplePaths": [
+        "CPP.UNUSED"
+      ]
+    },
+    {
+      "name": "CSS.COLOR",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.COLOR"
+      ]
+    },
+    {
+      "name": "CSS.COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.COMMENT"
+      ]
     }
   ],
   "classifiedChildLeaves": [
@@ -4401,6 +4233,123 @@
           "monacoTargets": [
             "token:class.reference.foreground",
             "token:support.class.reference.foreground"
+          ]
+        },
+        {
+          "path": "COFFEESCRIPT.BAD_CHARACTER.FOREGROUND",
+          "monacoTargets": [
+            "token:string.escape.invalid.coffee.foreground"
+          ]
+        },
+        {
+          "path": "COFFEESCRIPT.BLOCK_COMMENT.FOREGROUND",
+          "monacoTargets": [
+            "token:comment.coffee.foreground"
+          ]
+        },
+        {
+          "path": "COFFEESCRIPT.BOOLEAN.FOREGROUND",
+          "monacoTargets": [
+            "token:keyword.true.coffee.foreground",
+            "token:keyword.false.coffee.foreground",
+            "token:keyword.yes.coffee.foreground",
+            "token:keyword.no.coffee.foreground",
+            "token:keyword.on.coffee.foreground",
+            "token:keyword.off.coffee.foreground"
+          ]
+        },
+        {
+          "path": "COFFEESCRIPT.ESCAPE_SEQUENCE.FOREGROUND",
+          "monacoTargets": [
+            "token:string.escape.coffee.foreground"
+          ]
+        },
+        {
+          "path": "COFFEESCRIPT.EXISTENTIAL.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.coffee.foreground"
+          ]
+        },
+        {
+          "path": "COFFEESCRIPT.EXPRESSIONS_SUBSTITUTION_MARK.FOREGROUND",
+          "monacoTargets": [
+            "token:string.quote.coffee.foreground"
+          ]
+        },
+        {
+          "path": "COFFEESCRIPT.FUNCTION.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.coffee.foreground"
+          ]
+        },
+        {
+          "path": "COFFEESCRIPT.FUNCTION_BINDING.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.coffee.foreground"
+          ]
+        },
+        {
+          "path": "COFFEESCRIPT.KEYWORD.FOREGROUND",
+          "monacoTargets": [
+            "token:keyword.class.coffee.foreground",
+            "token:keyword.return.coffee.foreground",
+            "token:keyword.if.coffee.foreground",
+            "token:keyword.else.coffee.foreground",
+            "token:keyword.then.coffee.foreground",
+            "token:keyword.unless.coffee.foreground",
+            "token:keyword.for.coffee.foreground",
+            "token:keyword.while.coffee.foreground",
+            "token:keyword.try.coffee.foreground",
+            "token:keyword.catch.coffee.foreground",
+            "token:keyword.finally.coffee.foreground",
+            "token:keyword.new.coffee.foreground",
+            "token:keyword.extends.coffee.foreground",
+            "token:keyword.super.coffee.foreground"
+          ]
+        },
+        {
+          "path": "COFFEESCRIPT.LINE_COMMENT.FOREGROUND",
+          "monacoTargets": [
+            "token:comment.coffee.foreground"
+          ]
+        },
+        {
+          "path": "COFFEESCRIPT.NUMBER.FOREGROUND",
+          "monacoTargets": [
+            "token:number.coffee.foreground",
+            "token:number.float.coffee.foreground",
+            "token:number.hex.coffee.foreground",
+            "token:number.octal.coffee.foreground"
+          ]
+        },
+        {
+          "path": "COFFEESCRIPT.OPERATIONS.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.coffee.foreground"
+          ]
+        },
+        {
+          "path": "COFFEESCRIPT.PROTOTYPE.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.coffee.foreground"
+          ]
+        },
+        {
+          "path": "COFFEESCRIPT.REGULAR_EXPRESSION_CONTENT.FOREGROUND",
+          "monacoTargets": [
+            "token:regexp.coffee.foreground"
+          ]
+        },
+        {
+          "path": "COFFEESCRIPT.STRING.FOREGROUND",
+          "monacoTargets": [
+            "token:string.coffee.foreground"
+          ]
+        },
+        {
+          "path": "COFFEESCRIPT.THIS.FOREGROUND",
+          "monacoTargets": [
+            "token:variable.predefined.coffee.foreground"
           ]
         },
         {
@@ -4586,112 +4535,48 @@
           "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
         },
         {
-          "path": "COFFEESCRIPT.BAD_CHARACTER.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
-        },
-        {
-          "path": "COFFEESCRIPT.BLOCK_COMMENT.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
-        },
-        {
-          "path": "COFFEESCRIPT.BOOLEAN.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
-        },
-        {
           "path": "COFFEESCRIPT.CLASS_NAME.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
-        },
-        {
-          "path": "COFFEESCRIPT.ESCAPE_SEQUENCE.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
-        },
-        {
-          "path": "COFFEESCRIPT.EXISTENTIAL.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
-        },
-        {
-          "path": "COFFEESCRIPT.EXPRESSIONS_SUBSTITUTION_MARK.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
-        },
-        {
-          "path": "COFFEESCRIPT.FUNCTION.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
-        },
-        {
-          "path": "COFFEESCRIPT.FUNCTION_BINDING.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit a distinct class-name token"
         },
         {
           "path": "COFFEESCRIPT.FUNCTION_NAME.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit a distinct function-name token"
         },
         {
           "path": "COFFEESCRIPT.GLOBAL_VARIABLE.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not distinguish local/global variable identifiers"
         },
         {
           "path": "COFFEESCRIPT.HEREDOC_ID.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit distinct heredoc or heregex delimiter tokens"
         },
         {
           "path": "COFFEESCRIPT.HEREGEX_ID.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit distinct heredoc or heregex delimiter tokens"
         },
         {
           "path": "COFFEESCRIPT.JAVASCRIPT_ID.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
-        },
-        {
-          "path": "COFFEESCRIPT.KEYWORD.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
-        },
-        {
-          "path": "COFFEESCRIPT.LINE_COMMENT.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit a distinct embedded-JavaScript delimiter token"
         },
         {
           "path": "COFFEESCRIPT.LOCAL_VARIABLE.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
-        },
-        {
-          "path": "COFFEESCRIPT.NUMBER.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not distinguish local/global variable identifiers"
         },
         {
           "path": "COFFEESCRIPT.OBJECT_KEY.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
-        },
-        {
-          "path": "COFFEESCRIPT.OPERATIONS.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
-        },
-        {
-          "path": "COFFEESCRIPT.PROTOTYPE.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
-        },
-        {
-          "path": "COFFEESCRIPT.REGULAR_EXPRESSION_CONTENT.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit a distinct object-key token"
         },
         {
           "path": "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "unsupported: Monaco's CoffeeScript grammar emits regex flags and delimiters as the generic regexp token"
         },
         {
           "path": "COFFEESCRIPT.REGULAR_EXPRESSION_ID.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
-        },
-        {
-          "path": "COFFEESCRIPT.STRING.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "unsupported: Monaco's CoffeeScript grammar emits regex flags and delimiters as the generic regexp token"
         },
         {
           "path": "COFFEESCRIPT.STRING_LITERAL.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
-        },
-        {
-          "path": "COFFEESCRIPT.THIS.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not distinguish literal string token variants"
         },
         {
           "path": "CONDITIONALLY_NOT_COMPILED.FOREGROUND",
@@ -6473,6 +6358,35 @@
           ]
         },
         {
+          "path": "COFFEESCRIPT.BLOCK_COMMENT.FONT_TYPE",
+          "monacoTargets": [
+            "token:comment.coffee.fontStyle"
+          ]
+        },
+        {
+          "path": "COFFEESCRIPT.BOOLEAN.FONT_TYPE",
+          "monacoTargets": [
+            "token:keyword.true.coffee.fontStyle",
+            "token:keyword.false.coffee.fontStyle",
+            "token:keyword.yes.coffee.fontStyle",
+            "token:keyword.no.coffee.fontStyle",
+            "token:keyword.on.coffee.fontStyle",
+            "token:keyword.off.coffee.fontStyle"
+          ]
+        },
+        {
+          "path": "COFFEESCRIPT.LINE_COMMENT.FONT_TYPE",
+          "monacoTargets": [
+            "token:comment.coffee.fontStyle"
+          ]
+        },
+        {
+          "path": "COFFEESCRIPT.THIS.FONT_TYPE",
+          "monacoTargets": [
+            "token:variable.predefined.coffee.fontStyle"
+          ]
+        },
+        {
           "path": "DEFAULT_BRACES.FONT_TYPE",
           "monacoTargets": [
             "token:delimiter.fontStyle",
@@ -6547,48 +6461,32 @@
           "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
         },
         {
-          "path": "COFFEESCRIPT.BLOCK_COMMENT.FONT_TYPE",
-          "reason": "defer: Maldives does not load this language grammar yet"
-        },
-        {
-          "path": "COFFEESCRIPT.BOOLEAN.FONT_TYPE",
-          "reason": "defer: Maldives does not load this language grammar yet"
-        },
-        {
           "path": "COFFEESCRIPT.HEREDOC_CONTENT.FONT_TYPE",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "unsupported: Monaco's CoffeeScript grammar emits heredoc contents as the generic string token"
         },
         {
           "path": "COFFEESCRIPT.HEREDOC_ID.FONT_TYPE",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit distinct heredoc or heregex delimiter tokens"
         },
         {
           "path": "COFFEESCRIPT.HEREGEX_ID.FONT_TYPE",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit distinct heredoc or heregex delimiter tokens"
         },
         {
           "path": "COFFEESCRIPT.JAVASCRIPT_ID.FONT_TYPE",
-          "reason": "defer: Maldives does not load this language grammar yet"
-        },
-        {
-          "path": "COFFEESCRIPT.LINE_COMMENT.FONT_TYPE",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit a distinct embedded-JavaScript delimiter token"
         },
         {
           "path": "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG.FONT_TYPE",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "unsupported: Monaco's CoffeeScript grammar emits regex flags and delimiters as the generic regexp token"
         },
         {
           "path": "COFFEESCRIPT.REGULAR_EXPRESSION_ID.FONT_TYPE",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "unsupported: Monaco's CoffeeScript grammar emits regex flags and delimiters as the generic regexp token"
         },
         {
           "path": "COFFEESCRIPT.STRING_LITERAL.FONT_TYPE",
-          "reason": "defer: Maldives does not load this language grammar yet"
-        },
-        {
-          "path": "COFFEESCRIPT.THIS.FONT_TYPE",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not distinguish literal string token variants"
         },
         {
           "path": "CONSOLE_USER_INPUT.FONT_TYPE",
@@ -8516,6 +8414,433 @@
           "reason": "defer: terminal command block highlighting waits for the P23 terminal/editor-block subsystem; no Monaco grammar emits this token today"
         }
       ]
+    },
+    {
+      "name": "COFFEESCRIPT.BAD_CHARACTER",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "COFFEESCRIPT.BAD_CHARACTER.FOREGROUND",
+          "monacoTargets": [
+            "token:string.escape.invalid.coffee.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": [
+        {
+          "path": "COFFEESCRIPT.BAD_CHARACTER.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "COFFEESCRIPT.BAD_CHARACTER.ERROR_STRIPE_COLOR",
+          "reason": "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute"
+        }
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.BLOCK_COMMENT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "COFFEESCRIPT.BLOCK_COMMENT.FOREGROUND",
+          "monacoTargets": [
+            "token:comment.coffee.foreground"
+          ]
+        },
+        {
+          "path": "COFFEESCRIPT.BLOCK_COMMENT.FONT_TYPE",
+          "monacoTargets": [
+            "token:comment.coffee.fontStyle"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "COFFEESCRIPT.BOOLEAN",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "COFFEESCRIPT.BOOLEAN.FOREGROUND",
+          "monacoTargets": [
+            "token:keyword.true.coffee.foreground",
+            "token:keyword.false.coffee.foreground",
+            "token:keyword.yes.coffee.foreground",
+            "token:keyword.no.coffee.foreground",
+            "token:keyword.on.coffee.foreground",
+            "token:keyword.off.coffee.foreground"
+          ]
+        },
+        {
+          "path": "COFFEESCRIPT.BOOLEAN.FONT_TYPE",
+          "monacoTargets": [
+            "token:keyword.true.coffee.fontStyle",
+            "token:keyword.false.coffee.fontStyle",
+            "token:keyword.yes.coffee.fontStyle",
+            "token:keyword.no.coffee.fontStyle",
+            "token:keyword.on.coffee.fontStyle",
+            "token:keyword.off.coffee.fontStyle"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "COFFEESCRIPT.CLASS_NAME",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "COFFEESCRIPT.CLASS_NAME.FOREGROUND",
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit a distinct class-name token"
+        }
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.ESCAPE_SEQUENCE",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "COFFEESCRIPT.ESCAPE_SEQUENCE.FOREGROUND",
+          "monacoTargets": [
+            "token:string.escape.coffee.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "COFFEESCRIPT.EXISTENTIAL",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "COFFEESCRIPT.EXISTENTIAL.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.coffee.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "COFFEESCRIPT.EXPRESSIONS_SUBSTITUTION_MARK",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "COFFEESCRIPT.EXPRESSIONS_SUBSTITUTION_MARK.FOREGROUND",
+          "monacoTargets": [
+            "token:string.quote.coffee.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "COFFEESCRIPT.FUNCTION",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "COFFEESCRIPT.FUNCTION.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.coffee.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "COFFEESCRIPT.FUNCTION_BINDING",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "COFFEESCRIPT.FUNCTION_BINDING.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.coffee.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "COFFEESCRIPT.FUNCTION_NAME",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "COFFEESCRIPT.FUNCTION_NAME.FOREGROUND",
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit a distinct function-name token"
+        }
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.GLOBAL_VARIABLE",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "COFFEESCRIPT.GLOBAL_VARIABLE.FOREGROUND",
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not distinguish local/global variable identifiers"
+        }
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.HEREDOC_CONTENT",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "COFFEESCRIPT.HEREDOC_CONTENT.FONT_TYPE",
+          "reason": "unsupported: Monaco's CoffeeScript grammar emits heredoc contents as the generic string token"
+        }
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.HEREDOC_ID",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "COFFEESCRIPT.HEREDOC_ID.FOREGROUND",
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit distinct heredoc or heregex delimiter tokens"
+        },
+        {
+          "path": "COFFEESCRIPT.HEREDOC_ID.FONT_TYPE",
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit distinct heredoc or heregex delimiter tokens"
+        }
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.HEREGEX_ID",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "COFFEESCRIPT.HEREGEX_ID.FOREGROUND",
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit distinct heredoc or heregex delimiter tokens"
+        },
+        {
+          "path": "COFFEESCRIPT.HEREGEX_ID.FONT_TYPE",
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit distinct heredoc or heregex delimiter tokens"
+        }
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.JAVASCRIPT_ID",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "COFFEESCRIPT.JAVASCRIPT_ID.FOREGROUND",
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit a distinct embedded-JavaScript delimiter token"
+        },
+        {
+          "path": "COFFEESCRIPT.JAVASCRIPT_ID.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "COFFEESCRIPT.JAVASCRIPT_ID.FONT_TYPE",
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit a distinct embedded-JavaScript delimiter token"
+        }
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.KEYWORD",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "COFFEESCRIPT.KEYWORD.FOREGROUND",
+          "monacoTargets": [
+            "token:keyword.class.coffee.foreground",
+            "token:keyword.return.coffee.foreground",
+            "token:keyword.if.coffee.foreground",
+            "token:keyword.else.coffee.foreground",
+            "token:keyword.then.coffee.foreground",
+            "token:keyword.unless.coffee.foreground",
+            "token:keyword.for.coffee.foreground",
+            "token:keyword.while.coffee.foreground",
+            "token:keyword.try.coffee.foreground",
+            "token:keyword.catch.coffee.foreground",
+            "token:keyword.finally.coffee.foreground",
+            "token:keyword.new.coffee.foreground",
+            "token:keyword.extends.coffee.foreground",
+            "token:keyword.super.coffee.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "COFFEESCRIPT.LINE_COMMENT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "COFFEESCRIPT.LINE_COMMENT.FOREGROUND",
+          "monacoTargets": [
+            "token:comment.coffee.foreground"
+          ]
+        },
+        {
+          "path": "COFFEESCRIPT.LINE_COMMENT.FONT_TYPE",
+          "monacoTargets": [
+            "token:comment.coffee.fontStyle"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "COFFEESCRIPT.LOCAL_VARIABLE",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "COFFEESCRIPT.LOCAL_VARIABLE.FOREGROUND",
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not distinguish local/global variable identifiers"
+        }
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.NUMBER",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "COFFEESCRIPT.NUMBER.FOREGROUND",
+          "monacoTargets": [
+            "token:number.coffee.foreground",
+            "token:number.float.coffee.foreground",
+            "token:number.hex.coffee.foreground",
+            "token:number.octal.coffee.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "COFFEESCRIPT.OBJECT_KEY",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "COFFEESCRIPT.OBJECT_KEY.FOREGROUND",
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit a distinct object-key token"
+        }
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.OPERATIONS",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "COFFEESCRIPT.OPERATIONS.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.coffee.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "COFFEESCRIPT.PROTOTYPE",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "COFFEESCRIPT.PROTOTYPE.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.coffee.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "COFFEESCRIPT.REGULAR_EXPRESSION_CONTENT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "COFFEESCRIPT.REGULAR_EXPRESSION_CONTENT.FOREGROUND",
+          "monacoTargets": [
+            "token:regexp.coffee.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG.FOREGROUND",
+          "reason": "unsupported: Monaco's CoffeeScript grammar emits regex flags and delimiters as the generic regexp token"
+        },
+        {
+          "path": "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG.FONT_TYPE",
+          "reason": "unsupported: Monaco's CoffeeScript grammar emits regex flags and delimiters as the generic regexp token"
+        }
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.REGULAR_EXPRESSION_ID",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "COFFEESCRIPT.REGULAR_EXPRESSION_ID.FOREGROUND",
+          "reason": "unsupported: Monaco's CoffeeScript grammar emits regex flags and delimiters as the generic regexp token"
+        },
+        {
+          "path": "COFFEESCRIPT.REGULAR_EXPRESSION_ID.FONT_TYPE",
+          "reason": "unsupported: Monaco's CoffeeScript grammar emits regex flags and delimiters as the generic regexp token"
+        }
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.STRING",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "COFFEESCRIPT.STRING.FOREGROUND",
+          "monacoTargets": [
+            "token:string.coffee.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "COFFEESCRIPT.STRING_LITERAL",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "COFFEESCRIPT.STRING_LITERAL.FOREGROUND",
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not distinguish literal string token variants"
+        },
+        {
+          "path": "COFFEESCRIPT.STRING_LITERAL.FONT_TYPE",
+          "reason": "unsupported: Monaco's CoffeeScript grammar does not distinguish literal string token variants"
+        }
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.THIS",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "COFFEESCRIPT.THIS.FOREGROUND",
+          "monacoTargets": [
+            "token:variable.predefined.coffee.foreground"
+          ]
+        },
+        {
+          "path": "COFFEESCRIPT.THIS.FONT_TYPE",
+          "monacoTargets": [
+            "token:variable.predefined.coffee.fontStyle"
+          ]
+        }
+      ],
+      "deferredPaths": []
     }
   ]
 }

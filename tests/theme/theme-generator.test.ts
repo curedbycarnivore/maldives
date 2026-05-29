@@ -109,6 +109,24 @@ test("maps P15k Bash external command colors onto Monaco shell token scopes", ()
   );
 });
 
+test("maps P15l CoffeeScript colors onto Monaco CoffeeScript token scopes", () => {
+  expect(theme.rules).toEqual(
+    expect.arrayContaining([
+      { token: "comment.coffee", foreground: "999999", fontStyle: "italic" },
+      { token: "keyword.class.coffee", foreground: "cc99cc" },
+      { token: "keyword.true.coffee", foreground: "f99157", fontStyle: "bold" },
+      { token: "string.escape.coffee", foreground: "6699cc" },
+      { token: "string.escape.invalid.coffee", foreground: "ffffff" },
+      { token: "string.quote.coffee", foreground: "ffffff" },
+      { token: "delimiter.coffee", foreground: "66cccc" },
+      { token: "number.coffee", foreground: "f99157" },
+      { token: "regexp.coffee", foreground: "f2777a" },
+      { token: "string.coffee", foreground: "99cc99" },
+      { token: "variable.predefined.coffee", foreground: "66cccc", fontStyle: "bold" },
+    ]),
+  );
+});
+
 test("registers the generated Monaco theme", () => {
   const defineTheme = vi.fn();
   const monaco = { editor: { defineTheme } } as unknown as typeof import("monaco-editor");

@@ -108,3 +108,26 @@ test("parses P15k shell token surfaces from the active ICLS theme", () => {
     ]),
   );
 });
+
+test("parses P15l CoffeeScript token surfaces from the active ICLS theme", () => {
+  expect(theme.tokens).toEqual(
+    expect.arrayContaining([
+      { name: "COFFEESCRIPT.BAD_CHARACTER", foreground: "#ffffff", fontStyle: "" },
+      { name: "COFFEESCRIPT.BLOCK_COMMENT", foreground: "#999999", fontStyle: "italic" },
+      { name: "COFFEESCRIPT.BOOLEAN", foreground: "#f99157", fontStyle: "bold" },
+      { name: "COFFEESCRIPT.ESCAPE_SEQUENCE", foreground: "#6699cc", fontStyle: "" },
+      { name: "COFFEESCRIPT.EXISTENTIAL", foreground: "#66cccc", fontStyle: "" },
+      { name: "COFFEESCRIPT.EXPRESSIONS_SUBSTITUTION_MARK", foreground: "#ffffff", fontStyle: "" },
+      { name: "COFFEESCRIPT.FUNCTION", foreground: "#66cccc", fontStyle: "" },
+      { name: "COFFEESCRIPT.FUNCTION_BINDING", foreground: "#66cccc", fontStyle: "" },
+      { name: "COFFEESCRIPT.KEYWORD", foreground: "#cc99cc", fontStyle: "" },
+      { name: "COFFEESCRIPT.LINE_COMMENT", foreground: "#999999", fontStyle: "italic" },
+      { name: "COFFEESCRIPT.NUMBER", foreground: "#f99157", fontStyle: "" },
+      { name: "COFFEESCRIPT.OPERATIONS", foreground: "#66cccc", fontStyle: "" },
+      { name: "COFFEESCRIPT.PROTOTYPE", foreground: "#66cccc", fontStyle: "" },
+      { name: "COFFEESCRIPT.REGULAR_EXPRESSION_CONTENT", foreground: "#f2777a", fontStyle: "" },
+      { name: "COFFEESCRIPT.STRING", foreground: "#99cc99", fontStyle: "" },
+      { name: "COFFEESCRIPT.THIS", foreground: "#66cccc", fontStyle: "bold" },
+    ]),
+  );
+});

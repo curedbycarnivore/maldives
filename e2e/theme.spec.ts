@@ -270,3 +270,53 @@ grep -n "LiveRepository" src/generated/real-user.tsx
   await mkdir("proof", { recursive: true });
   await page.screenshot({ path: "proof/p15k-theme-shell-surfaces-proof.png" });
 });
+
+test("renders P15l CoffeeScript token colors on a real script that emits Effect TSX", async ({ page }) => {
+  await loadEditor(page);
+
+  await page.evaluate(() => {
+    const sample = `# CoffeeScript generator for a real Effect TSX module
+class RepositoryBuilder
+  constructor: (@ready = true) ->
+  build: (id) =>
+    source = """
+    import { Effect, Layer, Schema, pipe } from "effect"
+    class Repository<T extends { id: string }> {
+      load(id: string) { return pipe(Effect.succeed({ id }), Effect.map(Schema.decodeUnknownSync(Schema.Struct({ id: Schema.String })))) }
+    }
+    export const Live = Layer.succeed(Repository, new Repository<{ id: string }>())
+    """
+    count = 42
+    return source if this.ready? and count > 0
+`;
+    window.__maldivesEditor.setModel(window.__monaco.editor.createModel(sample, "coffeescript", window.__monaco.Uri.parse("file:///maldives/p15l-real-generator.coffee")));
+    window.__maldivesEditor.setPosition({ lineNumber: 3, column: 3 });
+    window.__maldivesEditor.focus();
+  });
+
+  const colorForText = (text: string) =>
+    page.evaluate((needle) => {
+      const normalize = (value: string | null) => (value ?? "").replace(/\u00a0/g, " ").trim();
+      const spans = Array.from(document.querySelectorAll<HTMLElement>(".monaco-editor .view-line span"));
+      const match = spans.find((span) => span.childElementCount === 0 && normalize(span.textContent) === needle);
+      if (match) return getComputedStyle(match).color;
+
+      const line = Array.from(document.querySelectorAll<HTMLElement>(".monaco-editor .view-line")).find(
+        (viewLine) => normalize(viewLine.textContent) === needle,
+      );
+      const leafColors = Array.from(line?.querySelectorAll<HTMLElement>("span") ?? [])
+        .filter((span) => span.childElementCount === 0 && normalize(span.textContent))
+        .map((span) => getComputedStyle(span).color);
+      return new Set(leafColors).size === 1 ? leafColors[0] : "";
+    }, text);
+
+  await expect.poll(() => colorForText("# CoffeeScript generator for a real Effect TSX module"), { timeout: 10000 }).toBe("rgb(153, 153, 153)");
+  await expect.poll(() => colorForText("class"), { timeout: 10000 }).toBe("rgb(204, 153, 204)");
+  await expect.poll(() => colorForText("true"), { timeout: 10000 }).toBe("rgb(249, 145, 87)");
+  await expect.poll(() => colorForText("->"), { timeout: 10000 }).toBe("rgb(102, 204, 204)");
+  await expect.poll(() => colorForText("this"), { timeout: 10000 }).toBe("rgb(102, 204, 204)");
+  await expect.poll(() => colorForText("42"), { timeout: 10000 }).toBe("rgb(249, 145, 87)");
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/p15l-theme-coffeescript-surfaces-proof.png" });
+});

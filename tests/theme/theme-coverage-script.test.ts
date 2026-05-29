@@ -208,6 +208,67 @@ describe("scripts/theme-coverage", () => {
     ]);
   });
 
+  test("classifies P15l CoffeeScript token surfaces into targets or explicit deferrals", () => {
+    const report = auditThemeCoverageMappings(iclsXml);
+    const p15lNames = [
+      "COFFEESCRIPT.BAD_CHARACTER",
+      "COFFEESCRIPT.BLOCK_COMMENT",
+      "COFFEESCRIPT.BOOLEAN",
+      "COFFEESCRIPT.CLASS_NAME",
+      "COFFEESCRIPT.ESCAPE_SEQUENCE",
+      "COFFEESCRIPT.EXISTENTIAL",
+      "COFFEESCRIPT.EXPRESSIONS_SUBSTITUTION_MARK",
+      "COFFEESCRIPT.FUNCTION",
+      "COFFEESCRIPT.FUNCTION_BINDING",
+      "COFFEESCRIPT.FUNCTION_NAME",
+      "COFFEESCRIPT.GLOBAL_VARIABLE",
+      "COFFEESCRIPT.HEREDOC_CONTENT",
+      "COFFEESCRIPT.HEREDOC_ID",
+      "COFFEESCRIPT.HEREGEX_ID",
+      "COFFEESCRIPT.JAVASCRIPT_ID",
+      "COFFEESCRIPT.KEYWORD",
+      "COFFEESCRIPT.LINE_COMMENT",
+      "COFFEESCRIPT.LOCAL_VARIABLE",
+      "COFFEESCRIPT.NUMBER",
+      "COFFEESCRIPT.OBJECT_KEY",
+      "COFFEESCRIPT.OPERATIONS",
+      "COFFEESCRIPT.PROTOTYPE",
+      "COFFEESCRIPT.REGULAR_EXPRESSION_CONTENT",
+      "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG",
+      "COFFEESCRIPT.REGULAR_EXPRESSION_ID",
+      "COFFEESCRIPT.STRING",
+      "COFFEESCRIPT.STRING_LITERAL",
+      "COFFEESCRIPT.THIS",
+    ];
+
+    expect(report.top50Unmapped.map((entry) => entry.name)).not.toEqual(expect.arrayContaining(p15lNames));
+    expect(report.classifiedTopLevelOptions.map((entry) => entry.name)).toEqual(expect.arrayContaining(p15lNames));
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "COFFEESCRIPT.KEYWORD")?.mappedPaths).toEqual([
+      {
+        path: "COFFEESCRIPT.KEYWORD.FOREGROUND",
+        monacoTargets: expect.arrayContaining([
+          "token:keyword.class.coffee.foreground",
+          "token:keyword.return.coffee.foreground",
+          "token:keyword.if.coffee.foreground",
+        ]),
+      },
+    ]);
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "COFFEESCRIPT.CLASS_NAME")?.deferredPaths).toEqual([
+      {
+        path: "COFFEESCRIPT.CLASS_NAME.FOREGROUND",
+        reason: "unsupported: Monaco's CoffeeScript grammar does not emit a distinct class-name token",
+      },
+    ]);
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "COFFEESCRIPT.JAVASCRIPT_ID")?.deferredPaths).toEqual(
+      expect.arrayContaining([
+        {
+          path: "COFFEESCRIPT.JAVASCRIPT_ID.BACKGROUND",
+          reason: "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute",
+        },
+      ]),
+    );
+  });
+
   test("writes proof/theme-coverage.json shaped for watchdog telemetry", () => {
     const outFile = join(mkdtempSync(join(tmpdir(), "maldives-theme-coverage-")), "theme-coverage.json");
 
