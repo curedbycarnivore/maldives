@@ -1,5 +1,6 @@
 import { mkdir } from "node:fs/promises";
-import { expect, type Page, test } from "@playwright/test";
+import { expect, test } from "@playwright/test";
+import { loadEditor } from "./helpers/load-editor";
 
 declare global {
   interface Window {
@@ -8,10 +9,6 @@ declare global {
   }
 }
 
-async function loadEditor(page: Page): Promise<void> {
-  await page.goto("http://127.0.0.1:5173/");
-  await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesEditor))).toBe(true);
-}
 
 test("keymap coverage audit exercises a newly covered editor action", async ({ page }) => {
   await loadEditor(page);

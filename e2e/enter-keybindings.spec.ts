@@ -1,5 +1,6 @@
 import { mkdir } from "node:fs/promises";
-import { expect, type Page, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
+import { loadEditor } from "./helpers/load-editor";
 
 declare global {
   interface Window {
@@ -34,13 +35,6 @@ async function executeEnterShortcut(page: Page, wsActionId: string, shortcut: En
     },
     { wsActionId, shortcut },
   );
-}
-
-async function loadEditor(page: Page): Promise<void> {
-  await page.goto("http://127.0.0.1:5173/");
-  await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesEditor))).toBe(true);
-  // wait for @ast-grep/wasm to initialize — completeStatementWhenReady is async on first call
-  await page.waitForTimeout(3000);
 }
 
 async function expectSuggestWidgetHidden(page: Page): Promise<void> {

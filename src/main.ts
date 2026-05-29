@@ -2,7 +2,7 @@ import * as monaco from "monaco-editor";
 import activeThemeXml from "../ssot/colors/active-theme.icls?raw";
 import keymapXml from "../ssot/keymaps/leet hax.xml?raw";
 import editorOptionsXml from "../ssot/options/editor.xml?raw";
-import { initializeAstSmartSelection } from "./ast-smart-selection";
+import { ensureAstReady } from "./ast-smart-selection";
 import { registerAstStructuralSearchAction } from "./ast-structural-search";
 import { registerMaldivesCodeActions } from "./code-actions";
 import { registerSchemaJsonSchemaAction } from "./schema-jsonschema";
@@ -15,10 +15,10 @@ import { registerKeybindings, type RegisteredMaldivesAction } from "./keybinding
 import { parseEditorOptions } from "./parsers/editor-options-parser";
 import { parseIcls } from "./parsers/icls-parser";
 import { parseKeymap } from "./parsers/keymap-parser";
-import { setupDefaultMonacoWorkers } from "./monaco-workers";
+import { awaitTypeScriptWorkerAnswer, setupDefaultMonacoWorkers } from "./monaco-workers";
 import { maldivesProFeatureOptions } from "./pro-features";
 import { registerTheme, THEME_NAME } from "./theme";
-import { configureTypeScriptWorker, registerEffectDtsFiles, warmTypeScriptWorkerForModel, type EffectDtsFiles, type RegisterEffectDtsFilesOptions } from "./typescript-worker";
+import { configureTypeScriptWorker, registerEffectDtsFiles, type EffectDtsFiles, type RegisterEffectDtsFilesOptions } from "./typescript-worker";
 
 declare global {
   interface Window {
@@ -28,7 +28,7 @@ declare global {
     __maldivesExecuteKeybinding: (wsActionId: string) => boolean;
     __maldivesRegisterEffectDtsFiles: (files: EffectDtsFiles, options?: RegisterEffectDtsFilesOptions) => monaco.IDisposable;
     __maldivesOpenEffectDevTools: (options: OpenEffectDevToolsOptions) => void;
-    __maldivesTypeScriptReady: Promise<void>;
+    __maldivesReady: Promise<void>;
   }
 }
 
@@ -72,14 +72,12 @@ configureTypeScriptWorker(monaco);
 registerEffectSnippets(monaco);
 registerEffectHoverProvider(monaco);
 registerMaldivesCodeActions(monaco);
-void initializeAstSmartSelection().catch(() => undefined);
 
 window.__monaco = monaco;
 window.__maldivesRegisterEffectDtsFiles = (files, options) => registerEffectDtsFiles(monaco, files, options);
 window.__maldivesOpenEffectDevTools = (options) => openEffectDevToolsPanel(options);
 const sampleModel = monaco.editor.createModel(sampleDocument, "typescript", monaco.Uri.parse("file:///maldives/sample.ts"));
 const secondModel = monaco.editor.createModel(secondDocument, "typescript", monaco.Uri.parse("file:///maldives/second.ts"));
-window.__maldivesTypeScriptReady = warmTypeScriptWorkerForModel(monaco, sampleModel).catch(() => undefined);
 registerModelTab(sampleModel);
 registerModelTab(secondModel);
 const editor = monaco.editor.create(app, {
@@ -100,6 +98,11 @@ installEffectDevToolsButton(document.body, {
   token: window.localStorage.getItem("maldives.devtools.token") ?? "",
 });
 window.__maldivesEditor = editor;
+window.__maldivesReady = (async () => {
+  await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+  await awaitTypeScriptWorkerAnswer(monaco, sampleModel);
+  await ensureAstReady();
+})();
 window.__maldivesKeybindings = registeredKeybindings;
 window.__maldivesExecuteKeybinding = (wsActionId) => {
   const registered = registeredKeybindings.find(

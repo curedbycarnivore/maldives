@@ -1,5 +1,6 @@
 import { mkdir } from "node:fs/promises";
-import { expect, type Page, test } from "@playwright/test";
+import { expect, test } from "@playwright/test";
+import { loadEditor } from "./helpers/load-editor";
 
 declare global {
   interface Window {
@@ -8,10 +9,6 @@ declare global {
   }
 }
 
-async function loadEditor(page: Page): Promise<void> {
-  await page.goto("http://127.0.0.1:5173/");
-  await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesEditor))).toBe(true);
-}
 
 test("Promise to Effect.gen code action rewrites an async function", async ({ page }) => {
   await loadEditor(page);
@@ -31,11 +28,12 @@ test("Promise to Effect.gen code action rewrites an async function", async ({ pa
     window.__maldivesEditor.focus();
   });
 
-  await page.waitForTimeout(500);
-  const opened = await page.evaluate(() => window.__maldivesExecuteKeybinding("IntroduceActionsGroup"));
-  expect(opened).toBe(true);
   const convertAction = page.locator('.action-widget .monaco-list-row:has-text("Convert to Effect.gen")');
-  await convertAction.waitFor({ state: "visible", timeout: 15000 });
+  await expect(async () => {
+    const opened = await page.evaluate(() => window.__maldivesExecuteKeybinding("IntroduceActionsGroup"));
+    expect(opened).toBe(true);
+    await convertAction.waitFor({ state: "visible", timeout: 1000 });
+  }).toPass({ timeout: 15000 });
   await page.keyboard.press("Enter");
 
   await expect

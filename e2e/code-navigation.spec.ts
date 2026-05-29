@@ -1,16 +1,12 @@
 import { mkdir } from "node:fs/promises";
-import { expect, type Page, test } from "@playwright/test";
+import { expect, test } from "@playwright/test";
+import { loadEditor } from "./helpers/load-editor";
 
 declare global {
   interface Window {
     __maldivesEditor: import("monaco-editor").editor.IStandaloneCodeEditor;
     __maldivesExecuteKeybinding: (wsActionId: string) => boolean;
   }
-}
-
-async function loadEditor(page: Page): Promise<void> {
-  await page.goto("http://127.0.0.1:5173/");
-  await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesEditor))).toBe(true);
 }
 
 test("code navigation actions show TypeScript-backed visible results", async ({ page }) => {

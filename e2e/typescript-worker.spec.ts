@@ -1,16 +1,12 @@
 import { mkdir } from "node:fs/promises";
-import { expect, type Page, test } from "@playwright/test";
+import { expect, test } from "@playwright/test";
+import { loadEditor } from "./helpers/load-editor";
 
 declare global {
   interface Window {
     __maldivesEditor: import("monaco-editor").editor.IStandaloneCodeEditor;
     __monaco: typeof import("monaco-editor");
   }
-}
-
-async function loadEditor(page: Page): Promise<void> {
-  await page.goto("http://127.0.0.1:5173/");
-  await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesEditor)), { timeout: 15000 }).toBe(true);
 }
 
 test("configures strict TypeScript worker options and renders inlay hints", async ({ page }) => {
@@ -53,40 +49,19 @@ total;`);
     editor.focus();
   });
 
-  // Wait for TS worker to process new model before polling decorations
-  await page.waitForTimeout(2000);
+  await expect(async () => {
+    const contents = await page.evaluate(() =>
+      window.__maldivesEditor
+        .getModel()
+        ?.getAllDecorations()
+        .filter((decoration) => decoration.options.description === "InlayHint")
+        .flatMap((decoration) => [decoration.options.before?.content, decoration.options.after?.content])
+        .filter((content): content is string => Boolean(content)) ?? [],
+    );
 
-  await expect
-    .poll(
-      () =>
-        page.evaluate(() =>
-          window.__maldivesEditor
-            .getModel()
-            ?.getAllDecorations()
-            .filter((decoration) => decoration.options.description === "InlayHint")
-            .flatMap((decoration) => [
-              decoration.options.before?.content,
-              decoration.options.after?.content,
-            ])
-            .filter((content): content is string => Boolean(content)),
-        ),
-      { timeout: 10000 },
-    )
-    .toEqual(expect.arrayContaining(["a:", "b:"]));
-
-  const hintText = await page.evaluate(() =>
-    window.__maldivesEditor
-      .getModel()
-      ?.getAllDecorations()
-      .filter((decoration) => decoration.options.description === "InlayHint")
-      .flatMap((decoration) => [
-        decoration.options.before?.content,
-        decoration.options.after?.content,
-      ])
-      .filter((content): content is string => Boolean(content))
-      .join(" ") ?? "",
-  );
-  expect(hintText).not.toContain("any");
+    expect(contents).toEqual(expect.arrayContaining(["a:", "b:"]));
+    expect(contents.join(" ")).not.toContain("any");
+  }).toPass({ timeout: 10000 });
 
   await mkdir("proof", { recursive: true });
   await page.screenshot({ path: "proof/ts-inlay-hints.png" });

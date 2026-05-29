@@ -1,5 +1,6 @@
 import { mkdir } from "node:fs/promises";
-import { expect, type Page, test } from "@playwright/test";
+import { expect, test } from "@playwright/test";
+import { loadEditor } from "./helpers/load-editor";
 
 declare global {
   interface Window {
@@ -8,16 +9,6 @@ declare global {
   }
 }
 
-async function loadEditor(page: Page): Promise<void> {
-  await page.goto("http://127.0.0.1:5173/");
-  // double-check: wait for editor, then verify still mounted 300ms later (survives Vite HMR reload)
-  await expect.poll(async () => {
-    const mounted = await page.evaluate(() => Boolean(window.__maldivesEditor)).catch(() => false);
-    if (!mounted) return false;
-    await page.waitForTimeout(300);
-    return page.evaluate(() => Boolean(window.__maldivesEditor)).catch(() => false);
-  }, { timeout: 15000 }).toBe(true);
-}
 
 test("MethodDown and MethodUp navigate between TypeScript method targets", async ({ page }) => {
   await loadEditor(page);
@@ -56,11 +47,20 @@ test("EditorSelectWord expands selection through AST boundaries", async ({ page 
     });
   });
 
-  await page.waitForTimeout(3000);
-  await page.evaluate(() => window.__maldivesExecuteKeybinding("EditorSelectWord"));
-  await expect
-    .poll(() => page.evaluate(() => window.__maldivesEditor.getModel()?.getValueInRange(window.__maldivesEditor.getSelection()!)))
-    .toBe("alpha");
+  await expect(async () => {
+    await page.evaluate(() => {
+      window.__maldivesEditor.setSelection({
+        startLineNumber: 1,
+        startColumn: 5,
+        endLineNumber: 1,
+        endColumn: 5,
+      });
+      window.__maldivesExecuteKeybinding("EditorSelectWord");
+    });
+    await expect
+      .poll(() => page.evaluate(() => window.__maldivesEditor.getModel()?.getValueInRange(window.__maldivesEditor.getSelection()!)), { timeout: 1000 })
+      .toBe("alpha");
+  }).toPass({ timeout: 10000 });
 
   await page.evaluate(() => window.__maldivesExecuteKeybinding("EditorSelectWord"));
   await expect

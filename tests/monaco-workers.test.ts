@@ -1,5 +1,104 @@
 import { describe, expect, test, vi } from "vitest";
-import { setupMonacoWorkers } from "../src/monaco-workers";
+import type * as monaco from "monaco-editor";
+import { awaitTypeScriptWorkerAnswer, setupMonacoWorkers } from "../src/monaco-workers";
+
+describe("awaitTypeScriptWorkerAnswer", () => {
+  test("retries until Monaco registers the TypeScript language contribution", async () => {
+    let attempts = 0;
+    const model = {
+      uri: { toString: () => "file:///maldives/sample.ts" },
+      getOffsetAt: () => 0,
+    } as unknown as monaco.editor.ITextModel;
+    const monacoStub = {
+      languages: {
+        typescript: {
+          async getTypeScriptWorker() {
+            attempts += 1;
+            if (attempts < 3) {
+              throw new Error("TypeScript not registered!");
+            }
+
+            return async () => ({
+              async getQuickInfoAtPosition() {},
+            });
+          },
+        },
+      },
+    } as unknown as typeof monaco;
+
+    await awaitTypeScriptWorkerAnswer(monacoStub, model);
+
+    expect(attempts).toBe(3);
+  });
+
+  test("retries if a TypeScript worker answer hangs before the readiness deadline", async () => {
+    let quickInfoCalls = 0;
+    const model = {
+      uri: { toString: () => "file:///maldives/sample.ts" },
+      getOffsetAt: () => 0,
+    } as unknown as monaco.editor.ITextModel;
+    const monacoStub = {
+      languages: {
+        typescript: {
+          async getTypeScriptWorker() {
+            return async () => ({
+              async getQuickInfoAtPosition() {
+                quickInfoCalls += 1;
+                if (quickInfoCalls === 1) {
+                  return new Promise(() => undefined);
+                }
+              },
+            });
+          },
+        },
+      },
+    } as unknown as typeof monaco;
+
+    const result = await Promise.race([
+      awaitTypeScriptWorkerAnswer(monacoStub, model, { timeoutMs: 100, attemptTimeoutMs: 5 }).then(() => "resolved"),
+      new Promise((resolve) => setTimeout(() => resolve("hung"), 50)),
+    ]);
+
+    expect(result).toBe("resolved");
+    expect(quickInfoCalls).toBe(2);
+  });
+
+  test("resolves only after the TypeScript worker answers for the attached model", async () => {
+    const calls: string[] = [];
+    const model = {
+      uri: { toString: () => "file:///maldives/sample.ts" },
+      getOffsetAt: () => 0,
+    } as unknown as monaco.editor.ITextModel;
+    const monacoStub = {
+      languages: {
+        typescript: {
+          async getTypeScriptWorker() {
+            calls.push("get-worker-factory");
+            return async (uri: monaco.Uri) => {
+              calls.push(`get-worker:${uri.toString()}`);
+              return {
+                async getQuickInfoAtPosition(path: string, offset: number) {
+                  calls.push(`quick-info:${path}:${offset}`);
+                },
+              };
+            };
+          },
+        },
+      },
+      Position: class {
+        constructor(public lineNumber: number, public column: number) {}
+      },
+    } as unknown as typeof monaco;
+
+    await awaitTypeScriptWorkerAnswer(monacoStub, model);
+
+    expect(calls).toEqual([
+      "get-worker-factory",
+      "get-worker:file:///maldives/sample.ts",
+      "quick-info:file:///maldives/sample.ts:0",
+    ]);
+  });
+});
 
 describe("setupMonacoWorkers", () => {
   test("routes TypeScript and JavaScript models to Monaco's TS worker", () => {

@@ -15,6 +15,10 @@ export function initializeAstSmartSelection(): Promise<void> {
   return initPromise;
 }
 
+export function ensureAstReady(): Promise<void> {
+  return initializeAstSmartSelection();
+}
+
 export function expandAstSelection(editor: editor.IStandaloneCodeEditor): boolean {
   const model = editor.getModel();
   const selection = editor.getSelection();

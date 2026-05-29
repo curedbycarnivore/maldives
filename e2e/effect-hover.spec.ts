@@ -1,5 +1,6 @@
 import { mkdir } from "node:fs/promises";
 import { expect, test } from "@playwright/test";
+import { loadEditor } from "./helpers/load-editor";
 
 declare global {
   interface Window {
@@ -38,8 +39,7 @@ const fiber = Fiber.interrupt;
 `;
 
 test("Layer composition hover shows a dependency mini-diagram", async ({ page }) => {
-  await page.goto("http://127.0.0.1:5173/");
-  await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesEditor)), { timeout: 15000 }).toBe(true);
+  await loadEditor(page);
 
   await page.evaluate(() => {
     const source = `import { Effect, Layer } from "effect";
@@ -69,8 +69,7 @@ const Live = Layer.merge(A, Layer.provide(B, C));
 });
 
 test("Effect API hovers show docs links and examples for canonical symbols", async ({ page }) => {
-  await page.goto("http://127.0.0.1:5173/");
-  await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesEditor)), { timeout: 15000 }).toBe(true);
+  await loadEditor(page);
 
   await page.evaluate((source) => {
     const model = window.__monaco.editor.createModel(source, "typescript", window.__monaco.Uri.parse("file:///maldives/effect-hover.ts"));

@@ -1,5 +1,6 @@
 import { mkdir } from "node:fs/promises";
-import { expect, type Page, test } from "@playwright/test";
+import { expect, test } from "@playwright/test";
+import { loadEditor } from "./helpers/load-editor";
 
 const effectDtsFixture = {
   "/node_modules/effect/dist/dts/index.d.ts": 'export * as Stream from "./Stream.js";',
@@ -26,14 +27,8 @@ declare global {
   }
 }
 
-async function loadEditor(page: Page): Promise<void> {
-  await page.goto("http://127.0.0.1:5173/");
-  await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesEditor)), { timeout: 15000 }).toBe(true);
-}
-
 test("full Effect DTS export map resolves Stream root exports and hover signatures", async ({ page }) => {
   await loadEditor(page);
-  await page.waitForTimeout(1000);
 
   const result = await page.evaluate(async ({ files, packageExports }) => {
     const registration = window.__maldivesRegisterEffectDtsFiles(files, { packageExports });

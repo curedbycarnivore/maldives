@@ -1,18 +1,13 @@
 import { mkdir } from "node:fs/promises";
 import { expect, type Page, test } from "@playwright/test";
+import { loadEditor } from "./helpers/load-editor";
 
 declare global {
   interface Window {
     __maldivesEditor: import("monaco-editor").editor.IStandaloneCodeEditor;
     __monaco: typeof import("monaco-editor");
     __maldivesExecuteKeybinding: (wsActionId: string) => boolean;
-    __maldivesTypeScriptReady: Promise<void>;
   }
-}
-
-async function loadEditor(page: Page): Promise<void> {
-  await page.goto("http://127.0.0.1:5173/");
-  await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesEditor))).toBe(true);
 }
 
 async function waitForXmlParserSymbol(page: Page): Promise<void> {

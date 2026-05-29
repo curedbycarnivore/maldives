@@ -3,6 +3,7 @@ import { mkdir } from "node:fs/promises";
 import { createServer, type IncomingMessage } from "node:http";
 import { Socket } from "node:net";
 import { expect, test } from "@playwright/test";
+import { loadEditor } from "./helpers/load-editor";
 
 const DEVTOOLS_TOKEN = "test-devtools-token";
 
@@ -108,8 +109,7 @@ test("Effect DevTools panel streams a local span and rejects cross-origin socket
   const fixture = await startDevToolsFixture();
 
   try {
-    await page.goto("http://127.0.0.1:5173/");
-    await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesEditor))).toBe(true);
+    await loadEditor(page);
 
     await page.evaluate((token) => {
       window.__maldivesOpenEffectDevTools({

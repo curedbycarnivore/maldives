@@ -1,5 +1,6 @@
 import { mkdir } from "node:fs/promises";
 import { expect, test } from "@playwright/test";
+import { loadEditor } from "./helpers/load-editor";
 
 declare global {
   interface Window {
@@ -8,8 +9,7 @@ declare global {
 }
 
 test("renders Monaco pro feature sticky scroll proof", async ({ page }) => {
-  await page.goto("http://127.0.0.1:5173/");
-  await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesEditor))).toBe(true);
+  await loadEditor(page);
 
   await page.evaluate(() => {
     const editor = window.__maldivesEditor;
@@ -25,8 +25,6 @@ ${Array.from({ length: 80 }, (_, index) => `    const line${index} = ${index};`)
     editor.focus();
   });
 
-  // brief wait for Monaco sticky scroll widget to re-render after programmatic scroll
-  await page.waitForTimeout(500);
   const stickyWidget = page.locator(".monaco-editor .sticky-widget");
   await expect(stickyWidget).toBeVisible();
 
