@@ -95,7 +95,7 @@ function rewriteAwaitExpressions(source: string, sourceFile: ts.SourceFile, body
 function canSafelyConvert(body: ts.Block): boolean {
   const awaits = directAwaitExpressions(body);
 
-  return awaits.length > 0 && !containsNestedTry(body) && !containsBindingSensitiveExpression(body) && awaits.every(isSafeAwaitExpression);
+  return awaits.length > 0 && !containsTryStatement(body) && !containsBindingSensitiveExpression(body) && awaits.every(isSafeAwaitExpression);
 }
 
 function directAwaitExpressions(body: ts.Block): ts.AwaitExpression[] {
@@ -199,12 +199,11 @@ function containsBindingSensitiveExpression(body: ts.Block): boolean {
   return found;
 }
 
-function containsNestedTry(body: ts.Block): boolean {
-  let tryDepth = 0;
-  let nested = false;
+function containsTryStatement(body: ts.Block): boolean {
+  let found = false;
 
   function visit(node: ts.Node): void {
-    if (nested) {
+    if (found) {
       return;
     }
 
@@ -213,13 +212,7 @@ function containsNestedTry(body: ts.Block): boolean {
     }
 
     if (ts.isTryStatement(node)) {
-      tryDepth += 1;
-      if (tryDepth > 1) {
-        nested = true;
-        return;
-      }
-      ts.forEachChild(node, visit);
-      tryDepth -= 1;
+      found = true;
       return;
     }
 
@@ -227,7 +220,7 @@ function containsNestedTry(body: ts.Block): boolean {
   }
 
   visit(body);
-  return nested;
+  return found;
 }
 
 function isSupportedFunction(node: ts.Node): node is SupportedFunction {

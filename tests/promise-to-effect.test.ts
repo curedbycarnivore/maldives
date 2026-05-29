@@ -33,7 +33,7 @@ async function loadBoth(): Promise<number> {
     expect(result).toContain("const two = yield* Effect.tryPromise(() => second(one));");
   });
 
-  test("preserves simple try/catch structure while rewriting awaited promises", () => {
+  test("does not offer a try/catch refactor because Promise rejection and Effect failure semantics differ", () => {
     const source = `async function guarded(): Promise<string> {
   try {
     return await fetchName();
@@ -42,11 +42,7 @@ async function loadBoth(): Promise<number> {
   }
 }`;
 
-    const result = convertPromiseFunctionToEffectGen(source, source.indexOf("fetchName"));
-
-    expect(result).toContain("try {");
-    expect(result).toContain("return yield* Effect.tryPromise(() => fetchName());");
-    expect(result).toContain("} catch (error) {");
+    expect(convertPromiseFunctionToEffectGen(source, source.indexOf("fetchName"))).toBeUndefined();
   });
 
   test("rewrites awaited promises inside conditional branches", () => {
@@ -73,6 +69,17 @@ async function loadBoth(): Promise<number> {
   });
 
   test.each([
+    {
+      name: "simple try/catch",
+      source: `async function guarded(): Promise<string> {
+  try {
+    return await fetchName();
+  } catch (error) {
+    return "fallback";
+  }
+}`,
+      needle: "fetchName",
+    },
     {
       name: "nested try/catch",
       source: `async function guarded(): Promise<string> {
@@ -270,14 +277,13 @@ class Repository<T extends { id: string }> {
       needle: "fetchName",
     },
     {
-      name: "simple try/catch",
+      name: "conditional branch returns",
       source: `declare function fetchName(): Promise<string>;
-async function guarded(): Promise<string> {
-  try {
+async function maybeLoad(flag: boolean): Promise<string> {
+  if (flag) {
     return await fetchName();
-  } catch (error) {
-    return "fallback";
   }
+  return "fallback";
 }`,
       needle: "fetchName",
     },
