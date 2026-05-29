@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import wasm from "vite-plugin-wasm";
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [wasm()],
   define: {
     __MALDIVES_DEVTOOLS_ENABLED__: JSON.stringify(process.env.MALDIVES_DEVTOOLS === "1"),
@@ -9,6 +9,17 @@ export default defineConfig({
   optimizeDeps: {
     entries: ["index.html"],
   },
+  build:
+    mode === "library"
+      ? {
+          emptyOutDir: false,
+          lib: {
+            entry: "src/index.ts",
+            fileName: () => "index.js",
+            formats: ["es"],
+          },
+        }
+      : undefined,
   server: {
     host: "127.0.0.1",
     port: 5173,
@@ -18,4 +29,4 @@ export default defineConfig({
       "Cross-Origin-Embedder-Policy": "require-corp",
     },
   },
-});
+}));

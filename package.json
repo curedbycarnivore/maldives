@@ -3,6 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "types": "dist/index.d.ts",
+  "module": "dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
   "files": [
     "dist"
   ],
@@ -11,7 +18,7 @@
     "postinstall": "mkdir -p public/ast && cp node_modules/web-tree-sitter/web-tree-sitter.wasm public/tree-sitter.wasm && cp node_modules/web-tree-sitter/web-tree-sitter.wasm public/web-tree-sitter.wasm && cp node_modules/tree-sitter-typescript/tree-sitter-typescript.wasm public/ast/tree-sitter-typescript.wasm",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "build": "tsc --noEmit --project tsconfig.build.json && vite build && tsc --project tsconfig.declarations.json",
+    "build": "tsc --noEmit --project tsconfig.build.json && vite build && vite build --mode library && tsc --project tsconfig.declarations.json",
     "prepublishOnly": "bun run build && test -f dist/index.d.ts"
   },
   "dependencies": {

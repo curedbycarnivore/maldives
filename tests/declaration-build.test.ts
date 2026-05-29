@@ -10,7 +10,9 @@ describe("package declaration build", () => {
 
     const declaration = readFileSync("dist/index.d.ts", "utf-8");
     const packageJson = JSON.parse(readFileSync("package.json", "utf-8")) as {
+      exports?: { "."?: { import?: string; types?: string } };
       files?: string[];
+      module?: string;
       scripts?: Record<string, string>;
       types?: string;
     };
@@ -18,9 +20,12 @@ describe("package declaration build", () => {
     const [{ files }] = JSON.parse(packJson) as [{ files: Array<{ path: string }> }];
 
     expect(packageJson.types).toBe("dist/index.d.ts");
+    expect(packageJson.module).toBe("dist/index.js");
+    expect(packageJson.exports?.["."]?.types).toBe("./dist/index.d.ts");
+    expect(packageJson.exports?.["."]?.import).toBe("./dist/index.js");
     expect(packageJson.files).toContain("dist");
     expect(packageJson.scripts?.prepublishOnly).toBe("bun run build && test -f dist/index.d.ts");
-    expect(files.map((file) => file.path)).toContain("dist/index.d.ts");
+    expect(files.map((file) => file.path)).toEqual(expect.arrayContaining(["dist/index.d.ts", "dist/index.js"]));
     expect(declaration).toContain("createMaldivesEditor");
     expect(declaration).toContain("CreateMaldivesEditorOptions");
     expect(declaration).toContain("EffectDtsFiles");
