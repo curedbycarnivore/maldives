@@ -10,7 +10,7 @@ export function convertPromiseFunctionToEffectGen(source: string, offset: number
   const sourceFile = ts.createSourceFile("maldives.ts", source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
   const candidate = findAsyncAwaitFunctionAtOffset(sourceFile, offset);
 
-  if (!candidate || !candidate.body || !ts.isBlock(candidate.body)) {
+  if (!candidate || !candidate.body || !ts.isBlock(candidate.body) || !canSafelyConvert(candidate.body)) {
     return undefined;
   }
 
@@ -30,7 +30,7 @@ function findAsyncAwaitFunctionAtOffset(sourceFile: ts.SourceFile, offset: numbe
 
     const body = isSupportedFunction(node) ? node.body : undefined;
 
-    if (isSupportedFunction(node) && body && hasAsyncModifier(node) && ts.isBlock(body) && containsAwait(body)) {
+    if (isSupportedFunction(node) && body && hasAsyncModifier(node) && ts.isBlock(body) && directAwaitExpressions(body).length > 0) {
       match = node;
     }
 
@@ -75,18 +75,11 @@ function rewriteAwaitExpressions(source: string, sourceFile: ts.SourceFile, body
   const bodyStart = body.getStart(sourceFile) + 1;
   const replacements: Array<{ start: number; end: number; text: string }> = [];
 
-  function visit(node: ts.Node): void {
-    if (ts.isAwaitExpression(node)) {
-      const expression = node.expression.getText(sourceFile);
-      const effectful = /^Effect\./.test(expression) ? `yield* ${expression}` : `yield* Effect.tryPromise(() => ${expression})`;
-      replacements.push({ start: node.getStart(sourceFile), end: node.getEnd(), text: effectful });
-      return;
-    }
-
-    ts.forEachChild(node, visit);
+  for (const node of directAwaitExpressions(body)) {
+    const expression = node.expression.getText(sourceFile);
+    const effectful = /^Effect\./.test(expression) ? `yield* ${expression}` : `yield* Effect.tryPromise(() => ${expression})`;
+    replacements.push({ start: node.getStart(sourceFile), end: node.getEnd(), text: effectful });
   }
-
-  visit(body);
 
   let bodyText = source.slice(bodyStart, body.getEnd() - 1);
 
@@ -99,24 +92,142 @@ function rewriteAwaitExpressions(source: string, sourceFile: ts.SourceFile, body
   return bodyText;
 }
 
-function containsAwait(node: ts.Node): boolean {
+function canSafelyConvert(body: ts.Block): boolean {
+  const awaits = directAwaitExpressions(body);
+
+  return awaits.length > 0 && !containsNestedTry(body) && !containsBindingSensitiveExpression(body) && awaits.every(isSafeAwaitExpression);
+}
+
+function directAwaitExpressions(body: ts.Block): ts.AwaitExpression[] {
+  const awaits: ts.AwaitExpression[] = [];
+
+  function visit(node: ts.Node): void {
+    if (node !== body && isSupportedFunction(node)) {
+      return;
+    }
+
+    if (ts.isAwaitExpression(node)) {
+      awaits.push(node);
+      return;
+    }
+
+    ts.forEachChild(node, visit);
+  }
+
+  visit(body);
+  return awaits;
+}
+
+function isSafeAwaitExpression(node: ts.AwaitExpression): boolean {
+  if (isObviouslyNonPromiseExpression(node.expression) || expressionContainsAwait(node.expression)) {
+    return false;
+  }
+
+  return isVariableInitializer(node) || isReturnExpression(node);
+}
+
+function expressionContainsAwait(expression: ts.Expression): boolean {
   let found = false;
 
-  function visit(child: ts.Node): void {
+  function visit(node: ts.Node): void {
     if (found) {
       return;
     }
 
-    if (ts.isAwaitExpression(child)) {
+    if (ts.isAwaitExpression(node)) {
       found = true;
       return;
     }
 
-    ts.forEachChild(child, visit);
+    if (node !== expression && isSupportedFunction(node)) {
+      return;
+    }
+
+    ts.forEachChild(node, visit);
   }
 
-  visit(node);
+  visit(expression);
   return found;
+}
+
+function isVariableInitializer(node: ts.AwaitExpression): boolean {
+  return ts.isVariableDeclaration(node.parent) && node.parent.initializer === node;
+}
+
+function isReturnExpression(node: ts.AwaitExpression): boolean {
+  return ts.isReturnStatement(node.parent) && node.parent.expression === node;
+}
+
+function isObviouslyNonPromiseExpression(expression: ts.Expression): boolean {
+  return (
+    ts.isIdentifier(expression) ||
+    ts.isNumericLiteral(expression) ||
+    ts.isStringLiteral(expression) ||
+    ts.isArrayLiteralExpression(expression) ||
+    ts.isObjectLiteralExpression(expression) ||
+    expression.kind === ts.SyntaxKind.TrueKeyword ||
+    expression.kind === ts.SyntaxKind.FalseKeyword ||
+    expression.kind === ts.SyntaxKind.NullKeyword
+  );
+}
+
+function containsBindingSensitiveExpression(body: ts.Block): boolean {
+  let found = false;
+
+  function visit(node: ts.Node): void {
+    if (found) {
+      return;
+    }
+
+    if (node !== body && isSupportedFunction(node)) {
+      return;
+    }
+
+    if (
+      node.kind === ts.SyntaxKind.ThisKeyword ||
+      node.kind === ts.SyntaxKind.SuperKeyword ||
+      (ts.isIdentifier(node) && node.text === "arguments")
+    ) {
+      found = true;
+      return;
+    }
+
+    ts.forEachChild(node, visit);
+  }
+
+  visit(body);
+  return found;
+}
+
+function containsNestedTry(body: ts.Block): boolean {
+  let tryDepth = 0;
+  let nested = false;
+
+  function visit(node: ts.Node): void {
+    if (nested) {
+      return;
+    }
+
+    if (node !== body && isSupportedFunction(node)) {
+      return;
+    }
+
+    if (ts.isTryStatement(node)) {
+      tryDepth += 1;
+      if (tryDepth > 1) {
+        nested = true;
+        return;
+      }
+      ts.forEachChild(node, visit);
+      tryDepth -= 1;
+      return;
+    }
+
+    ts.forEachChild(node, visit);
+  }
+
+  visit(body);
+  return nested;
 }
 
 function isSupportedFunction(node: ts.Node): node is SupportedFunction {

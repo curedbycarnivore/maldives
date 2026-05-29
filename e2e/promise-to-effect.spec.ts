@@ -46,3 +46,37 @@ test("Promise to Effect.gen code action rewrites an async function", async ({ pa
   await mkdir("proof", { recursive: true });
   await page.screenshot({ path: "proof/p12c-promise-to-effect-proof.png" });
 });
+
+test("Promise to Effect.gen code action stays hidden for unsafe real TSX shapes", async ({ page }) => {
+  await loadEditor(page);
+
+  await page.evaluate(() => {
+    const source = [
+      'import { Effect, Layer, Schema, pipe } from "effect";',
+      "",
+      "declare function fetchName(id: string): Promise<string>;",
+      "function logged(_target: unknown, _key: string, descriptor: PropertyDescriptor) { return descriptor; }",
+      "const User = Schema.Struct({ id: Schema.String });",
+      "const LiveLayer = Layer.succeed('Repository', {});",
+      "",
+      "class Repository<T extends { id: string }> {",
+      "  @logged",
+      "  async loadAll(ids: readonly string[]): Promise<readonly string[]> {",
+      "    const program = Effect.gen(function* () { return yield* Effect.succeed(ids.length); });",
+      "    const described = pipe(User, () => LiveLayer);",
+      "    return ids.map(async (id) => await fetchName(id));",
+      "  }",
+      "}",
+    ].join("\n");
+    window.__maldivesEditor.setValue(source);
+    window.__maldivesEditor.setPosition({ lineNumber: 13, column: 35 });
+    window.__maldivesEditor.focus();
+  });
+
+  const opened = await page.evaluate(() => window.__maldivesExecuteKeybinding("IntroduceActionsGroup"));
+  expect(opened).toBe(true);
+  await expect(page.locator('.action-widget .monaco-list-row:has-text("Convert to Effect.gen")')).toHaveCount(0, { timeout: 2000 });
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/p14d-promise-refactor-hidden-proof.png" });
+});
