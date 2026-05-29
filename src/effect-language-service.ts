@@ -38,6 +38,15 @@ export interface EffectLanguageServiceRefactor {
   actions: string[];
 }
 
+export interface EffectLanguageServiceRenderedDiagnostic {
+  rule: string;
+  startLine: number;
+  startCol: number;
+  endLine: number;
+  endCol: number;
+  message: string;
+}
+
 export interface EffectLanguageServiceSnapshot {
   diagnostics: EffectLanguageServiceDiagnostic[];
   refactors: EffectLanguageServiceRefactor[];
@@ -46,6 +55,7 @@ export interface EffectLanguageServiceSnapshot {
 export interface EffectLanguageServiceController {
   refreshModel(model: monaco.editor.ITextModel): Promise<void>;
   getDiagnostics(model: monaco.editor.ITextModel): EffectLanguageServiceDiagnostic[];
+  getRenderedDiagnostics(model: monaco.editor.ITextModel): EffectLanguageServiceRenderedDiagnostic[];
   getRefactors(model: monaco.editor.ITextModel, range: { pos: number; end: number }): EffectLanguageServiceRefactor[];
   dispose(): void;
 }
@@ -163,6 +173,20 @@ export function installEffectLanguageService(
     refreshModel,
     getDiagnostics(model) {
       return diagnosticsByUri.get(model.uri.toString()) ?? [];
+    },
+    getRenderedDiagnostics(model) {
+      return monacoApi.editor
+        .getModelMarkers({ resource: model.uri })
+        .filter((marker) => marker.source === "@effect/language-service")
+        .map((marker) => ({
+          rule: ruleFromMessage(marker.message),
+          startLine: marker.startLineNumber,
+          startCol: marker.startColumn,
+          endLine: marker.endLineNumber,
+          endCol: marker.endColumn,
+          message: marker.message,
+        }))
+        .sort(compareRenderedDiagnostics);
     },
     getRefactors(model, range) {
       return createEffectLanguageServiceSnapshot({
@@ -312,12 +336,27 @@ function toDiagnostic(diagnostic: ts.Diagnostic): EffectLanguageServiceDiagnosti
   const message = ts.flattenDiagnosticMessageText(diagnostic.messageText, " ");
   return {
     code: Number(diagnostic.code),
-    rule: /effect\(([^)]+)\)/.exec(message)?.[1] ?? "typescript",
+    rule: ruleFromMessage(message),
     message,
     start: diagnostic.start ?? 0,
     length: diagnostic.length ?? 1,
     category: ts.DiagnosticCategory[diagnostic.category] ?? "Unknown",
   };
+}
+
+function ruleFromMessage(message: string): string {
+  return /effect\(([^)]+)\)/.exec(message)?.[1] ?? "typescript";
+}
+
+function compareRenderedDiagnostics(left: EffectLanguageServiceRenderedDiagnostic, right: EffectLanguageServiceRenderedDiagnostic): number {
+  return (
+    left.startLine - right.startLine ||
+    left.startCol - right.startCol ||
+    left.endLine - right.endLine ||
+    left.endCol - right.endCol ||
+    left.rule.localeCompare(right.rule) ||
+    left.message.localeCompare(right.message)
+  );
 }
 
 function toRefactor(refactor: ts.ApplicableRefactorInfo): EffectLanguageServiceRefactor {
