@@ -38,7 +38,8 @@ describe("P11b VSCode TypeScript worker bootstrap", () => {
     expect(overlay.files.get("file:///node_modules/effect/Effect.d.ts")).toContain("succeed");
     expect(overlay.files.get("file:///node_modules/effect/package.json")).toContain('"name": "effect"');
     expect(overlay.files.get("file:///workspace/tsconfig.json")).toContain('"strict": true');
-    expect([...overlay.files.keys()].every((path) => path.startsWith("file:///node_modules/effect/") || path === "file:///workspace/tsconfig.json")).toBe(true);
+    expect(overlay.files.get("file:///workspace/tsconfig.json")).toContain('"@effect/language-service"');
+    expect([...overlay.files.keys()].every((path) => path.startsWith("file:///node_modules/effect/") || path.startsWith("file:///node_modules/@effect/language-service/") || path === "file:///workspace/tsconfig.json")).toBe(true);
   });
 
   test("boots the Monaco VSCode API wrapper exactly once and disables stock semantic diagnostics", async () => {

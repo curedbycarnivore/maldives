@@ -7,6 +7,7 @@ import { registerAstStructuralSearchAction } from "./ast-structural-search";
 import { registerMaldivesCodeActions } from "./code-actions";
 import { registerSchemaJsonSchemaAction } from "./schema-jsonschema";
 import { installEffectDevToolsButton, openEffectDevToolsPanel, type OpenEffectDevToolsOptions } from "./effect-devtools";
+import { installEffectLanguageService, type EffectLanguageServiceController } from "./effect-language-service";
 import { registerEffectHoverProvider } from "./effect-hover";
 import { registerEffectSnippets } from "./effect-snippets";
 import { registerModelTab, registerRecentLocationTracking } from "./file-switcher";
@@ -30,6 +31,7 @@ declare global {
     __maldivesRegisterEffectDtsFiles: (files: EffectDtsFiles, options?: RegisterEffectDtsFilesOptions) => monaco.IDisposable;
     __maldivesOpenEffectDevTools: (options: OpenEffectDevToolsOptions) => void;
     __maldivesVscodeTsWorkerReady: Promise<VscodeTypeScriptWorkerBootstrap>;
+    __maldivesEffectLanguageService: EffectLanguageServiceController;
     __maldivesReady: Promise<void>;
   }
 }
@@ -70,6 +72,16 @@ const effectDtsFiles = import.meta.glob("/node_modules/effect/dist/dts/**/*.d.ts
   import: "default",
   eager: true,
 }) as EffectDtsFiles;
+const effectLanguageServiceFiles = import.meta.glob("/node_modules/@effect/language-service/{index.js,package.json,schema.json}", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+}) as Record<string, string>;
+const typeScriptLibFiles = import.meta.glob("/node_modules/typescript/lib/lib.*.d.ts", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+}) as Record<string, string>;
 
 const themeConfig = parseIcls(activeThemeXml);
 const editorOptions = parseEditorOptions(editorOptionsXml);
@@ -77,7 +89,7 @@ const keymapConfig = parseKeymap(keymapXml);
 
 registerTheme(monaco, themeConfig);
 configureTypeScriptWorker(monaco, { effectDtsFiles });
-const vscodeTsWorkerReady = startVscodeTypeScriptWorkerForMaldives(monaco, { effectDtsFiles });
+const vscodeTsWorkerReady = startVscodeTypeScriptWorkerForMaldives(monaco, { effectDtsFiles, effectLanguageServiceFiles });
 registerEffectSnippets(monaco);
 registerEffectHoverProvider(monaco);
 registerMaldivesCodeActions(monaco);
@@ -102,11 +114,13 @@ const registeredKeybindings = registerKeybindings(editor, monaco, keymapConfig);
 registerRecentLocationTracking(editor);
 registerAstStructuralSearchAction(editor);
 registerSchemaJsonSchemaAction(editor);
+const effectLanguageService = installEffectLanguageService(monaco, editor, { effectDtsFiles, typeScriptLibFiles });
 installEffectDevToolsButton(document.body, {
   enabled: __MALDIVES_DEVTOOLS_ENABLED__,
   token: window.localStorage.getItem("maldives.devtools.token") ?? "",
 });
 window.__maldivesEditor = editor;
+window.__maldivesEffectLanguageService = effectLanguageService;
 window.__maldivesVscodeTsWorkerReady = vscodeTsWorkerReady;
 window.__maldivesReady = (async () => {
   await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));

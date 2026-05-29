@@ -4,7 +4,7 @@
     "dev": "vite --host 127.0.0.1",
     "postinstall": "mkdir -p public/ast && cp node_modules/web-tree-sitter/web-tree-sitter.wasm public/tree-sitter.wasm && cp node_modules/web-tree-sitter/web-tree-sitter.wasm public/web-tree-sitter.wasm && cp node_modules/tree-sitter-typescript/tree-sitter-typescript.wasm public/ast/tree-sitter-typescript.wasm",
     "test": "vitest run",
-    "test:e2e": "playwright test --pass-with-no-tests",
+    "test:e2e": "playwright test",
     "build": "tsc --noEmit --project tsconfig.build.json && vite build && tsc --project tsconfig.declarations.json"
   },
   "dependencies": {
@@ -19,6 +19,7 @@
     "web-tree-sitter": "^0.26.9"
   },
   "devDependencies": {
+    "@effect/language-service": "0.86.2",
     "@playwright/test": "^1.60.0",
     "typescript": "^6.0.3",
     "vite": "^8.0.14",

@@ -1,5 +1,6 @@
 import type * as monaco from "monaco-editor";
 import extensionHostWorkerUrl from "/node_modules/@codingame/monaco-vscode-api/workers/extensionHost.worker.js?url";
+import { effectLanguageServicePluginConfig } from "./effect-language-service-config";
 import { auditEffectDtsExports, EFFECT_TYPE_STUB, type EffectDtsFiles, type EffectPackageExports } from "./typescript-worker";
 
 type MonacoApi = typeof monaco;
@@ -20,6 +21,7 @@ export interface VscodeTypeScriptWorkerDeps {
 
 export interface VscodeTypeScriptOverlayOptions {
   effectDtsFiles?: EffectDtsFiles;
+  effectLanguageServiceFiles?: Record<string, string>;
   packageExports?: EffectPackageExports;
 }
 
@@ -58,6 +60,16 @@ export function buildVscodeTypeScriptOverlay(options: VscodeTypeScriptOverlayOpt
   }
 
   files.set("file:///node_modules/effect/package.json", effectPackageJson(coverage.exportVirtualPaths));
+  for (const [path, content] of Object.entries(options.effectLanguageServiceFiles ?? {})) {
+    const virtualPath = effectLanguageServiceVirtualPath(path);
+
+    if (virtualPath) {
+      files.set(virtualPath, content);
+    }
+  }
+  if (!files.has("file:///node_modules/@effect/language-service/package.json")) {
+    files.set("file:///node_modules/@effect/language-service/package.json", effectLanguageServicePackageJson());
+  }
   files.set("file:///workspace/tsconfig.json", vscodeTsConfigJson());
 
   return { files };
@@ -197,6 +209,18 @@ function effectPackageJson(exportVirtualPaths: string[]): string {
   return JSON.stringify({ name: "effect", types: "./index.d.ts", exports: exportsMap }, null, 2);
 }
 
+function effectLanguageServiceVirtualPath(path: string): string | undefined {
+  const normalized = path.replaceAll("\\", "/");
+  const marker = "@effect/language-service/";
+  const markerIndex = normalized.indexOf(marker);
+
+  return markerIndex === -1 ? undefined : `file:///node_modules/${normalized.slice(markerIndex)}`;
+}
+
+function effectLanguageServicePackageJson(): string {
+  return JSON.stringify({ name: "@effect/language-service", version: "0.86.2", main: "./index.js" }, null, 2);
+}
+
 function vscodeTsConfigJson(): string {
   return JSON.stringify(
     {
@@ -212,6 +236,7 @@ function vscodeTsConfigJson(): string {
         verbatimModuleSyntax: true,
         allowNonTsExtensions: true,
         lib: ["ESNext", "DOM", "DOM.Iterable"],
+        plugins: [effectLanguageServicePluginConfig],
       },
     },
     null,
