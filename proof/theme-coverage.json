@@ -2,6 +2,7 @@
   "totalOptions": 1512,
   "uniqueOptionNames": 627,
   "mapped": [
+    "BACKGROUND",
     "CARET_COLOR",
     "CARET_ROW_COLOR",
     "DEFAULT_BRACES",
@@ -14,8 +15,13 @@
     "DEFAULT_METADATA",
     "DEFAULT_OPERATION_SIGN",
     "DEFAULT_PARENTHS",
+    "EFFECT_COLOR",
+    "EFFECT_TYPE",
     "ERRORS_ATTRIBUTES",
+    "ERROR_STRIPE_COLOR",
     "FOLDED_TEXT_ATTRIBUTES",
+    "FONT_TYPE",
+    "FOREGROUND",
     "GUTTER_BACKGROUND",
     "INDENT_GUIDE",
     "JS.DOC_COMMENT",
@@ -43,72 +49,6 @@
     "WHITESPACES"
   ],
   "unmapped": [
-    {
-      "name": "FOREGROUND",
-      "occurrences": 503,
-      "samplePaths": [
-        "ABSTRACT_CLASS_NAME_ATTRIBUTES.FOREGROUND",
-        "ANNOTATION_NAME_ATTRIBUTES.FOREGROUND",
-        "APACHE_CONFIG.ARG_LEXEM.FOREGROUND",
-        "APACHE_CONFIG.COMMENT.FOREGROUND",
-        "APACHE_CONFIG.IDENTIFIER.FOREGROUND"
-      ]
-    },
-    {
-      "name": "FONT_TYPE",
-      "occurrences": 241,
-      "samplePaths": [
-        "ABSTRACT_CLASS_NAME_ATTRIBUTES.FONT_TYPE",
-        "APACHE_CONFIG.ARG_LEXEM.FONT_TYPE",
-        "APACHE_CONFIG.COMMENT.FONT_TYPE",
-        "APACHE_CONFIG.IDENTIFIER.FONT_TYPE",
-        "BLOCK_TERMINAL_COMMAND.FONT_TYPE"
-      ]
-    },
-    {
-      "name": "EFFECT_TYPE",
-      "occurrences": 55,
-      "samplePaths": [
-        "ANNOTATION_NAME_ATTRIBUTES.EFFECT_TYPE",
-        "BAD_CHARACTER.EFFECT_TYPE",
-        "BRACE_ATTR.EFFECT_TYPE",
-        "CPP.PARAMETER.EFFECT_TYPE",
-        "CPP.UNUSED.EFFECT_TYPE"
-      ]
-    },
-    {
-      "name": "BACKGROUND",
-      "occurrences": 53,
-      "samplePaths": [
-        "BAD_CHARACTER.BACKGROUND",
-        "BRACE_ATTR.BACKGROUND",
-        "BRACKET_ATTR.BACKGROUND",
-        "BREADCRUMBS_CURRENT.BACKGROUND",
-        "BREADCRUMBS_HOVERED.BACKGROUND"
-      ]
-    },
-    {
-      "name": "EFFECT_COLOR",
-      "occurrences": 19,
-      "samplePaths": [
-        "BOOKMARKS_ATTRIBUTES.EFFECT_COLOR",
-        "CTRL_CLICKABLE.EFFECT_COLOR",
-        "DEPRECATED_ATTRIBUTES.EFFECT_COLOR",
-        "DUPLICATE_FROM_SERVER.EFFECT_COLOR",
-        "ERRORS_ATTRIBUTES.EFFECT_COLOR"
-      ]
-    },
-    {
-      "name": "ERROR_STRIPE_COLOR",
-      "occurrences": 18,
-      "samplePaths": [
-        "BAD_CHARACTER.ERROR_STRIPE_COLOR",
-        "BOOKMARKS_ATTRIBUTES.ERROR_STRIPE_COLOR",
-        "COFFEESCRIPT.BAD_CHARACTER.ERROR_STRIPE_COLOR",
-        "DIFF_CONFLICT.ERROR_STRIPE_COLOR",
-        "DIFF_DELETED.ERROR_STRIPE_COLOR"
-      ]
-    },
     {
       "name": "EDITOR_FONT_NAME",
       "occurrences": 2,
@@ -4188,72 +4128,6 @@
   ],
   "top50Unmapped": [
     {
-      "name": "FOREGROUND",
-      "occurrences": 503,
-      "samplePaths": [
-        "ABSTRACT_CLASS_NAME_ATTRIBUTES.FOREGROUND",
-        "ANNOTATION_NAME_ATTRIBUTES.FOREGROUND",
-        "APACHE_CONFIG.ARG_LEXEM.FOREGROUND",
-        "APACHE_CONFIG.COMMENT.FOREGROUND",
-        "APACHE_CONFIG.IDENTIFIER.FOREGROUND"
-      ]
-    },
-    {
-      "name": "FONT_TYPE",
-      "occurrences": 241,
-      "samplePaths": [
-        "ABSTRACT_CLASS_NAME_ATTRIBUTES.FONT_TYPE",
-        "APACHE_CONFIG.ARG_LEXEM.FONT_TYPE",
-        "APACHE_CONFIG.COMMENT.FONT_TYPE",
-        "APACHE_CONFIG.IDENTIFIER.FONT_TYPE",
-        "BLOCK_TERMINAL_COMMAND.FONT_TYPE"
-      ]
-    },
-    {
-      "name": "EFFECT_TYPE",
-      "occurrences": 55,
-      "samplePaths": [
-        "ANNOTATION_NAME_ATTRIBUTES.EFFECT_TYPE",
-        "BAD_CHARACTER.EFFECT_TYPE",
-        "BRACE_ATTR.EFFECT_TYPE",
-        "CPP.PARAMETER.EFFECT_TYPE",
-        "CPP.UNUSED.EFFECT_TYPE"
-      ]
-    },
-    {
-      "name": "BACKGROUND",
-      "occurrences": 53,
-      "samplePaths": [
-        "BAD_CHARACTER.BACKGROUND",
-        "BRACE_ATTR.BACKGROUND",
-        "BRACKET_ATTR.BACKGROUND",
-        "BREADCRUMBS_CURRENT.BACKGROUND",
-        "BREADCRUMBS_HOVERED.BACKGROUND"
-      ]
-    },
-    {
-      "name": "EFFECT_COLOR",
-      "occurrences": 19,
-      "samplePaths": [
-        "BOOKMARKS_ATTRIBUTES.EFFECT_COLOR",
-        "CTRL_CLICKABLE.EFFECT_COLOR",
-        "DEPRECATED_ATTRIBUTES.EFFECT_COLOR",
-        "DUPLICATE_FROM_SERVER.EFFECT_COLOR",
-        "ERRORS_ATTRIBUTES.EFFECT_COLOR"
-      ]
-    },
-    {
-      "name": "ERROR_STRIPE_COLOR",
-      "occurrences": 18,
-      "samplePaths": [
-        "BAD_CHARACTER.ERROR_STRIPE_COLOR",
-        "BOOKMARKS_ATTRIBUTES.ERROR_STRIPE_COLOR",
-        "COFFEESCRIPT.BAD_CHARACTER.ERROR_STRIPE_COLOR",
-        "DIFF_CONFLICT.ERROR_STRIPE_COLOR",
-        "DIFF_DELETED.ERROR_STRIPE_COLOR"
-      ]
-    },
-    {
       "name": "EDITOR_FONT_NAME",
       "occurrences": 2,
       "samplePaths": [
@@ -4561,6 +4435,3752 @@
       "occurrences": 1,
       "samplePaths": [
         "COFFEESCRIPT.KEYWORD"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.LINE_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.LINE_COMMENT"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.LOCAL_VARIABLE",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.LOCAL_VARIABLE"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.NUMBER"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.OBJECT_KEY",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.OBJECT_KEY"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.OPERATIONS",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.OPERATIONS"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.PROTOTYPE",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.PROTOTYPE"
+      ]
+    }
+  ],
+  "classifiedChildLeaves": [
+    {
+      "name": "FOREGROUND",
+      "occurrences": 503,
+      "mappedPaths": [
+        {
+          "path": "DEFAULT_BRACES.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.foreground",
+            "token:delimiter.bracket.foreground"
+          ]
+        },
+        {
+          "path": "DEFAULT_BRACKETS.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.array.foreground"
+          ]
+        },
+        {
+          "path": "DEFAULT_CONSTANT.FOREGROUND",
+          "monacoTargets": [
+            "token:constant.foreground",
+            "token:variable.constant.foreground"
+          ]
+        },
+        {
+          "path": "DEFAULT_FUNCTION_CALL.FOREGROUND",
+          "monacoTargets": [
+            "token:function.call.foreground",
+            "token:support.function.foreground"
+          ]
+        },
+        {
+          "path": "DEFAULT_FUNCTION_DECLARATION.FOREGROUND",
+          "monacoTargets": [
+            "token:function.foreground",
+            "token:entity.name.function.foreground"
+          ]
+        },
+        {
+          "path": "DEFAULT_INSTANCE_FIELD.FOREGROUND",
+          "monacoTargets": [
+            "token:variable.member.foreground",
+            "token:property.foreground"
+          ]
+        },
+        {
+          "path": "DEFAULT_INTERFACE_NAME.FOREGROUND",
+          "monacoTargets": [
+            "token:interface.foreground",
+            "token:entity.name.type.interface.foreground"
+          ]
+        },
+        {
+          "path": "DEFAULT_METADATA.FOREGROUND",
+          "monacoTargets": [
+            "token:meta.decorator.foreground"
+          ]
+        },
+        {
+          "path": "DEFAULT_OPERATION_SIGN.FOREGROUND",
+          "monacoTargets": [
+            "token:operator.foreground",
+            "token:keyword.operator.foreground"
+          ]
+        },
+        {
+          "path": "DEFAULT_PARENTHS.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.parenthesis.foreground"
+          ]
+        },
+        {
+          "path": "JS.DOC_COMMENT.FOREGROUND",
+          "monacoTargets": [
+            "token:comment.doc.foreground",
+            "token:comment.block.documentation.foreground"
+          ]
+        },
+        {
+          "path": "JS.GLOBAL_FUNCTION.FOREGROUND",
+          "monacoTargets": [
+            "token:function.foreground"
+          ]
+        },
+        {
+          "path": "JS.INSTANCE_MEMBER_FUNCTION.FOREGROUND",
+          "monacoTargets": [
+            "token:method.foreground"
+          ]
+        },
+        {
+          "path": "JS.KEYWORD.FOREGROUND",
+          "monacoTargets": [
+            "token:keyword.foreground"
+          ]
+        },
+        {
+          "path": "JS.LINE_COMMENT.FOREGROUND",
+          "monacoTargets": [
+            "token:comment.foreground"
+          ]
+        },
+        {
+          "path": "JS.LOCAL_VARIABLE.FOREGROUND",
+          "monacoTargets": [
+            "token:variable.foreground"
+          ]
+        },
+        {
+          "path": "JS.NUMBER.FOREGROUND",
+          "monacoTargets": [
+            "token:number.foreground"
+          ]
+        },
+        {
+          "path": "JS.PARAMETER.FOREGROUND",
+          "monacoTargets": [
+            "token:parameter.foreground",
+            "token:variable.parameter.foreground"
+          ]
+        },
+        {
+          "path": "JS.STRING.FOREGROUND",
+          "monacoTargets": [
+            "token:string.foreground"
+          ]
+        },
+        {
+          "path": "TEXT.FOREGROUND",
+          "monacoTargets": [
+            "color:editor.foreground"
+          ]
+        },
+        {
+          "path": "TS.CLASS.FOREGROUND",
+          "monacoTargets": [
+            "token:class.foreground",
+            "token:entity.name.type.class.foreground"
+          ]
+        },
+        {
+          "path": "TS.DECORATOR.FOREGROUND",
+          "monacoTargets": [
+            "token:decorator.foreground",
+            "token:support.type.decorator.foreground"
+          ]
+        },
+        {
+          "path": "TS.TYPE.ALIAS.FOREGROUND",
+          "monacoTargets": [
+            "token:type.foreground",
+            "token:entity.name.type.foreground"
+          ]
+        },
+        {
+          "path": "UNMATCHED_BRACE_ATTRIBUTES.FOREGROUND",
+          "monacoTargets": [
+            "color:editorBracketHighlight.unexpectedBracket.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": [
+        {
+          "path": "ABSTRACT_CLASS_NAME_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "ANNOTATION_NAME_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "APACHE_CONFIG.ARG_LEXEM.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "APACHE_CONFIG.COMMENT.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "APACHE_CONFIG.IDENTIFIER.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "BAD_CHARACTER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "BASH.EXTERNAL_COMMAND.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "BLOCK_TERMINAL_COMMAND.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "BRACE_ATTR.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "BRACKET_ATTR.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "BREADCRUMBS_CURRENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "BREADCRUMBS_HOVERED.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "BREAKPOINT_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "BUILDOUT.KEY.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "BUILDOUT.KEY_VALUE_SEPARATOR.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "BUILDOUT.LINE_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "BUILDOUT.SECTION_NAME.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "C.KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CLASS_NAME_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CLASS_REFERENCE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "COFFEESCRIPT.BAD_CHARACTER.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.BLOCK_COMMENT.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.BOOLEAN.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.CLASS_NAME.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.ESCAPE_SEQUENCE.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.EXISTENTIAL.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.EXPRESSIONS_SUBSTITUTION_MARK.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.FUNCTION.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.FUNCTION_BINDING.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.FUNCTION_NAME.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.GLOBAL_VARIABLE.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.HEREDOC_ID.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.HEREGEX_ID.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.JAVASCRIPT_ID.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.KEYWORD.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.LINE_COMMENT.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.LOCAL_VARIABLE.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.NUMBER.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.OBJECT_KEY.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.OPERATIONS.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.PROTOTYPE.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.REGULAR_EXPRESSION_CONTENT.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.REGULAR_EXPRESSION_ID.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.STRING.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.STRING_LITERAL.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.THIS.FOREGROUND",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "CONDITIONALLY_NOT_COMPILED.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CONSOLE_BLACK_OUTPUT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CONSOLE_BLUE_BRIGHT_OUTPUT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CONSOLE_BLUE_OUTPUT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CONSOLE_CYAN_BRIGHT_OUTPUT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CONSOLE_CYAN_OUTPUT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CONSOLE_ERROR_OUTPUT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CONSOLE_GRAY_OUTPUT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CONSOLE_GREEN_BRIGHT_OUTPUT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CONSOLE_GREEN_OUTPUT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CONSOLE_MAGENTA_BRIGHT_OUTPUT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CONSOLE_MAGENTA_OUTPUT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CONSOLE_NORMAL_OUTPUT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CONSOLE_RED_BRIGHT_OUTPUT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CONSOLE_RED_OUTPUT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CONSOLE_SYSTEM_OUTPUT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CONSOLE_USER_INPUT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CONSOLE_WHITE_OUTPUT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CONSOLE_YELLOW_BRIGHT_OUTPUT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CONSOLE_YELLOW_OUTPUT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CONSTRUCTOR_CALL_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CONSTRUCTOR_DECLARATION_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.BLOCK_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.CONSTANT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.DOT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.FIELD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.FUNCTION.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.LABEL.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.LINE_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.MACROS.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.METHOD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.NAMESPACE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.NUMBER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.OPERATION_SIGN.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.PARAMETER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.PP_ARG.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.PP_SKIPPED.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.STATIC.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.STATIC_FUNCTION.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.STRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.TYPE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CSS.COLOR.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CSS.COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CSS.FUNCTION.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CSS.IDENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CSS.IMPORTANT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CSS.KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CSS.NUMBER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CSS.OPERATORS.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CSS.PROPERTY_NAME.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CSS.PROPERTY_VALUE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CSS.STRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CSS.TAG_NAME.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CSS.URL.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CTRL_CLICKABLE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CUSP_BRACKETS_ATTR.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CUSTOM_INVALID_STRING_ESCAPE_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CUSTOM_KEYWORD1_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CUSTOM_KEYWORD2_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CUSTOM_KEYWORD3_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CUSTOM_KEYWORD4_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CUSTOM_LINE_COMMENT_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CUSTOM_MULTI_LINE_COMMENT_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CUSTOM_NUMBER_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CUSTOM_STRING_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CUSTOM_VALID_STRING_ESCAPE_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CY_VARIABLE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CY_VARIABLE_SIGN.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DEFAULT_ATTRIBUTE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DEFAULT_ENTITY.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DEFAULT_IDENTIFIER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DEFAULT_INSTANCE_METHOD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DEFAULT_INVALID_STRING_ESCAPE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DEFAULT_KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DEFAULT_NUMBER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DEFAULT_STATIC_FIELD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DEFAULT_STRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DEFAULT_VALID_STRING_ESCAPE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DELETED_TEXT_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DJANGO_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DJANGO_FILTER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DJANGO_ID.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DJANGO_KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DJANGO_NUMBER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DJANGO_STRING_LITERAL.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DJANGO_TAG_NAME.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DOUBLE_QUOTE_ATTR.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "EL.IDENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "EL.KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "EL.NUMBER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "EL.STRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "ENUM_CONST.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "EXECUTIONPOINT_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "FOLLOWED_HYPERLINK_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "GHERKIN_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "GHERKIN_KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "GHERKIN_OUTLINE_PARAMETER_SUBSTITUTION.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "GHERKIN_PYSTRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "GHERKIN_REGEXP_PARAMETER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "GHERKIN_TABLE_PIPE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "GHERKIN_TAG.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "GQL_ID.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "GQL_INT_LITERAL.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "GQL_KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "GQL_STRING_LITERAL.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HAML_CLASS.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HAML_FILTER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HAML_ID.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HAML_RUBY_CODE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HAML_RUBY_START.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HAML_STRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HAML_STRING_INTERPOLATED.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HAML_TAG.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HAML_TAG_NAME.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HAML_XHTML.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HANDLEBARS.COMMENTS.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HANDLEBARS.IDENTIFIERS.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HANDLEBARS.OPERATORS.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HANDLEBARS.STRINGS.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HANDLEBARS.VALUES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HTML_ATTRIBUTE_NAME.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HTML_ATTRIBUTE_VALUE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HTML_CODE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HTML_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HTML_ENTITY_REFERENCE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HTML_TAG.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HTML_TAG_NAME.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HYPERLINK_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "IMPLICIT_ANONYMOUS_CLASS_PARAMETER_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "INJECTED_LANGUAGE_FRAGMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "INSTANCE_FIELD_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "INTERFACE_NAME_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JAVA_BLOCK_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JAVA_DOC_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JAVA_INVALID_STRING_ESCAPE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JAVA_KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JAVA_LINE_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JAVA_NUMBER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JAVA_OPERATION_SIGN.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JAVA_STRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JAVA_VALID_STRING_ESCAPE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.BADCHARACTER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.BLOCK_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.BRACES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.BRACKETS.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.CLASS.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.DEBUGGER_STMT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.DECORATOR.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.DOT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.FUNCTION.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.GLOBAL_VARIABLE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.INSTANCE_MEMBER_VARIABLE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.INTERFACE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.MODULE_KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.MODULE_NAME.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.OPERATION_SIGN.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.PARENTHS.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.REGEXP.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.SEMICOLON.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.STATIC_MEMBER_FUNCTION.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.STATIC_MEMBER_VARIABLE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.THIS_SUPER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.VALID_STRING_ESCAPE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.VAR_DEF.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JSON.KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JSON.PROPERTY_KEY.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JSON.STRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JSON.VALID_ESCAPE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JSP_ATTRIBUTE_NAME.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JSP_ATTRIBUTE_VALUE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JSP_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JSP_DIRECTIVE_NAME.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LABEL.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LESS_INJECTED_CODE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LESS_JS_CODE_DELIM.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LESS_KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LESS_VARIABLE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LINE_FULL_COVERAGE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LINE_NONE_COVERAGE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LINE_PARTIAL_COVERAGE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LOCALE.LINE_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LOCALE.MSGCTXT_KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LOCALE.MSGID_KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LOCALE.MSGID_PLURAL_KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LOCALE.MSGSTR_KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LOCALE.MSGSTR_PLURAL_KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LOCALE.STRING_LITERAL.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LOCAL_VARIABLE_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LOG_ERROR_OUTPUT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LOG_EXPIRED_ENTRY.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LOG_INFO_OUTPUT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LOG_VERBOSE_OUTPUT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LOG_WARNING_OUTPUT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MACRONAME.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_BLOCK_QUOTE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_BOLD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_CODE_BLOCK.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_CODE_FENCE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_CODE_SPAN.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_HEADER_LEVEL_1.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_HEADER_LEVEL_2.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_HEADER_LEVEL_3.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_HEADER_LEVEL_4.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_HEADER_LEVEL_5.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_HEADER_LEVEL_6.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_INLINE_HTML.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_ITALIC.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_LINK_DESTINATION.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_ORDERED_LIST.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_STRIKE_THROUGH.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_TABLE_SEPARATOR.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_UNORDERED_LIST.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MATCHED_BRACE_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "METHOD_CALL_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "METHOD_DECLARATION_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "OC.BLOCK_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "OC.CPP_KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "OC.DIRECTIVE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "OC.KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "OC.LINE_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "OC.NUMBER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "OC.SELFSUPERTHIS.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "OC.STRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "OC_FORMAT_TOKEN.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PARAMETER_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PARENTHESIS_ATTR.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_BAD_CHARACTER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_CONSTANT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_DOC_COMMENT_ID.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_ESCAPE_SEQUENCE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_EXEC_COMMAND_ID.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_HEREDOC_ID.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_IDENTIFIER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_NUMBER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_OPERATION_SIGN.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_PREDEFINED SYMBOL.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_STRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_TAG.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_VAR.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PROPERTIES.INVALID_STRING_ESCAPE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PROPERTIES.KEY.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PROPERTIES.KEY_VALUE_SEPARATOR.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PROPERTIES.LINE_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PROPERTIES.VALID_STRING_ESCAPE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PROTOCOL_REFERENCE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PUPPET_ESCAPE_SEQUENCE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PUPPET_KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PUPPET_NUMBER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PUPPET_RESOURCE_REFERENCE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PUPPET_SQ_STRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PUPPET_STRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PUPPET_VARIABLE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PUPPET_VARIABLE_INTERPOLATION.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PUPPET_VARIABLE_INTERPOLATION_TAGS.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PY.BUILTIN_NAME.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PY.CLASS_DEFINITION.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PY.DECORATOR.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PY.DOC_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PY.FUNC_DEFINITION.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PY.INVALID_STRING_ESCAPE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PY.KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PY.LINE_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PY.NUMBER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PY.OPERATION_SIGN.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PY.PREDEFINED_DEFINITION.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PY.PREDEFINED_USAGE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PY.STRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PY.VALID_STRING_ESCAPE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "QL_ATTRIBUTE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "QL_DATETIME.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "QL_ENTITY.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "QL_ID_VARIABLE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "QL_KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "QL_NUMBER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "QL_OPERATION_SIGN.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "QL_PARAMETER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "QL_STRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REASSIGNED_LOCAL_VARIABLE_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REASSIGNED_PARAMETER_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REGEXP.BAD_CHARACTER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REGEXP.CHAR_CLASS.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REGEXP.COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REGEXP.ESC_CHARACTER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REGEXP.INVALID_STRING_ESCAPE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REGEXP.META.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REGEXP.QUOTE_CHARACTER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REGEXP.REDUNDANT_ESCAPE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REST.EXPLICIT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REST.FIELD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REST.FIXED.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REST.INLINE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REST.INTERPRETED.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REST.LINE_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REST.REF.NAME.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REST.SECTION.HEADER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RHTML_COMMENT_ID.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RHTML_OMIT_NEW_LINE_ID.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_BAD_CHARACTER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_CONSTANT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_CONSTANT_DECLARATION.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_CVAR.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_ESCAPE_SEQUENCE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_EXPR_IN_STRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_GVAR.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_HASH_ASSOC.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_HEREDOC_ID.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_IDENTIFIER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_INTERPOLATED_STRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_INVALID_ESCAPE_SEQUENCE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_IVAR.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_LINE_CONTINUATION.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_METHOD_NAME.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_NTH_REF.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_NUMBER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_OPERATION_SIGN.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_PARAMDEF_CALL.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_PARAMETER_ID.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_REGEXP.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_SPECIFIC_CALL.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_STRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_SYMBOL.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_WORDS.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SASS_ATTRIBUTE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SASS_CONSTANT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SASS_DIRECTIVE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SASS_MIXIN.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SASS_RULE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SASS_STRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SASS_VARIABLE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SEARCH_RESULT_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SLIM_CALL.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SLIM_CLASS.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SLIM_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SLIM_DOCTYPE_KWD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SLIM_FILTER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SLIM_FILTER_CONTENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SLIM_ID.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SLIM_INTERPOLATION.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SLIM_RUBY_CODE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SLIM_STRING_INTERPOLATED.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SLIM_TAG.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SLIM_TAG_ATTR_KEY.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SMARTY_BAD_CHARACTER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SMARTY_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SMARTY_IDENTIFIER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SMARTY_KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SMARTY_NUMBER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SMARTY_OPERATION_SIGN.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SMARTY_STRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SPY-JS.EXCEPTION.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SQL_COLUMN.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SQL_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SQL_KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SQL_LOCAL_ALIAS.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SQL_NUMBER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SQL_PARAMETER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SQL_SCHEMA.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SQL_STRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SQL_TABLE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "STATIC_FIELD_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "STATIC_FINAL_FIELD_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "STATIC_METHOD_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "STRUCT_LIKE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Abstract class.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Annotation name.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Assign.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Bad character.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Block comment.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Class.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Class method call.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Dot.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Invalid escape in string.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Keyword.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Line comment.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Local method call.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Method declaration.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Number.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Object method call.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Parameter.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Predefined types.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala String.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Type parameter.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Valid escape in string.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "ScalaDoc comment.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "TEMPLATE_VARIABLE_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "TEXT_SEARCH_RESULT_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "TODO_DEFAULT_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "TS.INTERFACE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "TS.MODULE_NAME.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "TS.TYPE_GUARD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "TS.TYPE_PARAMETER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "TWIG_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "TWIG_IDENTIFIER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "TWIG_KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "TWIG_NUMBER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "TWIG_OPERATION_SIGN.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "TWIG_STRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "TYPEDEF.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "TYPE_PARAMETER_NAME_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "VELOCITY_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "VELOCITY_DIRECTIVE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "VELOCITY_ESCAPE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "VELOCITY_KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "VELOCITY_NUMBER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "VELOCITY_OPERATION_SIGN.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "VELOCITY_REFERENCE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "VELOCITY_STRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "WRITE_SEARCH_RESULT_ATTRIBUTES.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "XML_ATTRIBUTE_NAME.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "XML_ATTRIBUTE_VALUE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "XML_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "XML_ENTITY_REFERENCE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "XML_TAG.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "XML_TAG_NAME.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "XPATH.FUNCTION.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "XPATH.KEYWORD.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "XPATH.NUMBER.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "XPATH.OPERATION_SIGN.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "XPATH.STRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "XPATH.XPATH_NAME.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "XPATH.XPATH_VARIABLE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "YAML_COMMENT.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "YAML_SCALAR_DSTRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "YAML_SCALAR_KEY.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "YAML_SCALAR_LIST.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "YAML_SCALAR_STRING.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "YAML_SCALAR_VALUE.FOREGROUND",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        }
+      ]
+    },
+    {
+      "name": "FONT_TYPE",
+      "occurrences": 241,
+      "mappedPaths": [
+        {
+          "path": "DEFAULT_BRACES.FONT_TYPE",
+          "monacoTargets": [
+            "token:delimiter.fontStyle",
+            "token:delimiter.bracket.fontStyle"
+          ]
+        },
+        {
+          "path": "DEFAULT_BRACKETS.FONT_TYPE",
+          "monacoTargets": [
+            "token:delimiter.array.fontStyle"
+          ]
+        },
+        {
+          "path": "DEFAULT_CONSTANT.FONT_TYPE",
+          "monacoTargets": [
+            "token:constant.fontStyle",
+            "token:variable.constant.fontStyle"
+          ]
+        },
+        {
+          "path": "DEFAULT_FUNCTION_CALL.FONT_TYPE",
+          "monacoTargets": [
+            "token:function.call.fontStyle",
+            "token:support.function.fontStyle"
+          ]
+        },
+        {
+          "path": "DEFAULT_PARENTHS.FONT_TYPE",
+          "monacoTargets": [
+            "token:delimiter.parenthesis.fontStyle"
+          ]
+        },
+        {
+          "path": "JS.DOC_COMMENT.FONT_TYPE",
+          "monacoTargets": [
+            "token:comment.doc.fontStyle",
+            "token:comment.block.documentation.fontStyle"
+          ]
+        },
+        {
+          "path": "JS.INSTANCE_MEMBER_FUNCTION.FONT_TYPE",
+          "monacoTargets": [
+            "token:method.fontStyle"
+          ]
+        },
+        {
+          "path": "JS.LINE_COMMENT.FONT_TYPE",
+          "monacoTargets": [
+            "token:comment.fontStyle"
+          ]
+        }
+      ],
+      "deferredPaths": [
+        {
+          "path": "ABSTRACT_CLASS_NAME_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "APACHE_CONFIG.ARG_LEXEM.FONT_TYPE",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "APACHE_CONFIG.COMMENT.FONT_TYPE",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "APACHE_CONFIG.IDENTIFIER.FONT_TYPE",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "BLOCK_TERMINAL_COMMAND.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "BOOKMARKS_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "BRACE_ATTR.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "BRACKET_ATTR.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "BUILDOUT.KEY.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "BUILDOUT.LINE_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "BUILDOUT.VALUE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "C.KEYWORD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "COFFEESCRIPT.BLOCK_COMMENT.FONT_TYPE",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.BOOLEAN.FONT_TYPE",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.HEREDOC_CONTENT.FONT_TYPE",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.HEREDOC_ID.FONT_TYPE",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.HEREGEX_ID.FONT_TYPE",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.JAVASCRIPT_ID.FONT_TYPE",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.LINE_COMMENT.FONT_TYPE",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG.FONT_TYPE",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.REGULAR_EXPRESSION_ID.FONT_TYPE",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.STRING_LITERAL.FONT_TYPE",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "COFFEESCRIPT.THIS.FONT_TYPE",
+          "reason": "defer: Maldives does not load this language grammar yet"
+        },
+        {
+          "path": "CONSOLE_USER_INPUT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CONSTRUCTOR_CALL_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CONSTRUCTOR_DECLARATION_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.BLOCK_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.CONSTANT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.FIELD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.KEYWORD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.LINE_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.METHOD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.NAMESPACE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.PP_SKIPPED.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.STATIC.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.STATIC_FUNCTION.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CPP.STRING.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CSS.COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CUSP_BRACKETS_ATTR.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CUSTOM_KEYWORD1_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CUSTOM_KEYWORD2_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CUSTOM_KEYWORD3_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CUSTOM_KEYWORD4_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CUSTOM_LINE_COMMENT_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CUSTOM_MULTI_LINE_COMMENT_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CUSTOM_STRING_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CUSTOM_VALID_STRING_ESCAPE_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CY_VARIABLE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DEFAULT_ATTRIBUTE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DEFAULT_ENTITY.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DEFAULT_INSTANCE_METHOD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DEFAULT_KEYWORD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DEFAULT_VALID_STRING_ESCAPE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DJANGO_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DJANGO_ID.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DJANGO_KEYWORD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DJANGO_STRING_LITERAL.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DJANGO_TAG_NAME.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DOUBLE_QUOTE_ATTR.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "EL.BOUNDS.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "EL.KEYWORD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "EL.STRING.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "ENUM_CONST.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "FOLDED_TEXT_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "FOLLOWED_HYPERLINK_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "GHERKIN_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "GHERKIN_TABLE_HEADER_CELL.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "GHERKIN_TABLE_PIPE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "GQL_KEYWORD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "GQL_STRING_LITERAL.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HAML_FILTER_CONTENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HAML_XHTML.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HANDLEBARS.COMMENTS.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HANDLEBARS.IDENTIFIERS.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HANDLEBARS.STRINGS.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HTML_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HTML_ENTITY_REFERENCE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HYPERLINK_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "IDENTIFIER_UNDER_CARET_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "INTERFACE_NAME_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "IVAR.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JAVA_BLOCK_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JAVA_DOC_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JAVA_DOC_MARKUP.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JAVA_DOC_TAG.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JAVA_INVALID_STRING_ESCAPE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JAVA_LINE_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JAVA_STRING.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JAVA_VALID_STRING_ESCAPE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.BLOCK_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.BRACES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.BRACKETS.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.CLASS.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.COMMA.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.DEBUGGER_STMT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.DOC_MARKUP.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.DOC_TAG.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.DOT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.FUNCTION.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.MODULE_KEYWORD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.PARENTHS.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.SEMICOLON.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.STATIC_MEMBER_FUNCTION.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.VALID_STRING_ESCAPE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JSON.KEYWORD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JSON.PROPERTY_KEY.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JSON.VALID_ESCAPE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JSP_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JSP_DIRECTIVE_NAME.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LABEL.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LESS_JS_CODE_DELIM.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LINE_FULL_COVERAGE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LINE_NONE_COVERAGE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LINE_PARTIAL_COVERAGE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LOCALE.LINE_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LOCALE.MSGCTXT_KEYWORD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LOCALE.MSGID_KEYWORD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LOCALE.MSGID_PLURAL_KEYWORD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LOCALE.MSGSTR_KEYWORD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LOCALE.MSGSTR_PLURAL_KEYWORD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "LOCALE.STRING_LITERAL.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MACRONAME.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_BOLD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_CODE_BLOCK.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_CODE_FENCE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_CODE_SPAN.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_HEADER_LEVEL_1.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_HEADER_LEVEL_2.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_HEADER_LEVEL_3.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_HEADER_LEVEL_4.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_HEADER_LEVEL_5.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_HEADER_LEVEL_6.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_ITALIC.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_LINK_DESTINATION.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_TABLE_SEPARATOR.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MATCHED_BRACE_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "METHOD_CALL_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "OC.BLOCK_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "OC.CPP_KEYWORD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "OC.DIRECTIVE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "OC.KEYWORD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "OC.LINE_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "OC.SELFSUPERTHIS.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "OC.STRING.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "OC_FORMAT_TOKEN.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PARENTHESIS_ATTR.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_CONSTANT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_DOC_COMMENT_ID.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_DOC_TAG.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_ESCAPE_SEQUENCE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_EXEC_COMMAND_ID.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_HEREDOC_ID.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_KEYWORD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_PREDEFINED SYMBOL.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_STRING.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PHP_TAG.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PRE.KEYWORD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PROPERTIES.KEY.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PROPERTIES.LINE_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PROPERTIES.VALID_STRING_ESCAPE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PROPERTIES.VALUE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PY.CLASS_DEFINITION.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PY.DOC_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PY.DOC_COMMENT_TAG.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PY.FUNC_DEFINITION.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PY.KEYWORD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PY.LINE_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PY.PREDEFINED_DEFINITION.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PY.STRING.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "PY.VALID_STRING_ESCAPE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "QL_ATTRIBUTE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "QL_KEYWORD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "QL_STRING.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REGEXP.CHAR_CLASS.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REGEXP.COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REGEXP.ESC_CHARACTER.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REGEXP.META.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REGEXP.QUOTE_CHARACTER.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REGEXP.REDUNDANT_ESCAPE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REST.BOLD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REST.EXPLICIT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REST.FIELD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REST.ITALIC.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REST.LINE_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "REST.REF.NAME.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RHTML_COMMENT_ID.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RHTML_OMIT_NEW_LINE_ID.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RHTML_SCRIPTLET_START_ID.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_ESCAPE_SEQUENCE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_HEREDOC_CONTENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_HEREDOC_ID.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_REGEXP.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "RUBY_WORDS.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SASS_CONSTANT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SASS_DIRECTIVE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SASS_MIXIN.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SASS_RULE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SLIM_FILTER_CONTENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SMARTY_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SMARTY_KEYWORD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SMARTY_STRING.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "SQL_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "STATIC_FIELD_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "STATIC_FINAL_FIELD_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "STATIC_METHOD_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Block comment.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Keyword.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Line comment.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Object method call.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala String.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Template lazy val/var.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Template val.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Template var.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "Scala Valid escape in string.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "ScalaDoc comment.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "ScalaDoc comment tag.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "TEMPLATE_VARIABLE_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "TODO_DEFAULT_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "TWIG_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "TWIG_KEYWORD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "TWIG_STRING.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "UNMATCHED_BRACE_ATTRIBUTES.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "VELOCITY_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "VELOCITY_DIRECTIVE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "VELOCITY_ESCAPE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "VELOCITY_KEYWORD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "XML_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "XPATH.FUNCTION.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "XPATH.KEYWORD.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "XPATH.XPATH_VARIABLE.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "YAML_COMMENT.FONT_TYPE",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        }
+      ]
+    },
+    {
+      "name": "EFFECT_TYPE",
+      "occurrences": 55,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "ANNOTATION_NAME_ATTRIBUTES.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "BAD_CHARACTER.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "BRACE_ATTR.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "CPP.PARAMETER.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "CPP.UNUSED.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "CSS.KEYWORD.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "CSS.PROPERTY_VALUE.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "DELETED_TEXT_ATTRIBUTES.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "DEPRECATED_ATTRIBUTES.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "DOUBLE_QUOTE_ATTR.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "DUPLICATE_FROM_SERVER.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "ERRORS_ATTRIBUTES.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "FOLDED_TEXT_ATTRIBUTES.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "FOLLOWED_HYPERLINK_ATTRIBUTES.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "GENERIC_SERVER_ERROR_OR_WARNING.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "HTML_ATTRIBUTE_NAME.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "HTML_ATTRIBUTE_VALUE.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "HTML_TAG.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "HYPERLINK_ATTRIBUTES.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "INFO_ATTRIBUTES.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "JAVA_DOC_TAG.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "JS.BADCHARACTER.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "JS.BRACKETS.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "JS.CLASS.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "JS.DOC_TAG.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "JS.INSTANCE_MEMBER_FUNCTION.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "JS.INSTANCE_MEMBER_VARIABLE.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "JS.INVALID_STRING_ESCAPE.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "JS.LOCAL_VARIABLE.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "JS.MODULE_NAME.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "JS.PARAMETER.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "JS.SEMICOLON.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "JS.VAR_DEF.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "MARKDOWN_STRIKE_THROUGH.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "NOT_USED_ELEMENT_ATTRIBUTES.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "PHP_BAD_CHARACTER.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "PHP_DOC_TAG.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "PHP_HEREDOC_ID.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "PROPERTIES.KEY.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "PY.DOC_COMMENT_TAG.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "RUBY_HEREDOC_ID.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "SLIM_FILTER_CONTENT.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "SLIM_RUBY_CODE.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "SMARTY_BAD_CHARACTER.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "SPY-JS.EXCEPTION.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "SPY-JS.FUNCTION_SCOPE.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "SPY-JS.PATH_LEVEL_ONE.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "SPY-JS.PROGRAM_SCOPE.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "Scala Annotation name.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "ScalaDoc comment tag.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "TWIG_BAD_CHARACTER.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "TYPO.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "VELOCITY_BAD_CHARACTER.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "WARNING_ATTRIBUTES.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        },
+        {
+          "path": "WRONG_REFERENCES_ATTRIBUTES.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        }
+      ]
+    },
+    {
+      "name": "BACKGROUND",
+      "occurrences": 53,
+      "mappedPaths": [
+        {
+          "path": "FOLDED_TEXT_ATTRIBUTES.BACKGROUND",
+          "monacoTargets": [
+            "color:editor.foldBackground"
+          ]
+        },
+        {
+          "path": "MATCHED_BRACE_ATTRIBUTES.BACKGROUND",
+          "monacoTargets": [
+            "color:editorBracketMatch.background",
+            "color:editorBracketMatch.border"
+          ]
+        },
+        {
+          "path": "SEARCH_RESULT_ATTRIBUTES.BACKGROUND",
+          "monacoTargets": [
+            "color:editor.selectionHighlightBackground"
+          ]
+        },
+        {
+          "path": "TEXT.BACKGROUND",
+          "monacoTargets": [
+            "color:editor.background"
+          ]
+        },
+        {
+          "path": "TEXT_SEARCH_RESULT_ATTRIBUTES.BACKGROUND",
+          "monacoTargets": [
+            "color:editor.findMatchBackground"
+          ]
+        }
+      ],
+      "deferredPaths": [
+        {
+          "path": "BAD_CHARACTER.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "BRACE_ATTR.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "BRACKET_ATTR.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "BREADCRUMBS_CURRENT.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "BREADCRUMBS_HOVERED.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "BREAKPOINT_ATTRIBUTES.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "COFFEESCRIPT.BAD_CHARACTER.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "COFFEESCRIPT.JAVASCRIPT_ID.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "CUSP_BRACKETS_ATTR.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "CUSTOM_INVALID_STRING_ESCAPE_ATTRIBUTES.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "DEFAULT_ATTRIBUTE.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "DEFAULT_FUNCTION_CALL.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "DEFAULT_IDENTIFIER.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "DEFAULT_INVALID_STRING_ESCAPE.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "DEFAULT_KEYWORD.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "DEFAULT_STRING.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "DEFAULT_TEMPLATE_LANGUAGE_COLOR.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "DIFF_CONFLICT.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "DIFF_DELETED.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "DIFF_INSERTED.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "DIFF_MODIFIED.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "DOUBLE_QUOTE_ATTR.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "EXECUTIONPOINT_ATTRIBUTES.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "HAML_FILTER_CONTENT.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "HTML_CODE.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "JAVA_INVALID_STRING_ESCAPE.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "JS.ATTRIBUTE.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "JS.BADCHARACTER.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "JS.DOT.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "JS.PARENTHS.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "MARKDOWN_INLINE_HTML.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "MARKDOWN_ORDERED_LIST.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "MARKDOWN_UNORDERED_LIST.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "PARENTHESIS_ATTR.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "PHP_BAD_CHARACTER.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "PROPERTIES.INVALID_STRING_ESCAPE.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "PY.INVALID_STRING_ESCAPE.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "REGEXP.BAD_CHARACTER.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "REGEXP.INVALID_STRING_ESCAPE.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "REGEXP.REDUNDANT_ESCAPE.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "RUBY_BAD_CHARACTER.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "RUBY_INVALID_ESCAPE_SEQUENCE.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "SMARTY_BAD_CHARACTER.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "Scala Bad character.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "Scala Invalid escape in string.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "UNMATCHED_BRACE_ATTRIBUTES.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "VELOCITY_SCRIPTING_BACKGROUND.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "WRITE_SEARCH_RESULT_ATTRIBUTES.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        }
+      ]
+    },
+    {
+      "name": "EFFECT_COLOR",
+      "occurrences": 19,
+      "mappedPaths": [
+        {
+          "path": "ERRORS_ATTRIBUTES.EFFECT_COLOR",
+          "monacoTargets": [
+            "color:editorError.foreground"
+          ]
+        },
+        {
+          "path": "WARNING_ATTRIBUTES.EFFECT_COLOR",
+          "monacoTargets": [
+            "color:editorWarning.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": [
+        {
+          "path": "BOOKMARKS_ATTRIBUTES.EFFECT_COLOR",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "CTRL_CLICKABLE.EFFECT_COLOR",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DEPRECATED_ATTRIBUTES.EFFECT_COLOR",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "DUPLICATE_FROM_SERVER.EFFECT_COLOR",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "FOLLOWED_HYPERLINK_ATTRIBUTES.EFFECT_COLOR",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "GENERIC_SERVER_ERROR_OR_WARNING.EFFECT_COLOR",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "HYPERLINK_ATTRIBUTES.EFFECT_COLOR",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "IDENTIFIER_UNDER_CARET_ATTRIBUTES.EFFECT_COLOR",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.BADCHARACTER.EFFECT_COLOR",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "JS.INVALID_STRING_ESCAPE.EFFECT_COLOR",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "MARKDOWN_STRIKE_THROUGH.EFFECT_COLOR",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "NOT_USED_ELEMENT_ATTRIBUTES.EFFECT_COLOR",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "TWIG_BAD_CHARACTER.EFFECT_COLOR",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "TYPO.EFFECT_COLOR",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "VELOCITY_BAD_CHARACTER.EFFECT_COLOR",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "WRITE_IDENTIFIER_UNDER_CARET_ATTRIBUTES.EFFECT_COLOR",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        },
+        {
+          "path": "WRONG_REFERENCES_ATTRIBUTES.EFFECT_COLOR",
+          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+        }
+      ]
+    },
+    {
+      "name": "ERROR_STRIPE_COLOR",
+      "occurrences": 18,
+      "mappedPaths": [
+        {
+          "path": "ERRORS_ATTRIBUTES.ERROR_STRIPE_COLOR",
+          "monacoTargets": [
+            "color:editorOverviewRuler.errorForeground"
+          ]
+        },
+        {
+          "path": "WARNING_ATTRIBUTES.ERROR_STRIPE_COLOR",
+          "monacoTargets": [
+            "color:editorOverviewRuler.warningForeground"
+          ]
+        }
+      ],
+      "deferredPaths": [
+        {
+          "path": "BAD_CHARACTER.ERROR_STRIPE_COLOR",
+          "reason": "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute"
+        },
+        {
+          "path": "BOOKMARKS_ATTRIBUTES.ERROR_STRIPE_COLOR",
+          "reason": "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute"
+        },
+        {
+          "path": "COFFEESCRIPT.BAD_CHARACTER.ERROR_STRIPE_COLOR",
+          "reason": "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute"
+        },
+        {
+          "path": "DIFF_CONFLICT.ERROR_STRIPE_COLOR",
+          "reason": "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute"
+        },
+        {
+          "path": "DIFF_DELETED.ERROR_STRIPE_COLOR",
+          "reason": "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute"
+        },
+        {
+          "path": "DIFF_INSERTED.ERROR_STRIPE_COLOR",
+          "reason": "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute"
+        },
+        {
+          "path": "DIFF_MODIFIED.ERROR_STRIPE_COLOR",
+          "reason": "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute"
+        },
+        {
+          "path": "DUPLICATE_FROM_SERVER.ERROR_STRIPE_COLOR",
+          "reason": "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute"
+        },
+        {
+          "path": "GENERIC_SERVER_ERROR_OR_WARNING.ERROR_STRIPE_COLOR",
+          "reason": "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute"
+        },
+        {
+          "path": "INFO_ATTRIBUTES.ERROR_STRIPE_COLOR",
+          "reason": "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute"
+        },
+        {
+          "path": "JS.BADCHARACTER.ERROR_STRIPE_COLOR",
+          "reason": "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute"
+        },
+        {
+          "path": "JS.INSTANCE_MEMBER_VARIABLE.ERROR_STRIPE_COLOR",
+          "reason": "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute"
+        },
+        {
+          "path": "PHP_BAD_CHARACTER.ERROR_STRIPE_COLOR",
+          "reason": "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute"
+        },
+        {
+          "path": "SMARTY_BAD_CHARACTER.ERROR_STRIPE_COLOR",
+          "reason": "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute"
+        },
+        {
+          "path": "TEXT_SEARCH_RESULT_ATTRIBUTES.ERROR_STRIPE_COLOR",
+          "reason": "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute"
+        },
+        {
+          "path": "WRONG_REFERENCES_ATTRIBUTES.ERROR_STRIPE_COLOR",
+          "reason": "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute"
+        }
       ]
     }
   ]

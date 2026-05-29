@@ -36,6 +36,8 @@ test("maps remaining SSOT UI colors to Monaco theme color ids", () => {
     "editorWhitespace.foreground": "#515151",
     "editorError.foreground": "#f2777a",
     "editorWarning.foreground": "#ffcc66",
+    "editorOverviewRuler.errorForeground": "#f2777a",
+    "editorOverviewRuler.warningForeground": "#ebc700",
     "editor.findMatchBackground": "#ffcc66",
     "editor.selectionHighlightBackground": "#ffcc66",
   });

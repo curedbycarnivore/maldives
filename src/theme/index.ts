@@ -54,6 +54,8 @@ export function buildMonacoTheme(theme: ThemeConfig): editor.IStandaloneThemeDat
       "editorWhitespace.foreground": theme.whitespaceForeground,
       "editorError.foreground": theme.errorForeground,
       "editorWarning.foreground": theme.warningForeground,
+      "editorOverviewRuler.errorForeground": theme.errorOverviewRuler,
+      "editorOverviewRuler.warningForeground": theme.warningOverviewRuler,
       "editor.findMatchBackground": theme.findMatchBackground,
       "editor.selectionHighlightBackground": theme.selectionHighlightBackground,
       "editorRuler.foreground": theme.rightMarginColor,

@@ -13,6 +13,8 @@ export interface ThemeConfig {
   whitespaceForeground: string;
   errorForeground: string;
   warningForeground: string;
+  errorOverviewRuler: string;
+  warningOverviewRuler: string;
   findMatchBackground: string;
   selectionHighlightBackground: string;
   rightMarginColor: string;
@@ -79,6 +81,8 @@ export function parseIcls(xmlContent: string): ThemeConfig {
     whitespaceForeground: color(optionValue(xmlContent, "WHITESPACES")),
     errorForeground: color(optionValue(blockFor(xmlContent, "ERRORS_ATTRIBUTES"), "EFFECT_COLOR")),
     warningForeground: color(optionValue(blockFor(xmlContent, "WARNING_ATTRIBUTES"), "EFFECT_COLOR")),
+    errorOverviewRuler: color(optionValue(blockFor(xmlContent, "ERRORS_ATTRIBUTES"), "ERROR_STRIPE_COLOR")),
+    warningOverviewRuler: color(optionValue(blockFor(xmlContent, "WARNING_ATTRIBUTES"), "ERROR_STRIPE_COLOR")),
     findMatchBackground: color(optionValue(blockFor(xmlContent, "TEXT_SEARCH_RESULT_ATTRIBUTES"), "BACKGROUND")),
     selectionHighlightBackground: color(optionValue(blockFor(xmlContent, "SEARCH_RESULT_ATTRIBUTES"), "BACKGROUND")),
     rightMarginColor: color(optionValue(xmlContent, "RIGHT_MARGIN_COLOR")),

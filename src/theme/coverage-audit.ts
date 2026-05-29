@@ -24,6 +24,8 @@ const colorAuditEntries: ColorAuditEntry[] = [
   { iclsAttribute: "WHITESPACES", expected: (theme) => theme.whitespaceForeground, monacoColorIds: ["editorWhitespace.foreground"] },
   { iclsAttribute: "ERRORS_ATTRIBUTES.EFFECT_COLOR", expected: (theme) => theme.errorForeground, monacoColorIds: ["editorError.foreground"] },
   { iclsAttribute: "WARNING_ATTRIBUTES.EFFECT_COLOR", expected: (theme) => theme.warningForeground, monacoColorIds: ["editorWarning.foreground"] },
+  { iclsAttribute: "ERRORS_ATTRIBUTES.ERROR_STRIPE_COLOR", expected: (theme) => theme.errorOverviewRuler, monacoColorIds: ["editorOverviewRuler.errorForeground"] },
+  { iclsAttribute: "WARNING_ATTRIBUTES.ERROR_STRIPE_COLOR", expected: (theme) => theme.warningOverviewRuler, monacoColorIds: ["editorOverviewRuler.warningForeground"] },
   { iclsAttribute: "TEXT_SEARCH_RESULT_ATTRIBUTES.BACKGROUND", expected: (theme) => theme.findMatchBackground, monacoColorIds: ["editor.findMatchBackground"] },
   { iclsAttribute: "SEARCH_RESULT_ATTRIBUTES.BACKGROUND", expected: (theme) => theme.selectionHighlightBackground, monacoColorIds: ["editor.selectionHighlightBackground"] },
   { iclsAttribute: "RIGHT_MARGIN_COLOR", expected: (theme) => theme.rightMarginColor, monacoColorIds: ["editorRuler.foreground"] },
@@ -58,6 +60,22 @@ export const themeCoverageAuditAttributes = [
   ...colorAuditEntries.map((entry) => entry.iclsAttribute),
   ...tokenAuditNames,
 ];
+
+export function themeCoverageAuditTargets(): Record<string, string[]> {
+  const targets = new Map<string, string[]>();
+
+  for (const entry of colorAuditEntries) {
+    targets.set(entry.iclsAttribute, entry.monacoColorIds.map((colorId) => `color:${colorId}`));
+  }
+
+  for (const tokenName of tokenAuditNames) {
+    const scopes = TOKEN_SCOPES[tokenName] ?? [tokenName];
+    targets.set(`${tokenName}.FOREGROUND`, scopes.map((scope) => `token:${scope}.foreground`));
+    targets.set(`${tokenName}.FONT_TYPE`, scopes.map((scope) => `token:${scope}.fontStyle`));
+  }
+
+  return Object.fromEntries([...targets.entries()].sort(([a], [b]) => a.localeCompare(b)));
+}
 
 export function auditThemeCoverage(theme: ThemeConfig, monacoTheme: editor.IStandaloneThemeData): string[] {
   const missing: string[] = [];

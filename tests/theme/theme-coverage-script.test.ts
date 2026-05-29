@@ -29,6 +29,36 @@ describe("scripts/theme-coverage", () => {
     expect(report.top50Unmapped[0].occurrences).toBeGreaterThanOrEqual(report.top50Unmapped[49].occurrences);
   });
 
+  test("classifies high-frequency child leaves into Monaco targets or explicit deferrals", () => {
+    const report = auditThemeCoverageMappings(iclsXml);
+    const leafNames = report.classifiedChildLeaves.map((entry) => entry.name);
+
+    expect(leafNames).toEqual(["FOREGROUND", "FONT_TYPE", "EFFECT_TYPE", "BACKGROUND", "EFFECT_COLOR", "ERROR_STRIPE_COLOR"]);
+    expect(report.top50Unmapped.map((entry) => entry.name)).not.toEqual(
+      expect.arrayContaining(leafNames),
+    );
+    expect(report.classifiedChildLeaves.find((entry) => entry.name === "FOREGROUND")?.mappedPaths).toEqual(
+      expect.arrayContaining([
+        { path: "TEXT.FOREGROUND", monacoTargets: ["color:editor.foreground"] },
+        { path: "JS.KEYWORD.FOREGROUND", monacoTargets: ["token:keyword.foreground"] },
+      ]),
+    );
+    expect(report.classifiedChildLeaves.find((entry) => entry.name === "ERROR_STRIPE_COLOR")?.mappedPaths).toEqual(
+      expect.arrayContaining([
+        { path: "ERRORS_ATTRIBUTES.ERROR_STRIPE_COLOR", monacoTargets: ["color:editorOverviewRuler.errorForeground"] },
+        { path: "WARNING_ATTRIBUTES.ERROR_STRIPE_COLOR", monacoTargets: ["color:editorOverviewRuler.warningForeground"] },
+      ]),
+    );
+    expect(report.classifiedChildLeaves.find((entry) => entry.name === "EFFECT_TYPE")?.deferredPaths).toEqual(
+      expect.arrayContaining([
+        {
+          path: "DEPRECATED_ATTRIBUTES.EFFECT_TYPE",
+          reason: "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute",
+        },
+      ]),
+    );
+  });
+
   test("writes proof/theme-coverage.json shaped for watchdog telemetry", () => {
     const outFile = join(mkdtempSync(join(tmpdir(), "maldives-theme-coverage-")), "theme-coverage.json");
 

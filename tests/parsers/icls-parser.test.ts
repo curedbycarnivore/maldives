@@ -24,6 +24,8 @@ test("parses remaining UI color attributes from the active ICLS theme", () => {
     whitespaceForeground: "#515151",
     errorForeground: "#f2777a",
     warningForeground: "#ffcc66",
+    errorOverviewRuler: "#f2777a",
+    warningOverviewRuler: "#ebc700",
     findMatchBackground: "#ffcc66",
     selectionHighlightBackground: "#ffcc66",
   });
