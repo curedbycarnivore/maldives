@@ -74,3 +74,29 @@ test("parses P15i editor UI surface colors from the active ICLS theme", () => {
     badCharacterErrorStripe: "#ff0000",
   });
 });
+
+test("parses P15j breadcrumbs colors from the active ICLS theme", () => {
+  expect(theme).toMatchObject({
+    breadcrumbsCurrentForeground: "#e4e4e4",
+    breadcrumbsCurrentBackground: "#1f837f",
+    breadcrumbsHoveredForeground: "#585858",
+    breadcrumbsHoveredBackground: "#29b0ab",
+  });
+});
+
+test("parses P15j bracket, class, Buildout, and C token surfaces", () => {
+  expect(theme.tokens).toEqual(
+    expect.arrayContaining([
+      { name: "BRACE_ATTR", foreground: "#29b0ab", fontStyle: "bold" },
+      { name: "BRACKET_ATTR", foreground: "#29b0ab", fontStyle: "bold" },
+      { name: "CLASS_NAME_ATTRIBUTES", foreground: "#29b0ab", fontStyle: "" },
+      { name: "CLASS_REFERENCE", foreground: "#ffcc66", fontStyle: "" },
+      { name: "BUILDOUT.KEY", foreground: "#cc99cc", fontStyle: "bold" },
+      { name: "BUILDOUT.KEY_VALUE_SEPARATOR", foreground: "#66cccc", fontStyle: "" },
+      { name: "BUILDOUT.LINE_COMMENT", foreground: "#999999", fontStyle: "italic" },
+      { name: "BUILDOUT.SECTION_NAME", foreground: "#6699cc", fontStyle: "" },
+      { name: "BUILDOUT.VALUE", fontStyle: "bold" },
+      { name: "C.KEYWORD", foreground: "#cc99cc", fontStyle: "bold" },
+    ]),
+  );
+});

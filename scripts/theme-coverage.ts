@@ -23,6 +23,18 @@ const classifiedTopLevelOptionNames = [
   "BAD_CHARACTER",
   "BOOKMARKS_ATTRIBUTES",
   "BREAKPOINT_ATTRIBUTES",
+  "BRACE_ATTR",
+  "BRACKET_ATTR",
+  "BREADCRUMBS_CURRENT",
+  "BREADCRUMBS_HOVERED",
+  "CLASS_NAME_ATTRIBUTES",
+  "CLASS_REFERENCE",
+  "BUILDOUT.KEY",
+  "BUILDOUT.KEY_VALUE_SEPARATOR",
+  "BUILDOUT.LINE_COMMENT",
+  "BUILDOUT.SECTION_NAME",
+  "BUILDOUT.VALUE",
+  "C.KEYWORD",
 ];
 
 export interface IclsOptionNameIndex {
@@ -175,12 +187,12 @@ function classifyTopLevelOptions(index: IclsOptionNameIndex): ThemeCoverageChild
     const mappedPaths: ThemeCoverageMappedPath[] = [];
     const deferredPaths: ThemeCoverageDeferredPath[] = [];
 
-    for (const path of p15iPathsFor(name)) {
+    for (const path of classifiedTopLevelPathsFor(name)) {
       const monacoTargets = targetsByPath[path];
       if (monacoTargets) {
         mappedPaths.push({ path, monacoTargets });
       } else {
-        deferredPaths.push({ path, reason: p15iDeferredReason(path) });
+        deferredPaths.push({ path, reason: classifiedTopLevelDeferredReason(path) });
       }
     }
 
@@ -193,7 +205,7 @@ function classifyTopLevelOptions(index: IclsOptionNameIndex): ThemeCoverageChild
   });
 }
 
-function p15iPathsFor(name: string): string[] {
+function classifiedTopLevelPathsFor(name: string): string[] {
   if (name === "ABSTRACT_CLASS_NAME_ATTRIBUTES") {
     return ["ABSTRACT_CLASS_NAME_ATTRIBUTES.FOREGROUND", "ABSTRACT_CLASS_NAME_ATTRIBUTES.FONT_TYPE"];
   }
@@ -202,10 +214,34 @@ function p15iPathsFor(name: string): string[] {
     return ["BAD_CHARACTER.FOREGROUND", "BAD_CHARACTER.BACKGROUND", "BAD_CHARACTER.ERROR_STRIPE_COLOR", "BAD_CHARACTER.EFFECT_TYPE"];
   }
 
+  if (name === "BRACE_ATTR") {
+    return ["BRACE_ATTR.FOREGROUND", "BRACE_ATTR.BACKGROUND", "BRACE_ATTR.FONT_TYPE", "BRACE_ATTR.EFFECT_TYPE"];
+  }
+
+  if (name === "BRACKET_ATTR") {
+    return ["BRACKET_ATTR.FOREGROUND", "BRACKET_ATTR.BACKGROUND", "BRACKET_ATTR.FONT_TYPE"];
+  }
+
+  if (name === "BREADCRUMBS_CURRENT" || name === "BREADCRUMBS_HOVERED") {
+    return [`${name}.FOREGROUND`, `${name}.BACKGROUND`];
+  }
+
+  if (name === "CLASS_NAME_ATTRIBUTES" || name === "CLASS_REFERENCE" || name === "BUILDOUT.KEY_VALUE_SEPARATOR" || name === "BUILDOUT.SECTION_NAME") {
+    return [`${name}.FOREGROUND`];
+  }
+
+  if (name === "BUILDOUT.KEY" || name === "BUILDOUT.LINE_COMMENT" || name === "C.KEYWORD") {
+    return [`${name}.FOREGROUND`, `${name}.FONT_TYPE`];
+  }
+
+  if (name === "BUILDOUT.VALUE") {
+    return ["BUILDOUT.VALUE.FONT_TYPE"];
+  }
+
   return [name];
 }
 
-function p15iDeferredReason(path: string): string {
+function classifiedTopLevelDeferredReason(path: string): string {
   if (path === "ANNOTATION_NAME_ATTRIBUTES") {
     return "defer: Java annotation highlighting is not loaded; TypeScript decorators are covered by TS.DECORATOR";
   }
@@ -224,6 +260,18 @@ function p15iDeferredReason(path: string): string {
 
   if (path === "BAD_CHARACTER.EFFECT_TYPE") {
     return "unsupported: Monaco themes do not expose WebStorm effect-type styles for bad-character highlights";
+  }
+
+  if (path === "BREADCRUMBS_HOVERED.BACKGROUND") {
+    return "unsupported: Monaco breadcrumbs expose focus foreground but no separate hovered-item background color";
+  }
+
+  if (path.endsWith(".BACKGROUND")) {
+    return "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute";
+  }
+
+  if (path.endsWith(".EFFECT_TYPE")) {
+    return "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute";
   }
 
   return "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet";

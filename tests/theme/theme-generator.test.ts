@@ -43,6 +43,9 @@ test("maps remaining SSOT UI colors to Monaco theme color ids", () => {
     "diffEditor.insertedLineBackground": "#E4E4F4",
     "editorUnicodeHighlight.background": "#f2777a",
     "editorUnicodeHighlight.border": "#ff0000",
+    "breadcrumb.activeSelectionForeground": "#e4e4e4",
+    "breadcrumb.background": "#1f837f",
+    "breadcrumb.focusForeground": "#585858",
   });
 });
 
@@ -77,6 +80,23 @@ test("maps the extended ICLS token scheme to Monaco token rules", () => {
       { token: "comment.doc", foreground: "969696", fontStyle: "italic" },
       { token: "class.abstract", foreground: "29b0ab", fontStyle: "italic" },
       { token: "invalid", foreground: "ffffff" },
+    ]),
+  );
+});
+
+test("maps P15j bracket, class/reference, Buildout, and C token surfaces", () => {
+  expect(theme.rules).toEqual(
+    expect.arrayContaining([
+      { token: "delimiter.curly", foreground: "29b0ab", fontStyle: "bold" },
+      { token: "delimiter.square", foreground: "29b0ab", fontStyle: "bold" },
+      { token: "class.name", foreground: "29b0ab" },
+      { token: "class.reference", foreground: "ffcc66" },
+      { token: "key.ini", foreground: "cc99cc", fontStyle: "bold" },
+      { token: "delimiter.ini", foreground: "66cccc" },
+      { token: "comment.ini", foreground: "999999", fontStyle: "italic" },
+      { token: "metatag.ini", foreground: "6699cc" },
+      { token: "string.ini", fontStyle: "bold" },
+      { token: "keyword.int", foreground: "cc99cc", fontStyle: "bold" },
     ]),
   );
 });

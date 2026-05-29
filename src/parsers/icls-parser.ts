@@ -21,6 +21,10 @@ export interface ThemeConfig {
   addedLinesColor: string;
   badCharacterBackground: string;
   badCharacterErrorStripe: string;
+  breadcrumbsCurrentForeground: string;
+  breadcrumbsCurrentBackground: string;
+  breadcrumbsHoveredForeground: string;
+  breadcrumbsHoveredBackground: string;
   defaultForeground: string;
   fontFamily: string;
   fontSize: number;
@@ -58,6 +62,16 @@ const tokenNames = [
   "JS.DOC_COMMENT",
   "ABSTRACT_CLASS_NAME_ATTRIBUTES",
   "BAD_CHARACTER",
+  "BRACE_ATTR",
+  "BRACKET_ATTR",
+  "CLASS_NAME_ATTRIBUTES",
+  "CLASS_REFERENCE",
+  "BUILDOUT.KEY",
+  "BUILDOUT.KEY_VALUE_SEPARATOR",
+  "BUILDOUT.LINE_COMMENT",
+  "BUILDOUT.SECTION_NAME",
+  "BUILDOUT.VALUE",
+  "C.KEYWORD",
 ];
 
 export function parseIcls(xmlContent: string): ThemeConfig {
@@ -94,6 +108,10 @@ export function parseIcls(xmlContent: string): ThemeConfig {
     addedLinesColor: color(optionValue(xmlContent, "ADDED_LINES_COLOR")),
     badCharacterBackground: color(optionValue(blockFor(xmlContent, "BAD_CHARACTER"), "BACKGROUND")),
     badCharacterErrorStripe: color(optionValue(blockFor(xmlContent, "BAD_CHARACTER"), "ERROR_STRIPE_COLOR")),
+    breadcrumbsCurrentForeground: color(optionValue(blockFor(xmlContent, "BREADCRUMBS_CURRENT"), "FOREGROUND")),
+    breadcrumbsCurrentBackground: color(optionValue(blockFor(xmlContent, "BREADCRUMBS_CURRENT"), "BACKGROUND")),
+    breadcrumbsHoveredForeground: color(optionValue(blockFor(xmlContent, "BREADCRUMBS_HOVERED"), "FOREGROUND")),
+    breadcrumbsHoveredBackground: color(optionValue(blockFor(xmlContent, "BREADCRUMBS_HOVERED"), "BACKGROUND")),
     fontFamily: optionValue(fontBlock, "EDITOR_FONT_NAME"),
     fontSize: Number(optionValue(fontBlock, "EDITOR_FONT_SIZE")),
     tokens: tokenNames.map((name) => tokenRule(xmlContent, name)),
@@ -102,10 +120,11 @@ export function parseIcls(xmlContent: string): ThemeConfig {
 
 function tokenRule(xmlContent: string, name: string): TokenRule {
   const tokenBlock = blockFor(xmlContent, name);
+  const foreground = colorOrUndefined(optionValue(tokenBlock, "FOREGROUND"));
 
   return {
     name,
-    foreground: color(optionValue(tokenBlock, "FOREGROUND")),
+    ...(foreground ? { foreground } : {}),
     fontStyle: fontStyle(optionValue(tokenBlock, "FONT_TYPE")),
   };
 }
@@ -120,6 +139,10 @@ function optionValue(xmlContent: string, name: string): string {
 
 function color(hex: string): string {
   return `#${hex}`;
+}
+
+function colorOrUndefined(hex: string): string | undefined {
+  return hex ? color(hex) : undefined;
 }
 
 function fontStyle(fontType: string): TokenRule["fontStyle"] {

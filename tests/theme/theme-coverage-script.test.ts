@@ -77,18 +77,20 @@ describe("scripts/theme-coverage", () => {
         "BREAKPOINT_ATTRIBUTES",
       ]),
     );
-    expect(p15iNames).toEqual([
-      "EDITOR_FONT_NAME",
-      "EDITOR_FONT_SIZE",
-      "ABSTRACT_CLASS_NAME_ATTRIBUTES",
-      "ADDED_LINES_COLOR",
-      "ANNOTATION_NAME_ATTRIBUTES",
-      "ANNOTATIONS_COLOR",
-      "ANNOTATIONS_MERGED_COLOR",
-      "BAD_CHARACTER",
-      "BOOKMARKS_ATTRIBUTES",
-      "BREAKPOINT_ATTRIBUTES",
-    ]);
+    expect(p15iNames).toEqual(
+      expect.arrayContaining([
+        "EDITOR_FONT_NAME",
+        "EDITOR_FONT_SIZE",
+        "ABSTRACT_CLASS_NAME_ATTRIBUTES",
+        "ADDED_LINES_COLOR",
+        "ANNOTATION_NAME_ATTRIBUTES",
+        "ANNOTATIONS_COLOR",
+        "ANNOTATIONS_MERGED_COLOR",
+        "BAD_CHARACTER",
+        "BOOKMARKS_ATTRIBUTES",
+        "BREAKPOINT_ATTRIBUTES",
+      ]),
+    );
     expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "ADDED_LINES_COLOR")?.mappedPaths).toEqual([
       {
         path: "ADDED_LINES_COLOR",
@@ -111,6 +113,52 @@ describe("scripts/theme-coverage", () => {
         reason: "defer: breakpoints require the later debug subsystem before their glyph colors have a live Monaco surface",
       },
     ]);
+  });
+
+  test("classifies P15j bracket, breadcrumbs, class/reference, Buildout, and C surfaces", () => {
+    const report = auditThemeCoverageMappings(iclsXml);
+    const p15jNames = [
+      "BRACE_ATTR",
+      "BRACKET_ATTR",
+      "BREADCRUMBS_CURRENT",
+      "BREADCRUMBS_HOVERED",
+      "CLASS_NAME_ATTRIBUTES",
+      "CLASS_REFERENCE",
+      "BUILDOUT.KEY",
+      "BUILDOUT.KEY_VALUE_SEPARATOR",
+      "BUILDOUT.LINE_COMMENT",
+      "BUILDOUT.SECTION_NAME",
+      "BUILDOUT.VALUE",
+      "C.KEYWORD",
+    ];
+
+    expect(report.top50Unmapped.map((entry) => entry.name)).not.toEqual(expect.arrayContaining(p15jNames));
+    expect(report.classifiedTopLevelOptions.map((entry) => entry.name)).toEqual(expect.arrayContaining(p15jNames));
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "BREADCRUMBS_CURRENT")?.mappedPaths).toEqual(
+      expect.arrayContaining([
+        { path: "BREADCRUMBS_CURRENT.FOREGROUND", monacoTargets: ["color:breadcrumb.activeSelectionForeground"] },
+        { path: "BREADCRUMBS_CURRENT.BACKGROUND", monacoTargets: ["color:breadcrumb.background"] },
+      ]),
+    );
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "BREADCRUMBS_HOVERED")?.deferredPaths).toEqual([
+      {
+        path: "BREADCRUMBS_HOVERED.BACKGROUND",
+        reason: "unsupported: Monaco breadcrumbs expose focus foreground but no separate hovered-item background color",
+      },
+    ]);
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "C.KEYWORD")?.mappedPaths).toEqual([
+      {
+        path: "C.KEYWORD.FOREGROUND",
+        monacoTargets: ["token:keyword.int.foreground", "token:keyword.void.foreground", "token:keyword.return.foreground"],
+      },
+      {
+        path: "C.KEYWORD.FONT_TYPE",
+        monacoTargets: ["token:keyword.int.fontStyle", "token:keyword.void.fontStyle", "token:keyword.return.fontStyle"],
+      },
+    ]);
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "BUILDOUT.KEY")?.mappedPaths).toEqual(
+      expect.arrayContaining([{ path: "BUILDOUT.KEY.FOREGROUND", monacoTargets: ["token:key.ini.foreground"] }]),
+    );
   });
 
   test("writes proof/theme-coverage.json shaped for watchdog telemetry", () => {

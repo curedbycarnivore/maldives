@@ -175,3 +175,51 @@ const UserLayer = Layer.succeed(Repository, new UserRepository());
   await mkdir("proof", { recursive: true });
   await page.screenshot({ path: "proof/p15i-theme-core-surfaces-proof.png" });
 });
+
+test("renders P15j breadcrumbs variables plus Buildout and C token colors", async ({ page }) => {
+  await loadEditor(page);
+
+  const themeVar = (name: string) =>
+    page.locator(".monaco-editor").first().evaluate((element, variableName) => getComputedStyle(element).getPropertyValue(variableName).trim(), name);
+
+  await expect.poll(() => themeVar("--vscode-breadcrumb-activeSelectionForeground"), { timeout: 10000 }).toBe("#e4e4e4");
+  await expect.poll(() => themeVar("--vscode-breadcrumb-background"), { timeout: 10000 }).toBe("#1f837f");
+  await expect.poll(() => themeVar("--vscode-breadcrumb-focusForeground"), { timeout: 10000 }).toBe("#585858");
+
+  await page.evaluate(() => {
+    const sample = `[buildout]
+parts = app
+# managed by Maldives
+`;
+    window.__maldivesEditor.setModel(window.__monaco.editor.createModel(sample, "ini", window.__monaco.Uri.parse("file:///maldives/buildout.ts")));
+    window.__maldivesEditor.setPosition({ lineNumber: 2, column: 1 });
+    window.__maldivesEditor.focus();
+  });
+
+  const colorForText = (text: string) =>
+    page.evaluate((needle) => {
+      const normalize = (value: string | null) => (value ?? "").replace(/\u00a0/g, " ").trim();
+      const spans = Array.from(document.querySelectorAll<HTMLElement>(".monaco-editor .view-line span"));
+      const match = spans.find((span) => span.childElementCount === 0 && normalize(span.textContent) === needle);
+      return match ? getComputedStyle(match).color : "";
+    }, text);
+
+  await expect.poll(() => colorForText("parts"), { timeout: 10000 }).toBe("rgb(204, 153, 204)");
+  await expect.poll(() => colorForText("# managed by Maldives"), { timeout: 10000 }).toBe("rgb(153, 153, 153)");
+
+  await page.evaluate(() => {
+    const sample = `int main(void) {
+  int values[1] = {0};
+  return values[0];
+}
+`;
+    window.__maldivesEditor.setModel(window.__monaco.editor.createModel(sample, "c", window.__monaco.Uri.parse("file:///maldives/p15j.ts")));
+    window.__maldivesEditor.setPosition({ lineNumber: 2, column: 14 });
+    window.__maldivesEditor.focus();
+  });
+
+  await expect.poll(() => colorForText("int"), { timeout: 10000 }).toBe("rgb(204, 153, 204)");
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/p15j-theme-brackets-breadcrumbs-class-proof.png" });
+});

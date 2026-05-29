@@ -10,9 +10,21 @@
     "BACKGROUND",
     "BAD_CHARACTER",
     "BOOKMARKS_ATTRIBUTES",
+    "BRACE_ATTR",
+    "BRACKET_ATTR",
+    "BREADCRUMBS_CURRENT",
+    "BREADCRUMBS_HOVERED",
     "BREAKPOINT_ATTRIBUTES",
+    "BUILDOUT.KEY",
+    "BUILDOUT.KEY_VALUE_SEPARATOR",
+    "BUILDOUT.LINE_COMMENT",
+    "BUILDOUT.SECTION_NAME",
+    "BUILDOUT.VALUE",
+    "C.KEYWORD",
     "CARET_COLOR",
     "CARET_ROW_COLOR",
+    "CLASS_NAME_ATTRIBUTES",
+    "CLASS_REFERENCE",
     "DEFAULT_BRACES",
     "DEFAULT_BRACKETS",
     "DEFAULT_CONSTANT",
@@ -99,90 +111,6 @@
       "occurrences": 1,
       "samplePaths": [
         "BLOCK_TERMINAL_COMMAND"
-      ]
-    },
-    {
-      "name": "BRACE_ATTR",
-      "occurrences": 1,
-      "samplePaths": [
-        "BRACE_ATTR"
-      ]
-    },
-    {
-      "name": "BRACKET_ATTR",
-      "occurrences": 1,
-      "samplePaths": [
-        "BRACKET_ATTR"
-      ]
-    },
-    {
-      "name": "BREADCRUMBS_CURRENT",
-      "occurrences": 1,
-      "samplePaths": [
-        "BREADCRUMBS_CURRENT"
-      ]
-    },
-    {
-      "name": "BREADCRUMBS_HOVERED",
-      "occurrences": 1,
-      "samplePaths": [
-        "BREADCRUMBS_HOVERED"
-      ]
-    },
-    {
-      "name": "BUILDOUT.KEY",
-      "occurrences": 1,
-      "samplePaths": [
-        "BUILDOUT.KEY"
-      ]
-    },
-    {
-      "name": "BUILDOUT.KEY_VALUE_SEPARATOR",
-      "occurrences": 1,
-      "samplePaths": [
-        "BUILDOUT.KEY_VALUE_SEPARATOR"
-      ]
-    },
-    {
-      "name": "BUILDOUT.LINE_COMMENT",
-      "occurrences": 1,
-      "samplePaths": [
-        "BUILDOUT.LINE_COMMENT"
-      ]
-    },
-    {
-      "name": "BUILDOUT.SECTION_NAME",
-      "occurrences": 1,
-      "samplePaths": [
-        "BUILDOUT.SECTION_NAME"
-      ]
-    },
-    {
-      "name": "BUILDOUT.VALUE",
-      "occurrences": 1,
-      "samplePaths": [
-        "BUILDOUT.VALUE"
-      ]
-    },
-    {
-      "name": "C.KEYWORD",
-      "occurrences": 1,
-      "samplePaths": [
-        "C.KEYWORD"
-      ]
-    },
-    {
-      "name": "CLASS_NAME_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CLASS_NAME_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CLASS_REFERENCE",
-      "occurrences": 1,
-      "samplePaths": [
-        "CLASS_REFERENCE"
       ]
     },
     {
@@ -4108,90 +4036,6 @@
       ]
     },
     {
-      "name": "BRACE_ATTR",
-      "occurrences": 1,
-      "samplePaths": [
-        "BRACE_ATTR"
-      ]
-    },
-    {
-      "name": "BRACKET_ATTR",
-      "occurrences": 1,
-      "samplePaths": [
-        "BRACKET_ATTR"
-      ]
-    },
-    {
-      "name": "BREADCRUMBS_CURRENT",
-      "occurrences": 1,
-      "samplePaths": [
-        "BREADCRUMBS_CURRENT"
-      ]
-    },
-    {
-      "name": "BREADCRUMBS_HOVERED",
-      "occurrences": 1,
-      "samplePaths": [
-        "BREADCRUMBS_HOVERED"
-      ]
-    },
-    {
-      "name": "BUILDOUT.KEY",
-      "occurrences": 1,
-      "samplePaths": [
-        "BUILDOUT.KEY"
-      ]
-    },
-    {
-      "name": "BUILDOUT.KEY_VALUE_SEPARATOR",
-      "occurrences": 1,
-      "samplePaths": [
-        "BUILDOUT.KEY_VALUE_SEPARATOR"
-      ]
-    },
-    {
-      "name": "BUILDOUT.LINE_COMMENT",
-      "occurrences": 1,
-      "samplePaths": [
-        "BUILDOUT.LINE_COMMENT"
-      ]
-    },
-    {
-      "name": "BUILDOUT.SECTION_NAME",
-      "occurrences": 1,
-      "samplePaths": [
-        "BUILDOUT.SECTION_NAME"
-      ]
-    },
-    {
-      "name": "BUILDOUT.VALUE",
-      "occurrences": 1,
-      "samplePaths": [
-        "BUILDOUT.VALUE"
-      ]
-    },
-    {
-      "name": "C.KEYWORD",
-      "occurrences": 1,
-      "samplePaths": [
-        "C.KEYWORD"
-      ]
-    },
-    {
-      "name": "CLASS_NAME_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CLASS_NAME_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CLASS_REFERENCE",
-      "occurrences": 1,
-      "samplePaths": [
-        "CLASS_REFERENCE"
-      ]
-    },
-    {
       "name": "COFFEESCRIPT.BAD_CHARACTER",
       "occurrences": 1,
       "samplePaths": [
@@ -4414,6 +4258,90 @@
       "samplePaths": [
         "CONSOLE_BLUE_BRIGHT_OUTPUT"
       ]
+    },
+    {
+      "name": "CONSOLE_BLUE_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_BLUE_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_CYAN_BRIGHT_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_CYAN_BRIGHT_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_CYAN_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_CYAN_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_DARKGRAY_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_DARKGRAY_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_ERROR_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_ERROR_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_FONT_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_FONT_NAME"
+      ]
+    },
+    {
+      "name": "CONSOLE_FONT_SIZE",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_FONT_SIZE"
+      ]
+    },
+    {
+      "name": "CONSOLE_GRAY_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_GRAY_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_GREEN_BRIGHT_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_GREEN_BRIGHT_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_GREEN_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_GREEN_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_LINE_SPACING",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_LINE_SPACING"
+      ]
+    },
+    {
+      "name": "CONSOLE_MAGENTA_BRIGHT_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_MAGENTA_BRIGHT_OUTPUT"
+      ]
     }
   ],
   "classifiedChildLeaves": [
@@ -4433,6 +4361,76 @@
           "monacoTargets": [
             "token:invalid.foreground",
             "token:invalid.illegal.foreground"
+          ]
+        },
+        {
+          "path": "BRACE_ATTR.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.curly.foreground"
+          ]
+        },
+        {
+          "path": "BRACKET_ATTR.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.square.foreground"
+          ]
+        },
+        {
+          "path": "BREADCRUMBS_CURRENT.FOREGROUND",
+          "monacoTargets": [
+            "color:breadcrumb.activeSelectionForeground"
+          ]
+        },
+        {
+          "path": "BREADCRUMBS_HOVERED.FOREGROUND",
+          "monacoTargets": [
+            "color:breadcrumb.focusForeground"
+          ]
+        },
+        {
+          "path": "BUILDOUT.KEY.FOREGROUND",
+          "monacoTargets": [
+            "token:key.ini.foreground"
+          ]
+        },
+        {
+          "path": "BUILDOUT.KEY_VALUE_SEPARATOR.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.ini.foreground"
+          ]
+        },
+        {
+          "path": "BUILDOUT.LINE_COMMENT.FOREGROUND",
+          "monacoTargets": [
+            "token:comment.ini.foreground"
+          ]
+        },
+        {
+          "path": "BUILDOUT.SECTION_NAME.FOREGROUND",
+          "monacoTargets": [
+            "token:metatag.ini.foreground"
+          ]
+        },
+        {
+          "path": "C.KEYWORD.FOREGROUND",
+          "monacoTargets": [
+            "token:keyword.int.foreground",
+            "token:keyword.void.foreground",
+            "token:keyword.return.foreground"
+          ]
+        },
+        {
+          "path": "CLASS_NAME_ATTRIBUTES.FOREGROUND",
+          "monacoTargets": [
+            "token:class.name.foreground",
+            "token:entity.name.type.class.name.foreground"
+          ]
+        },
+        {
+          "path": "CLASS_REFERENCE.FOREGROUND",
+          "monacoTargets": [
+            "token:class.reference.foreground",
+            "token:support.class.reference.foreground"
           ]
         },
         {
@@ -4618,51 +4616,7 @@
           "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
         },
         {
-          "path": "BRACE_ATTR.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "BRACKET_ATTR.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "BREADCRUMBS_CURRENT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "BREADCRUMBS_HOVERED.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
           "path": "BREAKPOINT_ATTRIBUTES.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "BUILDOUT.KEY.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "BUILDOUT.KEY_VALUE_SEPARATOR.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "BUILDOUT.LINE_COMMENT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "BUILDOUT.SECTION_NAME.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "C.KEYWORD.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CLASS_NAME_ATTRIBUTES.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CLASS_REFERENCE.FOREGROUND",
           "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
         },
         {
@@ -6515,6 +6469,44 @@
           ]
         },
         {
+          "path": "BRACE_ATTR.FONT_TYPE",
+          "monacoTargets": [
+            "token:delimiter.curly.fontStyle"
+          ]
+        },
+        {
+          "path": "BRACKET_ATTR.FONT_TYPE",
+          "monacoTargets": [
+            "token:delimiter.square.fontStyle"
+          ]
+        },
+        {
+          "path": "BUILDOUT.KEY.FONT_TYPE",
+          "monacoTargets": [
+            "token:key.ini.fontStyle"
+          ]
+        },
+        {
+          "path": "BUILDOUT.LINE_COMMENT.FONT_TYPE",
+          "monacoTargets": [
+            "token:comment.ini.fontStyle"
+          ]
+        },
+        {
+          "path": "BUILDOUT.VALUE.FONT_TYPE",
+          "monacoTargets": [
+            "token:string.ini.fontStyle"
+          ]
+        },
+        {
+          "path": "C.KEYWORD.FONT_TYPE",
+          "monacoTargets": [
+            "token:keyword.int.fontStyle",
+            "token:keyword.void.fontStyle",
+            "token:keyword.return.fontStyle"
+          ]
+        },
+        {
           "path": "DEFAULT_BRACES.FONT_TYPE",
           "monacoTargets": [
             "token:delimiter.fontStyle",
@@ -6586,30 +6578,6 @@
         },
         {
           "path": "BOOKMARKS_ATTRIBUTES.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "BRACE_ATTR.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "BRACKET_ATTR.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "BUILDOUT.KEY.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "BUILDOUT.LINE_COMMENT.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "BUILDOUT.VALUE.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "C.KEYWORD.FONT_TYPE",
           "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
         },
         {
@@ -7736,6 +7704,12 @@
           ]
         },
         {
+          "path": "BREADCRUMBS_CURRENT.BACKGROUND",
+          "monacoTargets": [
+            "color:breadcrumb.background"
+          ]
+        },
+        {
           "path": "FOLDED_TEXT_ATTRIBUTES.BACKGROUND",
           "monacoTargets": [
             "color:editor.foldBackground"
@@ -7774,10 +7748,6 @@
         },
         {
           "path": "BRACKET_ATTR.BACKGROUND",
-          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
-        },
-        {
-          "path": "BREADCRUMBS_CURRENT.BACKGROUND",
           "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
         },
         {
@@ -8279,6 +8249,223 @@
           "reason": "defer: breakpoints require the later debug subsystem before their glyph colors have a live Monaco surface"
         }
       ]
+    },
+    {
+      "name": "BRACE_ATTR",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "BRACE_ATTR.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.curly.foreground"
+          ]
+        },
+        {
+          "path": "BRACE_ATTR.FONT_TYPE",
+          "monacoTargets": [
+            "token:delimiter.curly.fontStyle"
+          ]
+        }
+      ],
+      "deferredPaths": [
+        {
+          "path": "BRACE_ATTR.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        },
+        {
+          "path": "BRACE_ATTR.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this attribute"
+        }
+      ]
+    },
+    {
+      "name": "BRACKET_ATTR",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "BRACKET_ATTR.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.square.foreground"
+          ]
+        },
+        {
+          "path": "BRACKET_ATTR.FONT_TYPE",
+          "monacoTargets": [
+            "token:delimiter.square.fontStyle"
+          ]
+        }
+      ],
+      "deferredPaths": [
+        {
+          "path": "BRACKET_ATTR.BACKGROUND",
+          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+        }
+      ]
+    },
+    {
+      "name": "BREADCRUMBS_CURRENT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "BREADCRUMBS_CURRENT.FOREGROUND",
+          "monacoTargets": [
+            "color:breadcrumb.activeSelectionForeground"
+          ]
+        },
+        {
+          "path": "BREADCRUMBS_CURRENT.BACKGROUND",
+          "monacoTargets": [
+            "color:breadcrumb.background"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "BREADCRUMBS_HOVERED",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "BREADCRUMBS_HOVERED.FOREGROUND",
+          "monacoTargets": [
+            "color:breadcrumb.focusForeground"
+          ]
+        }
+      ],
+      "deferredPaths": [
+        {
+          "path": "BREADCRUMBS_HOVERED.BACKGROUND",
+          "reason": "unsupported: Monaco breadcrumbs expose focus foreground but no separate hovered-item background color"
+        }
+      ]
+    },
+    {
+      "name": "CLASS_NAME_ATTRIBUTES",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CLASS_NAME_ATTRIBUTES.FOREGROUND",
+          "monacoTargets": [
+            "token:class.name.foreground",
+            "token:entity.name.type.class.name.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CLASS_REFERENCE",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CLASS_REFERENCE.FOREGROUND",
+          "monacoTargets": [
+            "token:class.reference.foreground",
+            "token:support.class.reference.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "BUILDOUT.KEY",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "BUILDOUT.KEY.FOREGROUND",
+          "monacoTargets": [
+            "token:key.ini.foreground"
+          ]
+        },
+        {
+          "path": "BUILDOUT.KEY.FONT_TYPE",
+          "monacoTargets": [
+            "token:key.ini.fontStyle"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "BUILDOUT.KEY_VALUE_SEPARATOR",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "BUILDOUT.KEY_VALUE_SEPARATOR.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.ini.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "BUILDOUT.LINE_COMMENT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "BUILDOUT.LINE_COMMENT.FOREGROUND",
+          "monacoTargets": [
+            "token:comment.ini.foreground"
+          ]
+        },
+        {
+          "path": "BUILDOUT.LINE_COMMENT.FONT_TYPE",
+          "monacoTargets": [
+            "token:comment.ini.fontStyle"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "BUILDOUT.SECTION_NAME",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "BUILDOUT.SECTION_NAME.FOREGROUND",
+          "monacoTargets": [
+            "token:metatag.ini.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "BUILDOUT.VALUE",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "BUILDOUT.VALUE.FONT_TYPE",
+          "monacoTargets": [
+            "token:string.ini.fontStyle"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "C.KEYWORD",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "C.KEYWORD.FOREGROUND",
+          "monacoTargets": [
+            "token:keyword.int.foreground",
+            "token:keyword.void.foreground",
+            "token:keyword.return.foreground"
+          ]
+        },
+        {
+          "path": "C.KEYWORD.FONT_TYPE",
+          "monacoTargets": [
+            "token:keyword.int.fontStyle",
+            "token:keyword.void.fontStyle",
+            "token:keyword.return.fontStyle"
+          ]
+        }
+      ],
+      "deferredPaths": []
     }
   ]
 }

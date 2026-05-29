@@ -32,6 +32,9 @@ const colorAuditEntries: ColorAuditEntry[] = [
   { iclsAttribute: "ADDED_LINES_COLOR", expected: (theme) => theme.addedLinesColor, monacoColorIds: ["diffEditor.insertedLineBackground"] },
   { iclsAttribute: "BAD_CHARACTER.BACKGROUND", expected: (theme) => theme.badCharacterBackground, monacoColorIds: ["editorUnicodeHighlight.background"] },
   { iclsAttribute: "BAD_CHARACTER.ERROR_STRIPE_COLOR", expected: (theme) => theme.badCharacterErrorStripe, monacoColorIds: ["editorUnicodeHighlight.border"] },
+  { iclsAttribute: "BREADCRUMBS_CURRENT.FOREGROUND", expected: (theme) => theme.breadcrumbsCurrentForeground, monacoColorIds: ["breadcrumb.activeSelectionForeground"] },
+  { iclsAttribute: "BREADCRUMBS_CURRENT.BACKGROUND", expected: (theme) => theme.breadcrumbsCurrentBackground, monacoColorIds: ["breadcrumb.background"] },
+  { iclsAttribute: "BREADCRUMBS_HOVERED.FOREGROUND", expected: (theme) => theme.breadcrumbsHoveredForeground, monacoColorIds: ["breadcrumb.focusForeground"] },
 ];
 
 const editorOptionAuditAttributes = ["EDITOR_FONT_NAME", "EDITOR_FONT_SIZE"];
@@ -61,6 +64,16 @@ const tokenAuditNames = [
   "JS.DOC_COMMENT",
   "ABSTRACT_CLASS_NAME_ATTRIBUTES",
   "BAD_CHARACTER",
+  "BRACE_ATTR",
+  "BRACKET_ATTR",
+  "CLASS_NAME_ATTRIBUTES",
+  "CLASS_REFERENCE",
+  "BUILDOUT.KEY",
+  "BUILDOUT.KEY_VALUE_SEPARATOR",
+  "BUILDOUT.LINE_COMMENT",
+  "BUILDOUT.SECTION_NAME",
+  "BUILDOUT.VALUE",
+  "C.KEYWORD",
 ];
 
 export const themeCoverageAuditAttributes = [

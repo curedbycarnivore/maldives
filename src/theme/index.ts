@@ -29,6 +29,16 @@ export const TOKEN_SCOPES: Record<string, string[]> = {
   "JS.DOC_COMMENT": ["comment.doc", "comment.block.documentation"],
   "ABSTRACT_CLASS_NAME_ATTRIBUTES": ["class.abstract", "entity.name.type.class.abstract"],
   "BAD_CHARACTER": ["invalid", "invalid.illegal"],
+  "BRACE_ATTR": ["delimiter.curly"],
+  "BRACKET_ATTR": ["delimiter.square"],
+  "CLASS_NAME_ATTRIBUTES": ["class.name", "entity.name.type.class.name"],
+  "CLASS_REFERENCE": ["class.reference", "support.class.reference"],
+  "BUILDOUT.KEY": ["key.ini"],
+  "BUILDOUT.KEY_VALUE_SEPARATOR": ["delimiter.ini"],
+  "BUILDOUT.LINE_COMMENT": ["comment.ini"],
+  "BUILDOUT.SECTION_NAME": ["metatag.ini"],
+  "BUILDOUT.VALUE": ["string.ini"],
+  "C.KEYWORD": ["keyword.int", "keyword.void", "keyword.return"],
 };
 
 export function buildMonacoTheme(theme: ThemeConfig): editor.IStandaloneThemeData {
@@ -64,6 +74,9 @@ export function buildMonacoTheme(theme: ThemeConfig): editor.IStandaloneThemeDat
       "diffEditor.insertedLineBackground": theme.addedLinesColor,
       "editorUnicodeHighlight.background": theme.badCharacterBackground,
       "editorUnicodeHighlight.border": theme.badCharacterErrorStripe,
+      "breadcrumb.activeSelectionForeground": theme.breadcrumbsCurrentForeground,
+      "breadcrumb.background": theme.breadcrumbsCurrentBackground,
+      "breadcrumb.focusForeground": theme.breadcrumbsHoveredForeground,
     },
     rules: theme.tokens.flatMap(toTokenThemeRules),
   };
