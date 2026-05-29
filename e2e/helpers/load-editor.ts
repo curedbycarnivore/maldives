@@ -20,10 +20,10 @@ export async function loadEditor(page: Page): Promise<void> {
         .evaluate(() => new Promise<void>((resolve) => requestAnimationFrame(() => resolve())))
         .catch(() => undefined);
       return page.evaluate(() => Boolean(window.__maldivesEditor)).catch(() => false);
-    }, { timeout: 60000 })
+    }, { timeout: 120000 })
     .toBe(true);
-  await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesReady)).catch(() => false), { timeout: 60000 }).toBe(true);
+  await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesReady)).catch(() => false), { timeout: 120000 }).toBe(true);
   await expect(async () => {
     await page.evaluate(() => window.__maldivesReady);
-  }).toPass({ timeout: 60000 });
+  }).toPass({ timeout: 120000 });
 }

@@ -70,7 +70,7 @@ export async function awaitTypeScriptWorkerAnswer(
   model: monaco.editor.ITextModel,
   options: AwaitTypeScriptWorkerAnswerOptions = {},
 ): Promise<void> {
-  const timeoutMs = options.timeoutMs ?? 60000;
+  const timeoutMs = options.timeoutMs ?? 120000;
   const attemptTimeoutMs = options.attemptTimeoutMs ?? Math.min(10000, timeoutMs);
   const startedAt = Date.now();
   const typeScriptApi = monacoApi.languages.typescript as unknown as TypeScriptLanguageApi;
@@ -83,7 +83,7 @@ export async function awaitTypeScriptWorkerAnswer(
       const worker = await withTimeout(getWorker(model.uri), deadlineMs);
       await withTimeout(
         worker.getQuickInfoAtPosition(model.uri.toString(), model.getOffsetAt({ lineNumber: 1, column: 1 })),
-        deadlineMs,
+        remainingMs,
       );
       return;
     } catch (error) {

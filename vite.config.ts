@@ -6,6 +6,9 @@ export default defineConfig({
   define: {
     __MALDIVES_DEVTOOLS_ENABLED__: JSON.stringify(process.env.MALDIVES_DEVTOOLS === "1"),
   },
+  optimizeDeps: {
+    entries: ["index.html"],
+  },
   server: {
     host: "127.0.0.1",
     port: 5173,

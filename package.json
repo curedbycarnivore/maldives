@@ -9,8 +9,12 @@
   },
   "dependencies": {
     "@ast-grep/wasm": "^0.43.0",
+    "@codingame/monaco-vscode-api": "25.1.2",
+    "@codingame/monaco-vscode-editor-api": "25.1.2",
+    "@codingame/monaco-vscode-typescript-language-features-default-extension": "25.1.2",
     "effect": "3.21.2",
     "monaco-editor": "0.55.1",
+    "monaco-languageclient": "10.7.0",
     "tree-sitter-typescript": "^0.23.2",
     "web-tree-sitter": "^0.26.9"
   },

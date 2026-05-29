@@ -31,7 +31,7 @@ describe("awaitTypeScriptWorkerAnswer", () => {
     expect(attempts).toBe(3);
   });
 
-  test("retries if a TypeScript worker answer hangs before the readiness deadline", async () => {
+  test("uses the whole readiness deadline for the in-flight worker answer", async () => {
     let quickInfoCalls = 0;
     const model = {
       uri: { toString: () => "file:///maldives/sample.ts" },
@@ -44,9 +44,7 @@ describe("awaitTypeScriptWorkerAnswer", () => {
             return async () => ({
               async getQuickInfoAtPosition() {
                 quickInfoCalls += 1;
-                if (quickInfoCalls === 1) {
-                  return new Promise(() => undefined);
-                }
+                await new Promise((resolve) => setTimeout(resolve, 20));
               },
             });
           },
@@ -54,13 +52,41 @@ describe("awaitTypeScriptWorkerAnswer", () => {
       },
     } as unknown as typeof monaco;
 
-    const result = await Promise.race([
-      awaitTypeScriptWorkerAnswer(monacoStub, model, { timeoutMs: 100, attemptTimeoutMs: 5 }).then(() => "resolved"),
-      new Promise((resolve) => setTimeout(() => resolve("hung"), 50)),
-    ]);
+    await awaitTypeScriptWorkerAnswer(monacoStub, model, { timeoutMs: 100, attemptTimeoutMs: 5 });
 
-    expect(result).toBe("resolved");
-    expect(quickInfoCalls).toBe(2);
+    expect(quickInfoCalls).toBe(1);
+  });
+
+  test("does not enqueue duplicate quick info requests while the worker is already answering", async () => {
+    let quickInfoCalls = 0;
+    let resolveQuickInfo: (() => void) | undefined;
+    const model = {
+      uri: { toString: () => "file:///maldives/sample.ts" },
+      getOffsetAt: () => 0,
+    } as unknown as monaco.editor.ITextModel;
+    const monacoStub = {
+      languages: {
+        typescript: {
+          async getTypeScriptWorker() {
+            return async () => ({
+              getQuickInfoAtPosition() {
+                quickInfoCalls += 1;
+                return new Promise<void>((resolve) => {
+                  resolveQuickInfo = resolve;
+                });
+              },
+            });
+          },
+        },
+      },
+    } as unknown as typeof monaco;
+
+    const ready = awaitTypeScriptWorkerAnswer(monacoStub, model, { timeoutMs: 100, attemptTimeoutMs: 5 });
+    await new Promise((resolve) => setTimeout(resolve, 20));
+
+    expect(quickInfoCalls).toBe(1);
+    resolveQuickInfo?.();
+    await ready;
   });
 
   test("resolves only after the TypeScript worker answers for the attached model", async () => {
