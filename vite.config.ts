@@ -13,7 +13,7 @@ export default defineConfig({
     host: "127.0.0.1",
     port: 5173,
     headers: {
-      "Content-Security-Policy": "script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' blob:; connect-src 'self' ws://127.0.0.1:34437 ws://localhost:34437; object-src 'none'; base-uri 'self'",
+      "Content-Security-Policy": "script-src 'self' 'wasm-unsafe-eval' 'sha256-YenIR0w2uOJMq12UhbL15PlQWd7gf4v3ThVTe/nvZZE='; worker-src 'self' blob:; connect-src 'self' ws://127.0.0.1:34437 ws://localhost:34437; object-src 'none'; base-uri 'self'",
       "Cross-Origin-Opener-Policy": "same-origin",
       "Cross-Origin-Embedder-Policy": "require-corp",
     },

@@ -19,6 +19,7 @@ import { awaitTypeScriptWorkerAnswer, setupDefaultMonacoWorkers } from "./monaco
 import { maldivesProFeatureOptions } from "./pro-features";
 import { registerTheme, THEME_NAME } from "./theme";
 import { configureTypeScriptWorker, registerEffectDtsFiles, type EffectDtsFiles, type RegisterEffectDtsFilesOptions } from "./typescript-worker";
+import { startVscodeTypeScriptWorkerForMaldives, type VscodeTypeScriptWorkerBootstrap } from "./vscode-ts-worker";
 
 declare global {
   interface Window {
@@ -28,6 +29,7 @@ declare global {
     __maldivesExecuteKeybinding: (wsActionId: string) => boolean;
     __maldivesRegisterEffectDtsFiles: (files: EffectDtsFiles, options?: RegisterEffectDtsFilesOptions) => monaco.IDisposable;
     __maldivesOpenEffectDevTools: (options: OpenEffectDevToolsOptions) => void;
+    __maldivesVscodeTsWorkerReady: Promise<VscodeTypeScriptWorkerBootstrap>;
     __maldivesReady: Promise<void>;
   }
 }
@@ -63,12 +65,19 @@ export const secondTab = true;
 
 setupDefaultMonacoWorkers();
 
+const effectDtsFiles = import.meta.glob("/node_modules/effect/dist/dts/**/*.d.ts", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+}) as EffectDtsFiles;
+
 const themeConfig = parseIcls(activeThemeXml);
 const editorOptions = parseEditorOptions(editorOptionsXml);
 const keymapConfig = parseKeymap(keymapXml);
 
 registerTheme(monaco, themeConfig);
-configureTypeScriptWorker(monaco);
+configureTypeScriptWorker(monaco, { effectDtsFiles });
+const vscodeTsWorkerReady = startVscodeTypeScriptWorkerForMaldives(monaco, { effectDtsFiles });
 registerEffectSnippets(monaco);
 registerEffectHoverProvider(monaco);
 registerMaldivesCodeActions(monaco);
@@ -98,8 +107,10 @@ installEffectDevToolsButton(document.body, {
   token: window.localStorage.getItem("maldives.devtools.token") ?? "",
 });
 window.__maldivesEditor = editor;
+window.__maldivesVscodeTsWorkerReady = vscodeTsWorkerReady;
 window.__maldivesReady = (async () => {
   await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+  await vscodeTsWorkerReady;
   await awaitTypeScriptWorkerAnswer(monaco, sampleModel);
   await ensureAstReady();
 })();

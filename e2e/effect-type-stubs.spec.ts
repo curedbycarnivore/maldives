@@ -23,13 +23,13 @@ const program = Effect.gen(function* () {
 const piped = pipe(Option.some(1), Option.map((n) => n + 1));
 const either = Either.right("ok");
 const schema = Schema.Struct({ name: Schema.String, count: Schema.Number });
-Effect.`;
+Effect.ge`;
 
     const uri = window.__monaco.Uri.parse("file:///maldives/effect-type-stubs.ts");
     const model = window.__monaco.editor.createModel(sample, "typescript", uri);
     const editor = window.__maldivesEditor;
     editor.setModel(model);
-    editor.setPosition({ lineNumber: 12, column: 8 });
+    editor.setPosition({ lineNumber: 12, column: 10 });
     editor.focus();
 
     const getWorker = await window.__monaco.languages.typescript.getTypeScriptWorker();
