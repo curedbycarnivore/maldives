@@ -9,6 +9,39 @@ declare global {
   }
 }
 
+function complexLookalikeSource(): string {
+  return `import { Effect, Layer, Schema, pipe } from "effect";
+import { pipe as lodashPipe } from "lodash";
+
+function logged(_target: unknown, _key: string, descriptor: PropertyDescriptor) {
+  return descriptor;
+}
+
+interface Repository<T extends { id: string }> {
+  find(id: string): Effect.Effect<T | undefined>;
+}
+
+class MyLayer<T extends { id: string }> implements Repository<T> {
+  constructor(private readonly rows: ReadonlyArray<T>) {}
+
+  @logged
+  find(id: string): Effect.Effect<T | undefined> {
+    return pipe(
+      Effect.succeed(this.rows.find((row): row is T => row.id === id)),
+      Effect.map((row) => row)
+    );
+  }
+
+  pipeline(value: number) {
+    return lodashPipe(value);
+  }
+}
+
+const User = Schema.Struct({ id: Schema.String, name: Schema.String });
+const customLayerValue: Layer.Layer<MyLayer<{ id: string; name: string }>> = Layer.effect("Repo", Effect.succeed(new MyLayer([{ id: "1", name: "Ada" }])));
+`;
+}
+
 const hoverCases = [
   { symbol: "Effect.gen", needle: "Effect.gen", url: "https://effect.website/docs/getting-started/using-generators/" },
   { symbol: "Effect.map", needle: "Effect.map", url: "https://effect.website/docs/getting-started/using-generators/" },
@@ -55,7 +88,9 @@ const Live = Layer.merge(A, Layer.provide(B, C));
     const lineNumber = model.getValue().split("\n").findIndex((line) => line.includes("Layer.merge")) + 1;
     const startColumn = model.getLineContent(lineNumber).indexOf("Layer.merge") + 1;
     window.__maldivesEditor.setPosition({ lineNumber, column: startColumn + 1 });
-    void window.__maldivesEditor.getAction("editor.action.showHover")?.run();
+    const action = window.__maldivesEditor.getAction("editor.action.showHover");
+    if (!action) throw new Error("editor.action.showHover is not registered");
+    void action.run();
   });
 
   await expect(page.locator(".monaco-hover")).toContainText("Layer dependency diagram", { timeout: 15000 });
@@ -88,7 +123,9 @@ test("Effect API hovers show docs links and examples for canonical symbols", asy
       const memberOffset = needle.includes(".") ? needle.lastIndexOf(".") + 1 : 0;
       editor.setPosition({ lineNumber, column: startColumn + memberOffset });
       editor.focus();
-      void editor.getAction("editor.action.showHover")?.run();
+      const action = editor.getAction("editor.action.showHover");
+      if (!action) throw new Error("editor.action.showHover is not registered");
+      void action.run();
     }, hoverCase);
 
     await expect(page.locator(".monaco-hover"), hoverCase.symbol).toContainText(hoverCase.url, { timeout: 15000 });
@@ -97,4 +134,35 @@ test("Effect API hovers show docs links and examples for canonical symbols", asy
 
   await mkdir("proof", { recursive: true });
   await page.screenshot({ path: "proof/p12b-effect-hover-proof.png" });
+});
+
+test("Effect hover ignores substring lookalikes from non-Effect symbols", async ({ page }) => {
+  await loadEditor(page);
+
+  await page.evaluate((source) => {
+    const model = window.__monaco.editor.createModel(source, "typescript", window.__monaco.Uri.parse("file:///maldives/effect-hover-lookalikes.ts"));
+    window.__maldivesEditor.setModel(model);
+    window.__maldivesEditor.focus();
+  }, complexLookalikeSource());
+
+  for (const needle of ["MyLayer", "pipeline", "customLayerValue", "lodashPipe"] as const) {
+    await page.keyboard.press("Escape");
+    await page.evaluate((target) => {
+      const editor = window.__maldivesEditor;
+      const model = editor.getModel();
+      if (!model) throw new Error("missing model");
+      const lineNumber = model.getValue().split("\n").findIndex((line) => line.includes(target)) + 1;
+      const startColumn = model.getLineContent(lineNumber).indexOf(target) + 1;
+      editor.setPosition({ lineNumber, column: startColumn + 1 });
+      editor.focus();
+      const action = editor.getAction("editor.action.showHover");
+      if (!action) throw new Error("editor.action.showHover is not registered");
+      void action.run();
+    }, needle);
+
+    await expect(page.locator(".monaco-hover")).not.toContainText("Effect docs", { timeout: 5000 });
+  }
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/p14c-effect-hover-lookalikes-proof.png" });
 });

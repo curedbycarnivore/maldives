@@ -10,7 +10,11 @@ export interface EffectHoverDoc {
 type MonacoApi = typeof monaco;
 type QuickInfoDisplayPart = { text?: string };
 type QuickInfo = { displayParts?: QuickInfoDisplayPart[]; textSpan?: { start: number; length: number } };
-type TypeScriptWorker = { getQuickInfoAtPosition(fileName: string, offset: number): Promise<QuickInfo | undefined> };
+type DefinitionInfo = { fileName?: string };
+type TypeScriptWorker = {
+  getQuickInfoAtPosition(fileName: string, offset: number): Promise<QuickInfo | undefined>;
+  getDefinitionAtPosition?(fileName: string, offset: number): Promise<DefinitionInfo[] | undefined>;
+};
 type TypeScriptWorkerFactory = (uri: monaco.editor.ITextModel["uri"]) => Promise<TypeScriptWorker>;
 type TypeScriptWithWorker = { getTypeScriptWorker?: () => Promise<TypeScriptWorkerFactory> };
 
@@ -81,7 +85,7 @@ export function effectHoverDocForSymbol(symbol: string): EffectHoverDoc | undefi
 export function effectHoverSymbolFromQuickInfo(displayText: string): EffectHoverSymbol | undefined {
   const symbols = Object.keys(EFFECT_HOVER_DOCS).sort((left, right) => right.length - left.length) as EffectHoverSymbol[];
 
-  return symbols.find((symbol) => displayText.includes(symbol));
+  return symbols.find((symbol) => new RegExp(`(^|[^A-Za-z0-9_$])${escapeRegExp(symbol)}([^A-Za-z0-9_$]|$)`).test(displayText));
 }
 
 export function effectHoverSymbolFromSourceAtOffset(source: string, offset: number): EffectHoverSymbol | undefined {
@@ -142,10 +146,14 @@ export function registerEffectHoverProvider(monacoApi: MonacoApi): monaco.IDispo
         };
       }
 
-      const quickInfo = await quickInfoAtPosition(monacoApi, model, position);
-      const symbol = quickInfo ? effectHoverSymbolFromQuickInfo(displayPartsToString(quickInfo.displayParts)) : undefined;
-      const sourceSymbol = symbol ?? effectHoverSymbolFromSourceAtOffset(model.getValue(), model.getOffsetAt(position));
-      const doc = sourceSymbol ? effectHoverDocForSymbol(sourceSymbol) : undefined;
+      const offset = model.getOffsetAt(position);
+      const [quickInfo, definitionFileNames] = await Promise.all([
+        quickInfoAtPosition(monacoApi, model, position),
+        definitionFileNamesAtOffset(monacoApi, model, offset),
+      ]);
+      const sourceSymbol = effectHoverSymbolFromSourceAtOffset(model.getValue(), offset);
+      const symbol = sourceSymbol && hasEffectDefinitionProvenance(definitionFileNames) ? sourceSymbol : undefined;
+      const doc = symbol ? effectHoverDocForSymbol(symbol) : undefined;
 
       if (!doc) {
         return undefined;
@@ -154,7 +162,7 @@ export function registerEffectHoverProvider(monacoApi: MonacoApi): monaco.IDispo
       return {
         range: quickInfo?.textSpan ? rangeForTextSpan(monacoApi, model, quickInfo.textSpan) : undefined,
         contents: [
-          { value: `**${sourceSymbol}** — ${doc.summary}` },
+          { value: `**${symbol}** — ${doc.summary}` },
           { value: `**Example**\n\n\`\`\`ts\n${doc.example}\n\`\`\`` },
           { value: `[Effect docs](${doc.url}) — ${doc.url}` },
         ],
@@ -168,6 +176,17 @@ async function quickInfoAtPosition(
   model: monaco.editor.ITextModel,
   position: monaco.Position,
 ): Promise<QuickInfo | undefined> {
+  const worker = await typeScriptWorkerForModel(monacoApi, model);
+  return worker?.getQuickInfoAtPosition(model.uri.toString(), model.getOffsetAt(position));
+}
+
+async function definitionFileNamesAtOffset(monacoApi: MonacoApi, model: monaco.editor.ITextModel, offset: number): Promise<string[]> {
+  const worker = await typeScriptWorkerForModel(monacoApi, model);
+  const definitions = await worker?.getDefinitionAtPosition?.(model.uri.toString(), offset);
+  return definitions?.map((definition) => definition.fileName).filter((fileName): fileName is string => Boolean(fileName)) ?? [];
+}
+
+async function typeScriptWorkerForModel(monacoApi: MonacoApi, model: monaco.editor.ITextModel): Promise<TypeScriptWorker | undefined> {
   const getTypeScriptWorker = (monacoApi.languages.typescript as unknown as TypeScriptWithWorker).getTypeScriptWorker;
 
   if (!getTypeScriptWorker) {
@@ -175,8 +194,11 @@ async function quickInfoAtPosition(
   }
 
   const getWorker = await getTypeScriptWorker();
-  const worker = await getWorker(model.uri);
-  return worker.getQuickInfoAtPosition(model.uri.toString(), model.getOffsetAt(position));
+  return getWorker(model.uri);
+}
+
+function hasEffectDefinitionProvenance(fileNames: string[]): boolean {
+  return fileNames.some((fileName) => fileName.includes("/node_modules/effect/") || fileName.includes("/node_modules/@types/effect-stub/"));
 }
 
 interface LayerGraph {
@@ -219,9 +241,13 @@ function effectHoverSymbolForIdentifier(identifier: ts.Identifier, effectImports
   const parent = identifier.parent;
 
   if (ts.isPropertyAccessExpression(parent)) {
-    if (parent.name === identifier && ts.isIdentifier(parent.expression)) {
-      const symbol = `${parent.expression.text}.${identifier.text}`;
-      return isEffectHoverSymbol(symbol) && effectImports.has(parent.expression.text) ? symbol : undefined;
+    if (parent.name === identifier && ts.isIdentifier(parent.expression) && effectImports.has(parent.expression.text)) {
+      const memberSymbol = `${parent.expression.text}.${identifier.text}`;
+      if (isEffectHoverSymbol(memberSymbol)) {
+        return memberSymbol;
+      }
+
+      return isEffectHoverSymbol(parent.expression.text) ? parent.expression.text : undefined;
     }
 
     if (parent.expression === identifier && effectImports.has(identifier.text) && isEffectHoverSymbol(identifier.text)) {
@@ -234,6 +260,10 @@ function effectHoverSymbolForIdentifier(identifier: ts.Identifier, effectImports
 
 function isEffectHoverSymbol(symbol: string): symbol is EffectHoverSymbol {
   return Object.hasOwn(EFFECT_HOVER_DOCS, symbol);
+}
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function layerCompositionCallAtOffset(sourceFile: ts.SourceFile, offset: number): ts.CallExpression | undefined {

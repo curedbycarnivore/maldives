@@ -1,5 +1,11 @@
 import { describe, expect, test } from "vitest";
-import { EFFECT_HOVER_DOCS, effectHoverDocForSymbol, effectHoverSymbolFromSourceAtOffset, layerDependencyDiagramForSourceAtOffset } from "../src/effect-hover";
+import {
+  EFFECT_HOVER_DOCS,
+  effectHoverDocForSymbol,
+  effectHoverSymbolFromQuickInfo,
+  effectHoverSymbolFromSourceAtOffset,
+  layerDependencyDiagramForSourceAtOffset,
+} from "../src/effect-hover";
 
 const canonicalSymbols = [
   "Effect.gen",
@@ -33,6 +39,18 @@ describe("Effect hover docs", () => {
     const source = `import { Effect } from "effect";\nconst program = Effect.gen(function* () { return 1; });`;
 
     expect(effectHoverSymbolFromSourceAtOffset(source, source.indexOf("gen") + 1)).toBe("Effect.gen");
+  });
+
+  test("does not recognize substring lookalikes from quick info", () => {
+    expect(effectHoverSymbolFromQuickInfo("class MyLayer<T> { readonly pipeline = true }")).toBeUndefined();
+    expect(effectHoverSymbolFromQuickInfo("const pipeline: (value: number) => number")).toBeUndefined();
+  });
+
+  test("does not recognize non-Effect imports from hovered source positions", () => {
+    const source = `import { pipe } from "lodash";\nclass MyLayer<T> { value!: T }\nconst piped = pipe(1);`;
+
+    expect(effectHoverSymbolFromSourceAtOffset(source, source.indexOf("MyLayer") + 1)).toBeUndefined();
+    expect(effectHoverSymbolFromSourceAtOffset(source, source.lastIndexOf("pipe") + 1)).toBeUndefined();
   });
 
   test("builds a Layer dependency diagram from nested Layer expressions", () => {
