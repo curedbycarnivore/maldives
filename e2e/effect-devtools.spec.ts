@@ -1,112 +1,24 @@
-import { createHash } from "node:crypto";
-import { mkdir } from "node:fs/promises";
-import { createServer, type IncomingMessage } from "node:http";
-import { Socket } from "node:net";
+import { mkdir, mkdtemp, rm, writeFile, chmod } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { expect, test } from "@playwright/test";
 import { loadEditor } from "./helpers/load-editor";
 
 const DEVTOOLS_TOKEN = "test-devtools-token";
 
-function websocketAcceptKey(key: string): string {
-  return createHash("sha1")
-    .update(`${key}258EAFA5-E914-47DA-95CA-C5AB0DC85B11`)
-    .digest("base64");
-}
-
-function decodeClientTextFrame(buffer: Buffer): string {
-  const length = buffer[1] & 0x7f;
-  const maskOffset = 2;
-  const payloadOffset = maskOffset + 4;
-  const mask = buffer.subarray(maskOffset, payloadOffset);
-  const payload = buffer.subarray(payloadOffset, payloadOffset + length);
-
-  return Buffer.from(payload.map((byte, index) => byte ^ mask[index % 4])).toString("utf8");
-}
-
-function encodeServerTextFrame(text: string): Buffer {
-  const payload = Buffer.from(text, "utf8");
-
-  if (payload.length < 126) {
-    return Buffer.concat([Buffer.from([0x81, payload.length]), payload]);
-  }
-
-  const header = Buffer.alloc(4);
-  header[0] = 0x81;
-  header[1] = 126;
-  header.writeUInt16BE(payload.length, 2);
-
-  return Buffer.concat([header, payload]);
-}
-
-async function startDevToolsFixture(): Promise<{ close: () => Promise<void> }> {
-  const server = createServer();
-  const sockets = new Set<Socket>();
-
-  server.on("upgrade", (request: IncomingMessage, socket: Socket) => {
-    sockets.add(socket);
-    socket.on("close", () => sockets.delete(socket));
-    const origin = request.headers.origin;
-    const host = request.headers.host;
-
-    if (origin !== "http://127.0.0.1:5173" || (host !== "127.0.0.1:34437" && host !== "localhost:34437")) {
-      socket.write("HTTP/1.1 403 Forbidden\r\n\r\n");
-      socket.destroy();
-      return;
-    }
-
-    const key = request.headers["sec-websocket-key"];
-
-    if (typeof key !== "string") {
-      socket.destroy();
-      return;
-    }
-
-    socket.write(
-      [
-        "HTTP/1.1 101 Switching Protocols",
-        "Upgrade: websocket",
-        "Connection: Upgrade",
-        `Sec-WebSocket-Accept: ${websocketAcceptKey(key)}`,
-        "\r\n",
-      ].join("\r\n"),
-    );
-
-    socket.once("data", (buffer) => {
-      const auth = JSON.parse(decodeClientTextFrame(buffer)) as { token?: string };
-
-      if (auth.token !== DEVTOOLS_TOKEN) {
-        socket.end();
-        return;
-      }
-
-      socket.write(
-        encodeServerTextFrame(
-          JSON.stringify({
-            type: "span",
-            name: "maldives-test-span",
-            status: "completed",
-            attributes: { route: "Effect.gen", unsafe: "<script>alert(1)</script>" },
-          }),
-        ),
-      );
-    });
-  });
-
-  await new Promise<void>((resolve) => server.listen(34437, "127.0.0.1", resolve));
-
-  return {
-    close: () =>
-      new Promise<void>((resolve) => {
-        for (const socket of sockets) {
-          socket.destroy();
-        }
-        server.close(() => resolve());
-      }),
+test("Effect DevTools panel streams a real local bridge span and rejects cross-origin sockets", async ({ browser, page }) => {
+  const { default: bridgeModule } = await import("../scripts/effect-devtools-bridge.cjs");
+  const { startEffectDevToolsBridge } = bridgeModule as {
+    startEffectDevToolsBridge: (options: { enabled: boolean; tokenFile: string; port: number }) => Promise<{
+      publish: (event: { type: "span"; name: string; status: string; attributes: Record<string, string> }) => void;
+      close: () => Promise<void>;
+    }>;
   };
-}
-
-test("Effect DevTools panel streams a local span and rejects cross-origin sockets", async ({ browser, page }) => {
-  const fixture = await startDevToolsFixture();
+  const dir = await mkdtemp(join(tmpdir(), "maldives-devtools-e2e-"));
+  const tokenFile = join(dir, "devtools.token");
+  await writeFile(tokenFile, DEVTOOLS_TOKEN, "utf8");
+  await chmod(tokenFile, 0o600);
+  const bridge = await startEffectDevToolsBridge({ tokenFile, port: 34437, enabled: true });
 
   try {
     await loadEditor(page);
@@ -120,8 +32,16 @@ test("Effect DevTools panel streams a local span and rejects cross-origin socket
     }, DEVTOOLS_TOKEN);
 
     await page.locator(".maldives-effect-devtools").waitFor({ state: "visible", timeout: 8000 });
-    await expect(page.locator(".maldives-effect-devtools")).toContainText("maldives-test-span", { timeout: 8000 });
+    bridge.publish({
+      type: "span",
+      name: "maldives-real-bridge-span",
+      status: "completed",
+      attributes: { route: "Effect.gen", unsafe: "<script>alert(1)</script>" },
+    });
+
+    await expect(page.locator(".maldives-effect-devtools")).toContainText("maldives-real-bridge-span", { timeout: 8000 });
     await expect(page.locator(".maldives-effect-devtools")).toContainText("Effect.gen");
+    // SG-P11D-5: untrusted span attributes render as text, never executable HTML.
     await expect(page.locator(".maldives-effect-devtools")).toContainText("<script>alert(1)</script>");
     await expect(page.locator(".maldives-effect-devtools script")).toHaveCount(0);
 
@@ -144,6 +64,7 @@ test("Effect DevTools panel streams a local span and rejects cross-origin socket
     await mkdir("proof", { recursive: true });
     await page.screenshot({ path: "proof/p11d-effect-devtools-panel-proof.png" });
   } finally {
-    await fixture.close();
+    await bridge.close();
+    await rm(dir, { recursive: true, force: true });
   }
 });
