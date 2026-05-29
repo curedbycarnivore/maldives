@@ -14,6 +14,7 @@ import { registerKeybindings } from "./keybindings";
 import { parseEditorOptions } from "./parsers/editor-options-parser";
 import { parseIcls } from "./parsers/icls-parser";
 import { parseKeymap } from "./parsers/keymap-parser";
+import { setupDefaultMonacoWorkers } from "./monaco-workers";
 import { maldivesProFeatureOptions } from "./pro-features";
 import { registerTheme, THEME_NAME } from "./theme";
 import { configureTypeScriptWorker, type EffectDtsFiles } from "./typescript-worker";
@@ -36,6 +37,7 @@ export function createMaldivesEditor(
   const editorOptions = parseEditorOptions(editorOptionsXml);
   const keymapConfig = parseKeymap(keymapXml);
 
+  setupDefaultMonacoWorkers();
   registerTheme(monaco, themeConfig);
   configureTypeScriptWorker(monaco, { effectDtsFiles: _opts.effectDtsFiles });
   const snippetsDisposable = registerEffectSnippets(monaco);

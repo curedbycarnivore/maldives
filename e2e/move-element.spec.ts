@@ -9,7 +9,7 @@ declare global {
 }
 
 async function loadEditor(page: Page): Promise<void> {
-  await page.goto("http://127.0.0.1:5173/");
+  await page.goto("http://127.0.0.1:5173/", { waitUntil: "domcontentloaded" });
   await expect.poll(() => page.evaluate(() => Boolean(window.__maldivesEditor))).toBe(true);
   // wait for @ast-grep/wasm to initialize before invoking AST-backed movement
   await page.waitForTimeout(3000);

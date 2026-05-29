@@ -7,7 +7,7 @@ export const maldivesProFeatureOptions = {
     independentColorPoolPerBracketType: true,
   },
   guides: { bracketPairs: true, indentation: true },
-  stickyScroll: { enabled: true, maxLineCount: 5 },
+  stickyScroll: { enabled: true, maxLineCount: 5, defaultModel: "indentationModel" },
   inlayHints: {
     enabled: "on",
     fontSize: 12,

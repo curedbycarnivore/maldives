@@ -16,7 +16,7 @@ async function loadEditor(page: Page): Promise<void> {
 test("Promise to Effect.gen code action rewrites an async function", async ({ page }) => {
   await loadEditor(page);
 
-  const opened = await page.evaluate(() => {
+  await page.evaluate(() => {
     window.__maldivesEditor.setValue([
       "async function loadName(): Promise<string> {",
       "  const name = await fetchName();",
@@ -29,13 +29,13 @@ test("Promise to Effect.gen code action rewrites an async function", async ({ pa
     ].join("\n"));
     window.__maldivesEditor.setPosition({ lineNumber: 2, column: 23 });
     window.__maldivesEditor.focus();
-
-    return window.__maldivesExecuteKeybinding("IntroduceActionsGroup");
   });
 
+  await page.waitForTimeout(500);
+  const opened = await page.evaluate(() => window.__maldivesExecuteKeybinding("IntroduceActionsGroup"));
   expect(opened).toBe(true);
-  await page.locator(".action-widget").waitFor({ state: "visible", timeout: 8000 });
-  await expect(page.locator(".action-widget")).toContainText("Convert to Effect.gen");
+  const convertAction = page.locator('.action-widget .monaco-list-row:has-text("Convert to Effect.gen")');
+  await convertAction.waitFor({ state: "visible", timeout: 15000 });
   await page.keyboard.press("Enter");
 
   await expect

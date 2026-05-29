@@ -84,6 +84,27 @@ export function effectHoverSymbolFromQuickInfo(displayText: string): EffectHover
   return symbols.find((symbol) => displayText.includes(symbol));
 }
 
+export function effectHoverSymbolFromSourceAtOffset(source: string, offset: number): EffectHoverSymbol | undefined {
+  const sourceFile = ts.createSourceFile("effect-hover.ts", source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
+  const effectImports = effectImportsFromSourceFile(sourceFile);
+  let found: EffectHoverSymbol | undefined;
+
+  function visit(node: ts.Node): void {
+    if (found || offset < node.getStart(sourceFile) || offset > node.getEnd()) {
+      return;
+    }
+
+    if (ts.isIdentifier(node)) {
+      found = effectHoverSymbolForIdentifier(node, effectImports);
+    }
+
+    ts.forEachChild(node, visit);
+  }
+
+  visit(sourceFile);
+  return found;
+}
+
 export function layerDependencyDiagramForSourceAtOffset(source: string, offset: number): string | undefined {
   const sourceFile = ts.createSourceFile("effect-layer-hover.ts", source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
   const call = layerCompositionCallAtOffset(sourceFile, offset);
@@ -123,7 +144,8 @@ export function registerEffectHoverProvider(monacoApi: MonacoApi): monaco.IDispo
 
       const quickInfo = await quickInfoAtPosition(monacoApi, model, position);
       const symbol = quickInfo ? effectHoverSymbolFromQuickInfo(displayPartsToString(quickInfo.displayParts)) : undefined;
-      const doc = symbol ? effectHoverDocForSymbol(symbol) : undefined;
+      const sourceSymbol = symbol ?? effectHoverSymbolFromSourceAtOffset(model.getValue(), model.getOffsetAt(position));
+      const doc = sourceSymbol ? effectHoverDocForSymbol(sourceSymbol) : undefined;
 
       if (!doc) {
         return undefined;
@@ -132,7 +154,7 @@ export function registerEffectHoverProvider(monacoApi: MonacoApi): monaco.IDispo
       return {
         range: quickInfo?.textSpan ? rangeForTextSpan(monacoApi, model, quickInfo.textSpan) : undefined,
         contents: [
-          { value: `**${symbol}** — ${doc.summary}` },
+          { value: `**${sourceSymbol}** — ${doc.summary}` },
           { value: `**Example**\n\n\`\`\`ts\n${doc.example}\n\`\`\`` },
           { value: `[Effect docs](${doc.url}) — ${doc.url}` },
         ],
@@ -160,6 +182,58 @@ async function quickInfoAtPosition(
 interface LayerGraph {
   layers: string[];
   edges: Array<{ from: string; to: string }>;
+}
+
+type EffectImportSet = Set<string>;
+
+function effectImportsFromSourceFile(sourceFile: ts.SourceFile): EffectImportSet {
+  const imports = new Set<string>();
+
+  for (const statement of sourceFile.statements) {
+    if (!ts.isImportDeclaration(statement) || !ts.isStringLiteral(statement.moduleSpecifier) || statement.moduleSpecifier.text !== "effect") {
+      continue;
+    }
+
+    const clause = statement.importClause;
+    const namedBindings = clause?.namedBindings;
+
+    if (clause?.name) {
+      imports.add(clause.name.text);
+    }
+
+    if (namedBindings && ts.isNamespaceImport(namedBindings)) {
+      imports.add(namedBindings.name.text);
+    }
+
+    if (namedBindings && ts.isNamedImports(namedBindings)) {
+      for (const element of namedBindings.elements) {
+        imports.add(element.name.text);
+      }
+    }
+  }
+
+  return imports;
+}
+
+function effectHoverSymbolForIdentifier(identifier: ts.Identifier, effectImports: EffectImportSet): EffectHoverSymbol | undefined {
+  const parent = identifier.parent;
+
+  if (ts.isPropertyAccessExpression(parent)) {
+    if (parent.name === identifier && ts.isIdentifier(parent.expression)) {
+      const symbol = `${parent.expression.text}.${identifier.text}`;
+      return isEffectHoverSymbol(symbol) && effectImports.has(parent.expression.text) ? symbol : undefined;
+    }
+
+    if (parent.expression === identifier && effectImports.has(identifier.text) && isEffectHoverSymbol(identifier.text)) {
+      return identifier.text;
+    }
+  }
+
+  return effectImports.has(identifier.text) && isEffectHoverSymbol(identifier.text) ? identifier.text : undefined;
+}
+
+function isEffectHoverSymbol(symbol: string): symbol is EffectHoverSymbol {
+  return Object.hasOwn(EFFECT_HOVER_DOCS, symbol);
 }
 
 function layerCompositionCallAtOffset(sourceFile: ts.SourceFile, offset: number): ts.CallExpression | undefined {

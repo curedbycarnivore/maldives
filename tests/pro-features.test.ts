@@ -14,6 +14,7 @@ describe("maldivesProFeatureOptions", () => {
   test("enables sticky scroll", () => {
     expect(maldivesProFeatureOptions.stickyScroll.enabled).toBe(true);
     expect(maldivesProFeatureOptions.stickyScroll.maxLineCount).toBe(5);
+    expect(maldivesProFeatureOptions.stickyScroll.defaultModel).toBe("indentationModel");
   });
 
   test("enables inlay hints with JetBrains Mono", () => {

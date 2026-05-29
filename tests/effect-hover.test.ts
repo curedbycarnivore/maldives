@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { EFFECT_HOVER_DOCS, effectHoverDocForSymbol, layerDependencyDiagramForSourceAtOffset } from "../src/effect-hover";
+import { EFFECT_HOVER_DOCS, effectHoverDocForSymbol, effectHoverSymbolFromSourceAtOffset, layerDependencyDiagramForSourceAtOffset } from "../src/effect-hover";
 
 const canonicalSymbols = [
   "Effect.gen",
@@ -27,6 +27,12 @@ describe("Effect hover docs", () => {
       expect(doc?.url).not.toContain("undefined");
       expect(doc?.url).not.toContain("localhost");
     }
+  });
+
+  test("recognizes canonical Effect member symbols from the hovered source position", () => {
+    const source = `import { Effect } from "effect";\nconst program = Effect.gen(function* () { return 1; });`;
+
+    expect(effectHoverSymbolFromSourceAtOffset(source, source.indexOf("gen") + 1)).toBe("Effect.gen");
   });
 
   test("builds a Layer dependency diagram from nested Layer expressions", () => {
