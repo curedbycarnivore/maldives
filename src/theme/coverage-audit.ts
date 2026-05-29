@@ -74,6 +74,7 @@ const tokenAuditNames = [
   "BUILDOUT.SECTION_NAME",
   "BUILDOUT.VALUE",
   "C.KEYWORD",
+  "BASH.EXTERNAL_COMMAND",
 ];
 
 export const themeCoverageAuditAttributes = [

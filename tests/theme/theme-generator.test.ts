@@ -101,6 +101,14 @@ test("maps P15j bracket, class/reference, Buildout, and C token surfaces", () =>
   );
 });
 
+test("maps P15k Bash external command colors onto Monaco shell token scopes", () => {
+  expect(theme.rules).toEqual(
+    expect.arrayContaining([
+      { token: "type.identifier.shell", foreground: "cc8a9b" },
+    ]),
+  );
+});
+
 test("registers the generated Monaco theme", () => {
   const defineTheme = vi.fn();
   const monaco = { editor: { defineTheme } } as unknown as typeof import("monaco-editor");

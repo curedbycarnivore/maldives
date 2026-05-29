@@ -35,6 +35,12 @@ const classifiedTopLevelOptionNames = [
   "BUILDOUT.SECTION_NAME",
   "BUILDOUT.VALUE",
   "C.KEYWORD",
+  "APACHE_CONFIG.ARG_LEXEM",
+  "APACHE_CONFIG.COMMENT",
+  "APACHE_CONFIG.IDENTIFIER",
+  "BASH.EXTERNAL_COMMAND",
+  "BASH.HERE_DOC",
+  "BLOCK_TERMINAL_COMMAND",
 ];
 
 export interface IclsOptionNameIndex {
@@ -238,6 +244,22 @@ function classifiedTopLevelPathsFor(name: string): string[] {
     return ["BUILDOUT.VALUE.FONT_TYPE"];
   }
 
+  if (name.startsWith("APACHE_CONFIG.")) {
+    return [`${name}.FOREGROUND`, `${name}.FONT_TYPE`];
+  }
+
+  if (name === "BASH.EXTERNAL_COMMAND") {
+    return ["BASH.EXTERNAL_COMMAND.FOREGROUND"];
+  }
+
+  if (name === "BASH.HERE_DOC") {
+    return ["BASH.HERE_DOC"];
+  }
+
+  if (name === "BLOCK_TERMINAL_COMMAND") {
+    return ["BLOCK_TERMINAL_COMMAND.FOREGROUND", "BLOCK_TERMINAL_COMMAND.FONT_TYPE"];
+  }
+
   return [name];
 }
 
@@ -264,6 +286,18 @@ function classifiedTopLevelDeferredReason(path: string): string {
 
   if (path === "BREADCRUMBS_HOVERED.BACKGROUND") {
     return "unsupported: Monaco breadcrumbs expose focus foreground but no separate hovered-item background color";
+  }
+
+  if (path.startsWith("APACHE_CONFIG.")) {
+    return "defer: Monaco/Maldives does not load an Apache config language grammar yet";
+  }
+
+  if (path === "BASH.HERE_DOC") {
+    return "unsupported: active ICLS BASH.HERE_DOC has no foreground or font style to apply";
+  }
+
+  if (path.startsWith("BLOCK_TERMINAL_COMMAND.")) {
+    return "defer: terminal command block highlighting waits for the P23 terminal/editor-block subsystem; no Monaco grammar emits this token today";
   }
 
   if (path.endsWith(".BACKGROUND")) {

@@ -39,6 +39,7 @@ export const TOKEN_SCOPES: Record<string, string[]> = {
   "BUILDOUT.SECTION_NAME": ["metatag.ini"],
   "BUILDOUT.VALUE": ["string.ini"],
   "C.KEYWORD": ["keyword.int", "keyword.void", "keyword.return"],
+  "BASH.EXTERNAL_COMMAND": ["type.identifier.shell"],
 };
 
 export function buildMonacoTheme(theme: ThemeConfig): editor.IStandaloneThemeData {

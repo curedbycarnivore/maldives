@@ -100,3 +100,11 @@ test("parses P15j bracket, class, Buildout, and C token surfaces", () => {
     ]),
   );
 });
+
+test("parses P15k shell token surfaces from the active ICLS theme", () => {
+  expect(theme.tokens).toEqual(
+    expect.arrayContaining([
+      { name: "BASH.EXTERNAL_COMMAND", foreground: "#cc8a9b", fontStyle: "" },
+    ]),
+  );
+});

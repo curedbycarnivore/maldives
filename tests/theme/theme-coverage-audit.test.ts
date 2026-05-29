@@ -71,6 +71,7 @@ test("ratchets every classified in-scope ICLS attribute into the Monaco theme", 
     "BUILDOUT.SECTION_NAME",
     "BUILDOUT.VALUE",
     "C.KEYWORD",
+    "BASH.EXTERNAL_COMMAND",
   ]);
 
   expect(auditThemeCoverage(config, monacoTheme)).toEqual([]);

@@ -161,6 +161,53 @@ describe("scripts/theme-coverage", () => {
     );
   });
 
+  test("classifies P15k Apache config, Bash, and terminal command token surfaces", () => {
+    const report = auditThemeCoverageMappings(iclsXml);
+    const p15kNames = [
+      "APACHE_CONFIG.ARG_LEXEM",
+      "APACHE_CONFIG.COMMENT",
+      "APACHE_CONFIG.IDENTIFIER",
+      "BASH.EXTERNAL_COMMAND",
+      "BASH.HERE_DOC",
+      "BLOCK_TERMINAL_COMMAND",
+    ];
+
+    expect(report.top50Unmapped.map((entry) => entry.name)).not.toEqual(expect.arrayContaining(p15kNames));
+    expect(report.classifiedTopLevelOptions.map((entry) => entry.name)).toEqual(expect.arrayContaining(p15kNames));
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "BASH.EXTERNAL_COMMAND")?.mappedPaths).toEqual([
+      {
+        path: "BASH.EXTERNAL_COMMAND.FOREGROUND",
+        monacoTargets: ["token:type.identifier.shell.foreground"],
+      },
+    ]);
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "APACHE_CONFIG.IDENTIFIER")?.deferredPaths).toEqual([
+      {
+        path: "APACHE_CONFIG.IDENTIFIER.FOREGROUND",
+        reason: "defer: Monaco/Maldives does not load an Apache config language grammar yet",
+      },
+      {
+        path: "APACHE_CONFIG.IDENTIFIER.FONT_TYPE",
+        reason: "defer: Monaco/Maldives does not load an Apache config language grammar yet",
+      },
+    ]);
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "BASH.HERE_DOC")?.deferredPaths).toEqual([
+      {
+        path: "BASH.HERE_DOC",
+        reason: "unsupported: active ICLS BASH.HERE_DOC has no foreground or font style to apply",
+      },
+    ]);
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "BLOCK_TERMINAL_COMMAND")?.deferredPaths).toEqual([
+      {
+        path: "BLOCK_TERMINAL_COMMAND.FOREGROUND",
+        reason: "defer: terminal command block highlighting waits for the P23 terminal/editor-block subsystem; no Monaco grammar emits this token today",
+      },
+      {
+        path: "BLOCK_TERMINAL_COMMAND.FONT_TYPE",
+        reason: "defer: terminal command block highlighting waits for the P23 terminal/editor-block subsystem; no Monaco grammar emits this token today",
+      },
+    ]);
+  });
+
   test("writes proof/theme-coverage.json shaped for watchdog telemetry", () => {
     const outFile = join(mkdtempSync(join(tmpdir(), "maldives-theme-coverage-")), "theme-coverage.json");
 

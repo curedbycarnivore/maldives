@@ -223,3 +223,50 @@ parts = app
   await mkdir("proof", { recursive: true });
   await page.screenshot({ path: "proof/p15j-theme-brackets-breadcrumbs-class-proof.png" });
 });
+
+test("renders P15k Bash external command colors on a real shell workflow", async ({ page }) => {
+  await loadEditor(page);
+
+  await page.evaluate(() => {
+    const sample = `#!/usr/bin/env bash
+set -euo pipefail
+mkdir -p src/generated
+cat > src/generated/real-user.tsx <<'TSX'
+import { Effect, Layer, Schema, pipe } from "effect";
+
+function traced(_target: unknown, _key: string) {}
+
+@traced
+class Repository<T extends { id: string }> {
+  load(id: string): Effect.Effect<T, Error> {
+    return pipe(
+      Effect.succeed({ id, schema: Schema.String }),
+      Effect.map((value) => value as T)
+    );
+  }
+}
+
+const LiveRepository = Layer.succeed(Repository, new Repository<{ id: string }>());
+TSX
+grep -n "LiveRepository" src/generated/real-user.tsx
+`;
+    window.__maldivesEditor.setModel(window.__monaco.editor.createModel(sample, "shell", window.__monaco.Uri.parse("file:///maldives/p15k-real-workflow.ts")));
+    window.__maldivesEditor.setPosition({ lineNumber: 4, column: 1 });
+    window.__maldivesEditor.focus();
+  });
+
+  const colorForText = (text: string) =>
+    page.evaluate((needle) => {
+      const normalize = (value: string | null) => (value ?? "").replace(/\u00a0/g, " ").trim();
+      const spans = Array.from(document.querySelectorAll<HTMLElement>(".monaco-editor .view-line span"));
+      const match = spans.find((span) => span.childElementCount === 0 && normalize(span.textContent) === needle);
+      return match ? getComputedStyle(match).color : "";
+    }, text);
+
+  await expect.poll(() => colorForText("mkdir"), { timeout: 10000 }).toBe("rgb(204, 138, 155)");
+  await expect.poll(() => colorForText("cat"), { timeout: 10000 }).toBe("rgb(204, 138, 155)");
+  await expect.poll(() => colorForText("grep"), { timeout: 10000 }).toBe("rgb(204, 138, 155)");
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/p15k-theme-shell-surfaces-proof.png" });
+});

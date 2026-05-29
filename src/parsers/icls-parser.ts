@@ -72,6 +72,7 @@ const tokenNames = [
   "BUILDOUT.SECTION_NAME",
   "BUILDOUT.VALUE",
   "C.KEYWORD",
+  "BASH.EXTERNAL_COMMAND",
 ];
 
 export function parseIcls(xmlContent: string): ThemeConfig {

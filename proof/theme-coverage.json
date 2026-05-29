@@ -7,8 +7,14 @@
     "ANNOTATIONS_COLOR",
     "ANNOTATIONS_MERGED_COLOR",
     "ANNOTATION_NAME_ATTRIBUTES",
+    "APACHE_CONFIG.ARG_LEXEM",
+    "APACHE_CONFIG.COMMENT",
+    "APACHE_CONFIG.IDENTIFIER",
     "BACKGROUND",
     "BAD_CHARACTER",
+    "BASH.EXTERNAL_COMMAND",
+    "BASH.HERE_DOC",
+    "BLOCK_TERMINAL_COMMAND",
     "BOOKMARKS_ATTRIBUTES",
     "BRACE_ATTR",
     "BRACKET_ATTR",
@@ -71,48 +77,6 @@
     "WHITESPACES"
   ],
   "unmapped": [
-    {
-      "name": "APACHE_CONFIG.ARG_LEXEM",
-      "occurrences": 1,
-      "samplePaths": [
-        "APACHE_CONFIG.ARG_LEXEM"
-      ]
-    },
-    {
-      "name": "APACHE_CONFIG.COMMENT",
-      "occurrences": 1,
-      "samplePaths": [
-        "APACHE_CONFIG.COMMENT"
-      ]
-    },
-    {
-      "name": "APACHE_CONFIG.IDENTIFIER",
-      "occurrences": 1,
-      "samplePaths": [
-        "APACHE_CONFIG.IDENTIFIER"
-      ]
-    },
-    {
-      "name": "BASH.EXTERNAL_COMMAND",
-      "occurrences": 1,
-      "samplePaths": [
-        "BASH.EXTERNAL_COMMAND"
-      ]
-    },
-    {
-      "name": "BASH.HERE_DOC",
-      "occurrences": 1,
-      "samplePaths": [
-        "BASH.HERE_DOC"
-      ]
-    },
-    {
-      "name": "BLOCK_TERMINAL_COMMAND",
-      "occurrences": 1,
-      "samplePaths": [
-        "BLOCK_TERMINAL_COMMAND"
-      ]
-    },
     {
       "name": "COFFEESCRIPT.BAD_CHARACTER",
       "occurrences": 1,
@@ -3994,48 +3958,6 @@
   ],
   "top50Unmapped": [
     {
-      "name": "APACHE_CONFIG.ARG_LEXEM",
-      "occurrences": 1,
-      "samplePaths": [
-        "APACHE_CONFIG.ARG_LEXEM"
-      ]
-    },
-    {
-      "name": "APACHE_CONFIG.COMMENT",
-      "occurrences": 1,
-      "samplePaths": [
-        "APACHE_CONFIG.COMMENT"
-      ]
-    },
-    {
-      "name": "APACHE_CONFIG.IDENTIFIER",
-      "occurrences": 1,
-      "samplePaths": [
-        "APACHE_CONFIG.IDENTIFIER"
-      ]
-    },
-    {
-      "name": "BASH.EXTERNAL_COMMAND",
-      "occurrences": 1,
-      "samplePaths": [
-        "BASH.EXTERNAL_COMMAND"
-      ]
-    },
-    {
-      "name": "BASH.HERE_DOC",
-      "occurrences": 1,
-      "samplePaths": [
-        "BASH.HERE_DOC"
-      ]
-    },
-    {
-      "name": "BLOCK_TERMINAL_COMMAND",
-      "occurrences": 1,
-      "samplePaths": [
-        "BLOCK_TERMINAL_COMMAND"
-      ]
-    },
-    {
       "name": "COFFEESCRIPT.BAD_CHARACTER",
       "occurrences": 1,
       "samplePaths": [
@@ -4342,6 +4264,48 @@
       "samplePaths": [
         "CONSOLE_MAGENTA_BRIGHT_OUTPUT"
       ]
+    },
+    {
+      "name": "CONSOLE_MAGENTA_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_MAGENTA_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_NORMAL_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_NORMAL_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_RED_BRIGHT_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_RED_BRIGHT_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_RED_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_RED_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_SYSTEM_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_SYSTEM_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_USER_INPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_USER_INPUT"
+      ]
     }
   ],
   "classifiedChildLeaves": [
@@ -4361,6 +4325,12 @@
           "monacoTargets": [
             "token:invalid.foreground",
             "token:invalid.illegal.foreground"
+          ]
+        },
+        {
+          "path": "BASH.EXTERNAL_COMMAND.FOREGROUND",
+          "monacoTargets": [
+            "token:type.identifier.shell.foreground"
           ]
         },
         {
@@ -4605,10 +4575,6 @@
         },
         {
           "path": "APACHE_CONFIG.IDENTIFIER.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
-        },
-        {
-          "path": "BASH.EXTERNAL_COMMAND.FOREGROUND",
           "reason": "defer: Maldives does not load this language grammar yet"
         },
         {
@@ -8466,6 +8432,90 @@
         }
       ],
       "deferredPaths": []
+    },
+    {
+      "name": "APACHE_CONFIG.ARG_LEXEM",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "APACHE_CONFIG.ARG_LEXEM.FOREGROUND",
+          "reason": "defer: Monaco/Maldives does not load an Apache config language grammar yet"
+        },
+        {
+          "path": "APACHE_CONFIG.ARG_LEXEM.FONT_TYPE",
+          "reason": "defer: Monaco/Maldives does not load an Apache config language grammar yet"
+        }
+      ]
+    },
+    {
+      "name": "APACHE_CONFIG.COMMENT",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "APACHE_CONFIG.COMMENT.FOREGROUND",
+          "reason": "defer: Monaco/Maldives does not load an Apache config language grammar yet"
+        },
+        {
+          "path": "APACHE_CONFIG.COMMENT.FONT_TYPE",
+          "reason": "defer: Monaco/Maldives does not load an Apache config language grammar yet"
+        }
+      ]
+    },
+    {
+      "name": "APACHE_CONFIG.IDENTIFIER",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "APACHE_CONFIG.IDENTIFIER.FOREGROUND",
+          "reason": "defer: Monaco/Maldives does not load an Apache config language grammar yet"
+        },
+        {
+          "path": "APACHE_CONFIG.IDENTIFIER.FONT_TYPE",
+          "reason": "defer: Monaco/Maldives does not load an Apache config language grammar yet"
+        }
+      ]
+    },
+    {
+      "name": "BASH.EXTERNAL_COMMAND",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "BASH.EXTERNAL_COMMAND.FOREGROUND",
+          "monacoTargets": [
+            "token:type.identifier.shell.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "BASH.HERE_DOC",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "BASH.HERE_DOC",
+          "reason": "unsupported: active ICLS BASH.HERE_DOC has no foreground or font style to apply"
+        }
+      ]
+    },
+    {
+      "name": "BLOCK_TERMINAL_COMMAND",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "BLOCK_TERMINAL_COMMAND.FOREGROUND",
+          "reason": "defer: terminal command block highlighting waits for the P23 terminal/editor-block subsystem; no Monaco grammar emits this token today"
+        },
+        {
+          "path": "BLOCK_TERMINAL_COMMAND.FONT_TYPE",
+          "reason": "defer: terminal command block highlighting waits for the P23 terminal/editor-block subsystem; no Monaco grammar emits this token today"
+        }
+      ]
     }
   ]
 }
