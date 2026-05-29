@@ -24,6 +24,14 @@
     "message": "Argument of type '() => Generator<Effect.Effect<string, never, never>, never, never>' is not assignable to parameter of type '(resume: Adapter) => Generator<YieldWrap<Effect<any, any, any>>, never, never>'.   Call signature return types 'Generator<Effect<string, never, never>, never, never>' and 'Generator<YieldWrap<Effect<any, any, any>>, never, never>' are incompatible.     The types returned by 'next(...)' are incompatible between these types.       Type 'IteratorResult<Effect<string, never, never>, never>' is not assignable to type 'IteratorResult<YieldWrap<Effect<any, any, any>>, never>' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.         Type 'IteratorYieldResult<Effect<string, never, never>>' is not assignable to type 'IteratorResult<YieldWrap<Effect<any, any, any>>, never>' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.           Type 'IteratorYieldResult<Effect<string, never, never>>' is not assignable to type 'IteratorYieldResult<YieldWrap<Effect<any, any, any>>>' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.             Type 'Effect<string, never, never>' is missing the following properties from type 'YieldWrap<Effect<any, any, any>>': #private, [YieldWrapTypeId]"
   },
   {
+    "rule": "missingStarInYieldEffectGen",
+    "startLine": 42,
+    "startCol": 16,
+    "endLine": 42,
+    "endCol": 43,
+    "message": "This uses `yield` for an `Effect` value. `yield*` is the Effect-aware form in this context.    effect(missingStarInYieldEffectGen)"
+  },
+  {
     "rule": "missingEffectContext",
     "startLine": 46,
     "startCol": 14,

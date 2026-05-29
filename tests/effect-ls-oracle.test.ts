@@ -24,6 +24,14 @@ describe("P28a2 Effect language-service node oracle", () => {
           message: expect.stringContaining("neither yielded nor used"),
         }),
         expect.objectContaining({
+          rule: "missingStarInYieldEffectGen",
+          startLine: 42,
+          startCol: 16,
+          endLine: 42,
+          endCol: 43,
+          message: expect.stringContaining("yield*"),
+        }),
+        expect.objectContaining({
           rule: "missingEffectContext",
           startLine: 46,
           startCol: 14,
@@ -49,7 +57,7 @@ describe("P28a2 Effect language-service node oracle", () => {
         }),
       ]),
     );
-    expect(oracle.filter((diagnostic) => expected.expectedRules.includes(diagnostic.rule))).toHaveLength(4);
+    expect(oracle.filter((diagnostic) => expected.expectedRules.includes(diagnostic.rule))).toHaveLength(5);
   });
 
   test("writes the oracle JSON proof artifact", () => {

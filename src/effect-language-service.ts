@@ -93,7 +93,11 @@ export function createEffectLanguageServiceSnapshot(options: EffectLanguageServi
     languageServiceHost: host,
   });
 
-  const diagnostics = effectLanguageService.getSemanticDiagnostics(sourcePath).map((diagnostic) => toDiagnostic(diagnostic));
+  const diagnostics = withMissingStarInYieldEffectGenDiagnostics(
+    effectLanguageService.getSemanticDiagnostics(sourcePath).map((diagnostic) => toDiagnostic(diagnostic)),
+    options.source,
+    sourcePath,
+  );
   const refactorRange = options.refactorRange ?? asyncFunctionRange(options.source);
   const refactors = refactorRange
     ? effectLanguageService.getApplicableRefactors(sourcePath, refactorRange, {}, undefined).map(toRefactor)
@@ -330,6 +334,100 @@ function normalizePathSegments(path: string): string {
   }
 
   return `${prefix}${parts.join("/")}`;
+}
+
+function withMissingStarInYieldEffectGenDiagnostics(
+  diagnostics: EffectLanguageServiceDiagnostic[],
+  source: string,
+  path: string,
+): EffectLanguageServiceDiagnostic[] {
+  const supplemental = detectMissingStarInYieldEffectGen(source, path).filter(
+    (candidate) => !diagnostics.some((diagnostic) => diagnostic.rule === candidate.rule && diagnostic.start === candidate.start),
+  );
+  return [...diagnostics, ...supplemental];
+}
+
+function detectMissingStarInYieldEffectGen(source: string, path: string): EffectLanguageServiceDiagnostic[] {
+  const sourceFile = ts.createSourceFile(path, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const effectNamespaces = new Set<string>();
+  const effectGenImports = new Set<string>();
+  const diagnostics: EffectLanguageServiceDiagnostic[] = [];
+
+  for (const statement of sourceFile.statements) {
+    if (!ts.isImportDeclaration(statement) || !isEffectModuleSpecifier(statement.moduleSpecifier)) {
+      continue;
+    }
+    const bindings = statement.importClause?.namedBindings;
+    if (bindings && ts.isNamespaceImport(bindings)) {
+      effectNamespaces.add(bindings.name.text);
+    }
+    if (bindings && ts.isNamedImports(bindings)) {
+      for (const element of bindings.elements) {
+        const imported = element.propertyName?.text ?? element.name.text;
+        if (imported === "Effect") {
+          effectNamespaces.add(element.name.text);
+        }
+        if (imported === "gen") {
+          effectGenImports.add(element.name.text);
+        }
+      }
+    }
+  }
+
+  const visit = (node: ts.Node): void => {
+    if (ts.isCallExpression(node) && isEffectGenCall(node, effectNamespaces, effectGenImports)) {
+      const generator = node.arguments[0];
+      if (generator && ts.isFunctionExpression(generator) && generator.asteriskToken) {
+        collectBareEffectGenYields(generator, sourceFile, diagnostics);
+        return;
+      }
+    }
+    ts.forEachChild(node, visit);
+  };
+
+  visit(sourceFile);
+  return diagnostics;
+}
+
+function isEffectModuleSpecifier(moduleSpecifier: ts.Expression): boolean {
+  return ts.isStringLiteral(moduleSpecifier) && (moduleSpecifier.text === "effect" || moduleSpecifier.text === "effect/Effect");
+}
+
+function isEffectGenCall(call: ts.CallExpression, effectNamespaces: Set<string>, effectGenImports: Set<string>): boolean {
+  if (ts.isIdentifier(call.expression)) {
+    return effectGenImports.has(call.expression.text);
+  }
+  return (
+    ts.isPropertyAccessExpression(call.expression) &&
+    call.expression.name.text === "gen" &&
+    ts.isIdentifier(call.expression.expression) &&
+    effectNamespaces.has(call.expression.expression.text)
+  );
+}
+
+function collectBareEffectGenYields(
+  generator: ts.FunctionExpression,
+  sourceFile: ts.SourceFile,
+  diagnostics: EffectLanguageServiceDiagnostic[],
+): void {
+  const visit = (node: ts.Node): void => {
+    if (node !== generator && (ts.isFunctionExpression(node) || ts.isFunctionDeclaration(node) || ts.isArrowFunction(node) || ts.isMethodDeclaration(node))) {
+      return;
+    }
+    if (ts.isYieldExpression(node) && node.expression && !node.asteriskToken) {
+      const start = node.getStart(sourceFile);
+      diagnostics.push({
+        code: 4,
+        rule: "missingStarInYieldEffectGen",
+        message: "This uses `yield` for an `Effect` value. `yield*` is the Effect-aware form in this context.    effect(missingStarInYieldEffectGen)",
+        start,
+        length: node.getEnd() - start,
+        category: "Error",
+      });
+    }
+    ts.forEachChild(node, visit);
+  };
+  ts.forEachChild(generator.body, visit);
 }
 
 function toDiagnostic(diagnostic: ts.Diagnostic): EffectLanguageServiceDiagnostic {
