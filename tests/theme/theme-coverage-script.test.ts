@@ -59,6 +59,60 @@ describe("scripts/theme-coverage", () => {
     );
   });
 
+  test("classifies P15i font, UI, and token surfaces into targets or explicit deferrals", () => {
+    const report = auditThemeCoverageMappings(iclsXml);
+    const p15iNames = report.classifiedTopLevelOptions.map((entry) => entry.name);
+
+    expect(report.top50Unmapped.map((entry) => entry.name)).not.toEqual(
+      expect.arrayContaining([
+        "EDITOR_FONT_NAME",
+        "EDITOR_FONT_SIZE",
+        "ABSTRACT_CLASS_NAME_ATTRIBUTES",
+        "ADDED_LINES_COLOR",
+        "ANNOTATION_NAME_ATTRIBUTES",
+        "ANNOTATIONS_COLOR",
+        "ANNOTATIONS_MERGED_COLOR",
+        "BAD_CHARACTER",
+        "BOOKMARKS_ATTRIBUTES",
+        "BREAKPOINT_ATTRIBUTES",
+      ]),
+    );
+    expect(p15iNames).toEqual([
+      "EDITOR_FONT_NAME",
+      "EDITOR_FONT_SIZE",
+      "ABSTRACT_CLASS_NAME_ATTRIBUTES",
+      "ADDED_LINES_COLOR",
+      "ANNOTATION_NAME_ATTRIBUTES",
+      "ANNOTATIONS_COLOR",
+      "ANNOTATIONS_MERGED_COLOR",
+      "BAD_CHARACTER",
+      "BOOKMARKS_ATTRIBUTES",
+      "BREAKPOINT_ATTRIBUTES",
+    ]);
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "ADDED_LINES_COLOR")?.mappedPaths).toEqual([
+      {
+        path: "ADDED_LINES_COLOR",
+        monacoTargets: ["color:diffEditor.insertedLineBackground"],
+      },
+    ]);
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "BAD_CHARACTER")?.mappedPaths).toEqual(
+      expect.arrayContaining([
+        { path: "BAD_CHARACTER.FOREGROUND", monacoTargets: ["token:invalid.foreground", "token:invalid.illegal.foreground"] },
+        { path: "BAD_CHARACTER.BACKGROUND", monacoTargets: ["color:editorUnicodeHighlight.background"] },
+        { path: "BAD_CHARACTER.ERROR_STRIPE_COLOR", monacoTargets: ["color:editorUnicodeHighlight.border"] },
+      ]),
+    );
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "ANNOTATIONS_COLOR")?.deferredPaths).toEqual([
+      { path: "ANNOTATIONS_COLOR", reason: "defer: VCS annotate/blame UI is not implemented in Maldives yet" },
+    ]);
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "BREAKPOINT_ATTRIBUTES")?.deferredPaths).toEqual([
+      {
+        path: "BREAKPOINT_ATTRIBUTES",
+        reason: "defer: breakpoints require the later debug subsystem before their glyph colors have a live Monaco surface",
+      },
+    ]);
+  });
+
   test("writes proof/theme-coverage.json shaped for watchdog telemetry", () => {
     const outFile = join(mkdtempSync(join(tmpdir(), "maldives-theme-coverage-")), "theme-coverage.json");
 

@@ -18,6 +18,9 @@ export interface ThemeConfig {
   findMatchBackground: string;
   selectionHighlightBackground: string;
   rightMarginColor: string;
+  addedLinesColor: string;
+  badCharacterBackground: string;
+  badCharacterErrorStripe: string;
   defaultForeground: string;
   fontFamily: string;
   fontSize: number;
@@ -53,6 +56,8 @@ const tokenNames = [
   "DEFAULT_METADATA",
   "TS.DECORATOR",
   "JS.DOC_COMMENT",
+  "ABSTRACT_CLASS_NAME_ATTRIBUTES",
+  "BAD_CHARACTER",
 ];
 
 export function parseIcls(xmlContent: string): ThemeConfig {
@@ -86,6 +91,9 @@ export function parseIcls(xmlContent: string): ThemeConfig {
     findMatchBackground: color(optionValue(blockFor(xmlContent, "TEXT_SEARCH_RESULT_ATTRIBUTES"), "BACKGROUND")),
     selectionHighlightBackground: color(optionValue(blockFor(xmlContent, "SEARCH_RESULT_ATTRIBUTES"), "BACKGROUND")),
     rightMarginColor: color(optionValue(xmlContent, "RIGHT_MARGIN_COLOR")),
+    addedLinesColor: color(optionValue(xmlContent, "ADDED_LINES_COLOR")),
+    badCharacterBackground: color(optionValue(blockFor(xmlContent, "BAD_CHARACTER"), "BACKGROUND")),
+    badCharacterErrorStripe: color(optionValue(blockFor(xmlContent, "BAD_CHARACTER"), "ERROR_STRIPE_COLOR")),
     fontFamily: optionValue(fontBlock, "EDITOR_FONT_NAME"),
     fontSize: Number(optionValue(fontBlock, "EDITOR_FONT_SIZE")),
     tokens: tokenNames.map((name) => tokenRule(xmlContent, name)),

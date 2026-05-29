@@ -27,6 +27,8 @@ export const TOKEN_SCOPES: Record<string, string[]> = {
   "DEFAULT_METADATA": ["meta.decorator"],
   "TS.DECORATOR": ["decorator", "support.type.decorator"],
   "JS.DOC_COMMENT": ["comment.doc", "comment.block.documentation"],
+  "ABSTRACT_CLASS_NAME_ATTRIBUTES": ["class.abstract", "entity.name.type.class.abstract"],
+  "BAD_CHARACTER": ["invalid", "invalid.illegal"],
 };
 
 export function buildMonacoTheme(theme: ThemeConfig): editor.IStandaloneThemeData {
@@ -59,6 +61,9 @@ export function buildMonacoTheme(theme: ThemeConfig): editor.IStandaloneThemeDat
       "editor.findMatchBackground": theme.findMatchBackground,
       "editor.selectionHighlightBackground": theme.selectionHighlightBackground,
       "editorRuler.foreground": theme.rightMarginColor,
+      "diffEditor.insertedLineBackground": theme.addedLinesColor,
+      "editorUnicodeHighlight.background": theme.badCharacterBackground,
+      "editorUnicodeHighlight.border": theme.badCharacterErrorStripe,
     },
     rules: theme.tokens.flatMap(toTokenThemeRules),
   };

@@ -12,6 +12,19 @@ const classifiedChildLeafNames = [
   "ERROR_STRIPE_COLOR",
 ];
 
+const classifiedTopLevelOptionNames = [
+  "EDITOR_FONT_NAME",
+  "EDITOR_FONT_SIZE",
+  "ABSTRACT_CLASS_NAME_ATTRIBUTES",
+  "ADDED_LINES_COLOR",
+  "ANNOTATION_NAME_ATTRIBUTES",
+  "ANNOTATIONS_COLOR",
+  "ANNOTATIONS_MERGED_COLOR",
+  "BAD_CHARACTER",
+  "BOOKMARKS_ATTRIBUTES",
+  "BREAKPOINT_ATTRIBUTES",
+];
+
 export interface IclsOptionNameIndex {
   totalOptions: number;
   uniqueNames: string[];
@@ -50,6 +63,7 @@ export interface ThemeCoverageReport {
   unmapped: ThemeCoverageUnmappedEntry[];
   top50Unmapped: ThemeCoverageUnmappedEntry[];
   classifiedChildLeaves: ThemeCoverageChildLeafReport[];
+  classifiedTopLevelOptions: ThemeCoverageChildLeafReport[];
 }
 
 export function extractIclsOptionNames(xmlContent: string): IclsOptionNameIndex {
@@ -115,6 +129,7 @@ export function auditThemeCoverageMappings(xmlContent: string): ThemeCoverageRep
     unmapped,
     top50Unmapped: unmapped.slice(0, 50),
     classifiedChildLeaves: classifyChildLeaves(index),
+    classifiedTopLevelOptions: classifyTopLevelOptions(index),
   };
 }
 
@@ -153,6 +168,67 @@ function classifyChildLeaves(index: IclsOptionNameIndex): ThemeCoverageChildLeaf
   });
 }
 
+function classifyTopLevelOptions(index: IclsOptionNameIndex): ThemeCoverageChildLeafReport[] {
+  const targetsByPath = themeCoverageAuditTargets();
+
+  return classifiedTopLevelOptionNames.map((name) => {
+    const mappedPaths: ThemeCoverageMappedPath[] = [];
+    const deferredPaths: ThemeCoverageDeferredPath[] = [];
+
+    for (const path of p15iPathsFor(name)) {
+      const monacoTargets = targetsByPath[path];
+      if (monacoTargets) {
+        mappedPaths.push({ path, monacoTargets });
+      } else {
+        deferredPaths.push({ path, reason: p15iDeferredReason(path) });
+      }
+    }
+
+    return {
+      name,
+      occurrences: index.occurrences[name] ?? 0,
+      mappedPaths,
+      deferredPaths,
+    };
+  });
+}
+
+function p15iPathsFor(name: string): string[] {
+  if (name === "ABSTRACT_CLASS_NAME_ATTRIBUTES") {
+    return ["ABSTRACT_CLASS_NAME_ATTRIBUTES.FOREGROUND", "ABSTRACT_CLASS_NAME_ATTRIBUTES.FONT_TYPE"];
+  }
+
+  if (name === "BAD_CHARACTER") {
+    return ["BAD_CHARACTER.FOREGROUND", "BAD_CHARACTER.BACKGROUND", "BAD_CHARACTER.ERROR_STRIPE_COLOR", "BAD_CHARACTER.EFFECT_TYPE"];
+  }
+
+  return [name];
+}
+
+function p15iDeferredReason(path: string): string {
+  if (path === "ANNOTATION_NAME_ATTRIBUTES") {
+    return "defer: Java annotation highlighting is not loaded; TypeScript decorators are covered by TS.DECORATOR";
+  }
+
+  if (path === "ANNOTATIONS_COLOR" || path === "ANNOTATIONS_MERGED_COLOR") {
+    return "defer: VCS annotate/blame UI is not implemented in Maldives yet";
+  }
+
+  if (path === "BOOKMARKS_ATTRIBUTES") {
+    return "defer: bookmarks UI is not implemented in Maldives yet";
+  }
+
+  if (path === "BREAKPOINT_ATTRIBUTES") {
+    return "defer: breakpoints require the later debug subsystem before their glyph colors have a live Monaco surface";
+  }
+
+  if (path === "BAD_CHARACTER.EFFECT_TYPE") {
+    return "unsupported: Monaco themes do not expose WebStorm effect-type styles for bad-character highlights";
+  }
+
+  return "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet";
+}
+
 function deferredReason(path: string): string {
   const leaf = path.split(".").at(-1);
   const parent = path.slice(0, -(leaf?.length ?? 0) - 1);
@@ -186,6 +262,10 @@ function mappedIclsOptionNames(): Set<string> {
 
   for (const childLeaf of classifiedChildLeafNames) {
     mapped.add(childLeaf);
+  }
+
+  for (const optionName of classifiedTopLevelOptionNames) {
+    mapped.add(optionName);
   }
 
   return mapped;

@@ -29,7 +29,12 @@ const colorAuditEntries: ColorAuditEntry[] = [
   { iclsAttribute: "TEXT_SEARCH_RESULT_ATTRIBUTES.BACKGROUND", expected: (theme) => theme.findMatchBackground, monacoColorIds: ["editor.findMatchBackground"] },
   { iclsAttribute: "SEARCH_RESULT_ATTRIBUTES.BACKGROUND", expected: (theme) => theme.selectionHighlightBackground, monacoColorIds: ["editor.selectionHighlightBackground"] },
   { iclsAttribute: "RIGHT_MARGIN_COLOR", expected: (theme) => theme.rightMarginColor, monacoColorIds: ["editorRuler.foreground"] },
+  { iclsAttribute: "ADDED_LINES_COLOR", expected: (theme) => theme.addedLinesColor, monacoColorIds: ["diffEditor.insertedLineBackground"] },
+  { iclsAttribute: "BAD_CHARACTER.BACKGROUND", expected: (theme) => theme.badCharacterBackground, monacoColorIds: ["editorUnicodeHighlight.background"] },
+  { iclsAttribute: "BAD_CHARACTER.ERROR_STRIPE_COLOR", expected: (theme) => theme.badCharacterErrorStripe, monacoColorIds: ["editorUnicodeHighlight.border"] },
 ];
+
+const editorOptionAuditAttributes = ["EDITOR_FONT_NAME", "EDITOR_FONT_SIZE"];
 
 const tokenAuditNames = [
   "JS.KEYWORD",
@@ -54,10 +59,13 @@ const tokenAuditNames = [
   "DEFAULT_METADATA",
   "TS.DECORATOR",
   "JS.DOC_COMMENT",
+  "ABSTRACT_CLASS_NAME_ATTRIBUTES",
+  "BAD_CHARACTER",
 ];
 
 export const themeCoverageAuditAttributes = [
   ...colorAuditEntries.map((entry) => entry.iclsAttribute),
+  ...editorOptionAuditAttributes,
   ...tokenAuditNames,
 ];
 
@@ -67,6 +75,9 @@ export function themeCoverageAuditTargets(): Record<string, string[]> {
   for (const entry of colorAuditEntries) {
     targets.set(entry.iclsAttribute, entry.monacoColorIds.map((colorId) => `color:${colorId}`));
   }
+
+  targets.set("EDITOR_FONT_NAME", ["option:editor.fontFamily"]);
+  targets.set("EDITOR_FONT_SIZE", ["option:editor.fontSize"]);
 
   for (const tokenName of tokenAuditNames) {
     const scopes = TOKEN_SCOPES[tokenName] ?? [tokenName];

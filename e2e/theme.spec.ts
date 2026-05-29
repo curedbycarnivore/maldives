@@ -130,3 +130,48 @@ test("renders a compact theme coverage audit sample", async ({ page }) => {
   await mkdir("proof", { recursive: true });
   await page.screenshot({ path: "proof/p8-theme-coverage-audit-proof.png" });
 });
+
+test("renders P15i font and core theme surface variables for a complex Effect TSX file", async ({ page }) => {
+  await loadEditor(page);
+
+  await page.evaluate(() => {
+    const sample = `import { Effect, Layer, Schema, pipe } from "effect";
+
+function traced(_target: unknown, _key: string) {}
+
+@traced
+abstract class Repository<T extends { id: string }> {
+  abstract load(id: string): Effect.Effect<T, Error>;
+}
+
+class UserRepository extends Repository<{ id: string; name: string }> {
+  load(id: string) {
+    return pipe(
+      Effect.succeed({ id, name: "rad" }),
+      Effect.map((user) => ({ ...user, label: Schema.String }))
+    );
+  }
+}
+
+const UserLayer = Layer.succeed(Repository, new UserRepository());
+`;
+    window.__maldivesEditor.setModel(window.__monaco.editor.createModel(sample, "typescript", window.__monaco.Uri.parse("file:///maldives/p15i-real-user.tsx")));
+    window.__maldivesEditor.updateOptions({ unicodeHighlight: { nonBasicASCII: true, ambiguousCharacters: true, invisibleCharacters: true } });
+    window.__maldivesEditor.setPosition({ lineNumber: 6, column: 16 });
+    window.__maldivesEditor.focus();
+  });
+
+  await expect
+    .poll(() => page.locator(".monaco-editor .view-line").first().evaluate((element) => getComputedStyle(element).fontSize), { timeout: 10000 })
+    .toBe("14px");
+
+  const themeVar = (name: string) =>
+    page.locator(".monaco-editor").first().evaluate((element, variableName) => getComputedStyle(element).getPropertyValue(variableName).trim(), name);
+
+  await expect.poll(() => themeVar("--vscode-diffEditor-insertedLineBackground"), { timeout: 10000 }).toBe("#e4e4f4");
+  await expect.poll(() => themeVar("--vscode-editorUnicodeHighlight-background"), { timeout: 10000 }).toBe("#f2777a");
+  await expect.poll(() => themeVar("--vscode-editorUnicodeHighlight-border"), { timeout: 10000 }).toBe("#ff0000");
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/p15i-theme-core-surfaces-proof.png" });
+});

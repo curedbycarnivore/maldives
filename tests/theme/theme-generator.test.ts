@@ -40,6 +40,9 @@ test("maps remaining SSOT UI colors to Monaco theme color ids", () => {
     "editorOverviewRuler.warningForeground": "#ebc700",
     "editor.findMatchBackground": "#ffcc66",
     "editor.selectionHighlightBackground": "#ffcc66",
+    "diffEditor.insertedLineBackground": "#E4E4F4",
+    "editorUnicodeHighlight.background": "#f2777a",
+    "editorUnicodeHighlight.border": "#ff0000",
   });
 });
 
@@ -72,6 +75,8 @@ test("maps the extended ICLS token scheme to Monaco token rules", () => {
       { token: "meta.decorator", foreground: "29b0ab" },
       { token: "decorator", foreground: "e4a38e" },
       { token: "comment.doc", foreground: "969696", fontStyle: "italic" },
+      { token: "class.abstract", foreground: "29b0ab", fontStyle: "italic" },
+      { token: "invalid", foreground: "ffffff" },
     ]),
   );
 });

@@ -60,6 +60,17 @@ test("parses extended TypeScript token foregrounds from the active ICLS theme", 
       { name: "DEFAULT_METADATA", foreground: "#29b0ab", fontStyle: "" },
       { name: "TS.DECORATOR", foreground: "#e4a38e", fontStyle: "" },
       { name: "JS.DOC_COMMENT", foreground: "#969696", fontStyle: "italic" },
+      { name: "ABSTRACT_CLASS_NAME_ATTRIBUTES", foreground: "#29b0ab", fontStyle: "italic" },
+      { name: "BAD_CHARACTER", foreground: "#ffffff", fontStyle: "" },
     ]),
   );
+});
+
+
+test("parses P15i editor UI surface colors from the active ICLS theme", () => {
+  expect(theme).toMatchObject({
+    addedLinesColor: "#E4E4F4",
+    badCharacterBackground: "#f2777a",
+    badCharacterErrorStripe: "#ff0000",
+  });
 });

@@ -2,7 +2,15 @@
   "totalOptions": 1512,
   "uniqueOptionNames": 627,
   "mapped": [
+    "ABSTRACT_CLASS_NAME_ATTRIBUTES",
+    "ADDED_LINES_COLOR",
+    "ANNOTATIONS_COLOR",
+    "ANNOTATIONS_MERGED_COLOR",
+    "ANNOTATION_NAME_ATTRIBUTES",
     "BACKGROUND",
+    "BAD_CHARACTER",
+    "BOOKMARKS_ATTRIBUTES",
+    "BREAKPOINT_ATTRIBUTES",
     "CARET_COLOR",
     "CARET_ROW_COLOR",
     "DEFAULT_BRACES",
@@ -15,6 +23,8 @@
     "DEFAULT_METADATA",
     "DEFAULT_OPERATION_SIGN",
     "DEFAULT_PARENTHS",
+    "EDITOR_FONT_NAME",
+    "EDITOR_FONT_SIZE",
     "EFFECT_COLOR",
     "EFFECT_TYPE",
     "ERRORS_ATTRIBUTES",
@@ -50,57 +60,6 @@
   ],
   "unmapped": [
     {
-      "name": "EDITOR_FONT_NAME",
-      "occurrences": 2,
-      "samplePaths": [
-        "EDITOR_FONT_NAME",
-        "EDITOR_FONT_NAME"
-      ]
-    },
-    {
-      "name": "EDITOR_FONT_SIZE",
-      "occurrences": 2,
-      "samplePaths": [
-        "EDITOR_FONT_SIZE",
-        "EDITOR_FONT_SIZE"
-      ]
-    },
-    {
-      "name": "ABSTRACT_CLASS_NAME_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "ABSTRACT_CLASS_NAME_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "ADDED_LINES_COLOR",
-      "occurrences": 1,
-      "samplePaths": [
-        "ADDED_LINES_COLOR"
-      ]
-    },
-    {
-      "name": "ANNOTATION_NAME_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "ANNOTATION_NAME_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "ANNOTATIONS_COLOR",
-      "occurrences": 1,
-      "samplePaths": [
-        "ANNOTATIONS_COLOR"
-      ]
-    },
-    {
-      "name": "ANNOTATIONS_MERGED_COLOR",
-      "occurrences": 1,
-      "samplePaths": [
-        "ANNOTATIONS_MERGED_COLOR"
-      ]
-    },
-    {
       "name": "APACHE_CONFIG.ARG_LEXEM",
       "occurrences": 1,
       "samplePaths": [
@@ -122,13 +81,6 @@
       ]
     },
     {
-      "name": "BAD_CHARACTER",
-      "occurrences": 1,
-      "samplePaths": [
-        "BAD_CHARACTER"
-      ]
-    },
-    {
       "name": "BASH.EXTERNAL_COMMAND",
       "occurrences": 1,
       "samplePaths": [
@@ -147,13 +99,6 @@
       "occurrences": 1,
       "samplePaths": [
         "BLOCK_TERMINAL_COMMAND"
-      ]
-    },
-    {
-      "name": "BOOKMARKS_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "BOOKMARKS_ATTRIBUTES"
       ]
     },
     {
@@ -182,13 +127,6 @@
       "occurrences": 1,
       "samplePaths": [
         "BREADCRUMBS_HOVERED"
-      ]
-    },
-    {
-      "name": "BREAKPOINT_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "BREAKPOINT_ATTRIBUTES"
       ]
     },
     {
@@ -4128,57 +4066,6 @@
   ],
   "top50Unmapped": [
     {
-      "name": "EDITOR_FONT_NAME",
-      "occurrences": 2,
-      "samplePaths": [
-        "EDITOR_FONT_NAME",
-        "EDITOR_FONT_NAME"
-      ]
-    },
-    {
-      "name": "EDITOR_FONT_SIZE",
-      "occurrences": 2,
-      "samplePaths": [
-        "EDITOR_FONT_SIZE",
-        "EDITOR_FONT_SIZE"
-      ]
-    },
-    {
-      "name": "ABSTRACT_CLASS_NAME_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "ABSTRACT_CLASS_NAME_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "ADDED_LINES_COLOR",
-      "occurrences": 1,
-      "samplePaths": [
-        "ADDED_LINES_COLOR"
-      ]
-    },
-    {
-      "name": "ANNOTATION_NAME_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "ANNOTATION_NAME_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "ANNOTATIONS_COLOR",
-      "occurrences": 1,
-      "samplePaths": [
-        "ANNOTATIONS_COLOR"
-      ]
-    },
-    {
-      "name": "ANNOTATIONS_MERGED_COLOR",
-      "occurrences": 1,
-      "samplePaths": [
-        "ANNOTATIONS_MERGED_COLOR"
-      ]
-    },
-    {
       "name": "APACHE_CONFIG.ARG_LEXEM",
       "occurrences": 1,
       "samplePaths": [
@@ -4200,13 +4087,6 @@
       ]
     },
     {
-      "name": "BAD_CHARACTER",
-      "occurrences": 1,
-      "samplePaths": [
-        "BAD_CHARACTER"
-      ]
-    },
-    {
       "name": "BASH.EXTERNAL_COMMAND",
       "occurrences": 1,
       "samplePaths": [
@@ -4225,13 +4105,6 @@
       "occurrences": 1,
       "samplePaths": [
         "BLOCK_TERMINAL_COMMAND"
-      ]
-    },
-    {
-      "name": "BOOKMARKS_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "BOOKMARKS_ATTRIBUTES"
       ]
     },
     {
@@ -4260,13 +4133,6 @@
       "occurrences": 1,
       "samplePaths": [
         "BREADCRUMBS_HOVERED"
-      ]
-    },
-    {
-      "name": "BREAKPOINT_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "BREAKPOINT_ATTRIBUTES"
       ]
     },
     {
@@ -4478,6 +4344,76 @@
       "samplePaths": [
         "COFFEESCRIPT.PROTOTYPE"
       ]
+    },
+    {
+      "name": "COFFEESCRIPT.REGULAR_EXPRESSION_CONTENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.REGULAR_EXPRESSION_CONTENT"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.REGULAR_EXPRESSION_ID",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.REGULAR_EXPRESSION_ID"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.STRING"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.STRING_LITERAL",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.STRING_LITERAL"
+      ]
+    },
+    {
+      "name": "COFFEESCRIPT.THIS",
+      "occurrences": 1,
+      "samplePaths": [
+        "COFFEESCRIPT.THIS"
+      ]
+    },
+    {
+      "name": "CONDITIONALLY_NOT_COMPILED",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONDITIONALLY_NOT_COMPILED"
+      ]
+    },
+    {
+      "name": "CONSOLE_BACKGROUND_KEY",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_BACKGROUND_KEY"
+      ]
+    },
+    {
+      "name": "CONSOLE_BLACK_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_BLACK_OUTPUT"
+      ]
+    },
+    {
+      "name": "CONSOLE_BLUE_BRIGHT_OUTPUT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CONSOLE_BLUE_BRIGHT_OUTPUT"
+      ]
     }
   ],
   "classifiedChildLeaves": [
@@ -4485,6 +4421,20 @@
       "name": "FOREGROUND",
       "occurrences": 503,
       "mappedPaths": [
+        {
+          "path": "ABSTRACT_CLASS_NAME_ATTRIBUTES.FOREGROUND",
+          "monacoTargets": [
+            "token:class.abstract.foreground",
+            "token:entity.name.type.class.abstract.foreground"
+          ]
+        },
+        {
+          "path": "BAD_CHARACTER.FOREGROUND",
+          "monacoTargets": [
+            "token:invalid.foreground",
+            "token:invalid.illegal.foreground"
+          ]
+        },
         {
           "path": "DEFAULT_BRACES.FOREGROUND",
           "monacoTargets": [
@@ -4644,10 +4594,6 @@
       ],
       "deferredPaths": [
         {
-          "path": "ABSTRACT_CLASS_NAME_ATTRIBUTES.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
           "path": "ANNOTATION_NAME_ATTRIBUTES.FOREGROUND",
           "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
         },
@@ -4662,10 +4608,6 @@
         {
           "path": "APACHE_CONFIG.IDENTIFIER.FOREGROUND",
           "reason": "defer: Maldives does not load this language grammar yet"
-        },
-        {
-          "path": "BAD_CHARACTER.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
         },
         {
           "path": "BASH.EXTERNAL_COMMAND.FOREGROUND",
@@ -6566,6 +6508,13 @@
       "occurrences": 241,
       "mappedPaths": [
         {
+          "path": "ABSTRACT_CLASS_NAME_ATTRIBUTES.FONT_TYPE",
+          "monacoTargets": [
+            "token:class.abstract.fontStyle",
+            "token:entity.name.type.class.abstract.fontStyle"
+          ]
+        },
+        {
           "path": "DEFAULT_BRACES.FONT_TYPE",
           "monacoTargets": [
             "token:delimiter.fontStyle",
@@ -6619,10 +6568,6 @@
         }
       ],
       "deferredPaths": [
-        {
-          "path": "ABSTRACT_CLASS_NAME_ATTRIBUTES.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
         {
           "path": "APACHE_CONFIG.ARG_LEXEM.FONT_TYPE",
           "reason": "defer: Maldives does not load this language grammar yet"
@@ -7785,6 +7730,12 @@
       "occurrences": 53,
       "mappedPaths": [
         {
+          "path": "BAD_CHARACTER.BACKGROUND",
+          "monacoTargets": [
+            "color:editorUnicodeHighlight.background"
+          ]
+        },
+        {
           "path": "FOLDED_TEXT_ATTRIBUTES.BACKGROUND",
           "monacoTargets": [
             "color:editor.foldBackground"
@@ -7817,10 +7768,6 @@
         }
       ],
       "deferredPaths": [
-        {
-          "path": "BAD_CHARACTER.BACKGROUND",
-          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
-        },
         {
           "path": "BRACE_ATTR.BACKGROUND",
           "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
@@ -8104,6 +8051,12 @@
       "occurrences": 18,
       "mappedPaths": [
         {
+          "path": "BAD_CHARACTER.ERROR_STRIPE_COLOR",
+          "monacoTargets": [
+            "color:editorUnicodeHighlight.border"
+          ]
+        },
+        {
           "path": "ERRORS_ATTRIBUTES.ERROR_STRIPE_COLOR",
           "monacoTargets": [
             "color:editorOverviewRuler.errorForeground"
@@ -8117,10 +8070,6 @@
         }
       ],
       "deferredPaths": [
-        {
-          "path": "BAD_CHARACTER.ERROR_STRIPE_COLOR",
-          "reason": "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute"
-        },
         {
           "path": "BOOKMARKS_ATTRIBUTES.ERROR_STRIPE_COLOR",
           "reason": "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute"
@@ -8180,6 +8129,154 @@
         {
           "path": "WRONG_REFERENCES_ATTRIBUTES.ERROR_STRIPE_COLOR",
           "reason": "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute"
+        }
+      ]
+    }
+  ],
+  "classifiedTopLevelOptions": [
+    {
+      "name": "EDITOR_FONT_NAME",
+      "occurrences": 2,
+      "mappedPaths": [
+        {
+          "path": "EDITOR_FONT_NAME",
+          "monacoTargets": [
+            "option:editor.fontFamily"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "EDITOR_FONT_SIZE",
+      "occurrences": 2,
+      "mappedPaths": [
+        {
+          "path": "EDITOR_FONT_SIZE",
+          "monacoTargets": [
+            "option:editor.fontSize"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "ABSTRACT_CLASS_NAME_ATTRIBUTES",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "ABSTRACT_CLASS_NAME_ATTRIBUTES.FOREGROUND",
+          "monacoTargets": [
+            "token:class.abstract.foreground",
+            "token:entity.name.type.class.abstract.foreground"
+          ]
+        },
+        {
+          "path": "ABSTRACT_CLASS_NAME_ATTRIBUTES.FONT_TYPE",
+          "monacoTargets": [
+            "token:class.abstract.fontStyle",
+            "token:entity.name.type.class.abstract.fontStyle"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "ADDED_LINES_COLOR",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "ADDED_LINES_COLOR",
+          "monacoTargets": [
+            "color:diffEditor.insertedLineBackground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "ANNOTATION_NAME_ATTRIBUTES",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "ANNOTATION_NAME_ATTRIBUTES",
+          "reason": "defer: Java annotation highlighting is not loaded; TypeScript decorators are covered by TS.DECORATOR"
+        }
+      ]
+    },
+    {
+      "name": "ANNOTATIONS_COLOR",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "ANNOTATIONS_COLOR",
+          "reason": "defer: VCS annotate/blame UI is not implemented in Maldives yet"
+        }
+      ]
+    },
+    {
+      "name": "ANNOTATIONS_MERGED_COLOR",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "ANNOTATIONS_MERGED_COLOR",
+          "reason": "defer: VCS annotate/blame UI is not implemented in Maldives yet"
+        }
+      ]
+    },
+    {
+      "name": "BAD_CHARACTER",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "BAD_CHARACTER.FOREGROUND",
+          "monacoTargets": [
+            "token:invalid.foreground",
+            "token:invalid.illegal.foreground"
+          ]
+        },
+        {
+          "path": "BAD_CHARACTER.BACKGROUND",
+          "monacoTargets": [
+            "color:editorUnicodeHighlight.background"
+          ]
+        },
+        {
+          "path": "BAD_CHARACTER.ERROR_STRIPE_COLOR",
+          "monacoTargets": [
+            "color:editorUnicodeHighlight.border"
+          ]
+        }
+      ],
+      "deferredPaths": [
+        {
+          "path": "BAD_CHARACTER.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for bad-character highlights"
+        }
+      ]
+    },
+    {
+      "name": "BOOKMARKS_ATTRIBUTES",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "BOOKMARKS_ATTRIBUTES",
+          "reason": "defer: bookmarks UI is not implemented in Maldives yet"
+        }
+      ]
+    },
+    {
+      "name": "BREAKPOINT_ATTRIBUTES",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "BREAKPOINT_ATTRIBUTES",
+          "reason": "defer: breakpoints require the later debug subsystem before their glyph colors have a live Monaco surface"
         }
       ]
     }
