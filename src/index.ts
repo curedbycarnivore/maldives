@@ -94,5 +94,7 @@ export function createMaldivesEditor(
   };
 }
 
+export { createMemoryFileSystemAdapter, FileSystemAdapterError, MemoryFileSystemAdapter } from "./fs";
+export type { FileSystemAdapter, FileSystemChange, FileSystemEntry, FileSystemEntryType, FileSystemWatcher } from "./fs";
 export { registerEffectDtsFiles } from "./typescript-worker";
 export type { EffectDtsFiles } from "./typescript-worker";
