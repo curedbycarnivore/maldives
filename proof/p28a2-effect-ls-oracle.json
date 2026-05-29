@@ -1,0 +1,82 @@
+[
+  {
+    "rule": "globalErrorInEffectFailure",
+    "startLine": 14,
+    "startCol": 72,
+    "endLine": 14,
+    "endCol": 85,
+    "message": "Global 'Error' loses type safety as untagged errors merge together in the Effect failure channel. Consider using a tagged error and optionally wrapping the original in a 'cause' property.    effect(globalErrorInEffectFailure)"
+  },
+  {
+    "rule": "floatingEffect",
+    "startLine": 37,
+    "startCol": 3,
+    "endLine": 37,
+    "endCol": 30,
+    "message": "This Effect value is neither yielded nor used in an assignment.    effect(floatingEffect)"
+  },
+  {
+    "rule": "typescript",
+    "startLine": 41,
+    "startCol": 46,
+    "endLine": 41,
+    "endCol": 54,
+    "message": "Argument of type '() => Generator<Effect.Effect<string, never, never>, never, never>' is not assignable to parameter of type '(resume: Adapter) => Generator<YieldWrap<Effect<any, any, any>>, never, never>'.   Call signature return types 'Generator<Effect<string, never, never>, never, never>' and 'Generator<YieldWrap<Effect<any, any, any>>, never, never>' are incompatible.     The types returned by 'next(...)' are incompatible between these types.       Type 'IteratorResult<Effect<string, never, never>, never>' is not assignable to type 'IteratorResult<YieldWrap<Effect<any, any, any>>, never>' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.         Type 'IteratorYieldResult<Effect<string, never, never>>' is not assignable to type 'IteratorResult<YieldWrap<Effect<any, any, any>>, never>' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.           Type 'IteratorYieldResult<Effect<string, never, never>>' is not assignable to type 'IteratorYieldResult<YieldWrap<Effect<any, any, any>>>' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.             Type 'Effect<string, never, never>' is missing the following properties from type 'YieldWrap<Effect<any, any, any>>': #private, [YieldWrapTypeId]"
+  },
+  {
+    "rule": "missingEffectContext",
+    "startLine": 46,
+    "startCol": 14,
+    "endLine": 46,
+    "endCol": 39,
+    "message": "This Effect requires a service that is missing from the expected Effect context: `AuditLog`.    effect(missingEffectContext)"
+  },
+  {
+    "rule": "typescript",
+    "startLine": 46,
+    "startCol": 14,
+    "endLine": 46,
+    "endCol": 39,
+    "message": "Type 'Effect<string, never, AuditLog>' is not assignable to type 'Effect<string, never, never>' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.   Type 'AuditLog' is not assignable to type 'never'."
+  },
+  {
+    "rule": "missingEffectContext",
+    "startLine": 52,
+    "startCol": 14,
+    "endLine": 52,
+    "endCol": 34,
+    "message": "This Effect requires a service that is missing from the expected Effect context: `AuditLog | UserRepo`.    effect(missingEffectContext)"
+  },
+  {
+    "rule": "typescript",
+    "startLine": 52,
+    "startCol": 14,
+    "endLine": 52,
+    "endCol": 34,
+    "message": "Type 'Effect<{ readonly id: string; readonly name: string; }, Error, AuditLog | UserRepo>' is not assignable to type 'Effect<{ readonly id: string; readonly name: string; }, Error, never>' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.   Type 'AuditLog | UserRepo' is not assignable to type 'never'.     Type 'AuditLog' is not assignable to type 'never'."
+  },
+  {
+    "rule": "missingEffectError",
+    "startLine": 57,
+    "startCol": 14,
+    "endLine": 57,
+    "endCol": 42,
+    "message": "Missing 'Error' in the expected Effect errors.    effect(missingEffectError)"
+  },
+  {
+    "rule": "typescript",
+    "startLine": 57,
+    "startCol": 14,
+    "endLine": 57,
+    "endCol": 42,
+    "message": "Type 'Effect<never, Error, never>' is not assignable to type 'Effect<string, never, never>' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.   Type 'Error' is not assignable to type 'never'."
+  },
+  {
+    "rule": "globalErrorInEffectFailure",
+    "startLine": 57,
+    "startCol": 94,
+    "endLine": 57,
+    "endCol": 111,
+    "message": "Global 'Error' loses type safety as untagged errors merge together in the Effect failure channel. Consider using a tagged error and optionally wrapping the original in a 'cause' property.    effect(globalErrorInEffectFailure)"
+  }
+]
