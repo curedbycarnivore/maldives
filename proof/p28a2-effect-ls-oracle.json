@@ -86,5 +86,21 @@
     "endLine": 57,
     "endCol": 111,
     "message": "Global 'Error' loses type safety as untagged errors merge together in the Effect failure channel. Consider using a tagged error and optionally wrapping the original in a 'cause' property.    effect(globalErrorInEffectFailure)"
+  },
+  {
+    "rule": "missingLayerContext",
+    "startLine": 59,
+    "startCol": 14,
+    "endLine": 59,
+    "endCol": 33,
+    "message": "Missing 'AuditLog' in the expected Layer context.    effect(missingLayerContext)"
+  },
+  {
+    "rule": "typescript",
+    "startLine": 59,
+    "startCol": 14,
+    "endLine": 59,
+    "endCol": 33,
+    "message": "Type 'Layer<UserRepo, never, AuditLog>' is not assignable to type 'Layer<UserRepo, never, never>'.   Type 'AuditLog' is not assignable to type 'never'."
   }
 ]

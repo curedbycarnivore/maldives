@@ -15,10 +15,14 @@ describe("P28a1 Effect parity fixture-of-record", () => {
     const parsed = ts.createSourceFile(fixturePath, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
 
     expect(parsed.parseDiagnostics).toEqual([]);
-    expect(expected.expectedRules).toEqual(
-      expect.arrayContaining(["floatingEffect", "missingEffectContext", "missingEffectError"]),
-    );
-    expect(new Set(expected.expectedRules).size).toBeGreaterThanOrEqual(3);
+    expect(expected.expectedRules).toEqual([
+      "floatingEffect",
+      "missingEffectContext",
+      "missingEffectError",
+      "missingLayerContext",
+      "missingStarInYieldEffectGen",
+    ]);
+    expect(new Set(expected.expectedRules).size).toBe(5);
     expect(expected.proof).toEqual(
       expect.arrayContaining(["tsx", "decorator", "generic-class", "Effect.gen", "Layer", "Schema", "pipe"]),
     );
@@ -28,6 +32,7 @@ describe("P28a1 Effect parity fixture-of-record", () => {
     expect(source).toContain("yield Effect.succeed");
     expect(source).toContain("Effect.Effect<string, never, never>");
     expect(source).toContain("yield* AuditLog");
+    expect(source).toContain("missingLayerContext");
     expect(source).toContain("missingErrorButPromisesNever");
   });
 });

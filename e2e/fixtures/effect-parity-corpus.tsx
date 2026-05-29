@@ -55,3 +55,12 @@ export const findUserWithoutAudit: Effect.Effect<User, Error, never> = Effect.ge
 });
 
 export const missingErrorButPromisesNever: Effect.Effect<string, never, never> = Effect.fail(new Error("boom"));
+
+export const missingLayerContext: Layer.Layer<UserRepo, never, never> = Layer.effect(
+  UserRepo,
+  Effect.gen(function* () {
+    const audit = yield* AuditLog;
+    yield* audit.write("building repo");
+    return new Repository<User>([{ id: "2", name: "Grace" }]);
+  }),
+);

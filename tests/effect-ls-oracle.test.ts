@@ -55,9 +55,19 @@ describe("P28a2 Effect language-service node oracle", () => {
           endCol: 42,
           message: expect.stringContaining("Missing 'Error'"),
         }),
+        expect.objectContaining({
+          rule: "missingLayerContext",
+          startLine: 59,
+          startCol: 14,
+          endLine: 59,
+          endCol: 33,
+          message: expect.stringContaining("AuditLog"),
+        }),
       ]),
     );
-    expect(oracle.filter((diagnostic) => expected.expectedRules.includes(diagnostic.rule))).toHaveLength(5);
+    const mandatoryDiagnostics = oracle.filter((diagnostic) => expected.expectedRules.includes(diagnostic.rule));
+    expect(new Set(mandatoryDiagnostics.map((diagnostic) => diagnostic.rule))).toEqual(new Set(expected.expectedRules));
+    expect(mandatoryDiagnostics).toHaveLength(6);
   });
 
   test("writes the oracle JSON proof artifact", () => {
