@@ -1,8 +1,10 @@
 import { readFileSync } from "node:fs";
+import type { IDisposable, editor } from "monaco-editor";
 import { describe, expect, test } from "vitest";
 import {
   formatJsonSchemaComment,
   generateJsonSchemaFromEffectSchemaSource,
+  registerSchemaJsonSchemaAction,
   SCHEMA_JSON_SCHEMA_ACTION_ID,
   selectedJsonSchemaTarget,
 } from "../src/schema-jsonschema";
@@ -53,8 +55,26 @@ describe("Schema → JSONSchema static codegen", () => {
     expect(selectedJsonSchemaTarget("unknown")).toBe("draft-07");
   });
 
-  test("exports the stable Monaco action id", () => {
-    expect(SCHEMA_JSON_SCHEMA_ACTION_ID).toBe("maldives.schemaToJsonSchema");
+  test("registers the stable Monaco action id on the editor", () => {
+    let registeredAction: editor.IActionDescriptor | undefined;
+    const disposable: IDisposable = { dispose() {} };
+    const editorInstance = {
+      addAction(action: editor.IActionDescriptor) {
+        registeredAction = action;
+        return disposable;
+      },
+    } as Pick<editor.IStandaloneCodeEditor, "addAction"> as editor.IStandaloneCodeEditor;
+
+    const returnedDisposable = registerSchemaJsonSchemaAction(editorInstance);
+
+    expect(returnedDisposable).toBe(disposable);
+    expect(registeredAction).toMatchObject({
+      id: SCHEMA_JSON_SCHEMA_ACTION_ID,
+      label: "Schema → JSONSchema",
+      contextMenuGroupId: "navigation",
+    });
+    expect(registeredAction?.id).toBe("maldives.schemaToJsonSchema");
+    expect(typeof registeredAction?.run).toBe("function");
   });
 
   test("dedicated codegen worker disables network primitives", () => {
