@@ -1,0 +1,16 @@
+{
+  "expectedRules": [
+    "floatingEffect",
+    "missingEffectContext",
+    "missingEffectError"
+  ],
+  "proof": [
+    "tsx",
+    "decorator",
+    "generic-class",
+    "Effect.gen",
+    "Layer",
+    "Schema",
+    "pipe"
+  ]
+}
