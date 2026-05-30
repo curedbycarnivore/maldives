@@ -2,6 +2,8 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import { createEffectLanguageServiceSnapshot } from "../src/effect-language-service";
+export { positionAt } from "../src/text-position";
+import { positionAt } from "../src/text-position";
 
 export interface EffectLsOracleDiagnostic {
   rule: string;
@@ -42,22 +44,6 @@ export function writeEffectLsOracle(
 ): void {
   mkdirSync(dirname(outFile), { recursive: true });
   writeFileSync(outFile, `${JSON.stringify(buildEffectLsOracle(fixturePath), null, 2)}\n`);
-}
-
-function positionAt(source: string, offset: number): { line: number; col: number } {
-  let line = 1;
-  let col = 1;
-
-  for (let i = 0; i < offset; i += 1) {
-    if (source[i] === "\n") {
-      line += 1;
-      col = 1;
-    } else {
-      col += 1;
-    }
-  }
-
-  return { line, col };
 }
 
 function compareOracleDiagnostics(left: EffectLsOracleDiagnostic, right: EffectLsOracleDiagnostic): number {

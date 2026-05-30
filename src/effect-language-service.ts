@@ -56,6 +56,7 @@ export interface EffectLanguageServiceController {
   refreshModel(model: monaco.editor.ITextModel): Promise<void>;
   getDiagnostics(model: monaco.editor.ITextModel): EffectLanguageServiceDiagnostic[];
   getRenderedDiagnostics(model: monaco.editor.ITextModel): EffectLanguageServiceRenderedDiagnostic[];
+  getInMemoryRenderedDiagnostics(model: monaco.editor.ITextModel): EffectLanguageServiceRenderedDiagnostic[];
   getRefactors(model: monaco.editor.ITextModel, range: { pos: number; end: number }): EffectLanguageServiceRefactor[];
   dispose(): void;
 }
@@ -190,6 +191,11 @@ export function installEffectLanguageService(
           endCol: marker.endColumn,
           message: marker.message,
         }))
+        .sort(compareRenderedDiagnostics);
+    },
+    getInMemoryRenderedDiagnostics(model) {
+      return (diagnosticsByUri.get(model.uri.toString()) ?? [])
+        .map((diagnostic) => toRenderedDiagnostic(model, diagnostic))
         .sort(compareRenderedDiagnostics);
     },
     getRefactors(model, range) {
@@ -470,18 +476,34 @@ function toMarker(
   model: monaco.editor.ITextModel,
   diagnostic: EffectLanguageServiceDiagnostic,
 ): monaco.editor.IMarkerData {
-  const start = model.getPositionAt(diagnostic.start);
-  const end = model.getPositionAt(diagnostic.start + diagnostic.length);
+  const rendered = toRenderedDiagnostic(model, diagnostic);
 
   return {
     severity: diagnostic.category === "Error" ? monacoApi.MarkerSeverity.Error : monacoApi.MarkerSeverity.Warning,
     message: diagnostic.message,
-    startLineNumber: start.lineNumber,
-    startColumn: start.column,
-    endLineNumber: end.lineNumber,
-    endColumn: end.column,
+    startLineNumber: rendered.startLine,
+    startColumn: rendered.startCol,
+    endLineNumber: rendered.endLine,
+    endColumn: rendered.endCol,
     code: String(diagnostic.code),
     source: "@effect/language-service",
+  };
+}
+
+function toRenderedDiagnostic(
+  model: monaco.editor.ITextModel,
+  diagnostic: EffectLanguageServiceDiagnostic,
+): EffectLanguageServiceRenderedDiagnostic {
+  const start = model.getPositionAt(diagnostic.start);
+  const end = model.getPositionAt(diagnostic.start + diagnostic.length);
+
+  return {
+    rule: diagnostic.rule,
+    startLine: start.lineNumber,
+    startCol: start.column,
+    endLine: end.lineNumber,
+    endCol: end.column,
+    message: diagnostic.message,
   };
 }
 

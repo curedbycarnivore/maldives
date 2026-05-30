@@ -2,7 +2,7 @@ import { mkdtempSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, test } from "vitest";
-import { buildEffectLsOracle, writeEffectLsOracle } from "../scripts/effect-ls-oracle";
+import { buildEffectLsOracle, positionAt, writeEffectLsOracle } from "../scripts/effect-ls-oracle";
 
 const fixturePath = "e2e/fixtures/effect-parity-corpus.tsx";
 const expectedPath = "e2e/fixtures/effect-parity-corpus.expected.json";
@@ -68,6 +68,22 @@ describe("P28a2 Effect language-service node oracle", () => {
     const mandatoryDiagnostics = oracle.filter((diagnostic) => expected.expectedRules.includes(diagnostic.rule));
     expect(new Set(mandatoryDiagnostics.map((diagnostic) => diagnostic.rule))).toEqual(new Set(expected.expectedRules));
     expect(mandatoryDiagnostics).toHaveLength(6);
+  });
+
+  test("maps offsets the same way Monaco does for CRLF and unicode source", () => {
+    const source = "const alpha = 1;\r\nconst emoji = \"😀\";\r\nconst tail = emoji;";
+
+    expect([0, 16, 17, 18, 33, 34, 35, 39, source.indexOf("tail")].map((offset) => positionAt(source, offset))).toEqual([
+      { line: 1, col: 1 },
+      { line: 1, col: 17 },
+      { line: 1, col: 18 },
+      { line: 2, col: 1 },
+      { line: 2, col: 16 },
+      { line: 2, col: 17 },
+      { line: 2, col: 18 },
+      { line: 3, col: 1 },
+      { line: 3, col: 7 },
+    ]);
   });
 
   test("writes the oracle JSON proof artifact", () => {
