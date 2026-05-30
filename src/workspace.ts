@@ -1,15 +1,19 @@
 import type { editor } from "monaco-editor";
 
+export type WorkspaceMode = "read" | "write";
+
 export interface MaldivesWorkspaceEditor {
   setModel(model: editor.ITextModel | null): void;
   saveViewState?(): unknown;
   restoreViewState?(state: unknown): void;
+  updateOptions?(options: { readOnly: boolean }): void;
   focus?(): void;
 }
 
 export interface MaldivesWorkspaceOptions {
   createModel(uri: string, content: string): editor.ITextModel;
   editor?: MaldivesWorkspaceEditor;
+  initialMode?: WorkspaceMode;
 }
 
 interface WorkspaceEntry {
@@ -24,14 +28,31 @@ export class MaldivesWorkspace {
   readonly #createModel: MaldivesWorkspaceOptions["createModel"];
   readonly #editor?: MaldivesWorkspaceEditor;
   #activeUri: string | undefined;
+  #mode: WorkspaceMode;
 
   constructor(options: MaldivesWorkspaceOptions) {
     this.#createModel = options.createModel;
     this.#editor = options.editor;
+    this.#mode = options.initialMode ?? "read";
+    this.#applyReadOnlyOption();
   }
 
   get activeUri(): string | undefined {
     return this.#activeUri;
+  }
+
+  get mode(): WorkspaceMode {
+    return this.#mode;
+  }
+
+  setMode(mode: WorkspaceMode): WorkspaceMode {
+    this.#mode = mode;
+    this.#applyReadOnlyOption();
+    return this.#mode;
+  }
+
+  toggleMode(): WorkspaceMode {
+    return this.setMode(this.#mode === "read" ? "write" : "read");
   }
 
   open(uri: string, content: string): editor.ITextModel {
@@ -128,6 +149,10 @@ export class MaldivesWorkspace {
 
   uris(): string[] {
     return [...this.#models.keys()];
+  }
+
+  #applyReadOnlyOption(): void {
+    this.#editor?.updateOptions?.({ readOnly: this.#mode === "read" });
   }
 
   #saveActiveViewState(): void {

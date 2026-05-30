@@ -31,6 +31,12 @@ export interface MaldivesAction {
 
 export interface RegisteredMaldivesAction extends MaldivesAction {
   commandId: string;
+  run(): void;
+}
+
+export interface RegisterKeybindingsOptions {
+  readonly isWriteMode?: () => boolean;
+  readonly writeModeContextKey?: string;
 }
 
 type Monaco = typeof import("monaco-editor");
@@ -203,14 +209,20 @@ export function registerKeybindings(
   editor: editor.IStandaloneCodeEditor,
   monaco: Monaco,
   config: KeymapConfig,
+  options: RegisterKeybindingsOptions = {},
 ): RegisteredMaldivesAction[] {
   const addedSelections: EditorSelection[] = [];
   const actions = buildKeybindings(config, monaco);
 
-  registerCustomEditorActions(editor, actions);
+  registerCustomEditorActions(editor, actions, options);
 
   return actions.flatMap((action) => {
-    const commandId = editor.addCommand(action.monacoBinding, () => {
+    const mutatesText = isCustomTextMutationAction(action.wsActionId);
+    const run = () => {
+      if (mutatesText && options.isWriteMode?.() === false) {
+        return;
+      }
+
       if (action.wsActionId === "SelectNextOccurrence") {
         trackAddedSelection(editor, addedSelections, () => action.handler(editor));
         return;
@@ -222,9 +234,10 @@ export function registerKeybindings(
       }
 
       action.handler(editor);
-    });
+    };
+    const commandId = editor.addCommand(action.monacoBinding, run, mutatesText ? options.writeModeContextKey : undefined);
 
-    return commandId ? [{ ...action, commandId }] : [];
+    return commandId ? [{ ...action, commandId, run }] : [];
   });
 }
 
@@ -236,7 +249,7 @@ const customEditorActions: Partial<Record<string, { id: string; label: string }>
   EditorResetFontSize: { id: "maldives.resetFontSize", label: "Reset Font Size" },
 };
 
-function registerCustomEditorActions(editor: editor.IStandaloneCodeEditor, actions: MaldivesAction[]): void {
+function registerCustomEditorActions(editor: editor.IStandaloneCodeEditor, actions: MaldivesAction[], options: RegisterKeybindingsOptions): void {
   if (typeof editor.addAction !== "function") {
     return;
   }
@@ -261,10 +274,36 @@ function registerCustomEditorActions(editor: editor.IStandaloneCodeEditor, actio
       id: metadata.id,
       label: metadata.label,
       keybindings: registeredActions.map((action) => action.monacoBinding),
-      run: handler,
+      precondition: registeredActions.some((action) => isCustomTextMutationAction(action.wsActionId)) ? options.writeModeContextKey : undefined,
+      run: (editor) => {
+        if (registeredActions.some((action) => isCustomTextMutationAction(action.wsActionId)) && options.isWriteMode?.() === false) {
+          return;
+        }
+
+        handler(editor as editor.IStandaloneCodeEditor);
+      },
     });
   }
 }
+
+export function isCustomTextMutationAction(wsActionId: string): boolean {
+  return customTextMutationActions.has(wsActionId);
+}
+
+const customTextMutationActions = new Set([
+  "EditorChooseLookupItemCompleteStatement",
+  "EditorCompleteStatement",
+  "MoveElementLeft",
+  "MoveElementRight",
+  "MoveStatementDown",
+  "MoveStatementUp",
+  "EditorDeleteToWordStartInDifferentHumpsMode",
+  "EditorDeleteToWordEndInDifferentHumpsMode",
+  "EditorToggleCase",
+  "toggleCamelDashCase",
+  "SurroundWith",
+  "EditorSplitLine",
+]);
 
 const shortcutlessActionIds = new Set([
   "Replace",

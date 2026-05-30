@@ -14,7 +14,8 @@ import { registerEffectSnippets } from "./effect-snippets";
 import { FileSystemAccessAdapter, installOpenFileButton } from "./fs";
 import { registerModelTab, registerRecentLocationTracking } from "./file-switcher";
 import { cleanOnBlurFromModel } from "./hooks/trailing-whitespace";
-import { registerKeybindings, type RegisteredMaldivesAction } from "./keybindings";
+import { isCustomTextMutationAction, registerKeybindings, type RegisteredMaldivesAction } from "./keybindings";
+import { installReadWriteToggle, WRITE_MODE_CONTEXT_KEY, saveActiveWorkspaceFile } from "./read-write-mode";
 import { parseEditorOptions } from "./parsers/editor-options-parser";
 import { parseIcls } from "./parsers/icls-parser";
 import { parseKeymap } from "./parsers/keymap-parser";
@@ -37,6 +38,7 @@ declare global {
     __maldivesEffectLanguageService: EffectLanguageServiceController;
     __maldivesWorkspace: MaldivesWorkspace;
     __maldivesFileSystemAdapter: FileSystemAccessAdapter;
+    __maldivesSaveActiveFile: () => Promise<boolean>;
     __maldivesReady: Promise<void>;
   }
 }
@@ -115,11 +117,6 @@ const editor = monaco.editor.create(app, {
   trimAutoWhitespace: editorOptions.trimAutoWhitespace,
   ...maldivesProFeatureOptions,
 });
-const registeredKeybindings = registerKeybindings(editor, monaco, keymapConfig);
-registerRecentLocationTracking(editor);
-registerAstStructuralSearchAction(editor);
-registerSchemaJsonSchemaAction(editor);
-const effectLanguageService = installEffectLanguageService(monaco, editor, { effectDtsFiles, typeScriptLibFiles });
 const workspace = new MaldivesWorkspace({
   createModel(uri, content) {
     const language = uri.endsWith(".tsx") || uri.endsWith(".ts") ? "typescript" : undefined;
@@ -130,6 +127,15 @@ const workspace = new MaldivesWorkspace({
   editor,
 });
 const fileSystemAdapter = new FileSystemAccessAdapter();
+installReadWriteToggle(document.body, { monaco, editor, workspace, adapter: fileSystemAdapter });
+const registeredKeybindings = registerKeybindings(editor, monaco, keymapConfig, {
+  isWriteMode: () => workspace.mode === "write",
+  writeModeContextKey: WRITE_MODE_CONTEXT_KEY,
+});
+registerRecentLocationTracking(editor);
+registerAstStructuralSearchAction(editor);
+registerSchemaJsonSchemaAction(editor);
+const effectLanguageService = installEffectLanguageService(monaco, editor, { effectDtsFiles, typeScriptLibFiles });
 installOpenFileButton(document.body, fileSystemAdapter, workspace);
 installEffectDevToolsButton(document.body, {
   enabled: __MALDIVES_DEVTOOLS_ENABLED__,
@@ -139,6 +145,7 @@ window.__maldivesEditor = editor;
 window.__maldivesEffectLanguageService = effectLanguageService;
 window.__maldivesWorkspace = workspace;
 window.__maldivesFileSystemAdapter = fileSystemAdapter;
+window.__maldivesSaveActiveFile = () => saveActiveWorkspaceFile({ adapter: fileSystemAdapter, workspace, editor, userGesture: true });
 window.__maldivesVscodeTsWorkerReady = vscodeTsWorkerReady;
 window.__maldivesReady = (async () => {
   await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
@@ -156,7 +163,11 @@ window.__maldivesExecuteKeybinding = (wsActionId) => {
     return false;
   }
 
-  editor.trigger("maldives", registered.commandId, null);
+  if (isCustomTextMutationAction(registered.wsActionId) || registered.wsActionId === "SelectNextOccurrence" || registered.wsActionId === "UnselectPreviousOccurrence") {
+    registered.run();
+  } else {
+    editor.trigger("maldives", registered.commandId, null);
+  }
   return true;
 };
 
@@ -166,6 +177,10 @@ if (
   editorOptions.insertFinalNewline
 ) {
   editor.onDidBlurEditorText(() => {
+    if (workspace.mode !== "write") {
+      return;
+    }
+
     const model = editor.getModel();
 
     if (model) {

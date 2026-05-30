@@ -89,7 +89,7 @@ export function completeStatementWhenReady(
   astReady?: Promise<void>,
   options?: { ignoreWidgetFocus?: boolean },
 ): void {
-  const hasBlockingWidgetFocus = () => !options?.ignoreWidgetFocus && editor.hasWidgetFocus();
+  const hasBlockingWidgetFocus = () => !options?.ignoreWidgetFocus && editor.hasWidgetFocus() && !editor.hasTextFocus();
 
   if (hasBlockingWidgetFocus()) {
     return;
