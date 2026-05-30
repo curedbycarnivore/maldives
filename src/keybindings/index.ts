@@ -22,6 +22,7 @@ import {
   switchToPreviousModelTab,
 } from "../file-switcher";
 import type { KeyAction, KeymapConfig } from "../parsers/keymap-parser";
+import type { ToolWindowController } from "../tool-windows";
 
 export interface MaldivesAction {
   wsActionId: string;
@@ -37,6 +38,7 @@ export interface RegisteredMaldivesAction extends MaldivesAction {
 export interface RegisterKeybindingsOptions {
   readonly isWriteMode?: () => boolean;
   readonly writeModeContextKey?: string;
+  readonly toolWindows?: ToolWindowController;
 }
 
 type Monaco = typeof import("monaco-editor");
@@ -86,8 +88,14 @@ type MonacoTarget =
         | "switchPreviousModelTab"
         | "switchLastModelTab"
         | "moveTabRight"
-        | "reopenClosedTab";
+        | "reopenClosedTab"
+        | "hideActiveToolWindow"
+        | "hideAllToolWindows"
+        | "nextToolWindow"
+        | "showToolWindowContent"
+        | "toggleToolWindowContentMode";
     }
+  | { type: "custom"; id: "activateToolWindow"; actionId: string }
   | { type: "custom"; id: "switchModelTab"; tabIndex: number };
 
 function tabActionTargets(prefix: string, count: number): Record<string, MonacoTarget> {
@@ -97,6 +105,23 @@ function tabActionTargets(prefix: string, count: number): Record<string, MonacoT
 }
 
 const actionTargets: Record<string, MonacoTarget> = {
+  ActivateDatabaseToolWindow: { type: "custom", id: "activateToolWindow", actionId: "ActivateDatabaseToolWindow" },
+  ActivateDebugToolWindow: { type: "custom", id: "activateToolWindow", actionId: "ActivateDebugToolWindow" },
+  ActivateElectroJunToolWindowToolWindow: { type: "custom", id: "activateToolWindow", actionId: "ActivateElectroJunToolWindowToolWindow" },
+  ActivateFavoritesToolWindow: { type: "custom", id: "activateToolWindow", actionId: "ActivateFavoritesToolWindow" },
+  ActivateFindToolWindow: { type: "custom", id: "activateToolWindow", actionId: "ActivateFindToolWindow" },
+  ActivateMessagesToolWindow: { type: "custom", id: "activateToolWindow", actionId: "ActivateMessagesToolWindow" },
+  ActivateRunToolWindow: { type: "custom", id: "activateToolWindow", actionId: "ActivateRunToolWindow" },
+  ActivateServicesToolWindow: { type: "custom", id: "activateToolWindow", actionId: "ActivateServicesToolWindow" },
+  ActivateTODOToolWindow: { type: "custom", id: "activateToolWindow", actionId: "ActivateTODOToolWindow" },
+  ActivateTerminalToolWindow: { type: "custom", id: "activateToolWindow", actionId: "ActivateTerminalToolWindow" },
+  ActivateVersionControlToolWindow: { type: "custom", id: "activateToolWindow", actionId: "ActivateVersionControlToolWindow" },
+  ActivateYouTrackToolWindow: { type: "custom", id: "activateToolWindow", actionId: "ActivateYouTrackToolWindow" },
+  HideActiveWindow: { type: "custom", id: "hideActiveToolWindow" },
+  HideAllWindows: { type: "custom", id: "hideAllToolWindows" },
+  NextWindow: { type: "custom", id: "nextToolWindow" },
+  ShowContent: { type: "custom", id: "showToolWindowContent" },
+  ToggleContentUiTypeMode: { type: "custom", id: "toggleToolWindowContentMode" },
   ...tabActionTargets("GoToTab", 8),
   ...tabActionTargets("Go To Tab #", 10),
   ...tabActionTargets("Switch To Tab #", 10),
@@ -201,8 +226,8 @@ const actionTargets: Record<string, MonacoTarget> = {
   EditorPreviousWordInDifferentHumpsModeWithSelection: { type: "command", id: "cursorWordPartLeftSelect" },
 };
 
-export function buildKeybindings(config: KeymapConfig, monaco: Monaco): MaldivesAction[] {
-  return config.actions.flatMap((action) => keybindingsForAction(action, monaco));
+export function buildKeybindings(config: KeymapConfig, monaco: Monaco, options: RegisterKeybindingsOptions = {}): MaldivesAction[] {
+  return config.actions.flatMap((action) => keybindingsForAction(action, monaco, options));
 }
 
 export function registerKeybindings(
@@ -212,7 +237,7 @@ export function registerKeybindings(
   options: RegisterKeybindingsOptions = {},
 ): RegisteredMaldivesAction[] {
   const addedSelections: EditorSelection[] = [];
-  const actions = buildKeybindings(config, monaco);
+  const actions = buildKeybindings(config, monaco, options);
 
   registerCustomEditorActions(editor, actions, options);
 
@@ -314,12 +339,17 @@ const shortcutlessActionIds = new Set([
   "EditorPageDown",
   "EditorScrollToCenter",
   "EditorSplitLine",
+  "ActivateFavoritesToolWindow",
+  "ActivateFindToolWindow",
+  "ActivateMessagesToolWindow",
+  "ActivateServicesToolWindow",
+  "ActivateTODOToolWindow",
   "GotoSuperMethod",
   "GotoTest",
   "MethodHierarchy",
 ]);
 
-function keybindingsForAction(action: KeyAction, monaco: Monaco): MaldivesAction[] {
+function keybindingsForAction(action: KeyAction, monaco: Monaco, options: RegisterKeybindingsOptions): MaldivesAction[] {
   const target = actionTargets[action.id];
 
   if (!target) {
@@ -329,7 +359,7 @@ function keybindingsForAction(action: KeyAction, monaco: Monaco): MaldivesAction
   const shortcuts = shortcutsForAction(action);
 
   if (shortcuts.length === 0 && shortcutlessActionIds.has(action.id)) {
-    return [{ wsActionId: action.id, monacoBinding: 0, handler: handlerForTarget(target) }];
+    return [{ wsActionId: action.id, monacoBinding: 0, handler: handlerForTarget(target, options) }];
   }
 
   return shortcuts.flatMap((shortcut) => {
@@ -337,7 +367,7 @@ function keybindingsForAction(action: KeyAction, monaco: Monaco): MaldivesAction
 
     return monacoBinding === undefined
       ? []
-      : [{ wsActionId: action.id, monacoBinding, handler: handlerForTarget(target) }];
+      : [{ wsActionId: action.id, monacoBinding, handler: handlerForTarget(target, options) }];
   });
 }
 
@@ -439,7 +469,7 @@ function keyCodeForToken(token: string, monaco: Monaco): number | undefined {
   return keyCodes[token];
 }
 
-function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCodeEditor) => void {
+function handlerForTarget(target: MonacoTarget, options: RegisterKeybindingsOptions): (editor: editor.IStandaloneCodeEditor) => void {
   if (target.type === "action") {
     return (editor) => {
       if (
@@ -457,6 +487,48 @@ function handlerForTarget(target: MonacoTarget): (editor: editor.IStandaloneCode
   if (target.type === "command") {
     return (editor) => {
       editor.trigger("maldives", target.id, null);
+    };
+  }
+
+  if (target.id === "activateToolWindow") {
+    return (editor) => {
+      options.toolWindows?.activateAction(target.actionId);
+      editor.focus();
+    };
+  }
+
+  if (target.id === "hideActiveToolWindow") {
+    return (editor) => {
+      options.toolWindows?.hideActiveWindow();
+      editor.focus();
+    };
+  }
+
+  if (target.id === "hideAllToolWindows") {
+    return (editor) => {
+      options.toolWindows?.hideAllWindows();
+      editor.focus();
+    };
+  }
+
+  if (target.id === "nextToolWindow") {
+    return (editor) => {
+      options.toolWindows?.nextWindow();
+      editor.focus();
+    };
+  }
+
+  if (target.id === "showToolWindowContent") {
+    return (editor) => {
+      options.toolWindows?.showContent();
+      editor.focus();
+    };
+  }
+
+  if (target.id === "toggleToolWindowContentMode") {
+    return (editor) => {
+      options.toolWindows?.toggleContentUiTypeMode();
+      editor.focus();
     };
   }
 

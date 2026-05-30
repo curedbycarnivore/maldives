@@ -14,7 +14,9 @@ describe("scripts/keymap-coverage", () => {
     expect(coverage.wired).toContain("EditorBackSpace");
     expect(coverage.wired).toContain("SelectNextOccurrence");
     expect(coverage.wired).toContain("EditorPageDown");
-    expect(coverage.deferred).toContain("ActivateTerminalToolWindow");
+    expect(coverage.wired).toContain("ActivateTerminalToolWindow");
+    expect(coverage.wired).toContain("ActivateVersionControlToolWindow");
+    expect(coverage.deferred).not.toContain("ActivateTerminalToolWindow");
     expect(coverage.dropped).toContain("AceJumpAction");
     expect(coverage.dropped).toContain("DBNavigator.Actions.Calendar.CalendarNextMonth");
     expect(coverage.dropReasons["AceJumpAction"]).toContain("no maldives equivalent");
@@ -45,6 +47,6 @@ describe("scripts/keymap-coverage", () => {
     const report = JSON.parse(readFileSync(outFile, "utf-8")) as ReturnType<typeof auditKeymapCoverage>;
     expect(report.wired.length).toBeGreaterThan(40);
     expect(report.unwired).toEqual([]);
-    expect(report.deferred).toContain("ActivateTerminalToolWindow");
+    expect(report.wired).toContain("ActivateTerminalToolWindow");
   });
 });
