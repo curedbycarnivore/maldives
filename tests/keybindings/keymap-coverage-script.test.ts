@@ -13,9 +13,28 @@ describe("scripts/keymap-coverage", () => {
 
     expect(coverage.wired).toContain("EditorBackSpace");
     expect(coverage.wired).toContain("SelectNextOccurrence");
+    expect(coverage.wired).toContain("EditorPageDown");
     expect(coverage.deferred).toContain("ActivateTerminalToolWindow");
-    expect(coverage.wired).toContain("AceJumpAction");
+    expect(coverage.dropped).toContain("AceJumpAction");
+    expect(coverage.dropped).toContain("DBNavigator.Actions.Calendar.CalendarNextMonth");
+    expect(coverage.dropReasons["AceJumpAction"]).toContain("no maldives equivalent");
+    expect(coverage.dropReasons["copilot.applyInlaysNextWord"]).toContain("third-party plugin");
     expect(coverage.unwired).toEqual([]);
+  });
+
+  test("accounts for every SSOT action exactly once across honest buckets", () => {
+    const coverage = auditKeymapCoverage(keymap);
+    const ssotActionIds = keymap.actions.map((action) => action.id);
+    const buckets = [coverage.wired, coverage.deferred, coverage.dropped, coverage.unwired];
+    const accounted = buckets.flat();
+
+    expect(new Set(ssotActionIds).size).toBe(230);
+    expect(accounted).toHaveLength(230);
+    expect(new Set(accounted).size).toBe(230);
+    expect([...accounted].sort()).toEqual([...ssotActionIds].sort());
+    expect(coverage.unwired).toEqual([]);
+    expect(coverage.totals).toMatchObject({ ssot: 230, accounted: 230, unaccounted: 0 });
+    expect(coverage.totals.wired + coverage.totals.deferred + coverage.totals.dropped).toBe(230);
   });
 
   test("writes proof/keymap-coverage.json shaped for watchdog telemetry", () => {

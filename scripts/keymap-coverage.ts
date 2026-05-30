@@ -8,6 +8,18 @@ export interface KeymapCoverageReport {
   wired: string[];
   unwired: string[];
   deferred: string[];
+  dropped: string[];
+  deferredReasons: Record<string, string>;
+  dropReasons: Record<string, string>;
+  totals: {
+    ssot: number;
+    wired: number;
+    deferred: number;
+    dropped: number;
+    unwired: number;
+    accounted: number;
+    unaccounted: number;
+  };
 }
 
 const deferredActionIds = new Set([
@@ -15,11 +27,9 @@ const deferredActionIds = new Set([
   "ActivateDebugToolWindow",
   "ActivateElectroJunToolWindowToolWindow",
   "ActivateRunToolWindow",
-  "ActivateStickyNotesToolWindow",
   "ActivateTerminalToolWindow",
   "ActivateVersionControlToolWindow",
   "ActivateYouTrackToolWindow",
-  "Activategithub.copilotToolWindowToolWindow",
   "Annotate",
   "CollapseExpandableComponent",
   "CompareClipboardWithSelection",
@@ -52,17 +62,62 @@ const deferredActionIds = new Set([
   "Stop",
   "ToggleContentUiTypeMode",
   "TsLintFileFixAction",
+  "ActivateFavoritesToolWindow",
+  "ActivateFindToolWindow",
+  "ActivateMessagesToolWindow",
+  "ActivateServicesToolWindow",
+  "ActivateTODOToolWindow",
+  "AddToFavoritesPopup",
+  "ChangesView.AddUnversioned",
+  "ChangesView.ShelveSilently",
+  "CheckinProject",
+  "ChooseDebugConfiguration",
+  "CodeInspection.OnEditor",
+  "DebugClass",
+  "Diff.ShowSettingsPopup",
+  "ExternalSystem.ProjectRefreshAction",
+  "FileChooser.TogglePathShowing",
+  "Generate",
+  "HideActiveWindow",
+  "Images.ShowThumbnails",
+  "ImplementMethods",
+  "InsertLiveTemplate",
+  "IntroduceConstant",
+  "IntroduceField",
+  "IntroduceVariable",
+  "MaintenanceAction",
+  "OverrideMethods",
+  "RecentChangedFiles",
+  "RecentChanges",
+  "Refactorings.QuickListPopupAction",
+  "Refresh",
+  "RunClass",
+  "SavaAs",
+  "ShowReformatFileDialog",
+  "Unwrap",
+  "UsageView.Include",
+  "Vcs.UpdateProject",
+  "tasks.close",
+  "tasks.goto",
+  "tasks.open.in.browser",
+  "tasks.switch",
 ]);
 
 const droppedActionIds = new Set([
   "AceAction",
   "AceJumpAction",
+  "AceLineAction",
   "AceWordAction",
+  "ActivateStickyNotesToolWindow",
+  "Activategithub.copilotToolWindowToolWindow",
+  "DBNavigator.Actions.Calendar.CalendarNextMonth",
+  "DBNavigator.Actions.Calendar.CalendarPreviousMonth",
   "Scala.ShowImplicits",
   "com.anthropic.code.plugin.actions.OpenClaudeInTerminalAction",
   "com.buckstabue.stickynotes.idea.createeditstickynote.CreateStickyNoteAction",
   "com.buckstabue.stickynotes.idea.stickynotelist.ShowStickyNotesAction",
   "com.karateca.jstoolbox.torelated.GoToViewAction",
+  "copilot.applyInlaysNextWord",
   "copilot.cycleNextInlays",
   "copilot.cyclePrevInlays",
   "emacsIDEAs.AceJump",
@@ -74,7 +129,50 @@ const droppedActionIds = new Set([
   "osmedile.intellij.stringmanip.PopupChoiceAction",
   "osmedile.intellij.stringmanip.SwapCharactersAction",
   "osmedile.intellij.stringmanip.WordsCapitalizeAction",
+  "org.intellij.plugins.markdown.ui.actions.styling.ToggleBoldAction",
+  "org.intellij.plugins.markdown.ui.actions.styling.ToggleItalicAction",
 ]);
+
+function deferredReasonFor(actionId: string): string {
+  if (actionId.startsWith("Activate") || actionId.includes("ToolWindow") || actionId.includes("Window")) {
+    return "deferred — IDE-shell tool-window subsystem not built yet";
+  }
+  if (actionId.startsWith("Git.") || actionId.startsWith("ChangesView.") || actionId === "CheckinProject" || actionId.startsWith("Vcs.") || actionId.includes("Diff") || actionId.includes("Change") || actionId === "Annotate") {
+    return "deferred — VCS/diff subsystem not built yet";
+  }
+  if (actionId.startsWith("Debug") || actionId.startsWith("Run") || actionId === "ChooseDebugConfiguration" || actionId === "Resume" || actionId === "Stop" || actionId === "Rerun" || actionId === "RerunTests") {
+    return "deferred — run/debug subsystem not built yet";
+  }
+  if (actionId.startsWith("tasks.")) {
+    return "deferred — IDE task-runner subsystem not built yet";
+  }
+  if (actionId.includes("Favorites")) {
+    return "deferred — favorites subsystem not built yet";
+  }
+  if (actionId === "ActivateTerminalToolWindow") {
+    return "deferred — integrated terminal subsystem not built yet";
+  }
+  return "deferred — WebStorm IDE-shell action needs a later maldives subsystem";
+}
+
+function dropReasonFor(actionId: string): string {
+  if (actionId.includes("Ace")) {
+    return "dropped: no maldives equivalent — third-party AceJump character-overlay plugin";
+  }
+  if (actionId.includes("copilot")) {
+    return "dropped: no maldives equivalent — third-party plugin (Copilot)";
+  }
+  if (actionId.includes("DBNavigator")) {
+    return "dropped: no maldives equivalent — third-party plugin (DBNavigator)";
+  }
+  if (actionId.includes("stickynote") || actionId.includes("StickyNotes")) {
+    return "dropped: no maldives equivalent — third-party plugin (sticky notes)";
+  }
+  if (actionId.startsWith("com.") || actionId.startsWith("org.intellij.plugins.") || actionId.startsWith("osmedile.") || actionId === "Scala.ShowImplicits") {
+    return "dropped: no maldives equivalent — third-party plugin";
+  }
+  return "dropped: no maldives equivalent — out-of-scope WebStorm plugin action";
+}
 
 export function registeredWebStormActionIds(sourceText = readFileSync("src/keybindings/index.ts", "utf-8")): string[] {
   const actionTargetsBlock = sourceText.match(/const actionTargets: Record<string, MonacoTarget> = \{([\s\S]*?)\n\};/)?.[1] ?? "";
@@ -95,23 +193,49 @@ export function registeredWebStormActionIds(sourceText = readFileSync("src/keybi
 
 export function auditKeymapCoverage(keymap: KeymapConfig): KeymapCoverageReport {
   const mapped = new Set(registeredWebStormActionIds());
-  const coverageActions = keymap.actions.filter((action) => action.shortcuts.length > 0);
-  const wired = coverageActions
-    .filter((action) => mapped.has(action.id))
-    .map((action) => action.id)
-    .sort();
-  const deferred = coverageActions
-    .filter((action) => !mapped.has(action.id))
-    .filter((action) => deferredActionIds.has(action.id) || droppedActionIds.has(action.id))
-    .map((action) => action.id)
-    .sort();
-  const unwired = coverageActions
-    .filter((action) => !mapped.has(action.id))
-    .filter((action) => !deferredActionIds.has(action.id) && !droppedActionIds.has(action.id))
-    .map((action) => action.id)
-    .sort();
+  const wired: string[] = [];
+  const deferred: string[] = [];
+  const dropped: string[] = [];
+  const unwired: string[] = [];
 
-  return { wired, unwired, deferred };
+  for (const action of keymap.actions) {
+    if (droppedActionIds.has(action.id)) {
+      dropped.push(action.id);
+    } else if (mapped.has(action.id)) {
+      wired.push(action.id);
+    } else if (deferredActionIds.has(action.id)) {
+      deferred.push(action.id);
+    } else {
+      unwired.push(action.id);
+    }
+  }
+
+  wired.sort();
+  deferred.sort();
+  dropped.sort();
+  unwired.sort();
+
+  const deferredReasons = Object.fromEntries(deferred.map((actionId) => [actionId, deferredReasonFor(actionId)]));
+  const dropReasons = Object.fromEntries(dropped.map((actionId) => [actionId, dropReasonFor(actionId)]));
+  const accounted = wired.length + deferred.length + dropped.length;
+
+  return {
+    wired,
+    unwired,
+    deferred,
+    dropped,
+    deferredReasons,
+    dropReasons,
+    totals: {
+      ssot: keymap.actions.length,
+      wired: wired.length,
+      deferred: deferred.length,
+      dropped: dropped.length,
+      unwired: unwired.length,
+      accounted,
+      unaccounted: unwired.length,
+    },
+  };
 }
 
 export function writeKeymapCoverageReport(keymap: KeymapConfig, outFile = "proof/keymap-coverage.json"): KeymapCoverageReport {
@@ -133,18 +257,26 @@ export function writeUnwiredActionSpecs(
     "# Keymap Unwired Action Specs",
     "",
     "Source: `ssot/keymaps/leet hax.xml` vs `src/keybindings/index.ts`.",
-    `Coverage summary: wired=${report.wired.length} deferred=${report.deferred.length} unwired=${report.unwired.length}.`,
+    `Coverage summary: wired=${report.wired.length} deferred=${report.deferred.length} dropped=${report.dropped.length} unwired=${report.unwired.length} accounted=${report.totals.accounted}/${report.totals.ssot}.`,
     "",
   ];
 
   if (report.unwired.length === 0) {
-    lines.push("No unwired shortcut-bearing SSOT actions remain.", "");
+    lines.push("No unwired SSOT actions remain.", "");
   } else {
     report.unwired.forEach((actionId, index) => {
       if (index % 25 === 0) lines.push(`## Batch ${Math.floor(index / 25) + 1}`, "");
       lines.push(
         `- [ ] ${actionId} (${shortcutByAction.get(actionId) ?? "shortcut unknown"}) — preserve the WebStorm action semantics with a verified Monaco equivalent or record a defer/drop reason before implementation.`,
       );
+    });
+    lines.push("");
+  }
+
+  if (report.dropped.length > 0) {
+    lines.push("## Dropped Actions", "");
+    report.dropped.forEach((actionId) => {
+      lines.push(`- ${actionId} — ${report.dropReasons[actionId]}`);
     });
     lines.push("");
   }
@@ -164,5 +296,7 @@ if (import.meta.main) {
     writeUnwiredActionSpecs(keymap, report, process.argv[specsOutIndex + 1] ?? "proof/keymap-unwired-action-specs.md");
   }
 
-  console.log(`keymap coverage: wired=${report.wired.length} deferred=${report.deferred.length} unwired=${report.unwired.length}`);
+  console.log(
+    `keymap coverage: wired=${report.wired.length} deferred=${report.deferred.length} dropped=${report.dropped.length} unwired=${report.unwired.length} accounted=${report.totals.accounted}/${report.totals.ssot}`,
+  );
 }

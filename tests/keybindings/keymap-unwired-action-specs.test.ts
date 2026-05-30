@@ -17,8 +17,10 @@ describe("P15b unwired keymap action specs", () => {
     const markdown = readFileSync(outFile, "utf-8");
     expect(coverage.unwired).toEqual([]);
     expect(markdown).toContain("# Keymap Unwired Action Specs");
-    expect(markdown).toContain("No unwired shortcut-bearing SSOT actions remain.");
+    expect(markdown).toContain("No unwired SSOT actions remain.");
     expect(markdown).toContain(`wired=${coverage.wired.length}`);
     expect(markdown).toContain(`deferred=${coverage.deferred.length}`);
+    expect(markdown).toContain(`dropped=${coverage.dropped.length}`);
+    expect(markdown).toContain("AceJumpAction — dropped: no maldives equivalent");
   });
 });
