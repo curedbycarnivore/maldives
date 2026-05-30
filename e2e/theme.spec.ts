@@ -361,3 +361,54 @@ export const ConsolePaletteLayer = Layer.succeed(ConsolePaletteService, new Cons
   await mkdir("proof", { recursive: true });
   await page.screenshot({ path: "proof/p32f-console-palette-proof.png" });
 });
+
+test("renders P32g C++ token colors on a real bridge that embeds Effect TSX", async ({ page }) => {
+  await loadEditor(page);
+
+  await page.evaluate(() => {
+    const sample = `/* P32g C++ renders a real Effect TSX bridge */
+#include <effect/runtime.hpp>
+#define EFFECT_BATCH_SIZE 42
+namespace maldives::effect {
+template <class Row>
+class EffectRepository {
+public:
+  EffectRepository(Row row) : row_(row) {}
+  std::string emitTsx() const {
+    return "Effect.gen(function* () { return yield* Layer.succeed(Schema.String, pipe(Effect.succeed(row.id))) })";
+  }
+private:
+  Row row_;
+};
+}
+`;
+    window.__maldivesEditor.setModel(window.__monaco.editor.createModel(sample, "cpp", window.__monaco.Uri.parse("file:///maldives/p32g-effect-bridge.cpp")));
+    window.__maldivesEditor.setPosition({ lineNumber: 8, column: 3 });
+    window.__maldivesEditor.focus();
+  });
+
+  const colorForText = (text: string) =>
+    page.evaluate((needle) => {
+      const normalize = (value: string | null) => (value ?? "").replace(/\u00a0/g, " ").trim();
+      const spans = Array.from(document.querySelectorAll<HTMLElement>(".monaco-editor .view-line span"));
+      const match = spans.find((span) => span.childElementCount === 0 && normalize(span.textContent) === needle);
+      return match ? getComputedStyle(match).color : "";
+    }, text);
+  const colorForSpanContaining = (text: string) =>
+    page.evaluate((needle) => {
+      const normalize = (value: string | null) => (value ?? "").replace(/\u00a0/g, " ").trim();
+      const spans = Array.from(document.querySelectorAll<HTMLElement>(".monaco-editor .view-line span"));
+      const match = spans.find((span) => span.childElementCount === 0 && normalize(span.textContent).includes(needle));
+      return match ? getComputedStyle(match).color : "";
+    }, text);
+
+  await expect.poll(() => colorForText("/* P32g C++ renders a real Effect TSX bridge */"), { timeout: 10000 }).toBe("rgb(153, 153, 153)");
+  await expect.poll(() => colorForText("class"), { timeout: 10000 }).toBe("rgb(204, 153, 204)");
+  await expect.poll(() => colorForText("#define"), { timeout: 10000 }).toBe("rgb(242, 119, 122)");
+  await expect.poll(() => colorForText("effect/runtime.hpp"), { timeout: 10000 }).toBe("rgb(249, 145, 87)");
+  await expect.poll(() => colorForText("42"), { timeout: 10000 }).toBe("rgb(249, 145, 87)");
+  await expect.poll(() => colorForSpanContaining("Effect.gen(function*"), { timeout: 10000 }).toBe("rgb(153, 204, 153)");
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/p32g-cpp-theme-proof.png" });
+});

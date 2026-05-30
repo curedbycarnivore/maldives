@@ -69,6 +69,29 @@ const classifiedTopLevelOptionNames = [
   "COFFEESCRIPT.STRING",
   "COFFEESCRIPT.STRING_LITERAL",
   "COFFEESCRIPT.THIS",
+  "CONSTRUCTOR_CALL_ATTRIBUTES",
+  "CONSTRUCTOR_DECLARATION_ATTRIBUTES",
+  "CPP.BLOCK_COMMENT",
+  "CPP.CONSTANT",
+  "CPP.DOT",
+  "CPP.FIELD",
+  "CPP.FUNCTION",
+  "CPP.KEYWORD",
+  "CPP.LABEL",
+  "CPP.LINE_COMMENT",
+  "CPP.MACROS",
+  "CPP.METHOD",
+  "CPP.NAMESPACE",
+  "CPP.NUMBER",
+  "CPP.OPERATION_SIGN",
+  "CPP.PARAMETER",
+  "CPP.PP_ARG",
+  "CPP.PP_SKIPPED",
+  "CPP.STATIC",
+  "CPP.STATIC_FUNCTION",
+  "CPP.STRING",
+  "CPP.TYPE",
+  "CPP.UNUSED",
   "CONSOLE_BACKGROUND_KEY",
   "CONSOLE_BLACK_OUTPUT",
   "CONSOLE_BLUE_BRIGHT_OUTPUT",
@@ -316,11 +339,43 @@ function classifiedTopLevelPathsFor(name: string): string[] {
     return coffeeScriptPathsFor(name);
   }
 
+  if (name.startsWith("CONSTRUCTOR_")) {
+    return [`${name}.FOREGROUND`, `${name}.FONT_TYPE`];
+  }
+
+  if (name.startsWith("CPP.")) {
+    return cppPathsFor(name);
+  }
+
   if (name.startsWith("CONSOLE_")) {
     return consolePathsFor(name);
   }
 
   return [name];
+}
+
+function cppPathsFor(name: string): string[] {
+  if (["CPP.BLOCK_COMMENT", "CPP.KEYWORD", "CPP.LINE_COMMENT", "CPP.STRING"].includes(name)) {
+    return [`${name}.FOREGROUND`, `${name}.FONT_TYPE`];
+  }
+
+  if (["CPP.DOT", "CPP.MACROS", "CPP.NUMBER", "CPP.OPERATION_SIGN", "CPP.PP_ARG"].includes(name)) {
+    return [`${name}.FOREGROUND`];
+  }
+
+  if (name === "CPP.UNUSED") {
+    return ["CPP.UNUSED.EFFECT_TYPE"];
+  }
+
+  if (name === "CPP.PARAMETER") {
+    return ["CPP.PARAMETER.FOREGROUND", "CPP.PARAMETER.EFFECT_TYPE"];
+  }
+
+  if (["CPP.CONSTANT", "CPP.FIELD", "CPP.METHOD", "CPP.NAMESPACE", "CPP.PP_SKIPPED", "CPP.STATIC", "CPP.STATIC_FUNCTION"].includes(name)) {
+    return [`${name}.FOREGROUND`, `${name}.FONT_TYPE`];
+  }
+
+  return [`${name}.FOREGROUND`];
 }
 
 function consolePathsFor(name: string): string[] {
@@ -414,6 +469,14 @@ function classifiedTopLevelDeferredReason(path: string): string {
     return coffeeScriptDeferredReason(path);
   }
 
+  if (path.startsWith("CONSTRUCTOR_")) {
+    return constructorDeferredReason(path);
+  }
+
+  if (path.startsWith("CPP.")) {
+    return cppDeferredReason(path);
+  }
+
   if (path === "CONSOLE_DARKGRAY_OUTPUT") {
     return "unsupported: active ICLS CONSOLE_DARKGRAY_OUTPUT has no foreground or font style to apply";
   }
@@ -427,6 +490,42 @@ function classifiedTopLevelDeferredReason(path: string): string {
   }
 
   return "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet";
+}
+
+function constructorDeferredReason(path: string): string {
+  if (path.startsWith("CONSTRUCTOR_CALL_ATTRIBUTES.")) {
+    return "unsupported: Monaco's loaded grammars do not emit a distinct constructor-call token";
+  }
+
+  return "unsupported: Monaco's loaded grammars do not emit a distinct constructor-declaration token";
+}
+
+function cppDeferredReason(path: string): string {
+  if (path.endsWith(".EFFECT_TYPE")) {
+    return "unsupported: Monaco themes do not expose WebStorm effect-type styles for this C++ attribute";
+  }
+
+  if (path.endsWith(".BACKGROUND")) {
+    return "unsupported: Monaco token theme rules do not expose per-token backgrounds for this C++ attribute";
+  }
+
+  const cppName = path.split(".").slice(0, 2).join(".");
+  const labels: Record<string, string> = {
+    "CPP.CONSTANT": "constant",
+    "CPP.FIELD": "field",
+    "CPP.FUNCTION": "function",
+    "CPP.LABEL": "label",
+    "CPP.METHOD": "method",
+    "CPP.NAMESPACE": "namespace",
+    "CPP.PARAMETER": "parameter",
+    "CPP.PP_SKIPPED": "preprocessor-skipped",
+    "CPP.STATIC": "static-member",
+    "CPP.STATIC_FUNCTION": "static-function",
+    "CPP.TYPE": "type",
+  };
+  const label = labels[cppName] ?? "attribute";
+
+  return `unsupported: Monaco's C++ Monarch grammar emits ${label}s as generic identifiers, not a distinct ${label} token`;
 }
 
 function coffeeScriptDeferredReason(path: string): string {
@@ -495,6 +594,14 @@ function deferredReason(path: string): string {
 
   if (parent.startsWith("COFFEESCRIPT")) {
     return coffeeScriptDeferredReason(path);
+  }
+
+  if (parent.startsWith("CONSTRUCTOR_")) {
+    return constructorDeferredReason(path);
+  }
+
+  if (parent.startsWith("CPP")) {
+    return cppDeferredReason(path);
   }
 
   if (parent.startsWith("APACHE_CONFIG") || parent.startsWith("BASH")) {

@@ -83,6 +83,29 @@
     "CONSOLE_WHITE_OUTPUT",
     "CONSOLE_YELLOW_BRIGHT_OUTPUT",
     "CONSOLE_YELLOW_OUTPUT",
+    "CONSTRUCTOR_CALL_ATTRIBUTES",
+    "CONSTRUCTOR_DECLARATION_ATTRIBUTES",
+    "CPP.BLOCK_COMMENT",
+    "CPP.CONSTANT",
+    "CPP.DOT",
+    "CPP.FIELD",
+    "CPP.FUNCTION",
+    "CPP.KEYWORD",
+    "CPP.LABEL",
+    "CPP.LINE_COMMENT",
+    "CPP.MACROS",
+    "CPP.METHOD",
+    "CPP.NAMESPACE",
+    "CPP.NUMBER",
+    "CPP.OPERATION_SIGN",
+    "CPP.PARAMETER",
+    "CPP.PP_ARG",
+    "CPP.PP_SKIPPED",
+    "CPP.STATIC",
+    "CPP.STATIC_FUNCTION",
+    "CPP.STRING",
+    "CPP.TYPE",
+    "CPP.UNUSED",
     "DEFAULT_BRACES",
     "DEFAULT_BRACKETS",
     "DEFAULT_CONSTANT",
@@ -134,167 +157,6 @@
       "occurrences": 1,
       "samplePaths": [
         "CONDITIONALLY_NOT_COMPILED"
-      ]
-    },
-    {
-      "name": "CONSTRUCTOR_CALL_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSTRUCTOR_CALL_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CONSTRUCTOR_DECLARATION_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSTRUCTOR_DECLARATION_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CPP.BLOCK_COMMENT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.BLOCK_COMMENT"
-      ]
-    },
-    {
-      "name": "CPP.CONSTANT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.CONSTANT"
-      ]
-    },
-    {
-      "name": "CPP.DOT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.DOT"
-      ]
-    },
-    {
-      "name": "CPP.FIELD",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.FIELD"
-      ]
-    },
-    {
-      "name": "CPP.FUNCTION",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.FUNCTION"
-      ]
-    },
-    {
-      "name": "CPP.KEYWORD",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.KEYWORD"
-      ]
-    },
-    {
-      "name": "CPP.LABEL",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.LABEL"
-      ]
-    },
-    {
-      "name": "CPP.LINE_COMMENT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.LINE_COMMENT"
-      ]
-    },
-    {
-      "name": "CPP.MACROS",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.MACROS"
-      ]
-    },
-    {
-      "name": "CPP.METHOD",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.METHOD"
-      ]
-    },
-    {
-      "name": "CPP.NAMESPACE",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.NAMESPACE"
-      ]
-    },
-    {
-      "name": "CPP.NUMBER",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.NUMBER"
-      ]
-    },
-    {
-      "name": "CPP.OPERATION_SIGN",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.OPERATION_SIGN"
-      ]
-    },
-    {
-      "name": "CPP.PARAMETER",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.PARAMETER"
-      ]
-    },
-    {
-      "name": "CPP.PP_ARG",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.PP_ARG"
-      ]
-    },
-    {
-      "name": "CPP.PP_SKIPPED",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.PP_SKIPPED"
-      ]
-    },
-    {
-      "name": "CPP.STATIC",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.STATIC"
-      ]
-    },
-    {
-      "name": "CPP.STATIC_FUNCTION",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.STATIC_FUNCTION"
-      ]
-    },
-    {
-      "name": "CPP.STRING",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.STRING"
-      ]
-    },
-    {
-      "name": "CPP.TYPE",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.TYPE"
-      ]
-    },
-    {
-      "name": "CPP.UNUSED",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.UNUSED"
       ]
     },
     {
@@ -3653,167 +3515,6 @@
       ]
     },
     {
-      "name": "CONSTRUCTOR_CALL_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSTRUCTOR_CALL_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CONSTRUCTOR_DECLARATION_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSTRUCTOR_DECLARATION_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CPP.BLOCK_COMMENT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.BLOCK_COMMENT"
-      ]
-    },
-    {
-      "name": "CPP.CONSTANT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.CONSTANT"
-      ]
-    },
-    {
-      "name": "CPP.DOT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.DOT"
-      ]
-    },
-    {
-      "name": "CPP.FIELD",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.FIELD"
-      ]
-    },
-    {
-      "name": "CPP.FUNCTION",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.FUNCTION"
-      ]
-    },
-    {
-      "name": "CPP.KEYWORD",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.KEYWORD"
-      ]
-    },
-    {
-      "name": "CPP.LABEL",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.LABEL"
-      ]
-    },
-    {
-      "name": "CPP.LINE_COMMENT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.LINE_COMMENT"
-      ]
-    },
-    {
-      "name": "CPP.MACROS",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.MACROS"
-      ]
-    },
-    {
-      "name": "CPP.METHOD",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.METHOD"
-      ]
-    },
-    {
-      "name": "CPP.NAMESPACE",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.NAMESPACE"
-      ]
-    },
-    {
-      "name": "CPP.NUMBER",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.NUMBER"
-      ]
-    },
-    {
-      "name": "CPP.OPERATION_SIGN",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.OPERATION_SIGN"
-      ]
-    },
-    {
-      "name": "CPP.PARAMETER",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.PARAMETER"
-      ]
-    },
-    {
-      "name": "CPP.PP_ARG",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.PP_ARG"
-      ]
-    },
-    {
-      "name": "CPP.PP_SKIPPED",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.PP_SKIPPED"
-      ]
-    },
-    {
-      "name": "CPP.STATIC",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.STATIC"
-      ]
-    },
-    {
-      "name": "CPP.STATIC_FUNCTION",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.STATIC_FUNCTION"
-      ]
-    },
-    {
-      "name": "CPP.STRING",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.STRING"
-      ]
-    },
-    {
-      "name": "CPP.TYPE",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.TYPE"
-      ]
-    },
-    {
-      "name": "CPP.UNUSED",
-      "occurrences": 1,
-      "samplePaths": [
-        "CPP.UNUSED"
-      ]
-    },
-    {
       "name": "CSS.COLOR",
       "occurrences": 1,
       "samplePaths": [
@@ -3993,6 +3694,167 @@
       "occurrences": 1,
       "samplePaths": [
         "CY_VARIABLE"
+      ]
+    },
+    {
+      "name": "CY_VARIABLE_SIGN",
+      "occurrences": 1,
+      "samplePaths": [
+        "CY_VARIABLE_SIGN"
+      ]
+    },
+    {
+      "name": "DEFAULT_ATTRIBUTE",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_ATTRIBUTE"
+      ]
+    },
+    {
+      "name": "DEFAULT_ENTITY",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_ENTITY"
+      ]
+    },
+    {
+      "name": "DEFAULT_IDENTIFIER",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_IDENTIFIER"
+      ]
+    },
+    {
+      "name": "DEFAULT_INSTANCE_METHOD",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_INSTANCE_METHOD"
+      ]
+    },
+    {
+      "name": "DEFAULT_INVALID_STRING_ESCAPE",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_INVALID_STRING_ESCAPE"
+      ]
+    },
+    {
+      "name": "DEFAULT_KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_KEYWORD"
+      ]
+    },
+    {
+      "name": "DEFAULT_NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_NUMBER"
+      ]
+    },
+    {
+      "name": "DEFAULT_STATIC_FIELD",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_STATIC_FIELD"
+      ]
+    },
+    {
+      "name": "DEFAULT_STATIC_METHOD",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_STATIC_METHOD"
+      ]
+    },
+    {
+      "name": "DEFAULT_STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_STRING"
+      ]
+    },
+    {
+      "name": "DEFAULT_TEMPLATE_LANGUAGE_COLOR",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_TEMPLATE_LANGUAGE_COLOR"
+      ]
+    },
+    {
+      "name": "DEFAULT_VALID_STRING_ESCAPE",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEFAULT_VALID_STRING_ESCAPE"
+      ]
+    },
+    {
+      "name": "DELETED_LINES_COLOR",
+      "occurrences": 1,
+      "samplePaths": [
+        "DELETED_LINES_COLOR"
+      ]
+    },
+    {
+      "name": "DELETED_TEXT_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "DELETED_TEXT_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "DEPRECATED_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "DEPRECATED_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "DIFF_CONFLICT",
+      "occurrences": 1,
+      "samplePaths": [
+        "DIFF_CONFLICT"
+      ]
+    },
+    {
+      "name": "DIFF_DELETED",
+      "occurrences": 1,
+      "samplePaths": [
+        "DIFF_DELETED"
+      ]
+    },
+    {
+      "name": "DIFF_INSERTED",
+      "occurrences": 1,
+      "samplePaths": [
+        "DIFF_INSERTED"
+      ]
+    },
+    {
+      "name": "DIFF_MODIFIED",
+      "occurrences": 1,
+      "samplePaths": [
+        "DIFF_MODIFIED"
+      ]
+    },
+    {
+      "name": "DJANGO_COMMENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "DJANGO_COMMENT"
+      ]
+    },
+    {
+      "name": "DJANGO_FILTER",
+      "occurrences": 1,
+      "samplePaths": [
+        "DJANGO_FILTER"
+      ]
+    },
+    {
+      "name": "DJANGO_ID",
+      "occurrences": 1,
+      "samplePaths": [
+        "DJANGO_ID"
       ]
     }
   ],
@@ -4323,6 +4185,76 @@
           ]
         },
         {
+          "path": "CPP.BLOCK_COMMENT.FOREGROUND",
+          "monacoTargets": [
+            "token:comment.cpp.foreground"
+          ]
+        },
+        {
+          "path": "CPP.DOT.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.cpp.foreground"
+          ]
+        },
+        {
+          "path": "CPP.KEYWORD.FOREGROUND",
+          "monacoTargets": [
+            "token:keyword.auto.cpp.foreground",
+            "token:keyword.class.cpp.foreground",
+            "token:keyword.const.cpp.foreground",
+            "token:keyword.namespace.cpp.foreground",
+            "token:keyword.public.cpp.foreground",
+            "token:keyword.private.cpp.foreground",
+            "token:keyword.return.cpp.foreground",
+            "token:keyword.static.cpp.foreground",
+            "token:keyword.template.cpp.foreground",
+            "token:keyword.typename.cpp.foreground",
+            "token:keyword.void.cpp.foreground"
+          ]
+        },
+        {
+          "path": "CPP.LINE_COMMENT.FOREGROUND",
+          "monacoTargets": [
+            "token:comment.cpp.foreground"
+          ]
+        },
+        {
+          "path": "CPP.MACROS.FOREGROUND",
+          "monacoTargets": [
+            "token:keyword.directive.cpp.foreground",
+            "token:keyword.directive.include.cpp.foreground"
+          ]
+        },
+        {
+          "path": "CPP.NUMBER.FOREGROUND",
+          "monacoTargets": [
+            "token:number.cpp.foreground",
+            "token:number.float.cpp.foreground",
+            "token:number.hex.cpp.foreground",
+            "token:number.octal.cpp.foreground",
+            "token:number.binary.cpp.foreground"
+          ]
+        },
+        {
+          "path": "CPP.OPERATION_SIGN.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.cpp.foreground"
+          ]
+        },
+        {
+          "path": "CPP.PP_ARG.FOREGROUND",
+          "monacoTargets": [
+            "token:string.include.identifier.cpp.foreground"
+          ]
+        },
+        {
+          "path": "CPP.STRING.FOREGROUND",
+          "monacoTargets": [
+            "token:string.cpp.foreground",
+            "token:string.escape.cpp.foreground"
+          ]
+        },
+        {
           "path": "DEFAULT_BRACES.FOREGROUND",
           "monacoTargets": [
             "token:delimiter.foreground",
@@ -4554,91 +4486,55 @@
         },
         {
           "path": "CONSTRUCTOR_CALL_ATTRIBUTES.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's loaded grammars do not emit a distinct constructor-call token"
         },
         {
           "path": "CONSTRUCTOR_DECLARATION_ATTRIBUTES.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CPP.BLOCK_COMMENT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's loaded grammars do not emit a distinct constructor-declaration token"
         },
         {
           "path": "CPP.CONSTANT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CPP.DOT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits constants as generic identifiers, not a distinct constant token"
         },
         {
           "path": "CPP.FIELD.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits fields as generic identifiers, not a distinct field token"
         },
         {
           "path": "CPP.FUNCTION.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CPP.KEYWORD.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits functions as generic identifiers, not a distinct function token"
         },
         {
           "path": "CPP.LABEL.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CPP.LINE_COMMENT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CPP.MACROS.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits labels as generic identifiers, not a distinct label token"
         },
         {
           "path": "CPP.METHOD.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits methods as generic identifiers, not a distinct method token"
         },
         {
           "path": "CPP.NAMESPACE.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CPP.NUMBER.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CPP.OPERATION_SIGN.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits namespaces as generic identifiers, not a distinct namespace token"
         },
         {
           "path": "CPP.PARAMETER.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CPP.PP_ARG.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits parameters as generic identifiers, not a distinct parameter token"
         },
         {
           "path": "CPP.PP_SKIPPED.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits preprocessor-skippeds as generic identifiers, not a distinct preprocessor-skipped token"
         },
         {
           "path": "CPP.STATIC.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits static-members as generic identifiers, not a distinct static-member token"
         },
         {
           "path": "CPP.STATIC_FUNCTION.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CPP.STRING.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits static-functions as generic identifiers, not a distinct static-function token"
         },
         {
           "path": "CPP.TYPE.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits types as generic identifiers, not a distinct type token"
         },
         {
           "path": "CSS.COLOR.FOREGROUND",
@@ -6287,6 +6183,41 @@
           ]
         },
         {
+          "path": "CPP.BLOCK_COMMENT.FONT_TYPE",
+          "monacoTargets": [
+            "token:comment.cpp.fontStyle"
+          ]
+        },
+        {
+          "path": "CPP.KEYWORD.FONT_TYPE",
+          "monacoTargets": [
+            "token:keyword.auto.cpp.fontStyle",
+            "token:keyword.class.cpp.fontStyle",
+            "token:keyword.const.cpp.fontStyle",
+            "token:keyword.namespace.cpp.fontStyle",
+            "token:keyword.public.cpp.fontStyle",
+            "token:keyword.private.cpp.fontStyle",
+            "token:keyword.return.cpp.fontStyle",
+            "token:keyword.static.cpp.fontStyle",
+            "token:keyword.template.cpp.fontStyle",
+            "token:keyword.typename.cpp.fontStyle",
+            "token:keyword.void.cpp.fontStyle"
+          ]
+        },
+        {
+          "path": "CPP.LINE_COMMENT.FONT_TYPE",
+          "monacoTargets": [
+            "token:comment.cpp.fontStyle"
+          ]
+        },
+        {
+          "path": "CPP.STRING.FONT_TYPE",
+          "monacoTargets": [
+            "token:string.cpp.fontStyle",
+            "token:string.escape.cpp.fontStyle"
+          ]
+        },
+        {
           "path": "DEFAULT_BRACES.FONT_TYPE",
           "monacoTargets": [
             "token:delimiter.fontStyle",
@@ -6390,55 +6321,39 @@
         },
         {
           "path": "CONSTRUCTOR_CALL_ATTRIBUTES.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's loaded grammars do not emit a distinct constructor-call token"
         },
         {
           "path": "CONSTRUCTOR_DECLARATION_ATTRIBUTES.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CPP.BLOCK_COMMENT.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's loaded grammars do not emit a distinct constructor-declaration token"
         },
         {
           "path": "CPP.CONSTANT.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits constants as generic identifiers, not a distinct constant token"
         },
         {
           "path": "CPP.FIELD.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CPP.KEYWORD.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CPP.LINE_COMMENT.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits fields as generic identifiers, not a distinct field token"
         },
         {
           "path": "CPP.METHOD.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits methods as generic identifiers, not a distinct method token"
         },
         {
           "path": "CPP.NAMESPACE.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits namespaces as generic identifiers, not a distinct namespace token"
         },
         {
           "path": "CPP.PP_SKIPPED.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits preprocessor-skippeds as generic identifiers, not a distinct preprocessor-skipped token"
         },
         {
           "path": "CPP.STATIC.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits static-members as generic identifiers, not a distinct static-member token"
         },
         {
           "path": "CPP.STATIC_FUNCTION.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CPP.STRING.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits static-functions as generic identifiers, not a distinct static-function token"
         },
         {
           "path": "CSS.COMMENT.FONT_TYPE",
@@ -8737,6 +8652,368 @@
         }
       ],
       "deferredPaths": []
+    },
+    {
+      "name": "CONSTRUCTOR_CALL_ATTRIBUTES",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CONSTRUCTOR_CALL_ATTRIBUTES.FOREGROUND",
+          "reason": "unsupported: Monaco's loaded grammars do not emit a distinct constructor-call token"
+        },
+        {
+          "path": "CONSTRUCTOR_CALL_ATTRIBUTES.FONT_TYPE",
+          "reason": "unsupported: Monaco's loaded grammars do not emit a distinct constructor-call token"
+        }
+      ]
+    },
+    {
+      "name": "CONSTRUCTOR_DECLARATION_ATTRIBUTES",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CONSTRUCTOR_DECLARATION_ATTRIBUTES.FOREGROUND",
+          "reason": "unsupported: Monaco's loaded grammars do not emit a distinct constructor-declaration token"
+        },
+        {
+          "path": "CONSTRUCTOR_DECLARATION_ATTRIBUTES.FONT_TYPE",
+          "reason": "unsupported: Monaco's loaded grammars do not emit a distinct constructor-declaration token"
+        }
+      ]
+    },
+    {
+      "name": "CPP.BLOCK_COMMENT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CPP.BLOCK_COMMENT.FOREGROUND",
+          "monacoTargets": [
+            "token:comment.cpp.foreground"
+          ]
+        },
+        {
+          "path": "CPP.BLOCK_COMMENT.FONT_TYPE",
+          "monacoTargets": [
+            "token:comment.cpp.fontStyle"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CPP.CONSTANT",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CPP.CONSTANT.FOREGROUND",
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits constants as generic identifiers, not a distinct constant token"
+        },
+        {
+          "path": "CPP.CONSTANT.FONT_TYPE",
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits constants as generic identifiers, not a distinct constant token"
+        }
+      ]
+    },
+    {
+      "name": "CPP.DOT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CPP.DOT.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.cpp.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CPP.FIELD",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CPP.FIELD.FOREGROUND",
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits fields as generic identifiers, not a distinct field token"
+        },
+        {
+          "path": "CPP.FIELD.FONT_TYPE",
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits fields as generic identifiers, not a distinct field token"
+        }
+      ]
+    },
+    {
+      "name": "CPP.FUNCTION",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CPP.FUNCTION.FOREGROUND",
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits functions as generic identifiers, not a distinct function token"
+        }
+      ]
+    },
+    {
+      "name": "CPP.KEYWORD",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CPP.KEYWORD.FOREGROUND",
+          "monacoTargets": [
+            "token:keyword.auto.cpp.foreground",
+            "token:keyword.class.cpp.foreground",
+            "token:keyword.const.cpp.foreground",
+            "token:keyword.namespace.cpp.foreground",
+            "token:keyword.public.cpp.foreground",
+            "token:keyword.private.cpp.foreground",
+            "token:keyword.return.cpp.foreground",
+            "token:keyword.static.cpp.foreground",
+            "token:keyword.template.cpp.foreground",
+            "token:keyword.typename.cpp.foreground",
+            "token:keyword.void.cpp.foreground"
+          ]
+        },
+        {
+          "path": "CPP.KEYWORD.FONT_TYPE",
+          "monacoTargets": [
+            "token:keyword.auto.cpp.fontStyle",
+            "token:keyword.class.cpp.fontStyle",
+            "token:keyword.const.cpp.fontStyle",
+            "token:keyword.namespace.cpp.fontStyle",
+            "token:keyword.public.cpp.fontStyle",
+            "token:keyword.private.cpp.fontStyle",
+            "token:keyword.return.cpp.fontStyle",
+            "token:keyword.static.cpp.fontStyle",
+            "token:keyword.template.cpp.fontStyle",
+            "token:keyword.typename.cpp.fontStyle",
+            "token:keyword.void.cpp.fontStyle"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CPP.LABEL",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CPP.LABEL.FOREGROUND",
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits labels as generic identifiers, not a distinct label token"
+        }
+      ]
+    },
+    {
+      "name": "CPP.LINE_COMMENT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CPP.LINE_COMMENT.FOREGROUND",
+          "monacoTargets": [
+            "token:comment.cpp.foreground"
+          ]
+        },
+        {
+          "path": "CPP.LINE_COMMENT.FONT_TYPE",
+          "monacoTargets": [
+            "token:comment.cpp.fontStyle"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CPP.MACROS",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CPP.MACROS.FOREGROUND",
+          "monacoTargets": [
+            "token:keyword.directive.cpp.foreground",
+            "token:keyword.directive.include.cpp.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CPP.METHOD",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CPP.METHOD.FOREGROUND",
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits methods as generic identifiers, not a distinct method token"
+        },
+        {
+          "path": "CPP.METHOD.FONT_TYPE",
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits methods as generic identifiers, not a distinct method token"
+        }
+      ]
+    },
+    {
+      "name": "CPP.NAMESPACE",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CPP.NAMESPACE.FOREGROUND",
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits namespaces as generic identifiers, not a distinct namespace token"
+        },
+        {
+          "path": "CPP.NAMESPACE.FONT_TYPE",
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits namespaces as generic identifiers, not a distinct namespace token"
+        }
+      ]
+    },
+    {
+      "name": "CPP.NUMBER",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CPP.NUMBER.FOREGROUND",
+          "monacoTargets": [
+            "token:number.cpp.foreground",
+            "token:number.float.cpp.foreground",
+            "token:number.hex.cpp.foreground",
+            "token:number.octal.cpp.foreground",
+            "token:number.binary.cpp.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CPP.OPERATION_SIGN",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CPP.OPERATION_SIGN.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.cpp.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CPP.PARAMETER",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CPP.PARAMETER.FOREGROUND",
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits parameters as generic identifiers, not a distinct parameter token"
+        },
+        {
+          "path": "CPP.PARAMETER.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this C++ attribute"
+        }
+      ]
+    },
+    {
+      "name": "CPP.PP_ARG",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CPP.PP_ARG.FOREGROUND",
+          "monacoTargets": [
+            "token:string.include.identifier.cpp.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CPP.PP_SKIPPED",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CPP.PP_SKIPPED.FOREGROUND",
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits preprocessor-skippeds as generic identifiers, not a distinct preprocessor-skipped token"
+        },
+        {
+          "path": "CPP.PP_SKIPPED.FONT_TYPE",
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits preprocessor-skippeds as generic identifiers, not a distinct preprocessor-skipped token"
+        }
+      ]
+    },
+    {
+      "name": "CPP.STATIC",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CPP.STATIC.FOREGROUND",
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits static-members as generic identifiers, not a distinct static-member token"
+        },
+        {
+          "path": "CPP.STATIC.FONT_TYPE",
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits static-members as generic identifiers, not a distinct static-member token"
+        }
+      ]
+    },
+    {
+      "name": "CPP.STATIC_FUNCTION",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CPP.STATIC_FUNCTION.FOREGROUND",
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits static-functions as generic identifiers, not a distinct static-function token"
+        },
+        {
+          "path": "CPP.STATIC_FUNCTION.FONT_TYPE",
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits static-functions as generic identifiers, not a distinct static-function token"
+        }
+      ]
+    },
+    {
+      "name": "CPP.STRING",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CPP.STRING.FOREGROUND",
+          "monacoTargets": [
+            "token:string.cpp.foreground",
+            "token:string.escape.cpp.foreground"
+          ]
+        },
+        {
+          "path": "CPP.STRING.FONT_TYPE",
+          "monacoTargets": [
+            "token:string.cpp.fontStyle",
+            "token:string.escape.cpp.fontStyle"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CPP.TYPE",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CPP.TYPE.FOREGROUND",
+          "reason": "unsupported: Monaco's C++ Monarch grammar emits types as generic identifiers, not a distinct type token"
+        }
+      ]
+    },
+    {
+      "name": "CPP.UNUSED",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CPP.UNUSED.EFFECT_TYPE",
+          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this C++ attribute"
+        }
+      ]
     },
     {
       "name": "CONSOLE_BACKGROUND_KEY",

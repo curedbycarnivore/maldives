@@ -269,6 +269,85 @@ describe("scripts/theme-coverage", () => {
     );
   });
 
+  test("classifies P32g constructor and C++ token surfaces into targets or explicit no-surface deferrals", () => {
+    const report = auditThemeCoverageMappings(iclsXml);
+    const p32gNames = [
+      "CONSTRUCTOR_CALL_ATTRIBUTES",
+      "CONSTRUCTOR_DECLARATION_ATTRIBUTES",
+      "CPP.BLOCK_COMMENT",
+      "CPP.CONSTANT",
+      "CPP.DOT",
+      "CPP.FIELD",
+      "CPP.FUNCTION",
+      "CPP.KEYWORD",
+      "CPP.LABEL",
+      "CPP.LINE_COMMENT",
+      "CPP.MACROS",
+      "CPP.METHOD",
+      "CPP.NAMESPACE",
+      "CPP.NUMBER",
+      "CPP.OPERATION_SIGN",
+      "CPP.PARAMETER",
+      "CPP.PP_ARG",
+      "CPP.PP_SKIPPED",
+      "CPP.STATIC",
+      "CPP.STATIC_FUNCTION",
+      "CPP.STRING",
+      "CPP.TYPE",
+      "CPP.UNUSED",
+    ];
+
+    expect(report.top50Unmapped.map((entry) => entry.name)).not.toEqual(expect.arrayContaining(p32gNames));
+    expect(report.classifiedTopLevelOptions.map((entry) => entry.name)).toEqual(expect.arrayContaining(p32gNames));
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CPP.KEYWORD")?.mappedPaths).toEqual([
+      {
+        path: "CPP.KEYWORD.FOREGROUND",
+        monacoTargets: expect.arrayContaining([
+          "token:keyword.class.cpp.foreground",
+          "token:keyword.return.cpp.foreground",
+          "token:keyword.namespace.cpp.foreground",
+        ]),
+      },
+      {
+        path: "CPP.KEYWORD.FONT_TYPE",
+        monacoTargets: expect.arrayContaining([
+          "token:keyword.class.cpp.fontStyle",
+          "token:keyword.return.cpp.fontStyle",
+          "token:keyword.namespace.cpp.fontStyle",
+        ]),
+      },
+    ]);
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CPP.PP_ARG")?.mappedPaths).toEqual([
+      { path: "CPP.PP_ARG.FOREGROUND", monacoTargets: ["token:string.include.identifier.cpp.foreground"] },
+    ]);
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CONSTRUCTOR_CALL_ATTRIBUTES")?.deferredPaths).toEqual([
+      {
+        path: "CONSTRUCTOR_CALL_ATTRIBUTES.FOREGROUND",
+        reason: "unsupported: Monaco's loaded grammars do not emit a distinct constructor-call token",
+      },
+      {
+        path: "CONSTRUCTOR_CALL_ATTRIBUTES.FONT_TYPE",
+        reason: "unsupported: Monaco's loaded grammars do not emit a distinct constructor-call token",
+      },
+    ]);
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CPP.FIELD")?.deferredPaths).toEqual([
+      {
+        path: "CPP.FIELD.FOREGROUND",
+        reason: "unsupported: Monaco's C++ Monarch grammar emits fields as generic identifiers, not a distinct field token",
+      },
+      {
+        path: "CPP.FIELD.FONT_TYPE",
+        reason: "unsupported: Monaco's C++ Monarch grammar emits fields as generic identifiers, not a distinct field token",
+      },
+    ]);
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CPP.UNUSED")?.deferredPaths).toEqual([
+      {
+        path: "CPP.UNUSED.EFFECT_TYPE",
+        reason: "unsupported: Monaco themes do not expose WebStorm effect-type styles for this C++ attribute",
+      },
+    ]);
+  });
+
   test("classifies P32f console palette surfaces into terminal CSS targets or explicit no-value deferrals", () => {
     const report = auditThemeCoverageMappings(iclsXml);
     const consoleNames = [

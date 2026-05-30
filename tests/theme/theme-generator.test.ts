@@ -127,6 +127,21 @@ test("maps P15l CoffeeScript colors onto Monaco CoffeeScript token scopes", () =
   );
 });
 
+test("maps P32g C++ token colors onto Monaco-loaded C++ token scopes", () => {
+  expect(theme.rules).toEqual(
+    expect.arrayContaining([
+      { token: "comment.cpp", foreground: "999999", fontStyle: "italic" },
+      { token: "keyword.class.cpp", foreground: "cc99cc", fontStyle: "bold" },
+      { token: "keyword.return.cpp", foreground: "cc99cc", fontStyle: "bold" },
+      { token: "keyword.directive.cpp", foreground: "f2777a" },
+      { token: "string.include.identifier.cpp", foreground: "f99157" },
+      { token: "number.cpp", foreground: "f99157" },
+      { token: "delimiter.cpp", foreground: "66cccc" },
+      { token: "string.cpp", foreground: "99cc99", fontStyle: "bold" },
+    ]),
+  );
+});
+
 test("registers the generated Monaco theme", () => {
   const defineTheme = vi.fn();
   const monaco = { editor: { defineTheme } } as unknown as typeof import("monaco-editor");

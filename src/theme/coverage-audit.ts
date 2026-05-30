@@ -117,6 +117,15 @@ const tokenAuditNames = [
   "COFFEESCRIPT.REGULAR_EXPRESSION_CONTENT",
   "COFFEESCRIPT.STRING",
   "COFFEESCRIPT.THIS",
+  "CPP.BLOCK_COMMENT",
+  "CPP.DOT",
+  "CPP.KEYWORD",
+  "CPP.LINE_COMMENT",
+  "CPP.MACROS",
+  "CPP.NUMBER",
+  "CPP.OPERATION_SIGN",
+  "CPP.PP_ARG",
+  "CPP.STRING",
 ];
 
 export const themeCoverageAuditAttributes = [

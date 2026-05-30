@@ -78,6 +78,27 @@ export const TOKEN_SCOPES: Record<string, string[]> = {
   "COFFEESCRIPT.REGULAR_EXPRESSION_CONTENT": ["regexp.coffee"],
   "COFFEESCRIPT.STRING": ["string.coffee"],
   "COFFEESCRIPT.THIS": ["variable.predefined.coffee"],
+  "CPP.BLOCK_COMMENT": ["comment.cpp"],
+  "CPP.DOT": ["delimiter.cpp"],
+  "CPP.KEYWORD": [
+    "keyword.auto.cpp",
+    "keyword.class.cpp",
+    "keyword.const.cpp",
+    "keyword.namespace.cpp",
+    "keyword.public.cpp",
+    "keyword.private.cpp",
+    "keyword.return.cpp",
+    "keyword.static.cpp",
+    "keyword.template.cpp",
+    "keyword.typename.cpp",
+    "keyword.void.cpp",
+  ],
+  "CPP.LINE_COMMENT": ["comment.cpp"],
+  "CPP.MACROS": ["keyword.directive.cpp", "keyword.directive.include.cpp"],
+  "CPP.NUMBER": ["number.cpp", "number.float.cpp", "number.hex.cpp", "number.octal.cpp", "number.binary.cpp"],
+  "CPP.OPERATION_SIGN": ["delimiter.cpp"],
+  "CPP.PP_ARG": ["string.include.identifier.cpp"],
+  "CPP.STRING": ["string.cpp", "string.escape.cpp"],
 };
 
 export function buildMonacoTheme(theme: ThemeConfig): editor.IStandaloneThemeData {
