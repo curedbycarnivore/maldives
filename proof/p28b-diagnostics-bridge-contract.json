@@ -1,0 +1,21 @@
+{
+  "request": {
+    "path": "/src/effect-app.tsx",
+    "content": "string"
+  },
+  "response": {
+    "diagnostics": [
+      {
+        "path": "/src/effect-app.tsx",
+        "severity": "error",
+        "code": "TS9999",
+        "rule": "floatingEffect",
+        "startLine": 9,
+        "startCol": 5,
+        "endLine": 9,
+        "endCol": 6,
+        "message": "Effect is neither yielded nor used"
+      }
+    ]
+  }
+}
