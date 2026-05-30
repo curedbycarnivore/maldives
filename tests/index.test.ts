@@ -1,5 +1,6 @@
 import { describe, expect, test, vi } from "vitest";
 import type * as monaco from "monaco-editor";
+import { MemoryFileSystemAdapter } from "../src/fs";
 
 const monacoStub = vi.hoisted(() => {
   const state = {
@@ -82,10 +83,12 @@ describe("createMaldivesEditor", () => {
   test("creates a themed Monaco editor and disposes owned resources", async () => {
     const { createMaldivesEditor } = await import("../src");
     const container = {} as HTMLElement;
+    const fileSystemAdapter = new MemoryFileSystemAdapter();
 
-    const result = createMaldivesEditor(container, { lspUrl: "ws://unused" });
+    const result = createMaldivesEditor(container, { lspUrl: "ws://unused", fs: fileSystemAdapter });
 
     expect(result.editor).toBe(monacoStub.editor);
+    expect(result.fileSystemAdapter).toBe(fileSystemAdapter);
     expect(monacoStub.state.definedThemes[0]?.name).toBe("tomorrow-night-eighties");
     expect(monacoStub.state.createdEditors[0]).toMatchObject({
       language: "typescript",

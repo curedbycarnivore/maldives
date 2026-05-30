@@ -10,6 +10,8 @@ import { registerEffectHoverProvider } from "./effect-hover";
 import { registerEffectSnippets } from "./effect-snippets";
 import { registerModelTab, registerRecentLocationTracking } from "./file-switcher";
 import { cleanOnBlurFromModel } from "./hooks/trailing-whitespace";
+import { resolveFileSystemAdapter, type FileSystemAdapterInit } from "./fs/selector";
+import type { FileSystemAdapter } from "./fs/types";
 import { registerKeybindings } from "./keybindings";
 import { parseEditorOptions } from "./parsers/editor-options-parser";
 import { parseIcls } from "./parsers/icls-parser";
@@ -22,10 +24,12 @@ import { configureTypeScriptWorker, warmTypeScriptWorkerForModel, type EffectDts
 export interface CreateMaldivesEditorOptions {
   lspUrl?: string;
   effectDtsFiles?: EffectDtsFiles;
+  fs?: FileSystemAdapterInit;
 }
 
 export interface MaldivesEditorHandle {
   editor: monaco.editor.IStandaloneCodeEditor;
+  fileSystemAdapter: FileSystemAdapter;
   dispose: () => void;
 }
 
@@ -36,6 +40,7 @@ export function createMaldivesEditor(
   const themeConfig = parseIcls(activeThemeXml);
   const editorOptions = parseEditorOptions(editorOptionsXml);
   const keymapConfig = parseKeymap(keymapXml);
+  const fileSystemAdapter = resolveFileSystemAdapter(_opts.fs);
 
   setupDefaultMonacoWorkers();
   registerTheme(monaco, themeConfig);
@@ -81,6 +86,7 @@ export function createMaldivesEditor(
 
   return {
     editor,
+    fileSystemAdapter,
     dispose() {
       blurDisposable?.dispose();
       recentLocationsDisposable.dispose();
@@ -94,8 +100,8 @@ export function createMaldivesEditor(
   };
 }
 
-export { createMemoryFileSystemAdapter, createOpfsFileSystemAdapter, FileSystemAccessAdapter, FileSystemAdapterError, fileUriForFsaPath, fsaPathForFileUri, installOpenFileButton, MemoryFileSystemAdapter, OpfsFileSystemAdapter, openPickedFileInWorkspace, ProxyFileSystemAdapter, saveWorkspaceFile } from "./fs";
-export type { FileSystemAccessAdapterOptions, FileSystemAccessHost, FileSystemAccessWriteOptions, FileSystemAdapter, FileSystemAdapterErrorCode, FileSystemChange, FileSystemDirectoryHandleLike, FileSystemEntry, FileSystemEntryType, FileSystemFileHandleLike, FileSystemHandleLike, FileSystemPermissionStateLike, FileSystemWatcher, FileSystemWritableFileStreamLike, FileSystemWriteOptions, OpenedFile, OpenedWorkspaceFile, OpfsDirectoryHandleLike, OpfsFileHandleLike, OpfsFileSystemAdapterOptions, OpfsHandleLike, OpfsHost, OpfsWritableFileStreamLike, ProxyFileSystemAdapterOptions } from "./fs";
+export { createMemoryFileSystemAdapter, createOpfsFileSystemAdapter, FileSystemAccessAdapter, FileSystemAdapterError, fileUriForFsaPath, fsaPathForFileUri, installOpenFileButton, isFileSystemAdapter, MemoryFileSystemAdapter, OpfsFileSystemAdapter, openPickedFileInWorkspace, ProxyFileSystemAdapter, resolveFileSystemAdapter, saveWorkspaceFile } from "./fs";
+export type { FileSystemAccessAdapterOptions, FileSystemAccessHost, FileSystemAccessWriteOptions, FileSystemAdapter, FileSystemAdapterErrorCode, FileSystemAdapterInit, FileSystemChange, FileSystemDirectoryHandleLike, FileSystemEntry, FileSystemEntryType, FileSystemFileHandleLike, FileSystemHandleLike, FileSystemPermissionStateLike, FileSystemWatcher, FileSystemWritableFileStreamLike, FileSystemWriteOptions, OpenedFile, OpenedWorkspaceFile, OpfsDirectoryHandleLike, OpfsFileHandleLike, OpfsFileSystemAdapterOptions, OpfsHandleLike, OpfsHost, OpfsWritableFileStreamLike, ProxyFileSystemAdapterOptions } from "./fs";
 export { createToolWindowController, installToolWindowController, toolWindowIdForAction, toolWindowTitleForAction, ToolWindowController } from "./tool-windows";
 export type { ToolWindowDefinition, ToolWindowId, ToolWindowSnapshot } from "./tool-windows";
 export { registerEffectDtsFiles } from "./typescript-worker";

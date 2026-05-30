@@ -5,5 +5,7 @@ export { createOpfsFileSystemAdapter, OpfsFileSystemAdapter } from "./opfs-adapt
 export type { OpfsDirectoryHandleLike, OpfsFileHandleLike, OpfsFileSystemAdapterOptions, OpfsHandleLike, OpfsHost, OpfsWritableFileStreamLike } from "./opfs-adapter";
 export { ProxyFileSystemAdapter } from "./proxy-adapter";
 export type { ProxyFileSystemAdapterOptions } from "./proxy-adapter";
+export { isFileSystemAdapter, resolveFileSystemAdapter } from "./selector";
+export type { FileSystemAdapterInit } from "./selector";
 export type { FileSystemAdapter, FileSystemAdapterErrorCode, FileSystemChange, FileSystemEntry, FileSystemEntryType, FileSystemWatcher, FileSystemWriteOptions } from "./types";
 export { FileSystemAdapterError } from "./types";

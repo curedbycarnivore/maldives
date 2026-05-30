@@ -14,7 +14,7 @@ import { registerEffectHoverProvider } from "./effect-hover";
 import { registerEffectSnippets } from "./effect-snippets";
 import { installFavoritesPanelController, type FavoritesPanelController } from "./favorites-panel";
 import { installFindInFilesPanel, type FindInFilesController } from "./find-in-files";
-import { FileSystemAccessAdapter, installOpenFileButton } from "./fs";
+import { FileSystemAccessAdapter, installOpenFileButton, resolveFileSystemAdapter, type FileSystemAdapter, type FileSystemAdapterInit } from "./fs";
 import { installFileSwitcherController, registerModelTab, registerRecentLocationTracking, type FileSwitcherController } from "./file-switcher";
 import { cleanOnBlurFromModel } from "./hooks/trailing-whitespace";
 import { isCustomTextMutationAction, registerKeybindings, type RegisteredMaldivesAction } from "./keybindings";
@@ -47,7 +47,8 @@ declare global {
     __maldivesVscodeTsWorkerReady: Promise<VscodeTypeScriptWorkerBootstrap>;
     __maldivesEffectLanguageService: EffectLanguageServiceController;
     __maldivesWorkspace: MaldivesWorkspace;
-    __maldivesFileSystemAdapter: FileSystemAccessAdapter;
+    __maldivesInit?: { readonly fs?: FileSystemAdapterInit };
+    __maldivesFileSystemAdapter: FileSystemAdapter;
     __maldivesToolWindows: ToolWindowController;
     __maldivesVcsPanel: VcsPanelController;
     __maldivesRunDebugPanel: RunDebugPanelController;
@@ -144,7 +145,7 @@ installWorkspacePersistence({ workspace, editor, storage: workspaceStorage });
 const readyModel = workspace.model(workspace.activeUri ?? DEFAULT_SAMPLE_URI) ?? workspace.open(DEFAULT_SAMPLE_URI, defaultSampleDocument);
 installWorkspaceTabStrip(document.body, workspace);
 installWorkspaceSplitLayout(document.body, workspace);
-const fileSystemAdapter = new FileSystemAccessAdapter();
+const fileSystemAdapter = resolveFileSystemAdapter(window.__maldivesInit?.fs);
 const toolWindows = installToolWindowController(document.body);
 const vcsPanel = installVcsPanelController(document.body);
 const runDebugPanel = installRunDebugPanelController(document.body);
@@ -169,7 +170,9 @@ registerRecentLocationTracking(editor);
 registerAstStructuralSearchAction(editor);
 registerSchemaJsonSchemaAction(editor);
 const effectLanguageService = installEffectLanguageService(monaco, editor, { effectDtsFiles, typeScriptLibFiles });
-installOpenFileButton(document.body, fileSystemAdapter, workspace);
+if (fileSystemAdapter instanceof FileSystemAccessAdapter) {
+  installOpenFileButton(document.body, fileSystemAdapter, workspace);
+}
 installEffectDevToolsButton(document.body, {
   enabled: __MALDIVES_DEVTOOLS_ENABLED__,
   token: window.localStorage.getItem("maldives.devtools.token") ?? "",
