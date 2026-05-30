@@ -92,6 +92,53 @@ describe("ProxyFileSystemAdapter", () => {
       path: "/src/effect-app.tsx",
     });
   });
+
+  test("enforces HTTPS origin and client-side write size before fetch", async () => {
+    const fetch = vi.fn(async () => response(""));
+
+    expect(() => new ProxyFileSystemAdapter({ origin: "http://take5.local", repo: "maldives", token: "session-token", fetch })).toThrow(
+      FileSystemAdapterError,
+    );
+
+    const adapter = new ProxyFileSystemAdapter({ origin: "https://take5.local", repo: "maldives", token: "session-token", fetch, maxWriteBytes: 16 });
+
+    await expect(adapter.writeFile("/src/effect-app.tsx", "x".repeat(17))).rejects.toMatchObject({
+      name: "FileSystemAdapterError",
+      code: "EFBIG",
+      path: "/src/effect-app.tsx",
+    });
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  test("trusts only textual read responses and JSON list responses inside the requested workspace path", async () => {
+    const fetch = vi.fn(async (input: RequestInfo | URL, init: RequestInit = {}) => {
+      const url = input.toString();
+
+      if (url.endsWith("/src/effect-app.tsx") && init.method === "GET") {
+        return response("<script>not source</script>", { headers: { "content-type": "text/html" } });
+      }
+
+      if (url.endsWith("/src?list=1") && init.method === "GET") {
+        return response(JSON.stringify([{ type: "file", name: "secret.tsx", path: "/secret.tsx" }]), {
+          headers: { "content-type": "application/json" },
+        });
+      }
+
+      return response("not found", { status: 404 });
+    });
+    const adapter = new ProxyFileSystemAdapter({ origin: "https://take5.local", repo: "maldives", token: "session-token", fetch });
+
+    await expect(adapter.readFile("/src/effect-app.tsx")).rejects.toMatchObject({
+      name: "FileSystemAdapterError",
+      code: "ESECURITY",
+      path: "/src/effect-app.tsx",
+    });
+    await expect(adapter.list("/src")).rejects.toMatchObject({
+      name: "FileSystemAdapterError",
+      code: "ESECURITY",
+      path: "/secret.tsx",
+    });
+  });
 });
 
 function response(body: string, init: ResponseInit = {}): Response {

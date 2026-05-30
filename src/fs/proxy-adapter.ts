@@ -5,7 +5,11 @@ export interface ProxyFileSystemAdapterOptions {
   readonly repo: string;
   readonly token: string;
   readonly fetch?: typeof fetch;
+  readonly maxWriteBytes?: number;
 }
+
+const DEFAULT_MAX_WRITE_BYTES = 5 * 1024 * 1024;
+const TEXT_READ_MIME_TYPES = new Set(["application/json", "application/javascript", "application/typescript", "text/javascript", "text/plain", "text/typescript"]);
 
 type WatchCallback = (change: FileSystemChange) => void;
 
@@ -14,6 +18,7 @@ export class ProxyFileSystemAdapter implements FileSystemAdapter {
   readonly #repo: string;
   readonly #token: string;
   readonly #fetch: typeof fetch;
+  readonly #maxWriteBytes: number;
   readonly #watchers = new Map<string, Set<WatchCallback>>();
 
   constructor(options: ProxyFileSystemAdapterOptions) {
@@ -21,16 +26,23 @@ export class ProxyFileSystemAdapter implements FileSystemAdapter {
     this.#repo = normalizeRepo(options.repo);
     this.#token = options.token;
     this.#fetch = options.fetch ?? globalThis.fetch.bind(globalThis);
+    this.#maxWriteBytes = options.maxWriteBytes ?? DEFAULT_MAX_WRITE_BYTES;
   }
 
   async readFile(path: string): Promise<string> {
     const normalized = normalizeWorkspacePath(path);
     const response = await this.#request(normalized, { method: "GET", headers: { accept: "text/plain" } });
+    assertMimeType(response, normalized, TEXT_READ_MIME_TYPES);
     return response.text();
   }
 
   async writeFile(path: string, content: string): Promise<void> {
     const normalized = normalizeWorkspacePath(path);
+
+    if (new TextEncoder().encode(content).byteLength > this.#maxWriteBytes) {
+      throw new FileSystemAdapterError("EFBIG", normalized, `Refusing to write file over ${this.#maxWriteBytes} bytes: ${normalized}`);
+    }
+
     await this.#request(normalized, {
       method: "PUT",
       body: content,
@@ -42,13 +54,14 @@ export class ProxyFileSystemAdapter implements FileSystemAdapter {
   async list(dir: string): Promise<FileSystemEntry[]> {
     const normalized = normalizeWorkspacePath(dir);
     const response = await this.#request(normalized, { method: "GET", headers: { accept: "application/json" }, list: true });
+    assertMimeType(response, normalized, new Set(["application/json"]));
     const entries = await response.json();
 
     if (!Array.isArray(entries)) {
       throw new FileSystemAdapterError("EACCES", normalized, `Invalid Take5 list response for: ${normalized}`);
     }
 
-    return entries.map(toFileSystemEntry).sort((a, b) => a.path.localeCompare(b.path));
+    return entries.map((entry) => toFileSystemEntry(entry, normalized)).sort((a, b) => a.path.localeCompare(b.path));
   }
 
   watch(path: string, callback: WatchCallback): FileSystemWatcher {
@@ -107,6 +120,11 @@ export class ProxyFileSystemAdapter implements FileSystemAdapter {
 
 function normalizeOrigin(origin: string | URL): URL {
   const url = new URL(origin.toString());
+
+  if (url.protocol !== "https:") {
+    throw new FileSystemAdapterError("ESECURITY", url.origin, `Take5 workspace proxy requires HTTPS origin: ${url.origin}`);
+  }
+
   url.pathname = "/";
   url.search = "";
   url.hash = "";
@@ -144,7 +162,7 @@ function endpointUrl(origin: URL, repo: string, path: string): URL {
   return url;
 }
 
-function toFileSystemEntry(value: unknown): FileSystemEntry {
+function toFileSystemEntry(value: unknown, listedDir: string): FileSystemEntry {
   if (!value || typeof value !== "object") {
     throw new FileSystemAdapterError("EACCES", "/", "Invalid Take5 list entry");
   }
@@ -155,7 +173,25 @@ function toFileSystemEntry(value: unknown): FileSystemEntry {
     throw new FileSystemAdapterError("EACCES", "/", "Invalid Take5 list entry");
   }
 
-  return { type: entry.type, name: entry.name, path: normalizeWorkspacePath(entry.path) };
+  const path = normalizeWorkspacePath(entry.path);
+
+  if (!isInsideListedDir(path, listedDir)) {
+    throw new FileSystemAdapterError("ESECURITY", path, `Take5 list entry escaped requested workspace path: ${path}`);
+  }
+
+  return { type: entry.type, name: entry.name, path };
+}
+
+function assertMimeType(response: Response, path: string, allowed: ReadonlySet<string>): void {
+  const mimeType = (response.headers.get("content-type") ?? "").split(";")[0]?.trim().toLowerCase();
+
+  if (!mimeType || !allowed.has(mimeType)) {
+    throw new FileSystemAdapterError("ESECURITY", path, `Unexpected Take5 workspace response content-type: ${mimeType || "<missing>"}`);
+  }
+}
+
+function isInsideListedDir(path: string, listedDir: string): boolean {
+  return listedDir === "/" || path === listedDir || path.startsWith(`${listedDir}/`);
 }
 
 function errorCodeForStatus(status: number): "ENOENT" | "EACCES" | "EFBIG" {
