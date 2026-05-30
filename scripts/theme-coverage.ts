@@ -489,6 +489,9 @@ function coffeeScriptPathsFor(name: string): string[] {
 }
 
 function classifiedTopLevelDeferredReason(path: string): string {
+  const noSurface = noSurfaceReasonForPath(path);
+  if (noSurface) return noSurface;
+
   if (path === "ANNOTATION_NAME_ATTRIBUTES") {
     return "defer: Java annotation highlighting is not loaded; TypeScript decorators are covered by TS.DECORATOR";
   }
@@ -513,37 +516,21 @@ function classifiedTopLevelDeferredReason(path: string): string {
     return "unsupported: Monaco breadcrumbs expose focus foreground but no separate hovered-item background color";
   }
 
-  if (path.startsWith("APACHE_CONFIG.")) {
-    return "defer: Monaco/Maldives does not load an Apache config language grammar yet";
-  }
-
-  if (path === "BASH.HERE_DOC") {
-    return "unsupported: active ICLS BASH.HERE_DOC has no foreground or font style to apply";
-  }
 
   if (path.startsWith("BLOCK_TERMINAL_COMMAND.")) {
     return "defer: terminal command block highlighting waits for the P23 terminal/editor-block subsystem; no Monaco grammar emits this token today";
   }
 
-  if (path.startsWith("COFFEESCRIPT.")) {
-    return coffeeScriptDeferredReason(path);
-  }
 
   if (path.startsWith("CONSTRUCTOR_")) {
     return constructorDeferredReason(path);
   }
 
-  if (path.startsWith("CPP.")) {
-    return cppDeferredReason(path);
-  }
 
   if (path === "CONSOLE_DARKGRAY_OUTPUT") {
     return "unsupported: active ICLS CONSOLE_DARKGRAY_OUTPUT has no foreground or font style to apply";
   }
 
-  if (path.startsWith("CSS.")) {
-    return cssDeferredReason(path);
-  }
 
   if (path.startsWith("CUSTOM_")) {
     return customLanguageDeferredReason(path);
@@ -567,7 +554,23 @@ function classifiedTopLevelDeferredReason(path: string): string {
 function customLanguageDeferredReason(path: string): string {
   const label = path.includes("STRING_ESCAPE") ? "string escape" : path.includes("COMMENT") ? "comment" : path.includes("NUMBER") ? "number" : path.includes("STRING") ? "string" : "keyword";
 
-  return `no-surface: WebStorm custom file-type ${label} colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately`;
+  return noSurfaceReason(`custom file-type ${label}`);
+}
+
+function noSurfaceReason(label: string): string {
+  return `no-surface: WebStorm ${label} colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately`;
+}
+
+function noSurfaceReasonForPath(path: string): string | undefined {
+  if (path.startsWith("BUILDOUT.")) return noSurfaceReason("Buildout");
+  if (path.startsWith("C.KEYWORD")) return noSurfaceReason("C");
+  if (path.startsWith("APACHE_CONFIG.")) return noSurfaceReason("Apache config");
+  if (path.startsWith("BASH.")) return noSurfaceReason("Bash");
+  if (path.startsWith("COFFEESCRIPT.")) return noSurfaceReason("CoffeeScript");
+  if (path.startsWith("CPP.")) return noSurfaceReason("C/C++");
+  if (path.startsWith("CSS.")) return noSurfaceReason("CSS");
+  if (path.startsWith("CONDITIONALLY_NOT_COMPILED.")) return noSurfaceReason("conditionally-not-compiled foreign-language");
+  return undefined;
 }
 
 function constructorDeferredReason(path: string): string {
@@ -690,29 +693,18 @@ function deferredReason(path: string): string {
     return "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute";
   }
 
-  if (parent.startsWith("COFFEESCRIPT")) {
-    return coffeeScriptDeferredReason(path);
-  }
+  const noSurface = noSurfaceReasonForPath(path);
+  if (noSurface) return noSurface;
 
   if (parent.startsWith("CONSTRUCTOR_")) {
     return constructorDeferredReason(path);
   }
 
-  if (parent.startsWith("CPP")) {
-    return cppDeferredReason(path);
-  }
-
-  if (parent.startsWith("CSS")) {
-    return cssDeferredReason(path);
-  }
 
   if (parent.startsWith("CUSTOM_")) {
     return customLanguageDeferredReason(path);
   }
 
-  if (parent.startsWith("APACHE_CONFIG") || parent.startsWith("BASH")) {
-    return "defer: Maldives does not load this language grammar yet";
-  }
 
   return "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet";
 }

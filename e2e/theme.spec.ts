@@ -178,8 +178,29 @@ const UserLayer = Layer.succeed(Repository, new UserRepository());
   await page.screenshot({ path: "proof/p15i-theme-core-surfaces-proof.png" });
 });
 
-test("renders P15j breadcrumbs variables plus Buildout and C token colors", async ({ page }) => {
+test("reports P15j/P15k/P15l foreign-language colors as no-surface while breadcrumbs remain mapped", async ({ page }) => {
   await loadEditor(page);
+
+  const report = JSON.parse(await readFile("proof/theme-coverage.json", "utf-8")) as {
+    top50Unmapped: Array<{ name: string }>;
+    classifiedTopLevelOptions: Array<{ name: string; mappedPaths: unknown[]; deferredPaths: Array<{ reason: string }> }>;
+  };
+  const foreignNames = [
+    "BUILDOUT.KEY",
+    "BUILDOUT.LINE_COMMENT",
+    "C.KEYWORD",
+    "APACHE_CONFIG.IDENTIFIER",
+    "BASH.EXTERNAL_COMMAND",
+    "COFFEESCRIPT.KEYWORD",
+    "COFFEESCRIPT.STRING",
+  ];
+
+  expect(report.top50Unmapped.map((entry) => entry.name)).not.toEqual(expect.arrayContaining(foreignNames));
+  for (const name of foreignNames) {
+    const entry = report.classifiedTopLevelOptions.find((candidate) => candidate.name === name);
+    expect(entry?.mappedPaths).toEqual([]);
+    expect(entry?.deferredPaths.every((path) => path.reason.startsWith("no-surface:"))).toBe(true);
+  }
 
   const themeVar = (name: string) =>
     page.locator(".monaco-editor").first().evaluate((element, variableName) => getComputedStyle(element).getPropertyValue(variableName).trim(), name);
@@ -189,138 +210,27 @@ test("renders P15j breadcrumbs variables plus Buildout and C token colors", asyn
   await expect.poll(() => themeVar("--vscode-breadcrumb-focusForeground"), { timeout: 10000 }).toBe("#585858");
 
   await page.evaluate(() => {
-    const sample = `[buildout]
-parts = app
-# managed by Maldives
-`;
-    window.__maldivesEditor.setModel(window.__monaco.editor.createModel(sample, "ini", window.__monaco.Uri.parse("file:///maldives/buildout.ts")));
-    window.__maldivesEditor.setPosition({ lineNumber: 2, column: 1 });
-    window.__maldivesEditor.focus();
-  });
-
-  const colorForText = (text: string) =>
-    page.evaluate((needle) => {
-      const normalize = (value: string | null) => (value ?? "").replace(/\u00a0/g, " ").trim();
-      const spans = Array.from(document.querySelectorAll<HTMLElement>(".monaco-editor .view-line span"));
-      const match = spans.find((span) => span.childElementCount === 0 && normalize(span.textContent) === needle);
-      return match ? getComputedStyle(match).color : "";
-    }, text);
-
-  await expect.poll(() => colorForText("parts"), { timeout: 10000 }).toBe("rgb(204, 153, 204)");
-  await expect.poll(() => colorForText("# managed by Maldives"), { timeout: 10000 }).toBe("rgb(153, 153, 153)");
-
-  await page.evaluate(() => {
-    const sample = `int main(void) {
-  int values[1] = {0};
-  return values[0];
-}
-`;
-    window.__maldivesEditor.setModel(window.__monaco.editor.createModel(sample, "c", window.__monaco.Uri.parse("file:///maldives/p15j.ts")));
-    window.__maldivesEditor.setPosition({ lineNumber: 2, column: 14 });
-    window.__maldivesEditor.focus();
-  });
-
-  await expect.poll(() => colorForText("int"), { timeout: 10000 }).toBe("rgb(204, 153, 204)");
-
-  await mkdir("proof", { recursive: true });
-  await page.screenshot({ path: "proof/p15j-theme-brackets-breadcrumbs-class-proof.png" });
-});
-
-test("renders P15k Bash external command colors on a real shell workflow", async ({ page }) => {
-  await loadEditor(page);
-
-  await page.evaluate(() => {
-    const sample = `#!/usr/bin/env bash
-set -euo pipefail
-mkdir -p src/generated
-cat > src/generated/real-user.tsx <<'TSX'
-import { Effect, Layer, Schema, pipe } from "effect";
+    const sample = `import { Effect, Layer, Schema, pipe } from "effect";
 
 function traced(_target: unknown, _key: string) {}
 
 @traced
-class Repository<T extends { id: string }> {
-  load(id: string): Effect.Effect<T, Error> {
-    return pipe(
-      Effect.succeed({ id, schema: Schema.String }),
-      Effect.map((value) => value as T)
-    );
+class P32ForeignNoSurfaceAudit<T extends { id: string }> {
+  render(value: T) {
+    return pipe(Effect.succeed(value), Effect.map((row) => Schema.String));
   }
 }
 
-const LiveRepository = Layer.succeed(Repository, new Repository<{ id: string }>());
-TSX
-grep -n "LiveRepository" src/generated/real-user.tsx
+export const ForeignNoSurfaceLayer = Layer.succeed(P32ForeignNoSurfaceAudit, new P32ForeignNoSurfaceAudit());
 `;
-    window.__maldivesEditor.setModel(window.__monaco.editor.createModel(sample, "shell", window.__monaco.Uri.parse("file:///maldives/p15k-real-workflow.ts")));
-    window.__maldivesEditor.setPosition({ lineNumber: 4, column: 1 });
+    window.__maldivesEditor.setModel(window.__monaco.editor.createModel(sample, "typescript", window.__monaco.Uri.parse("file:///maldives/p32-foreign-no-surface.tsx")));
+    window.__maldivesEditor.setPosition({ lineNumber: 7, column: 5 });
     window.__maldivesEditor.focus();
   });
-
-  const colorForText = (text: string) =>
-    page.evaluate((needle) => {
-      const normalize = (value: string | null) => (value ?? "").replace(/\u00a0/g, " ").trim();
-      const spans = Array.from(document.querySelectorAll<HTMLElement>(".monaco-editor .view-line span"));
-      const match = spans.find((span) => span.childElementCount === 0 && normalize(span.textContent) === needle);
-      return match ? getComputedStyle(match).color : "";
-    }, text);
-
-  await expect.poll(() => colorForText("mkdir"), { timeout: 10000 }).toBe("rgb(204, 138, 155)");
-  await expect.poll(() => colorForText("cat"), { timeout: 10000 }).toBe("rgb(204, 138, 155)");
-  await expect.poll(() => colorForText("grep"), { timeout: 10000 }).toBe("rgb(204, 138, 155)");
+  await expect(page.locator(".monaco-editor")).toContainText("P32ForeignNoSurfaceAudit");
 
   await mkdir("proof", { recursive: true });
-  await page.screenshot({ path: "proof/p15k-theme-shell-surfaces-proof.png" });
-});
-
-test("renders P15l CoffeeScript token colors on a real script that emits Effect TSX", async ({ page }) => {
-  await loadEditor(page);
-
-  await page.evaluate(() => {
-    const sample = `# CoffeeScript generator for a real Effect TSX module
-class RepositoryBuilder
-  constructor: (@ready = true) ->
-  build: (id) =>
-    source = """
-    import { Effect, Layer, Schema, pipe } from "effect"
-    class Repository<T extends { id: string }> {
-      load(id: string) { return pipe(Effect.succeed({ id }), Effect.map(Schema.decodeUnknownSync(Schema.Struct({ id: Schema.String })))) }
-    }
-    export const Live = Layer.succeed(Repository, new Repository<{ id: string }>())
-    """
-    count = 42
-    return source if this.ready? and count > 0
-`;
-    window.__maldivesEditor.setModel(window.__monaco.editor.createModel(sample, "coffeescript", window.__monaco.Uri.parse("file:///maldives/p15l-real-generator.coffee")));
-    window.__maldivesEditor.setPosition({ lineNumber: 3, column: 3 });
-    window.__maldivesEditor.focus();
-  });
-
-  const colorForText = (text: string) =>
-    page.evaluate((needle) => {
-      const normalize = (value: string | null) => (value ?? "").replace(/\u00a0/g, " ").trim();
-      const spans = Array.from(document.querySelectorAll<HTMLElement>(".monaco-editor .view-line span"));
-      const match = spans.find((span) => span.childElementCount === 0 && normalize(span.textContent) === needle);
-      if (match) return getComputedStyle(match).color;
-
-      const line = Array.from(document.querySelectorAll<HTMLElement>(".monaco-editor .view-line")).find(
-        (viewLine) => normalize(viewLine.textContent) === needle,
-      );
-      const leafColors = Array.from(line?.querySelectorAll<HTMLElement>("span") ?? [])
-        .filter((span) => span.childElementCount === 0 && normalize(span.textContent))
-        .map((span) => getComputedStyle(span).color);
-      return new Set(leafColors).size === 1 ? leafColors[0] : "";
-    }, text);
-
-  await expect.poll(() => colorForText("# CoffeeScript generator for a real Effect TSX module"), { timeout: 10000 }).toBe("rgb(153, 153, 153)");
-  await expect.poll(() => colorForText("class"), { timeout: 10000 }).toBe("rgb(204, 153, 204)");
-  await expect.poll(() => colorForText("true"), { timeout: 10000 }).toBe("rgb(249, 145, 87)");
-  await expect.poll(() => colorForText("->"), { timeout: 10000 }).toBe("rgb(102, 204, 204)");
-  await expect.poll(() => colorForText("this"), { timeout: 10000 }).toBe("rgb(102, 204, 204)");
-  await expect.poll(() => colorForText("42"), { timeout: 10000 }).toBe("rgb(249, 145, 87)");
-
-  await mkdir("proof", { recursive: true });
-  await page.screenshot({ path: "proof/p15l-theme-coffeescript-surfaces-proof.png" });
+  await page.screenshot({ path: "proof/p32j-foreign-language-no-surface-proof.png" });
 });
 
 test("renders P32f console palette colors in the terminal panel", async ({ page }) => {
@@ -362,100 +272,53 @@ export const ConsolePaletteLayer = Layer.succeed(ConsolePaletteService, new Cons
   await page.screenshot({ path: "proof/p32f-console-palette-proof.png" });
 });
 
-test("renders P32g C++ token colors on a real bridge that embeds Effect TSX", async ({ page }) => {
+test("reports P32g/P32h C++ and CSS color schemes as no-surface instead of bundled language themes", async ({ page }) => {
   await loadEditor(page);
 
-  await page.evaluate(() => {
-    const sample = `/* P32g C++ renders a real Effect TSX bridge */
-#include <effect/runtime.hpp>
-#define EFFECT_BATCH_SIZE 42
-namespace maldives::effect {
-template <class Row>
-class EffectRepository {
-public:
-  EffectRepository(Row row) : row_(row) {}
-  std::string emitTsx() const {
-    return "Effect.gen(function* () { return yield* Layer.succeed(Schema.String, pipe(Effect.succeed(row.id))) })";
+  const report = JSON.parse(await readFile("proof/theme-coverage.json", "utf-8")) as {
+    top50Unmapped: Array<{ name: string }>;
+    classifiedTopLevelOptions: Array<{ name: string; mappedPaths: unknown[]; deferredPaths: Array<{ reason: string }> }>;
+  };
+  const names = [
+    "CPP.BLOCK_COMMENT",
+    "CPP.KEYWORD",
+    "CPP.PP_ARG",
+    "CPP.STRING",
+    "CSS.COLOR",
+    "CSS.COMMENT",
+    "CSS.PROPERTY_NAME",
+    "CSS.URL",
+  ];
+
+  expect(report.top50Unmapped.map((entry) => entry.name)).not.toEqual(expect.arrayContaining(names));
+  for (const name of names) {
+    const entry = report.classifiedTopLevelOptions.find((candidate) => candidate.name === name);
+    expect(entry?.mappedPaths).toEqual([]);
+    expect(entry?.deferredPaths.every((path) => path.reason.startsWith("no-surface:"))).toBe(true);
   }
-private:
-  Row row_;
-};
-}
-`;
-    window.__maldivesEditor.setModel(window.__monaco.editor.createModel(sample, "cpp", window.__monaco.Uri.parse("file:///maldives/p32g-effect-bridge.cpp")));
-    window.__maldivesEditor.setPosition({ lineNumber: 8, column: 3 });
-    window.__maldivesEditor.focus();
-  });
-
-  const colorForText = (text: string) =>
-    page.evaluate((needle) => {
-      const normalize = (value: string | null) => (value ?? "").replace(/\u00a0/g, " ").trim();
-      const spans = Array.from(document.querySelectorAll<HTMLElement>(".monaco-editor .view-line span"));
-      const match = spans.find((span) => span.childElementCount === 0 && normalize(span.textContent) === needle);
-      return match ? getComputedStyle(match).color : "";
-    }, text);
-  const colorForSpanContaining = (text: string) =>
-    page.evaluate((needle) => {
-      const normalize = (value: string | null) => (value ?? "").replace(/\u00a0/g, " ").trim();
-      const spans = Array.from(document.querySelectorAll<HTMLElement>(".monaco-editor .view-line span"));
-      const match = spans.find((span) => span.childElementCount === 0 && normalize(span.textContent).includes(needle));
-      return match ? getComputedStyle(match).color : "";
-    }, text);
-
-  await expect.poll(() => colorForText("/* P32g C++ renders a real Effect TSX bridge */"), { timeout: 10000 }).toBe("rgb(153, 153, 153)");
-  await expect.poll(() => colorForText("class"), { timeout: 10000 }).toBe("rgb(204, 153, 204)");
-  await expect.poll(() => colorForText("#define"), { timeout: 10000 }).toBe("rgb(242, 119, 122)");
-  await expect.poll(() => colorForText("effect/runtime.hpp"), { timeout: 10000 }).toBe("rgb(249, 145, 87)");
-  await expect.poll(() => colorForText("42"), { timeout: 10000 }).toBe("rgb(249, 145, 87)");
-  await expect.poll(() => colorForSpanContaining("Effect.gen(function*"), { timeout: 10000 }).toBe("rgb(153, 204, 153)");
-
-  await mkdir("proof", { recursive: true });
-  await page.screenshot({ path: "proof/p32g-cpp-theme-proof.png" });
-});
-
-test("renders P32h CSS token colors on a real stylesheet for an Effect TSX shell", async ({ page }) => {
-  await loadEditor(page);
 
   await page.evaluate(() => {
-    const sample = `/* P32h CSS skins a real Effect TSX shell */
-@media screen and (min-width: 768px) {
-  .effect-workbench[data-state="ready"] {
-    color: #cccccc;
-    background-image: url("/assets/effect-layer.svg");
-    margin: calc(100% - 42px) !important;
+    const sample = `import { Effect, Layer, Schema, pipe } from "effect";
+
+function traced(_target: unknown, _key: string) {}
+
+@traced
+class P32CppCssNoSurface<T extends { id: string }> {
+  run(value: T) {
+    return pipe(Effect.succeed(value), Effect.map((row) => Schema.String));
   }
 }
+
+export const P32NoSurfaceLayer = Layer.succeed(P32CppCssNoSurface, new P32CppCssNoSurface());
 `;
-    window.__maldivesEditor.setModel(window.__monaco.editor.createModel(sample, "css", window.__monaco.Uri.parse("file:///maldives/p32h-effect-workbench.css")));
-    window.__maldivesEditor.setPosition({ lineNumber: 5, column: 5 });
+    window.__maldivesEditor.setModel(window.__monaco.editor.createModel(sample, "typescript", window.__monaco.Uri.parse("file:///maldives/p32-cpp-css-no-surface.tsx")));
+    window.__maldivesEditor.setPosition({ lineNumber: 7, column: 5 });
     window.__maldivesEditor.focus();
   });
-
-  const colorForText = (text: string) =>
-    page.evaluate((needle) => {
-      const normalize = (value: string | null) => (value ?? "").replace(/\u00a0/g, " ").trim();
-      const spans = Array.from(document.querySelectorAll<HTMLElement>(".monaco-editor .view-line span"));
-      const match = spans.find((span) => span.childElementCount === 0 && normalize(span.textContent) === needle);
-      return match ? getComputedStyle(match).color : "";
-    }, text);
-  const colorForSpanContaining = (text: string) =>
-    page.evaluate((needle) => {
-      const normalize = (value: string | null) => (value ?? "").replace(/\u00a0/g, " ").trim();
-      const spans = Array.from(document.querySelectorAll<HTMLElement>(".monaco-editor .view-line span"));
-      const match = spans.find((span) => span.childElementCount === 0 && normalize(span.textContent).includes(needle));
-      return match ? getComputedStyle(match).color : "";
-    }, text);
-
-  await expect.poll(() => colorForText("/* P32h CSS skins a real Effect TSX shell */"), { timeout: 10000 }).toBe("rgb(153, 153, 153)");
-  await expect.poll(() => colorForText("media"), { timeout: 10000 }).toBe("rgb(255, 204, 102)");
-  await expect.poll(() => colorForText("color:"), { timeout: 10000 }).toBe("rgb(153, 204, 153)");
-  await expect.poll(() => colorForText("#cccccc"), { timeout: 10000 }).toBe("rgb(204, 204, 204)");
-  await expect.poll(() => colorForSpanContaining("42"), { timeout: 10000 }).toBe("rgb(249, 145, 87)");
-  await expect.poll(() => colorForText("!important"), { timeout: 10000 }).toBe("rgb(242, 119, 122)");
-  await expect.poll(() => colorForSpanContaining("/assets/effect-layer.svg"), { timeout: 10000 }).toBe("rgb(255, 204, 102)");
+  await expect(page.locator(".monaco-editor")).toContainText("P32CppCssNoSurface");
 
   await mkdir("proof", { recursive: true });
-  await page.screenshot({ path: "proof/p32h-css-theme-proof.png" });
+  await page.screenshot({ path: "proof/p32j-cpp-css-no-surface-proof.png" });
 });
 
 test("reports P32i custom-language colors as no-surface while the TSX daily-driver remains real", async ({ page }) => {

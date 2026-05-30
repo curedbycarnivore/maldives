@@ -84,77 +84,37 @@ test("maps the extended ICLS token scheme to Monaco token rules", () => {
   );
 });
 
-test("maps P15j bracket, class/reference, Buildout, and C token surfaces", () => {
+test("maps P15j bracket and class/reference token surfaces", () => {
   expect(theme.rules).toEqual(
     expect.arrayContaining([
       { token: "delimiter.curly", foreground: "29b0ab", fontStyle: "bold" },
       { token: "delimiter.square", foreground: "29b0ab", fontStyle: "bold" },
       { token: "class.name", foreground: "29b0ab" },
       { token: "class.reference", foreground: "ffcc66" },
-      { token: "key.ini", foreground: "cc99cc", fontStyle: "bold" },
-      { token: "delimiter.ini", foreground: "66cccc" },
-      { token: "comment.ini", foreground: "999999", fontStyle: "italic" },
-      { token: "metatag.ini", foreground: "6699cc" },
-      { token: "string.ini", fontStyle: "bold" },
-      { token: "keyword.int", foreground: "cc99cc", fontStyle: "bold" },
     ]),
   );
 });
 
-test("maps P15k Bash external command colors onto Monaco shell token scopes", () => {
-  expect(theme.rules).toEqual(
-    expect.arrayContaining([
-      { token: "type.identifier.shell", foreground: "cc8a9b" },
-    ]),
-  );
-});
+test("does not emit dead token rules or language contributions for foreign-language ICLS schemes", () => {
+  const foreignTokenPrefixes = [
+    "key.ini",
+    "comment.ini",
+    "keyword.int",
+    "type.identifier.shell",
+    "comment.coffee",
+    "keyword.class.coffee",
+    "comment.cpp",
+    "keyword.class.cpp",
+    "comment.css",
+    "attribute.name.css",
+  ];
 
-test("maps P15l CoffeeScript colors onto Monaco CoffeeScript token scopes", () => {
-  expect(theme.rules).toEqual(
-    expect.arrayContaining([
-      { token: "comment.coffee", foreground: "999999", fontStyle: "italic" },
-      { token: "keyword.class.coffee", foreground: "cc99cc" },
-      { token: "keyword.true.coffee", foreground: "f99157", fontStyle: "bold" },
-      { token: "string.escape.coffee", foreground: "6699cc" },
-      { token: "string.escape.invalid.coffee", foreground: "ffffff" },
-      { token: "string.quote.coffee", foreground: "ffffff" },
-      { token: "delimiter.coffee", foreground: "66cccc" },
-      { token: "number.coffee", foreground: "f99157" },
-      { token: "regexp.coffee", foreground: "f2777a" },
-      { token: "string.coffee", foreground: "99cc99" },
-      { token: "variable.predefined.coffee", foreground: "66cccc", fontStyle: "bold" },
-    ]),
-  );
-});
+  expect(theme.rules.map((rule) => rule.token)).not.toEqual(expect.arrayContaining(foreignTokenPrefixes));
 
-test("maps P32g C++ token colors onto Monaco-loaded C++ token scopes", () => {
-  expect(theme.rules).toEqual(
-    expect.arrayContaining([
-      { token: "comment.cpp", foreground: "999999", fontStyle: "italic" },
-      { token: "keyword.class.cpp", foreground: "cc99cc", fontStyle: "bold" },
-      { token: "keyword.return.cpp", foreground: "cc99cc", fontStyle: "bold" },
-      { token: "keyword.directive.cpp", foreground: "f2777a" },
-      { token: "string.include.identifier.cpp", foreground: "f99157" },
-      { token: "number.cpp", foreground: "f99157" },
-      { token: "delimiter.cpp", foreground: "66cccc" },
-      { token: "string.cpp", foreground: "99cc99", fontStyle: "bold" },
-    ]),
-  );
-});
-
-test("maps P32h CSS token colors onto Monaco CSS token scopes", () => {
-  expect(theme.rules).toEqual(
-    expect.arrayContaining([
-      { token: "comment.css", foreground: "999999", fontStyle: "italic" },
-      { token: "keyword.css", foreground: "f2777a" },
-      { token: "attribute.value.hex.css", foreground: "cccccc" },
-      { token: "attribute.value.number.css", foreground: "f99157" },
-      { token: "attribute.name.css", foreground: "99cc99" },
-      { token: "delimiter.css", foreground: "cccccc" },
-      { token: "string.css", foreground: "ffcc66" },
-      { token: "tag.css", foreground: "ffcc66" },
-    ]),
-  );
+  const mainSource = readFileSync("src/main.ts", "utf-8");
+  expect(mainSource).not.toContain("basic-languages/coffee");
+  expect(mainSource).not.toContain("basic-languages/cpp");
+  expect(mainSource).not.toContain("basic-languages/css");
 });
 
 test("registers the generated Monaco theme", () => {

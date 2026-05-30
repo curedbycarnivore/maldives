@@ -1,7 +1,4 @@
 import * as monaco from "monaco-editor";
-import "monaco-editor/esm/vs/basic-languages/coffee/coffee.contribution.js";
-import "monaco-editor/esm/vs/basic-languages/cpp/cpp.contribution.js";
-import "monaco-editor/esm/vs/basic-languages/css/css.contribution.js";
 import activeThemeXml from "../ssot/colors/active-theme.icls?raw";
 import keymapXml from "../ssot/keymaps/leet hax.xml?raw";
 import editorOptionsXml from "../ssot/options/editor.xml?raw";

@@ -145,19 +145,11 @@ describe("scripts/theme-coverage", () => {
         reason: "unsupported: Monaco breadcrumbs expose focus foreground but no separate hovered-item background color",
       },
     ]);
-    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "C.KEYWORD")?.mappedPaths).toEqual([
-      {
-        path: "C.KEYWORD.FOREGROUND",
-        monacoTargets: ["token:keyword.int.foreground", "token:keyword.void.foreground", "token:keyword.return.foreground"],
-      },
-      {
-        path: "C.KEYWORD.FONT_TYPE",
-        monacoTargets: ["token:keyword.int.fontStyle", "token:keyword.void.fontStyle", "token:keyword.return.fontStyle"],
-      },
-    ]);
-    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "BUILDOUT.KEY")?.mappedPaths).toEqual(
-      expect.arrayContaining([{ path: "BUILDOUT.KEY.FOREGROUND", monacoTargets: ["token:key.ini.foreground"] }]),
-    );
+    for (const name of ["C.KEYWORD", "BUILDOUT.KEY", "BUILDOUT.LINE_COMMENT", "BUILDOUT.SECTION_NAME"]) {
+      const entry = report.classifiedTopLevelOptions.find((candidate) => candidate.name === name);
+      expect(entry?.mappedPaths).toEqual([]);
+      expect(entry?.deferredPaths.every((path) => path.reason.startsWith("no-surface:"))).toBe(true);
+    }
   });
 
   test("classifies P15k Apache config, Bash, and terminal command token surfaces", () => {
@@ -173,26 +165,15 @@ describe("scripts/theme-coverage", () => {
 
     expect(report.top50Unmapped.map((entry) => entry.name)).not.toEqual(expect.arrayContaining(p15kNames));
     expect(report.classifiedTopLevelOptions.map((entry) => entry.name)).toEqual(expect.arrayContaining(p15kNames));
-    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "BASH.EXTERNAL_COMMAND")?.mappedPaths).toEqual([
-      {
-        path: "BASH.EXTERNAL_COMMAND.FOREGROUND",
-        monacoTargets: ["token:type.identifier.shell.foreground"],
-      },
-    ]);
-    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "APACHE_CONFIG.IDENTIFIER")?.deferredPaths).toEqual([
-      {
-        path: "APACHE_CONFIG.IDENTIFIER.FOREGROUND",
-        reason: "defer: Monaco/Maldives does not load an Apache config language grammar yet",
-      },
-      {
-        path: "APACHE_CONFIG.IDENTIFIER.FONT_TYPE",
-        reason: "defer: Monaco/Maldives does not load an Apache config language grammar yet",
-      },
-    ]);
+    for (const name of ["APACHE_CONFIG.IDENTIFIER", "BASH.EXTERNAL_COMMAND"]) {
+      const entry = report.classifiedTopLevelOptions.find((candidate) => candidate.name === name);
+      expect(entry?.mappedPaths).toEqual([]);
+      expect(entry?.deferredPaths.every((path) => path.reason.startsWith("no-surface:"))).toBe(true);
+    }
     expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "BASH.HERE_DOC")?.deferredPaths).toEqual([
       {
         path: "BASH.HERE_DOC",
-        reason: "unsupported: active ICLS BASH.HERE_DOC has no foreground or font style to apply",
+        reason: "no-surface: WebStorm Bash colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately",
       },
     ]);
     expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "BLOCK_TERMINAL_COMMAND")?.deferredPaths).toEqual([
@@ -207,7 +188,7 @@ describe("scripts/theme-coverage", () => {
     ]);
   });
 
-  test("classifies P15l CoffeeScript token surfaces into targets or explicit deferrals", () => {
+  test("classifies P15l CoffeeScript token surfaces as no-surface, not dead Monaco rules", () => {
     const report = auditThemeCoverageMappings(iclsXml);
     const p15lNames = [
       "COFFEESCRIPT.BAD_CHARACTER",
@@ -241,34 +222,14 @@ describe("scripts/theme-coverage", () => {
     ];
 
     expect(report.top50Unmapped.map((entry) => entry.name)).not.toEqual(expect.arrayContaining(p15lNames));
-    expect(report.classifiedTopLevelOptions.map((entry) => entry.name)).toEqual(expect.arrayContaining(p15lNames));
-    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "COFFEESCRIPT.KEYWORD")?.mappedPaths).toEqual([
-      {
-        path: "COFFEESCRIPT.KEYWORD.FOREGROUND",
-        monacoTargets: expect.arrayContaining([
-          "token:keyword.class.coffee.foreground",
-          "token:keyword.return.coffee.foreground",
-          "token:keyword.if.coffee.foreground",
-        ]),
-      },
-    ]);
-    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "COFFEESCRIPT.CLASS_NAME")?.deferredPaths).toEqual([
-      {
-        path: "COFFEESCRIPT.CLASS_NAME.FOREGROUND",
-        reason: "unsupported: Monaco's CoffeeScript grammar does not emit a distinct class-name token",
-      },
-    ]);
-    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "COFFEESCRIPT.JAVASCRIPT_ID")?.deferredPaths).toEqual(
-      expect.arrayContaining([
-        {
-          path: "COFFEESCRIPT.JAVASCRIPT_ID.BACKGROUND",
-          reason: "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute",
-        },
-      ]),
-    );
+    for (const name of p15lNames) {
+      const entry = report.classifiedTopLevelOptions.find((candidate) => candidate.name === name);
+      expect(entry?.mappedPaths).toEqual([]);
+      expect(entry?.deferredPaths.every((path) => path.reason.startsWith("no-surface:"))).toBe(true);
+    }
   });
 
-  test("classifies P32g constructor and C++ token surfaces into targets or explicit no-surface deferrals", () => {
+  test("classifies P32g constructor and C++ token surfaces as no-surface, not dead Monaco rules", () => {
     const report = auditThemeCoverageMappings(iclsXml);
     const p32gNames = [
       "CONSTRUCTOR_CALL_ATTRIBUTES",
@@ -297,54 +258,11 @@ describe("scripts/theme-coverage", () => {
     ];
 
     expect(report.top50Unmapped.map((entry) => entry.name)).not.toEqual(expect.arrayContaining(p32gNames));
-    expect(report.classifiedTopLevelOptions.map((entry) => entry.name)).toEqual(expect.arrayContaining(p32gNames));
-    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CPP.KEYWORD")?.mappedPaths).toEqual([
-      {
-        path: "CPP.KEYWORD.FOREGROUND",
-        monacoTargets: expect.arrayContaining([
-          "token:keyword.class.cpp.foreground",
-          "token:keyword.return.cpp.foreground",
-          "token:keyword.namespace.cpp.foreground",
-        ]),
-      },
-      {
-        path: "CPP.KEYWORD.FONT_TYPE",
-        monacoTargets: expect.arrayContaining([
-          "token:keyword.class.cpp.fontStyle",
-          "token:keyword.return.cpp.fontStyle",
-          "token:keyword.namespace.cpp.fontStyle",
-        ]),
-      },
-    ]);
-    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CPP.PP_ARG")?.mappedPaths).toEqual([
-      { path: "CPP.PP_ARG.FOREGROUND", monacoTargets: ["token:string.include.identifier.cpp.foreground"] },
-    ]);
-    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CONSTRUCTOR_CALL_ATTRIBUTES")?.deferredPaths).toEqual([
-      {
-        path: "CONSTRUCTOR_CALL_ATTRIBUTES.FOREGROUND",
-        reason: "unsupported: Monaco's loaded grammars do not emit a distinct constructor-call token",
-      },
-      {
-        path: "CONSTRUCTOR_CALL_ATTRIBUTES.FONT_TYPE",
-        reason: "unsupported: Monaco's loaded grammars do not emit a distinct constructor-call token",
-      },
-    ]);
-    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CPP.FIELD")?.deferredPaths).toEqual([
-      {
-        path: "CPP.FIELD.FOREGROUND",
-        reason: "unsupported: Monaco's C++ Monarch grammar emits fields as generic identifiers, not a distinct field token",
-      },
-      {
-        path: "CPP.FIELD.FONT_TYPE",
-        reason: "unsupported: Monaco's C++ Monarch grammar emits fields as generic identifiers, not a distinct field token",
-      },
-    ]);
-    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CPP.UNUSED")?.deferredPaths).toEqual([
-      {
-        path: "CPP.UNUSED.EFFECT_TYPE",
-        reason: "unsupported: Monaco themes do not expose WebStorm effect-type styles for this C++ attribute",
-      },
-    ]);
+    for (const name of p32gNames) {
+      const entry = report.classifiedTopLevelOptions.find((candidate) => candidate.name === name);
+      expect(entry?.mappedPaths).toEqual([]);
+      expect(entry?.deferredPaths.every((path) => path.reason.startsWith("no-surface:") || path.reason.startsWith("unsupported:"))).toBe(true);
+    }
   });
 
   test("classifies P32f console palette surfaces into terminal CSS targets or explicit no-value deferrals", () => {
@@ -393,7 +311,7 @@ describe("scripts/theme-coverage", () => {
     ]);
   });
 
-  test("classifies P32h CSS token surfaces into loaded Monaco CSS scopes or explicit no-surface deferrals", () => {
+  test("classifies P32h CSS token surfaces as no-surface for the TS/TSX daily-driver", () => {
     const report = auditThemeCoverageMappings(iclsXml);
     const p32hNames = [
       "CONDITIONALLY_NOT_COMPILED",
@@ -413,35 +331,11 @@ describe("scripts/theme-coverage", () => {
     ];
 
     expect(report.top50Unmapped.map((entry) => entry.name)).not.toEqual(expect.arrayContaining(p32hNames));
-    expect(report.classifiedTopLevelOptions.map((entry) => entry.name)).toEqual(expect.arrayContaining(p32hNames));
-    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CSS.COMMENT")?.mappedPaths).toEqual([
-      { path: "CSS.COMMENT.FOREGROUND", monacoTargets: ["token:comment.css.foreground"] },
-      { path: "CSS.COMMENT.FONT_TYPE", monacoTargets: ["token:comment.css.fontStyle"] },
-    ]);
-    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CSS.COLOR")?.mappedPaths).toEqual([
-      { path: "CSS.COLOR.FOREGROUND", monacoTargets: ["token:attribute.value.hex.css.foreground"] },
-    ]);
-    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CSS.PROPERTY_NAME")?.mappedPaths).toEqual([
-      { path: "CSS.PROPERTY_NAME.FOREGROUND", monacoTargets: ["token:attribute.name.css.foreground"] },
-    ]);
-    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CSS.FUNCTION")?.deferredPaths).toEqual([
-      {
-        path: "CSS.FUNCTION.FOREGROUND",
-        reason: "unsupported: Monaco's CSS grammar emits functions as generic attribute values, colliding with CSS property values",
-      },
-    ]);
-    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CSS.IDENT")?.deferredPaths).toEqual([
-      {
-        path: "CSS.IDENT.FOREGROUND",
-        reason: "unsupported: Monaco's CSS grammar emits class/id selectors as generic tag tokens, not distinct identifiers",
-      },
-    ]);
-    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CSS.PROPERTY_VALUE")?.deferredPaths).toEqual([
-      {
-        path: "CSS.PROPERTY_VALUE.FOREGROUND",
-        reason: "unsupported: Monaco's CSS grammar emits generic property values with the same token as functions/units",
-      },
-    ]);
+    for (const name of p32hNames) {
+      const entry = report.classifiedTopLevelOptions.find((candidate) => candidate.name === name);
+      expect(entry?.mappedPaths).toEqual([]);
+      expect(entry?.deferredPaths.every((path) => path.reason.startsWith("no-surface:"))).toBe(true);
+    }
   });
 
   test("classifies P32i custom-language token surfaces as explicit no-surface entries", () => {

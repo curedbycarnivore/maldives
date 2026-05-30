@@ -3734,12 +3734,6 @@
           ]
         },
         {
-          "path": "BASH.EXTERNAL_COMMAND.FOREGROUND",
-          "monacoTargets": [
-            "token:type.identifier.shell.foreground"
-          ]
-        },
-        {
           "path": "BRACE_ATTR.FOREGROUND",
           "monacoTargets": [
             "token:delimiter.curly.foreground"
@@ -3764,38 +3758,6 @@
           ]
         },
         {
-          "path": "BUILDOUT.KEY.FOREGROUND",
-          "monacoTargets": [
-            "token:key.ini.foreground"
-          ]
-        },
-        {
-          "path": "BUILDOUT.KEY_VALUE_SEPARATOR.FOREGROUND",
-          "monacoTargets": [
-            "token:delimiter.ini.foreground"
-          ]
-        },
-        {
-          "path": "BUILDOUT.LINE_COMMENT.FOREGROUND",
-          "monacoTargets": [
-            "token:comment.ini.foreground"
-          ]
-        },
-        {
-          "path": "BUILDOUT.SECTION_NAME.FOREGROUND",
-          "monacoTargets": [
-            "token:metatag.ini.foreground"
-          ]
-        },
-        {
-          "path": "C.KEYWORD.FOREGROUND",
-          "monacoTargets": [
-            "token:keyword.int.foreground",
-            "token:keyword.void.foreground",
-            "token:keyword.return.foreground"
-          ]
-        },
-        {
           "path": "CLASS_NAME_ATTRIBUTES.FOREGROUND",
           "monacoTargets": [
             "token:class.name.foreground",
@@ -3807,123 +3769,6 @@
           "monacoTargets": [
             "token:class.reference.foreground",
             "token:support.class.reference.foreground"
-          ]
-        },
-        {
-          "path": "COFFEESCRIPT.BAD_CHARACTER.FOREGROUND",
-          "monacoTargets": [
-            "token:string.escape.invalid.coffee.foreground"
-          ]
-        },
-        {
-          "path": "COFFEESCRIPT.BLOCK_COMMENT.FOREGROUND",
-          "monacoTargets": [
-            "token:comment.coffee.foreground"
-          ]
-        },
-        {
-          "path": "COFFEESCRIPT.BOOLEAN.FOREGROUND",
-          "monacoTargets": [
-            "token:keyword.true.coffee.foreground",
-            "token:keyword.false.coffee.foreground",
-            "token:keyword.yes.coffee.foreground",
-            "token:keyword.no.coffee.foreground",
-            "token:keyword.on.coffee.foreground",
-            "token:keyword.off.coffee.foreground"
-          ]
-        },
-        {
-          "path": "COFFEESCRIPT.ESCAPE_SEQUENCE.FOREGROUND",
-          "monacoTargets": [
-            "token:string.escape.coffee.foreground"
-          ]
-        },
-        {
-          "path": "COFFEESCRIPT.EXISTENTIAL.FOREGROUND",
-          "monacoTargets": [
-            "token:delimiter.coffee.foreground"
-          ]
-        },
-        {
-          "path": "COFFEESCRIPT.EXPRESSIONS_SUBSTITUTION_MARK.FOREGROUND",
-          "monacoTargets": [
-            "token:string.quote.coffee.foreground"
-          ]
-        },
-        {
-          "path": "COFFEESCRIPT.FUNCTION.FOREGROUND",
-          "monacoTargets": [
-            "token:delimiter.coffee.foreground"
-          ]
-        },
-        {
-          "path": "COFFEESCRIPT.FUNCTION_BINDING.FOREGROUND",
-          "monacoTargets": [
-            "token:delimiter.coffee.foreground"
-          ]
-        },
-        {
-          "path": "COFFEESCRIPT.KEYWORD.FOREGROUND",
-          "monacoTargets": [
-            "token:keyword.class.coffee.foreground",
-            "token:keyword.return.coffee.foreground",
-            "token:keyword.if.coffee.foreground",
-            "token:keyword.else.coffee.foreground",
-            "token:keyword.then.coffee.foreground",
-            "token:keyword.unless.coffee.foreground",
-            "token:keyword.for.coffee.foreground",
-            "token:keyword.while.coffee.foreground",
-            "token:keyword.try.coffee.foreground",
-            "token:keyword.catch.coffee.foreground",
-            "token:keyword.finally.coffee.foreground",
-            "token:keyword.new.coffee.foreground",
-            "token:keyword.extends.coffee.foreground",
-            "token:keyword.super.coffee.foreground"
-          ]
-        },
-        {
-          "path": "COFFEESCRIPT.LINE_COMMENT.FOREGROUND",
-          "monacoTargets": [
-            "token:comment.coffee.foreground"
-          ]
-        },
-        {
-          "path": "COFFEESCRIPT.NUMBER.FOREGROUND",
-          "monacoTargets": [
-            "token:number.coffee.foreground",
-            "token:number.float.coffee.foreground",
-            "token:number.hex.coffee.foreground",
-            "token:number.octal.coffee.foreground"
-          ]
-        },
-        {
-          "path": "COFFEESCRIPT.OPERATIONS.FOREGROUND",
-          "monacoTargets": [
-            "token:delimiter.coffee.foreground"
-          ]
-        },
-        {
-          "path": "COFFEESCRIPT.PROTOTYPE.FOREGROUND",
-          "monacoTargets": [
-            "token:delimiter.coffee.foreground"
-          ]
-        },
-        {
-          "path": "COFFEESCRIPT.REGULAR_EXPRESSION_CONTENT.FOREGROUND",
-          "monacoTargets": [
-            "token:regexp.coffee.foreground"
-          ]
-        },
-        {
-          "path": "COFFEESCRIPT.STRING.FOREGROUND",
-          "monacoTargets": [
-            "token:string.coffee.foreground"
-          ]
-        },
-        {
-          "path": "COFFEESCRIPT.THIS.FOREGROUND",
-          "monacoTargets": [
-            "token:variable.predefined.coffee.foreground"
           ]
         },
         {
@@ -4038,136 +3883,6 @@
           "path": "CONSOLE_YELLOW_OUTPUT.FOREGROUND",
           "monacoTargets": [
             "terminal-css:--maldives-console-yellow"
-          ]
-        },
-        {
-          "path": "CPP.BLOCK_COMMENT.FOREGROUND",
-          "monacoTargets": [
-            "token:comment.cpp.foreground"
-          ]
-        },
-        {
-          "path": "CPP.DOT.FOREGROUND",
-          "monacoTargets": [
-            "token:delimiter.cpp.foreground"
-          ]
-        },
-        {
-          "path": "CPP.KEYWORD.FOREGROUND",
-          "monacoTargets": [
-            "token:keyword.auto.cpp.foreground",
-            "token:keyword.class.cpp.foreground",
-            "token:keyword.const.cpp.foreground",
-            "token:keyword.namespace.cpp.foreground",
-            "token:keyword.public.cpp.foreground",
-            "token:keyword.private.cpp.foreground",
-            "token:keyword.return.cpp.foreground",
-            "token:keyword.static.cpp.foreground",
-            "token:keyword.template.cpp.foreground",
-            "token:keyword.typename.cpp.foreground",
-            "token:keyword.void.cpp.foreground"
-          ]
-        },
-        {
-          "path": "CPP.LINE_COMMENT.FOREGROUND",
-          "monacoTargets": [
-            "token:comment.cpp.foreground"
-          ]
-        },
-        {
-          "path": "CPP.MACROS.FOREGROUND",
-          "monacoTargets": [
-            "token:keyword.directive.cpp.foreground",
-            "token:keyword.directive.include.cpp.foreground"
-          ]
-        },
-        {
-          "path": "CPP.NUMBER.FOREGROUND",
-          "monacoTargets": [
-            "token:number.cpp.foreground",
-            "token:number.float.cpp.foreground",
-            "token:number.hex.cpp.foreground",
-            "token:number.octal.cpp.foreground",
-            "token:number.binary.cpp.foreground"
-          ]
-        },
-        {
-          "path": "CPP.OPERATION_SIGN.FOREGROUND",
-          "monacoTargets": [
-            "token:delimiter.cpp.foreground"
-          ]
-        },
-        {
-          "path": "CPP.PP_ARG.FOREGROUND",
-          "monacoTargets": [
-            "token:string.include.identifier.cpp.foreground"
-          ]
-        },
-        {
-          "path": "CPP.STRING.FOREGROUND",
-          "monacoTargets": [
-            "token:string.cpp.foreground",
-            "token:string.escape.cpp.foreground"
-          ]
-        },
-        {
-          "path": "CSS.COLOR.FOREGROUND",
-          "monacoTargets": [
-            "token:attribute.value.hex.css.foreground"
-          ]
-        },
-        {
-          "path": "CSS.COMMENT.FOREGROUND",
-          "monacoTargets": [
-            "token:comment.css.foreground"
-          ]
-        },
-        {
-          "path": "CSS.IMPORTANT.FOREGROUND",
-          "monacoTargets": [
-            "token:keyword.css.foreground"
-          ]
-        },
-        {
-          "path": "CSS.KEYWORD.FOREGROUND",
-          "monacoTargets": [
-            "token:keyword.css.foreground"
-          ]
-        },
-        {
-          "path": "CSS.NUMBER.FOREGROUND",
-          "monacoTargets": [
-            "token:attribute.value.number.css.foreground"
-          ]
-        },
-        {
-          "path": "CSS.OPERATORS.FOREGROUND",
-          "monacoTargets": [
-            "token:delimiter.css.foreground"
-          ]
-        },
-        {
-          "path": "CSS.PROPERTY_NAME.FOREGROUND",
-          "monacoTargets": [
-            "token:attribute.name.css.foreground"
-          ]
-        },
-        {
-          "path": "CSS.STRING.FOREGROUND",
-          "monacoTargets": [
-            "token:string.css.foreground"
-          ]
-        },
-        {
-          "path": "CSS.TAG_NAME.FOREGROUND",
-          "monacoTargets": [
-            "token:tag.css.foreground"
-          ]
-        },
-        {
-          "path": "CSS.URL.FOREGROUND",
-          "monacoTargets": [
-            "token:string.css.foreground"
           ]
         },
         {
@@ -4334,15 +4049,19 @@
         },
         {
           "path": "APACHE_CONFIG.ARG_LEXEM.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "no-surface: WebStorm Apache config colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "APACHE_CONFIG.COMMENT.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "no-surface: WebStorm Apache config colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "APACHE_CONFIG.IDENTIFIER.FOREGROUND",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "no-surface: WebStorm Apache config colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "BASH.EXTERNAL_COMMAND.FOREGROUND",
+          "reason": "no-surface: WebStorm Bash colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "BLOCK_TERMINAL_COMMAND.FOREGROUND",
@@ -4353,52 +4072,136 @@
           "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
         },
         {
+          "path": "BUILDOUT.KEY.FOREGROUND",
+          "reason": "no-surface: WebStorm Buildout colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "BUILDOUT.KEY_VALUE_SEPARATOR.FOREGROUND",
+          "reason": "no-surface: WebStorm Buildout colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "BUILDOUT.LINE_COMMENT.FOREGROUND",
+          "reason": "no-surface: WebStorm Buildout colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "BUILDOUT.SECTION_NAME.FOREGROUND",
+          "reason": "no-surface: WebStorm Buildout colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "C.KEYWORD.FOREGROUND",
+          "reason": "no-surface: WebStorm C colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "COFFEESCRIPT.BAD_CHARACTER.FOREGROUND",
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "COFFEESCRIPT.BLOCK_COMMENT.FOREGROUND",
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "COFFEESCRIPT.BOOLEAN.FOREGROUND",
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
           "path": "COFFEESCRIPT.CLASS_NAME.FOREGROUND",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit a distinct class-name token"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "COFFEESCRIPT.ESCAPE_SEQUENCE.FOREGROUND",
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "COFFEESCRIPT.EXISTENTIAL.FOREGROUND",
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "COFFEESCRIPT.EXPRESSIONS_SUBSTITUTION_MARK.FOREGROUND",
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "COFFEESCRIPT.FUNCTION.FOREGROUND",
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "COFFEESCRIPT.FUNCTION_BINDING.FOREGROUND",
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.FUNCTION_NAME.FOREGROUND",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit a distinct function-name token"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.GLOBAL_VARIABLE.FOREGROUND",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not distinguish local/global variable identifiers"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.HEREDOC_ID.FOREGROUND",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit distinct heredoc or heregex delimiter tokens"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.HEREGEX_ID.FOREGROUND",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit distinct heredoc or heregex delimiter tokens"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.JAVASCRIPT_ID.FOREGROUND",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit a distinct embedded-JavaScript delimiter token"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "COFFEESCRIPT.KEYWORD.FOREGROUND",
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "COFFEESCRIPT.LINE_COMMENT.FOREGROUND",
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.LOCAL_VARIABLE.FOREGROUND",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not distinguish local/global variable identifiers"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "COFFEESCRIPT.NUMBER.FOREGROUND",
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.OBJECT_KEY.FOREGROUND",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit a distinct object-key token"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "COFFEESCRIPT.OPERATIONS.FOREGROUND",
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "COFFEESCRIPT.PROTOTYPE.FOREGROUND",
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "COFFEESCRIPT.REGULAR_EXPRESSION_CONTENT.FOREGROUND",
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG.FOREGROUND",
-          "reason": "unsupported: Monaco's CoffeeScript grammar emits regex flags and delimiters as the generic regexp token"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.REGULAR_EXPRESSION_ID.FOREGROUND",
-          "reason": "unsupported: Monaco's CoffeeScript grammar emits regex flags and delimiters as the generic regexp token"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "COFFEESCRIPT.STRING.FOREGROUND",
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.STRING_LITERAL.FOREGROUND",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not distinguish literal string token variants"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "COFFEESCRIPT.THIS.FOREGROUND",
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CONDITIONALLY_NOT_COMPILED.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "no-surface: WebStorm conditionally-not-compiled foreign-language colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CONSTRUCTOR_CALL_ATTRIBUTES.FOREGROUND",
@@ -4409,60 +4212,136 @@
           "reason": "unsupported: Monaco's loaded grammars do not emit a distinct constructor-declaration token"
         },
         {
+          "path": "CPP.BLOCK_COMMENT.FOREGROUND",
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
           "path": "CPP.CONSTANT.FOREGROUND",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits constants as generic identifiers, not a distinct constant token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CPP.DOT.FOREGROUND",
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.FIELD.FOREGROUND",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits fields as generic identifiers, not a distinct field token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.FUNCTION.FOREGROUND",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits functions as generic identifiers, not a distinct function token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CPP.KEYWORD.FOREGROUND",
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.LABEL.FOREGROUND",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits labels as generic identifiers, not a distinct label token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CPP.LINE_COMMENT.FOREGROUND",
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CPP.MACROS.FOREGROUND",
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.METHOD.FOREGROUND",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits methods as generic identifiers, not a distinct method token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.NAMESPACE.FOREGROUND",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits namespaces as generic identifiers, not a distinct namespace token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CPP.NUMBER.FOREGROUND",
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CPP.OPERATION_SIGN.FOREGROUND",
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.PARAMETER.FOREGROUND",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits parameters as generic identifiers, not a distinct parameter token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CPP.PP_ARG.FOREGROUND",
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.PP_SKIPPED.FOREGROUND",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits preprocessor-skippeds as generic identifiers, not a distinct preprocessor-skipped token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.STATIC.FOREGROUND",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits static-members as generic identifiers, not a distinct static-member token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.STATIC_FUNCTION.FOREGROUND",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits static-functions as generic identifiers, not a distinct static-function token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CPP.STRING.FOREGROUND",
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.TYPE.FOREGROUND",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits types as generic identifiers, not a distinct type token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CSS.COLOR.FOREGROUND",
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CSS.COMMENT.FOREGROUND",
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CSS.FUNCTION.FOREGROUND",
-          "reason": "unsupported: Monaco's CSS grammar emits functions as generic attribute values, colliding with CSS property values"
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CSS.IDENT.FOREGROUND",
-          "reason": "unsupported: Monaco's CSS grammar emits class/id selectors as generic tag tokens, not distinct identifiers"
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CSS.IMPORTANT.FOREGROUND",
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CSS.KEYWORD.FOREGROUND",
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CSS.NUMBER.FOREGROUND",
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CSS.OPERATORS.FOREGROUND",
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CSS.PROPERTY_NAME.FOREGROUND",
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CSS.PROPERTY_VALUE.FOREGROUND",
-          "reason": "unsupported: Monaco's CSS grammar emits generic property values with the same token as functions/units"
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CSS.STRING.FOREGROUND",
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CSS.TAG_NAME.FOREGROUND",
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CSS.URL.FOREGROUND",
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CTRL_CLICKABLE.FOREGROUND",
@@ -5998,105 +5877,9 @@
           ]
         },
         {
-          "path": "BUILDOUT.KEY.FONT_TYPE",
-          "monacoTargets": [
-            "token:key.ini.fontStyle"
-          ]
-        },
-        {
-          "path": "BUILDOUT.LINE_COMMENT.FONT_TYPE",
-          "monacoTargets": [
-            "token:comment.ini.fontStyle"
-          ]
-        },
-        {
-          "path": "BUILDOUT.VALUE.FONT_TYPE",
-          "monacoTargets": [
-            "token:string.ini.fontStyle"
-          ]
-        },
-        {
-          "path": "C.KEYWORD.FONT_TYPE",
-          "monacoTargets": [
-            "token:keyword.int.fontStyle",
-            "token:keyword.void.fontStyle",
-            "token:keyword.return.fontStyle"
-          ]
-        },
-        {
-          "path": "COFFEESCRIPT.BLOCK_COMMENT.FONT_TYPE",
-          "monacoTargets": [
-            "token:comment.coffee.fontStyle"
-          ]
-        },
-        {
-          "path": "COFFEESCRIPT.BOOLEAN.FONT_TYPE",
-          "monacoTargets": [
-            "token:keyword.true.coffee.fontStyle",
-            "token:keyword.false.coffee.fontStyle",
-            "token:keyword.yes.coffee.fontStyle",
-            "token:keyword.no.coffee.fontStyle",
-            "token:keyword.on.coffee.fontStyle",
-            "token:keyword.off.coffee.fontStyle"
-          ]
-        },
-        {
-          "path": "COFFEESCRIPT.LINE_COMMENT.FONT_TYPE",
-          "monacoTargets": [
-            "token:comment.coffee.fontStyle"
-          ]
-        },
-        {
-          "path": "COFFEESCRIPT.THIS.FONT_TYPE",
-          "monacoTargets": [
-            "token:variable.predefined.coffee.fontStyle"
-          ]
-        },
-        {
           "path": "CONSOLE_USER_INPUT.FONT_TYPE",
           "monacoTargets": [
             "terminal-css:--maldives-console-user-input-font-style"
-          ]
-        },
-        {
-          "path": "CPP.BLOCK_COMMENT.FONT_TYPE",
-          "monacoTargets": [
-            "token:comment.cpp.fontStyle"
-          ]
-        },
-        {
-          "path": "CPP.KEYWORD.FONT_TYPE",
-          "monacoTargets": [
-            "token:keyword.auto.cpp.fontStyle",
-            "token:keyword.class.cpp.fontStyle",
-            "token:keyword.const.cpp.fontStyle",
-            "token:keyword.namespace.cpp.fontStyle",
-            "token:keyword.public.cpp.fontStyle",
-            "token:keyword.private.cpp.fontStyle",
-            "token:keyword.return.cpp.fontStyle",
-            "token:keyword.static.cpp.fontStyle",
-            "token:keyword.template.cpp.fontStyle",
-            "token:keyword.typename.cpp.fontStyle",
-            "token:keyword.void.cpp.fontStyle"
-          ]
-        },
-        {
-          "path": "CPP.LINE_COMMENT.FONT_TYPE",
-          "monacoTargets": [
-            "token:comment.cpp.fontStyle"
-          ]
-        },
-        {
-          "path": "CPP.STRING.FONT_TYPE",
-          "monacoTargets": [
-            "token:string.cpp.fontStyle",
-            "token:string.escape.cpp.fontStyle"
-          ]
-        },
-        {
-          "path": "CSS.COMMENT.FONT_TYPE",
-          "monacoTargets": [
-            "token:comment.css.fontStyle"
           ]
         },
         {
@@ -6155,15 +5938,15 @@
       "deferredPaths": [
         {
           "path": "APACHE_CONFIG.ARG_LEXEM.FONT_TYPE",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "no-surface: WebStorm Apache config colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "APACHE_CONFIG.COMMENT.FONT_TYPE",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "no-surface: WebStorm Apache config colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "APACHE_CONFIG.IDENTIFIER.FONT_TYPE",
-          "reason": "defer: Maldives does not load this language grammar yet"
+          "reason": "no-surface: WebStorm Apache config colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "BLOCK_TERMINAL_COMMAND.FONT_TYPE",
@@ -6174,32 +5957,64 @@
           "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
         },
         {
+          "path": "BUILDOUT.KEY.FONT_TYPE",
+          "reason": "no-surface: WebStorm Buildout colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "BUILDOUT.LINE_COMMENT.FONT_TYPE",
+          "reason": "no-surface: WebStorm Buildout colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "BUILDOUT.VALUE.FONT_TYPE",
+          "reason": "no-surface: WebStorm Buildout colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "C.KEYWORD.FONT_TYPE",
+          "reason": "no-surface: WebStorm C colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "COFFEESCRIPT.BLOCK_COMMENT.FONT_TYPE",
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "COFFEESCRIPT.BOOLEAN.FONT_TYPE",
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
           "path": "COFFEESCRIPT.HEREDOC_CONTENT.FONT_TYPE",
-          "reason": "unsupported: Monaco's CoffeeScript grammar emits heredoc contents as the generic string token"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.HEREDOC_ID.FONT_TYPE",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit distinct heredoc or heregex delimiter tokens"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.HEREGEX_ID.FONT_TYPE",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit distinct heredoc or heregex delimiter tokens"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.JAVASCRIPT_ID.FONT_TYPE",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit a distinct embedded-JavaScript delimiter token"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "COFFEESCRIPT.LINE_COMMENT.FONT_TYPE",
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG.FONT_TYPE",
-          "reason": "unsupported: Monaco's CoffeeScript grammar emits regex flags and delimiters as the generic regexp token"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.REGULAR_EXPRESSION_ID.FONT_TYPE",
-          "reason": "unsupported: Monaco's CoffeeScript grammar emits regex flags and delimiters as the generic regexp token"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.STRING_LITERAL.FONT_TYPE",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not distinguish literal string token variants"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "COFFEESCRIPT.THIS.FONT_TYPE",
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CONSTRUCTOR_CALL_ATTRIBUTES.FONT_TYPE",
@@ -6210,32 +6025,52 @@
           "reason": "unsupported: Monaco's loaded grammars do not emit a distinct constructor-declaration token"
         },
         {
+          "path": "CPP.BLOCK_COMMENT.FONT_TYPE",
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
           "path": "CPP.CONSTANT.FONT_TYPE",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits constants as generic identifiers, not a distinct constant token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.FIELD.FONT_TYPE",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits fields as generic identifiers, not a distinct field token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CPP.KEYWORD.FONT_TYPE",
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CPP.LINE_COMMENT.FONT_TYPE",
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.METHOD.FONT_TYPE",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits methods as generic identifiers, not a distinct method token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.NAMESPACE.FONT_TYPE",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits namespaces as generic identifiers, not a distinct namespace token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.PP_SKIPPED.FONT_TYPE",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits preprocessor-skippeds as generic identifiers, not a distinct preprocessor-skipped token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.STATIC.FONT_TYPE",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits static-members as generic identifiers, not a distinct static-member token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.STATIC_FUNCTION.FONT_TYPE",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits static-functions as generic identifiers, not a distinct static-function token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CPP.STRING.FONT_TYPE",
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CSS.COMMENT.FONT_TYPE",
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CUSP_BRACKETS_ATTR.FONT_TYPE",
@@ -7923,102 +7758,80 @@
     {
       "name": "BUILDOUT.KEY",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "BUILDOUT.KEY.FOREGROUND",
-          "monacoTargets": [
-            "token:key.ini.foreground"
-          ]
+          "reason": "no-surface: WebStorm Buildout colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "BUILDOUT.KEY.FONT_TYPE",
-          "monacoTargets": [
-            "token:key.ini.fontStyle"
-          ]
+          "reason": "no-surface: WebStorm Buildout colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "BUILDOUT.KEY_VALUE_SEPARATOR",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "BUILDOUT.KEY_VALUE_SEPARATOR.FOREGROUND",
-          "monacoTargets": [
-            "token:delimiter.ini.foreground"
-          ]
+          "reason": "no-surface: WebStorm Buildout colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "BUILDOUT.LINE_COMMENT",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "BUILDOUT.LINE_COMMENT.FOREGROUND",
-          "monacoTargets": [
-            "token:comment.ini.foreground"
-          ]
+          "reason": "no-surface: WebStorm Buildout colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "BUILDOUT.LINE_COMMENT.FONT_TYPE",
-          "monacoTargets": [
-            "token:comment.ini.fontStyle"
-          ]
+          "reason": "no-surface: WebStorm Buildout colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "BUILDOUT.SECTION_NAME",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "BUILDOUT.SECTION_NAME.FOREGROUND",
-          "monacoTargets": [
-            "token:metatag.ini.foreground"
-          ]
+          "reason": "no-surface: WebStorm Buildout colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "BUILDOUT.VALUE",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "BUILDOUT.VALUE.FONT_TYPE",
-          "monacoTargets": [
-            "token:string.ini.fontStyle"
-          ]
+          "reason": "no-surface: WebStorm Buildout colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "C.KEYWORD",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "C.KEYWORD.FOREGROUND",
-          "monacoTargets": [
-            "token:keyword.int.foreground",
-            "token:keyword.void.foreground",
-            "token:keyword.return.foreground"
-          ]
+          "reason": "no-surface: WebStorm C colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "C.KEYWORD.FONT_TYPE",
-          "monacoTargets": [
-            "token:keyword.int.fontStyle",
-            "token:keyword.void.fontStyle",
-            "token:keyword.return.fontStyle"
-          ]
+          "reason": "no-surface: WebStorm C colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "APACHE_CONFIG.ARG_LEXEM",
@@ -8027,11 +7840,11 @@
       "deferredPaths": [
         {
           "path": "APACHE_CONFIG.ARG_LEXEM.FOREGROUND",
-          "reason": "defer: Monaco/Maldives does not load an Apache config language grammar yet"
+          "reason": "no-surface: WebStorm Apache config colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "APACHE_CONFIG.ARG_LEXEM.FONT_TYPE",
-          "reason": "defer: Monaco/Maldives does not load an Apache config language grammar yet"
+          "reason": "no-surface: WebStorm Apache config colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
@@ -8042,11 +7855,11 @@
       "deferredPaths": [
         {
           "path": "APACHE_CONFIG.COMMENT.FOREGROUND",
-          "reason": "defer: Monaco/Maldives does not load an Apache config language grammar yet"
+          "reason": "no-surface: WebStorm Apache config colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "APACHE_CONFIG.COMMENT.FONT_TYPE",
-          "reason": "defer: Monaco/Maldives does not load an Apache config language grammar yet"
+          "reason": "no-surface: WebStorm Apache config colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
@@ -8057,26 +7870,24 @@
       "deferredPaths": [
         {
           "path": "APACHE_CONFIG.IDENTIFIER.FOREGROUND",
-          "reason": "defer: Monaco/Maldives does not load an Apache config language grammar yet"
+          "reason": "no-surface: WebStorm Apache config colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "APACHE_CONFIG.IDENTIFIER.FONT_TYPE",
-          "reason": "defer: Monaco/Maldives does not load an Apache config language grammar yet"
+          "reason": "no-surface: WebStorm Apache config colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
     {
       "name": "BASH.EXTERNAL_COMMAND",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "BASH.EXTERNAL_COMMAND.FOREGROUND",
-          "monacoTargets": [
-            "token:type.identifier.shell.foreground"
-          ]
+          "reason": "no-surface: WebStorm Bash colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "BASH.HERE_DOC",
@@ -8085,7 +7896,7 @@
       "deferredPaths": [
         {
           "path": "BASH.HERE_DOC",
-          "reason": "unsupported: active ICLS BASH.HERE_DOC has no foreground or font style to apply"
+          "reason": "no-surface: WebStorm Bash colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
@@ -8107,72 +7918,51 @@
     {
       "name": "COFFEESCRIPT.BAD_CHARACTER",
       "occurrences": 1,
-      "mappedPaths": [
-        {
-          "path": "COFFEESCRIPT.BAD_CHARACTER.FOREGROUND",
-          "monacoTargets": [
-            "token:string.escape.invalid.coffee.foreground"
-          ]
-        }
-      ],
+      "mappedPaths": [],
       "deferredPaths": [
         {
+          "path": "COFFEESCRIPT.BAD_CHARACTER.FOREGROUND",
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
           "path": "COFFEESCRIPT.BAD_CHARACTER.BACKGROUND",
-          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.BAD_CHARACTER.ERROR_STRIPE_COLOR",
-          "reason": "unsupported: Maldives has no Monaco overview-ruler equivalent for this WebStorm stripe attribute"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
     {
       "name": "COFFEESCRIPT.BLOCK_COMMENT",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "COFFEESCRIPT.BLOCK_COMMENT.FOREGROUND",
-          "monacoTargets": [
-            "token:comment.coffee.foreground"
-          ]
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.BLOCK_COMMENT.FONT_TYPE",
-          "monacoTargets": [
-            "token:comment.coffee.fontStyle"
-          ]
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "COFFEESCRIPT.BOOLEAN",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "COFFEESCRIPT.BOOLEAN.FOREGROUND",
-          "monacoTargets": [
-            "token:keyword.true.coffee.foreground",
-            "token:keyword.false.coffee.foreground",
-            "token:keyword.yes.coffee.foreground",
-            "token:keyword.no.coffee.foreground",
-            "token:keyword.on.coffee.foreground",
-            "token:keyword.off.coffee.foreground"
-          ]
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.BOOLEAN.FONT_TYPE",
-          "monacoTargets": [
-            "token:keyword.true.coffee.fontStyle",
-            "token:keyword.false.coffee.fontStyle",
-            "token:keyword.yes.coffee.fontStyle",
-            "token:keyword.no.coffee.fontStyle",
-            "token:keyword.on.coffee.fontStyle",
-            "token:keyword.off.coffee.fontStyle"
-          ]
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "COFFEESCRIPT.CLASS_NAME",
@@ -8181,74 +7971,64 @@
       "deferredPaths": [
         {
           "path": "COFFEESCRIPT.CLASS_NAME.FOREGROUND",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit a distinct class-name token"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
     {
       "name": "COFFEESCRIPT.ESCAPE_SEQUENCE",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "COFFEESCRIPT.ESCAPE_SEQUENCE.FOREGROUND",
-          "monacoTargets": [
-            "token:string.escape.coffee.foreground"
-          ]
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "COFFEESCRIPT.EXISTENTIAL",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "COFFEESCRIPT.EXISTENTIAL.FOREGROUND",
-          "monacoTargets": [
-            "token:delimiter.coffee.foreground"
-          ]
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "COFFEESCRIPT.EXPRESSIONS_SUBSTITUTION_MARK",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "COFFEESCRIPT.EXPRESSIONS_SUBSTITUTION_MARK.FOREGROUND",
-          "monacoTargets": [
-            "token:string.quote.coffee.foreground"
-          ]
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "COFFEESCRIPT.FUNCTION",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "COFFEESCRIPT.FUNCTION.FOREGROUND",
-          "monacoTargets": [
-            "token:delimiter.coffee.foreground"
-          ]
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "COFFEESCRIPT.FUNCTION_BINDING",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "COFFEESCRIPT.FUNCTION_BINDING.FOREGROUND",
-          "monacoTargets": [
-            "token:delimiter.coffee.foreground"
-          ]
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "COFFEESCRIPT.FUNCTION_NAME",
@@ -8257,7 +8037,7 @@
       "deferredPaths": [
         {
           "path": "COFFEESCRIPT.FUNCTION_NAME.FOREGROUND",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit a distinct function-name token"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
@@ -8268,7 +8048,7 @@
       "deferredPaths": [
         {
           "path": "COFFEESCRIPT.GLOBAL_VARIABLE.FOREGROUND",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not distinguish local/global variable identifiers"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
@@ -8279,7 +8059,7 @@
       "deferredPaths": [
         {
           "path": "COFFEESCRIPT.HEREDOC_CONTENT.FONT_TYPE",
-          "reason": "unsupported: Monaco's CoffeeScript grammar emits heredoc contents as the generic string token"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
@@ -8290,11 +8070,11 @@
       "deferredPaths": [
         {
           "path": "COFFEESCRIPT.HEREDOC_ID.FOREGROUND",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit distinct heredoc or heregex delimiter tokens"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.HEREDOC_ID.FONT_TYPE",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit distinct heredoc or heregex delimiter tokens"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
@@ -8305,11 +8085,11 @@
       "deferredPaths": [
         {
           "path": "COFFEESCRIPT.HEREGEX_ID.FOREGROUND",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit distinct heredoc or heregex delimiter tokens"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.HEREGEX_ID.FONT_TYPE",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit distinct heredoc or heregex delimiter tokens"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
@@ -8320,62 +8100,43 @@
       "deferredPaths": [
         {
           "path": "COFFEESCRIPT.JAVASCRIPT_ID.FOREGROUND",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit a distinct embedded-JavaScript delimiter token"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.JAVASCRIPT_ID.BACKGROUND",
-          "reason": "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.JAVASCRIPT_ID.FONT_TYPE",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit a distinct embedded-JavaScript delimiter token"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
     {
       "name": "COFFEESCRIPT.KEYWORD",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "COFFEESCRIPT.KEYWORD.FOREGROUND",
-          "monacoTargets": [
-            "token:keyword.class.coffee.foreground",
-            "token:keyword.return.coffee.foreground",
-            "token:keyword.if.coffee.foreground",
-            "token:keyword.else.coffee.foreground",
-            "token:keyword.then.coffee.foreground",
-            "token:keyword.unless.coffee.foreground",
-            "token:keyword.for.coffee.foreground",
-            "token:keyword.while.coffee.foreground",
-            "token:keyword.try.coffee.foreground",
-            "token:keyword.catch.coffee.foreground",
-            "token:keyword.finally.coffee.foreground",
-            "token:keyword.new.coffee.foreground",
-            "token:keyword.extends.coffee.foreground",
-            "token:keyword.super.coffee.foreground"
-          ]
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "COFFEESCRIPT.LINE_COMMENT",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "COFFEESCRIPT.LINE_COMMENT.FOREGROUND",
-          "monacoTargets": [
-            "token:comment.coffee.foreground"
-          ]
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.LINE_COMMENT.FONT_TYPE",
-          "monacoTargets": [
-            "token:comment.coffee.fontStyle"
-          ]
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "COFFEESCRIPT.LOCAL_VARIABLE",
@@ -8384,25 +8145,20 @@
       "deferredPaths": [
         {
           "path": "COFFEESCRIPT.LOCAL_VARIABLE.FOREGROUND",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not distinguish local/global variable identifiers"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
     {
       "name": "COFFEESCRIPT.NUMBER",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "COFFEESCRIPT.NUMBER.FOREGROUND",
-          "monacoTargets": [
-            "token:number.coffee.foreground",
-            "token:number.float.coffee.foreground",
-            "token:number.hex.coffee.foreground",
-            "token:number.octal.coffee.foreground"
-          ]
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "COFFEESCRIPT.OBJECT_KEY",
@@ -8411,48 +8167,42 @@
       "deferredPaths": [
         {
           "path": "COFFEESCRIPT.OBJECT_KEY.FOREGROUND",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not emit a distinct object-key token"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
     {
       "name": "COFFEESCRIPT.OPERATIONS",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "COFFEESCRIPT.OPERATIONS.FOREGROUND",
-          "monacoTargets": [
-            "token:delimiter.coffee.foreground"
-          ]
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "COFFEESCRIPT.PROTOTYPE",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "COFFEESCRIPT.PROTOTYPE.FOREGROUND",
-          "monacoTargets": [
-            "token:delimiter.coffee.foreground"
-          ]
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "COFFEESCRIPT.REGULAR_EXPRESSION_CONTENT",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "COFFEESCRIPT.REGULAR_EXPRESSION_CONTENT.FOREGROUND",
-          "monacoTargets": [
-            "token:regexp.coffee.foreground"
-          ]
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG",
@@ -8461,11 +8211,11 @@
       "deferredPaths": [
         {
           "path": "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG.FOREGROUND",
-          "reason": "unsupported: Monaco's CoffeeScript grammar emits regex flags and delimiters as the generic regexp token"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.REGULAR_EXPRESSION_FLAG.FONT_TYPE",
-          "reason": "unsupported: Monaco's CoffeeScript grammar emits regex flags and delimiters as the generic regexp token"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
@@ -8476,26 +8226,24 @@
       "deferredPaths": [
         {
           "path": "COFFEESCRIPT.REGULAR_EXPRESSION_ID.FOREGROUND",
-          "reason": "unsupported: Monaco's CoffeeScript grammar emits regex flags and delimiters as the generic regexp token"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.REGULAR_EXPRESSION_ID.FONT_TYPE",
-          "reason": "unsupported: Monaco's CoffeeScript grammar emits regex flags and delimiters as the generic regexp token"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
     {
       "name": "COFFEESCRIPT.STRING",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "COFFEESCRIPT.STRING.FOREGROUND",
-          "monacoTargets": [
-            "token:string.coffee.foreground"
-          ]
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "COFFEESCRIPT.STRING_LITERAL",
@@ -8504,32 +8252,28 @@
       "deferredPaths": [
         {
           "path": "COFFEESCRIPT.STRING_LITERAL.FOREGROUND",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not distinguish literal string token variants"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.STRING_LITERAL.FONT_TYPE",
-          "reason": "unsupported: Monaco's CoffeeScript grammar does not distinguish literal string token variants"
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
     {
       "name": "COFFEESCRIPT.THIS",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "COFFEESCRIPT.THIS.FOREGROUND",
-          "monacoTargets": [
-            "token:variable.predefined.coffee.foreground"
-          ]
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "COFFEESCRIPT.THIS.FONT_TYPE",
-          "monacoTargets": [
-            "token:variable.predefined.coffee.fontStyle"
-          ]
+          "reason": "no-surface: WebStorm CoffeeScript colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "CONSTRUCTOR_CALL_ATTRIBUTES",
@@ -8564,21 +8308,17 @@
     {
       "name": "CPP.BLOCK_COMMENT",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "CPP.BLOCK_COMMENT.FOREGROUND",
-          "monacoTargets": [
-            "token:comment.cpp.foreground"
-          ]
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.BLOCK_COMMENT.FONT_TYPE",
-          "monacoTargets": [
-            "token:comment.cpp.fontStyle"
-          ]
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "CPP.CONSTANT",
@@ -8587,26 +8327,24 @@
       "deferredPaths": [
         {
           "path": "CPP.CONSTANT.FOREGROUND",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits constants as generic identifiers, not a distinct constant token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.CONSTANT.FONT_TYPE",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits constants as generic identifiers, not a distinct constant token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
     {
       "name": "CPP.DOT",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "CPP.DOT.FOREGROUND",
-          "monacoTargets": [
-            "token:delimiter.cpp.foreground"
-          ]
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "CPP.FIELD",
@@ -8615,11 +8353,11 @@
       "deferredPaths": [
         {
           "path": "CPP.FIELD.FOREGROUND",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits fields as generic identifiers, not a distinct field token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.FIELD.FONT_TYPE",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits fields as generic identifiers, not a distinct field token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
@@ -8630,48 +8368,24 @@
       "deferredPaths": [
         {
           "path": "CPP.FUNCTION.FOREGROUND",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits functions as generic identifiers, not a distinct function token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
     {
       "name": "CPP.KEYWORD",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "CPP.KEYWORD.FOREGROUND",
-          "monacoTargets": [
-            "token:keyword.auto.cpp.foreground",
-            "token:keyword.class.cpp.foreground",
-            "token:keyword.const.cpp.foreground",
-            "token:keyword.namespace.cpp.foreground",
-            "token:keyword.public.cpp.foreground",
-            "token:keyword.private.cpp.foreground",
-            "token:keyword.return.cpp.foreground",
-            "token:keyword.static.cpp.foreground",
-            "token:keyword.template.cpp.foreground",
-            "token:keyword.typename.cpp.foreground",
-            "token:keyword.void.cpp.foreground"
-          ]
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.KEYWORD.FONT_TYPE",
-          "monacoTargets": [
-            "token:keyword.auto.cpp.fontStyle",
-            "token:keyword.class.cpp.fontStyle",
-            "token:keyword.const.cpp.fontStyle",
-            "token:keyword.namespace.cpp.fontStyle",
-            "token:keyword.public.cpp.fontStyle",
-            "token:keyword.private.cpp.fontStyle",
-            "token:keyword.return.cpp.fontStyle",
-            "token:keyword.static.cpp.fontStyle",
-            "token:keyword.template.cpp.fontStyle",
-            "token:keyword.typename.cpp.fontStyle",
-            "token:keyword.void.cpp.fontStyle"
-          ]
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "CPP.LABEL",
@@ -8680,42 +8394,35 @@
       "deferredPaths": [
         {
           "path": "CPP.LABEL.FOREGROUND",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits labels as generic identifiers, not a distinct label token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
     {
       "name": "CPP.LINE_COMMENT",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "CPP.LINE_COMMENT.FOREGROUND",
-          "monacoTargets": [
-            "token:comment.cpp.foreground"
-          ]
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.LINE_COMMENT.FONT_TYPE",
-          "monacoTargets": [
-            "token:comment.cpp.fontStyle"
-          ]
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "CPP.MACROS",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "CPP.MACROS.FOREGROUND",
-          "monacoTargets": [
-            "token:keyword.directive.cpp.foreground",
-            "token:keyword.directive.include.cpp.foreground"
-          ]
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "CPP.METHOD",
@@ -8724,11 +8431,11 @@
       "deferredPaths": [
         {
           "path": "CPP.METHOD.FOREGROUND",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits methods as generic identifiers, not a distinct method token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.METHOD.FONT_TYPE",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits methods as generic identifiers, not a distinct method token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
@@ -8739,43 +8446,35 @@
       "deferredPaths": [
         {
           "path": "CPP.NAMESPACE.FOREGROUND",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits namespaces as generic identifiers, not a distinct namespace token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.NAMESPACE.FONT_TYPE",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits namespaces as generic identifiers, not a distinct namespace token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
     {
       "name": "CPP.NUMBER",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "CPP.NUMBER.FOREGROUND",
-          "monacoTargets": [
-            "token:number.cpp.foreground",
-            "token:number.float.cpp.foreground",
-            "token:number.hex.cpp.foreground",
-            "token:number.octal.cpp.foreground",
-            "token:number.binary.cpp.foreground"
-          ]
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "CPP.OPERATION_SIGN",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "CPP.OPERATION_SIGN.FOREGROUND",
-          "monacoTargets": [
-            "token:delimiter.cpp.foreground"
-          ]
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "CPP.PARAMETER",
@@ -8784,26 +8483,24 @@
       "deferredPaths": [
         {
           "path": "CPP.PARAMETER.FOREGROUND",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits parameters as generic identifiers, not a distinct parameter token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.PARAMETER.EFFECT_TYPE",
-          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this C++ attribute"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
     {
       "name": "CPP.PP_ARG",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "CPP.PP_ARG.FOREGROUND",
-          "monacoTargets": [
-            "token:string.include.identifier.cpp.foreground"
-          ]
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "CPP.PP_SKIPPED",
@@ -8812,11 +8509,11 @@
       "deferredPaths": [
         {
           "path": "CPP.PP_SKIPPED.FOREGROUND",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits preprocessor-skippeds as generic identifiers, not a distinct preprocessor-skipped token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.PP_SKIPPED.FONT_TYPE",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits preprocessor-skippeds as generic identifiers, not a distinct preprocessor-skipped token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
@@ -8827,11 +8524,11 @@
       "deferredPaths": [
         {
           "path": "CPP.STATIC.FOREGROUND",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits static-members as generic identifiers, not a distinct static-member token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.STATIC.FONT_TYPE",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits static-members as generic identifiers, not a distinct static-member token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
@@ -8842,34 +8539,28 @@
       "deferredPaths": [
         {
           "path": "CPP.STATIC_FUNCTION.FOREGROUND",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits static-functions as generic identifiers, not a distinct static-function token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.STATIC_FUNCTION.FONT_TYPE",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits static-functions as generic identifiers, not a distinct static-function token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
     {
       "name": "CPP.STRING",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "CPP.STRING.FOREGROUND",
-          "monacoTargets": [
-            "token:string.cpp.foreground",
-            "token:string.escape.cpp.foreground"
-          ]
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CPP.STRING.FONT_TYPE",
-          "monacoTargets": [
-            "token:string.cpp.fontStyle",
-            "token:string.escape.cpp.fontStyle"
-          ]
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "CPP.TYPE",
@@ -8878,7 +8569,7 @@
       "deferredPaths": [
         {
           "path": "CPP.TYPE.FOREGROUND",
-          "reason": "unsupported: Monaco's C++ Monarch grammar emits types as generic identifiers, not a distinct type token"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
@@ -8889,7 +8580,7 @@
       "deferredPaths": [
         {
           "path": "CPP.UNUSED.EFFECT_TYPE",
-          "reason": "unsupported: Monaco themes do not expose WebStorm effect-type styles for this C++ attribute"
+          "reason": "no-surface: WebStorm C/C++ colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
@@ -9216,41 +8907,35 @@
       "deferredPaths": [
         {
           "path": "CONDITIONALLY_NOT_COMPILED.FOREGROUND",
-          "reason": "defer: Monaco/Maldives does not load a preprocessor inactive-code surface for conditionally-not-compiled regions yet"
+          "reason": "no-surface: WebStorm conditionally-not-compiled foreign-language colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
     {
       "name": "CSS.COLOR",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "CSS.COLOR.FOREGROUND",
-          "monacoTargets": [
-            "token:attribute.value.hex.css.foreground"
-          ]
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "CSS.COMMENT",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "CSS.COMMENT.FOREGROUND",
-          "monacoTargets": [
-            "token:comment.css.foreground"
-          ]
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CSS.COMMENT.FONT_TYPE",
-          "monacoTargets": [
-            "token:comment.css.fontStyle"
-          ]
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "CSS.FUNCTION",
@@ -9259,7 +8944,7 @@
       "deferredPaths": [
         {
           "path": "CSS.FUNCTION.FOREGROUND",
-          "reason": "unsupported: Monaco's CSS grammar emits functions as generic attribute values, colliding with CSS property values"
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
@@ -9270,86 +8955,72 @@
       "deferredPaths": [
         {
           "path": "CSS.IDENT.FOREGROUND",
-          "reason": "unsupported: Monaco's CSS grammar emits class/id selectors as generic tag tokens, not distinct identifiers"
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
     {
       "name": "CSS.IMPORTANT",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "CSS.IMPORTANT.FOREGROUND",
-          "monacoTargets": [
-            "token:keyword.css.foreground"
-          ]
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CSS.IMPORTANT.FONT_TYPE",
-          "monacoTargets": [
-            "token:keyword.css.fontStyle"
-          ]
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "CSS.KEYWORD",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "CSS.KEYWORD.FOREGROUND",
-          "monacoTargets": [
-            "token:keyword.css.foreground"
-          ]
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CSS.KEYWORD.FONT_TYPE",
-          "monacoTargets": [
-            "token:keyword.css.fontStyle"
-          ]
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "CSS.NUMBER",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "CSS.NUMBER.FOREGROUND",
-          "monacoTargets": [
-            "token:attribute.value.number.css.foreground"
-          ]
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "CSS.OPERATORS",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "CSS.OPERATORS.FOREGROUND",
-          "monacoTargets": [
-            "token:delimiter.css.foreground"
-          ]
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "CSS.PROPERTY_NAME",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "CSS.PROPERTY_NAME.FOREGROUND",
-          "monacoTargets": [
-            "token:attribute.name.css.foreground"
-          ]
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "CSS.PROPERTY_VALUE",
@@ -9358,48 +9029,42 @@
       "deferredPaths": [
         {
           "path": "CSS.PROPERTY_VALUE.FOREGROUND",
-          "reason": "unsupported: Monaco's CSS grammar emits generic property values with the same token as functions/units"
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
       ]
     },
     {
       "name": "CSS.STRING",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "CSS.STRING.FOREGROUND",
-          "monacoTargets": [
-            "token:string.css.foreground"
-          ]
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "CSS.TAG_NAME",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "CSS.TAG_NAME.FOREGROUND",
-          "monacoTargets": [
-            "token:tag.css.foreground"
-          ]
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "CSS.URL",
       "occurrences": 1,
-      "mappedPaths": [
+      "mappedPaths": [],
+      "deferredPaths": [
         {
           "path": "CSS.URL.FOREGROUND",
-          "monacoTargets": [
-            "token:string.css.foreground"
-          ]
+          "reason": "no-surface: WebStorm CSS colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         }
-      ],
-      "deferredPaths": []
+      ]
     },
     {
       "name": "CUSTOM_INVALID_STRING_ESCAPE_ATTRIBUTES",
