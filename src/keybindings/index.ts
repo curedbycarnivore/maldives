@@ -23,6 +23,7 @@ import {
 } from "../file-switcher";
 import type { KeyAction, KeymapConfig } from "../parsers/keymap-parser";
 import { contextFromEditor as runDebugContextFromEditor, type RunDebugPanelController } from "../run-debug-panel";
+import { contextFromEditor as terminalContextFromEditor, type TerminalPanelController } from "../terminal-panel";
 import type { ToolWindowController } from "../tool-windows";
 import { contextFromEditor as vcsContextFromEditor, type VcsPanelController } from "../vcs-panel";
 
@@ -43,6 +44,7 @@ export interface RegisterKeybindingsOptions {
   readonly toolWindows?: ToolWindowController;
   readonly vcsPanel?: VcsPanelController;
   readonly runDebugPanel?: RunDebugPanelController;
+  readonly terminalPanel?: TerminalPanelController;
 }
 
 type Monaco = typeof import("monaco-editor");
@@ -101,6 +103,7 @@ type MonacoTarget =
     }
   | { type: "custom"; id: "vcsPanelAction"; actionId: string }
   | { type: "custom"; id: "runDebugPanelAction"; actionId: string }
+  | { type: "custom"; id: "terminalPanelAction"; actionId: string }
   | { type: "custom"; id: "activateToolWindow"; actionId: string }
   | { type: "custom"; id: "switchModelTab"; tabIndex: number };
 
@@ -156,6 +159,10 @@ const actionTargets: Record<string, MonacoTarget> = {
   RunClass: { type: "custom", id: "runDebugPanelAction", actionId: "RunClass" },
   RunConfiguration: { type: "custom", id: "runDebugPanelAction", actionId: "RunConfiguration" },
   Stop: { type: "custom", id: "runDebugPanelAction", actionId: "Stop" },
+  "tasks.close": { type: "custom", id: "terminalPanelAction", actionId: "tasks.close" },
+  "tasks.goto": { type: "custom", id: "terminalPanelAction", actionId: "tasks.goto" },
+  "tasks.open.in.browser": { type: "custom", id: "terminalPanelAction", actionId: "tasks.open.in.browser" },
+  "tasks.switch": { type: "custom", id: "terminalPanelAction", actionId: "tasks.switch" },
   ...tabActionTargets("GoToTab", 8),
   ...tabActionTargets("Go To Tab #", 10),
   ...tabActionTargets("Switch To Tab #", 10),
@@ -391,6 +398,10 @@ const shortcutlessActionIds = new Set([
   "ChooseDebugConfiguration",
   "DebugClass",
   "RunClass",
+  "tasks.close",
+  "tasks.goto",
+  "tasks.open.in.browser",
+  "tasks.switch",
 ]);
 
 function keybindingsForAction(action: KeyAction, monaco: Monaco, options: RegisterKeybindingsOptions): MaldivesAction[] {
@@ -537,6 +548,10 @@ function handlerForTarget(target: MonacoTarget, options: RegisterKeybindingsOpti
   if (target.id === "activateToolWindow") {
     return (editor) => {
       options.toolWindows?.activateAction(target.actionId);
+      if (target.actionId === "ActivateTerminalToolWindow") {
+        const context = terminalContextFromEditor(editor);
+        if (context) options.terminalPanel?.runAction(target.actionId, context);
+      }
       editor.focus();
     };
   }
@@ -591,6 +606,16 @@ function handlerForTarget(target: MonacoTarget, options: RegisterKeybindingsOpti
       const context = runDebugContextFromEditor(editor);
       if (context) {
         options.runDebugPanel?.runAction(target.actionId, context);
+      }
+      editor.focus();
+    };
+  }
+
+  if (target.id === "terminalPanelAction") {
+    return (editor) => {
+      const context = terminalContextFromEditor(editor);
+      if (context) {
+        options.terminalPanel?.runAction(target.actionId, context);
       }
       editor.focus();
     };

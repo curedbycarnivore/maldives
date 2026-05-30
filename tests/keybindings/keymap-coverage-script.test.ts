@@ -26,9 +26,12 @@ describe("scripts/keymap-coverage", () => {
     expect(coverage.wired).toContain("Run");
     expect(coverage.wired).toContain("RunClass");
     expect(coverage.wired).toContain("Stop");
+    expect(coverage.wired).toContain("tasks.switch");
+    expect(coverage.wired).toContain("tasks.open.in.browser");
     expect(coverage.deferred).not.toContain("ActivateTerminalToolWindow");
     expect(coverage.deferred).not.toContain("Annotate");
     expect(coverage.deferred).not.toContain("Run");
+    expect(coverage.deferred).not.toContain("tasks.switch");
     expect(coverage.dropped).toContain("AceJumpAction");
     expect(coverage.dropped).toContain("DBNavigator.Actions.Calendar.CalendarNextMonth");
     expect(coverage.dropReasons["AceJumpAction"]).toContain("no maldives equivalent");
@@ -60,5 +63,6 @@ describe("scripts/keymap-coverage", () => {
     expect(report.wired.length).toBeGreaterThan(40);
     expect(report.unwired).toEqual([]);
     expect(report.wired).toContain("ActivateTerminalToolWindow");
+    expect(report.wired).toContain("tasks.goto");
   });
 });

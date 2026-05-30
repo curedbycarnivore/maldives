@@ -22,6 +22,7 @@ import { parseKeymap } from "./parsers/keymap-parser";
 import { awaitTypeScriptWorkerAnswer, setupDefaultMonacoWorkers } from "./monaco-workers";
 import { maldivesProFeatureOptions } from "./pro-features";
 import { installRunDebugPanelController, type RunDebugPanelController } from "./run-debug-panel";
+import { contextFromEditor as terminalContextFromEditor, installTerminalPanelController, type TerminalResult } from "./terminal-panel";
 import { registerTheme, THEME_NAME } from "./theme";
 import { installToolWindowController, type ToolWindowController } from "./tool-windows";
 import { installVcsPanelController, type VcsPanelController } from "./vcs-panel";
@@ -44,6 +45,7 @@ declare global {
     __maldivesToolWindows: ToolWindowController;
     __maldivesVcsPanel: VcsPanelController;
     __maldivesRunDebugPanel: RunDebugPanelController;
+    __maldivesTerminalPanel: { execute: (line: string, token?: string) => TerminalResult };
     __maldivesSaveActiveFile: () => Promise<boolean>;
     __maldivesReady: Promise<void>;
   }
@@ -136,6 +138,7 @@ const fileSystemAdapter = new FileSystemAccessAdapter();
 const toolWindows = installToolWindowController(document.body);
 const vcsPanel = installVcsPanelController(document.body);
 const runDebugPanel = installRunDebugPanelController(document.body);
+const terminalPanel = installTerminalPanelController(document.body, { token: "maldives-terminal-session" });
 installReadWriteToggle(document.body, { monaco, editor, workspace, adapter: fileSystemAdapter });
 const registeredKeybindings = registerKeybindings(editor, monaco, keymapConfig, {
   isWriteMode: () => workspace.mode === "write",
@@ -143,6 +146,7 @@ const registeredKeybindings = registerKeybindings(editor, monaco, keymapConfig, 
   toolWindows,
   vcsPanel,
   runDebugPanel,
+  terminalPanel,
 });
 registerRecentLocationTracking(editor);
 registerAstStructuralSearchAction(editor);
@@ -160,6 +164,12 @@ window.__maldivesFileSystemAdapter = fileSystemAdapter;
 window.__maldivesToolWindows = toolWindows;
 window.__maldivesVcsPanel = vcsPanel;
 window.__maldivesRunDebugPanel = runDebugPanel;
+window.__maldivesTerminalPanel = {
+  execute(line, token) {
+    const context = terminalContextFromEditor(editor);
+    return context ? terminalPanel.execute(line, context, token) : { ok: false, output: "ENOENT: no active editor model" };
+  },
+};
 window.__maldivesSaveActiveFile = () => saveActiveWorkspaceFile({ adapter: fileSystemAdapter, workspace, editor, userGesture: true });
 window.__maldivesVscodeTsWorkerReady = vscodeTsWorkerReady;
 window.__maldivesReady = (async () => {
