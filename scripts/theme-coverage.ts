@@ -69,6 +69,30 @@ const classifiedTopLevelOptionNames = [
   "COFFEESCRIPT.STRING",
   "COFFEESCRIPT.STRING_LITERAL",
   "COFFEESCRIPT.THIS",
+  "CONSOLE_BACKGROUND_KEY",
+  "CONSOLE_BLACK_OUTPUT",
+  "CONSOLE_BLUE_BRIGHT_OUTPUT",
+  "CONSOLE_BLUE_OUTPUT",
+  "CONSOLE_CYAN_BRIGHT_OUTPUT",
+  "CONSOLE_CYAN_OUTPUT",
+  "CONSOLE_DARKGRAY_OUTPUT",
+  "CONSOLE_ERROR_OUTPUT",
+  "CONSOLE_FONT_NAME",
+  "CONSOLE_FONT_SIZE",
+  "CONSOLE_GRAY_OUTPUT",
+  "CONSOLE_GREEN_BRIGHT_OUTPUT",
+  "CONSOLE_GREEN_OUTPUT",
+  "CONSOLE_LINE_SPACING",
+  "CONSOLE_MAGENTA_BRIGHT_OUTPUT",
+  "CONSOLE_MAGENTA_OUTPUT",
+  "CONSOLE_NORMAL_OUTPUT",
+  "CONSOLE_RED_BRIGHT_OUTPUT",
+  "CONSOLE_RED_OUTPUT",
+  "CONSOLE_SYSTEM_OUTPUT",
+  "CONSOLE_USER_INPUT",
+  "CONSOLE_WHITE_OUTPUT",
+  "CONSOLE_YELLOW_BRIGHT_OUTPUT",
+  "CONSOLE_YELLOW_OUTPUT",
 ];
 
 export interface IclsOptionNameIndex {
@@ -292,7 +316,23 @@ function classifiedTopLevelPathsFor(name: string): string[] {
     return coffeeScriptPathsFor(name);
   }
 
+  if (name.startsWith("CONSOLE_")) {
+    return consolePathsFor(name);
+  }
+
   return [name];
+}
+
+function consolePathsFor(name: string): string[] {
+  if (["CONSOLE_BACKGROUND_KEY", "CONSOLE_FONT_NAME", "CONSOLE_FONT_SIZE", "CONSOLE_LINE_SPACING", "CONSOLE_DARKGRAY_OUTPUT"].includes(name)) {
+    return [name];
+  }
+
+  if (name === "CONSOLE_USER_INPUT") {
+    return ["CONSOLE_USER_INPUT.FOREGROUND", "CONSOLE_USER_INPUT.FONT_TYPE"];
+  }
+
+  return [`${name}.FOREGROUND`];
 }
 
 function coffeeScriptPathsFor(name: string): string[] {
@@ -372,6 +412,10 @@ function classifiedTopLevelDeferredReason(path: string): string {
 
   if (path.startsWith("COFFEESCRIPT.")) {
     return coffeeScriptDeferredReason(path);
+  }
+
+  if (path === "CONSOLE_DARKGRAY_OUTPUT") {
+    return "unsupported: active ICLS CONSOLE_DARKGRAY_OUTPUT has no foreground or font style to apply";
   }
 
   if (path.endsWith(".BACKGROUND")) {

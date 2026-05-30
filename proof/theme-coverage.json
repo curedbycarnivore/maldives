@@ -59,6 +59,30 @@
     "COFFEESCRIPT.STRING",
     "COFFEESCRIPT.STRING_LITERAL",
     "COFFEESCRIPT.THIS",
+    "CONSOLE_BACKGROUND_KEY",
+    "CONSOLE_BLACK_OUTPUT",
+    "CONSOLE_BLUE_BRIGHT_OUTPUT",
+    "CONSOLE_BLUE_OUTPUT",
+    "CONSOLE_CYAN_BRIGHT_OUTPUT",
+    "CONSOLE_CYAN_OUTPUT",
+    "CONSOLE_DARKGRAY_OUTPUT",
+    "CONSOLE_ERROR_OUTPUT",
+    "CONSOLE_FONT_NAME",
+    "CONSOLE_FONT_SIZE",
+    "CONSOLE_GRAY_OUTPUT",
+    "CONSOLE_GREEN_BRIGHT_OUTPUT",
+    "CONSOLE_GREEN_OUTPUT",
+    "CONSOLE_LINE_SPACING",
+    "CONSOLE_MAGENTA_BRIGHT_OUTPUT",
+    "CONSOLE_MAGENTA_OUTPUT",
+    "CONSOLE_NORMAL_OUTPUT",
+    "CONSOLE_RED_BRIGHT_OUTPUT",
+    "CONSOLE_RED_OUTPUT",
+    "CONSOLE_SYSTEM_OUTPUT",
+    "CONSOLE_USER_INPUT",
+    "CONSOLE_WHITE_OUTPUT",
+    "CONSOLE_YELLOW_BRIGHT_OUTPUT",
+    "CONSOLE_YELLOW_OUTPUT",
     "DEFAULT_BRACES",
     "DEFAULT_BRACKETS",
     "DEFAULT_CONSTANT",
@@ -110,174 +134,6 @@
       "occurrences": 1,
       "samplePaths": [
         "CONDITIONALLY_NOT_COMPILED"
-      ]
-    },
-    {
-      "name": "CONSOLE_BACKGROUND_KEY",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_BACKGROUND_KEY"
-      ]
-    },
-    {
-      "name": "CONSOLE_BLACK_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_BLACK_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_BLUE_BRIGHT_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_BLUE_BRIGHT_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_BLUE_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_BLUE_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_CYAN_BRIGHT_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_CYAN_BRIGHT_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_CYAN_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_CYAN_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_DARKGRAY_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_DARKGRAY_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_ERROR_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_ERROR_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_FONT_NAME",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_FONT_NAME"
-      ]
-    },
-    {
-      "name": "CONSOLE_FONT_SIZE",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_FONT_SIZE"
-      ]
-    },
-    {
-      "name": "CONSOLE_GRAY_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_GRAY_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_GREEN_BRIGHT_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_GREEN_BRIGHT_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_GREEN_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_GREEN_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_LINE_SPACING",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_LINE_SPACING"
-      ]
-    },
-    {
-      "name": "CONSOLE_MAGENTA_BRIGHT_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_MAGENTA_BRIGHT_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_MAGENTA_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_MAGENTA_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_NORMAL_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_NORMAL_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_RED_BRIGHT_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_RED_BRIGHT_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_RED_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_RED_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_SYSTEM_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_SYSTEM_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_USER_INPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_USER_INPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_WHITE_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_WHITE_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_YELLOW_BRIGHT_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_YELLOW_BRIGHT_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_YELLOW_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_YELLOW_OUTPUT"
       ]
     },
     {
@@ -3797,174 +3653,6 @@
       ]
     },
     {
-      "name": "CONSOLE_BACKGROUND_KEY",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_BACKGROUND_KEY"
-      ]
-    },
-    {
-      "name": "CONSOLE_BLACK_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_BLACK_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_BLUE_BRIGHT_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_BLUE_BRIGHT_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_BLUE_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_BLUE_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_CYAN_BRIGHT_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_CYAN_BRIGHT_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_CYAN_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_CYAN_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_DARKGRAY_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_DARKGRAY_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_ERROR_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_ERROR_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_FONT_NAME",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_FONT_NAME"
-      ]
-    },
-    {
-      "name": "CONSOLE_FONT_SIZE",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_FONT_SIZE"
-      ]
-    },
-    {
-      "name": "CONSOLE_GRAY_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_GRAY_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_GREEN_BRIGHT_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_GREEN_BRIGHT_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_GREEN_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_GREEN_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_LINE_SPACING",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_LINE_SPACING"
-      ]
-    },
-    {
-      "name": "CONSOLE_MAGENTA_BRIGHT_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_MAGENTA_BRIGHT_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_MAGENTA_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_MAGENTA_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_NORMAL_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_NORMAL_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_RED_BRIGHT_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_RED_BRIGHT_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_RED_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_RED_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_SYSTEM_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_SYSTEM_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_USER_INPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_USER_INPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_WHITE_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_WHITE_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_YELLOW_BRIGHT_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_YELLOW_BRIGHT_OUTPUT"
-      ]
-    },
-    {
-      "name": "CONSOLE_YELLOW_OUTPUT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONSOLE_YELLOW_OUTPUT"
-      ]
-    },
-    {
       "name": "CONSTRUCTOR_CALL_ATTRIBUTES",
       "occurrences": 1,
       "samplePaths": [
@@ -4137,6 +3825,174 @@
       "occurrences": 1,
       "samplePaths": [
         "CSS.COMMENT"
+      ]
+    },
+    {
+      "name": "CSS.FUNCTION",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.FUNCTION"
+      ]
+    },
+    {
+      "name": "CSS.IDENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.IDENT"
+      ]
+    },
+    {
+      "name": "CSS.IMPORTANT",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.IMPORTANT"
+      ]
+    },
+    {
+      "name": "CSS.KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.KEYWORD"
+      ]
+    },
+    {
+      "name": "CSS.NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.NUMBER"
+      ]
+    },
+    {
+      "name": "CSS.OPERATORS",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.OPERATORS"
+      ]
+    },
+    {
+      "name": "CSS.PROPERTY_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.PROPERTY_NAME"
+      ]
+    },
+    {
+      "name": "CSS.PROPERTY_VALUE",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.PROPERTY_VALUE"
+      ]
+    },
+    {
+      "name": "CSS.STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.STRING"
+      ]
+    },
+    {
+      "name": "CSS.TAG_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.TAG_NAME"
+      ]
+    },
+    {
+      "name": "CSS.URL",
+      "occurrences": 1,
+      "samplePaths": [
+        "CSS.URL"
+      ]
+    },
+    {
+      "name": "CTRL_CLICKABLE",
+      "occurrences": 1,
+      "samplePaths": [
+        "CTRL_CLICKABLE"
+      ]
+    },
+    {
+      "name": "CUSP_BRACKETS_ATTR",
+      "occurrences": 1,
+      "samplePaths": [
+        "CUSP_BRACKETS_ATTR"
+      ]
+    },
+    {
+      "name": "CUSTOM_INVALID_STRING_ESCAPE_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CUSTOM_INVALID_STRING_ESCAPE_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CUSTOM_KEYWORD1_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CUSTOM_KEYWORD1_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CUSTOM_KEYWORD2_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CUSTOM_KEYWORD2_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CUSTOM_KEYWORD3_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CUSTOM_KEYWORD3_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CUSTOM_KEYWORD4_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CUSTOM_KEYWORD4_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CUSTOM_LINE_COMMENT_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CUSTOM_LINE_COMMENT_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CUSTOM_MULTI_LINE_COMMENT_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CUSTOM_MULTI_LINE_COMMENT_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CUSTOM_NUMBER_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CUSTOM_NUMBER_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CUSTOM_STRING_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CUSTOM_STRING_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CUSTOM_VALID_STRING_ESCAPE_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "CUSTOM_VALID_STRING_ESCAPE_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "CY_VARIABLE",
+      "occurrences": 1,
+      "samplePaths": [
+        "CY_VARIABLE"
       ]
     }
   ],
@@ -4350,6 +4206,120 @@
           "path": "COFFEESCRIPT.THIS.FOREGROUND",
           "monacoTargets": [
             "token:variable.predefined.coffee.foreground"
+          ]
+        },
+        {
+          "path": "CONSOLE_BLACK_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-black"
+          ]
+        },
+        {
+          "path": "CONSOLE_BLUE_BRIGHT_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-blue-bright"
+          ]
+        },
+        {
+          "path": "CONSOLE_BLUE_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-blue"
+          ]
+        },
+        {
+          "path": "CONSOLE_CYAN_BRIGHT_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-cyan-bright"
+          ]
+        },
+        {
+          "path": "CONSOLE_CYAN_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-cyan"
+          ]
+        },
+        {
+          "path": "CONSOLE_ERROR_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-error-output"
+          ]
+        },
+        {
+          "path": "CONSOLE_GRAY_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-gray"
+          ]
+        },
+        {
+          "path": "CONSOLE_GREEN_BRIGHT_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-green-bright"
+          ]
+        },
+        {
+          "path": "CONSOLE_GREEN_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-green"
+          ]
+        },
+        {
+          "path": "CONSOLE_MAGENTA_BRIGHT_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-magenta-bright"
+          ]
+        },
+        {
+          "path": "CONSOLE_MAGENTA_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-magenta"
+          ]
+        },
+        {
+          "path": "CONSOLE_NORMAL_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-normal-output"
+          ]
+        },
+        {
+          "path": "CONSOLE_RED_BRIGHT_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-red-bright"
+          ]
+        },
+        {
+          "path": "CONSOLE_RED_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-red"
+          ]
+        },
+        {
+          "path": "CONSOLE_SYSTEM_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-system-output"
+          ]
+        },
+        {
+          "path": "CONSOLE_USER_INPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-user-input"
+          ]
+        },
+        {
+          "path": "CONSOLE_WHITE_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-white"
+          ]
+        },
+        {
+          "path": "CONSOLE_YELLOW_BRIGHT_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-yellow-bright"
+          ]
+        },
+        {
+          "path": "CONSOLE_YELLOW_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-yellow"
           ]
         },
         {
@@ -4580,82 +4550,6 @@
         },
         {
           "path": "CONDITIONALLY_NOT_COMPILED.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CONSOLE_BLACK_OUTPUT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CONSOLE_BLUE_BRIGHT_OUTPUT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CONSOLE_BLUE_OUTPUT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CONSOLE_CYAN_BRIGHT_OUTPUT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CONSOLE_CYAN_OUTPUT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CONSOLE_ERROR_OUTPUT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CONSOLE_GRAY_OUTPUT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CONSOLE_GREEN_BRIGHT_OUTPUT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CONSOLE_GREEN_OUTPUT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CONSOLE_MAGENTA_BRIGHT_OUTPUT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CONSOLE_MAGENTA_OUTPUT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CONSOLE_NORMAL_OUTPUT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CONSOLE_RED_BRIGHT_OUTPUT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CONSOLE_RED_OUTPUT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CONSOLE_SYSTEM_OUTPUT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CONSOLE_USER_INPUT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CONSOLE_WHITE_OUTPUT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CONSOLE_YELLOW_BRIGHT_OUTPUT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CONSOLE_YELLOW_OUTPUT.FOREGROUND",
           "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
         },
         {
@@ -6387,6 +6281,12 @@
           ]
         },
         {
+          "path": "CONSOLE_USER_INPUT.FONT_TYPE",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-user-input-font-style"
+          ]
+        },
+        {
           "path": "DEFAULT_BRACES.FONT_TYPE",
           "monacoTargets": [
             "token:delimiter.fontStyle",
@@ -6487,10 +6387,6 @@
         {
           "path": "COFFEESCRIPT.STRING_LITERAL.FONT_TYPE",
           "reason": "unsupported: Monaco's CoffeeScript grammar does not distinguish literal string token variants"
-        },
-        {
-          "path": "CONSOLE_USER_INPUT.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
         },
         {
           "path": "CONSTRUCTOR_CALL_ATTRIBUTES.FONT_TYPE",
@@ -8837,6 +8733,322 @@
           "path": "COFFEESCRIPT.THIS.FONT_TYPE",
           "monacoTargets": [
             "token:variable.predefined.coffee.fontStyle"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONSOLE_BACKGROUND_KEY",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CONSOLE_BACKGROUND_KEY",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-background"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONSOLE_BLACK_OUTPUT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CONSOLE_BLACK_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-black"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONSOLE_BLUE_BRIGHT_OUTPUT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CONSOLE_BLUE_BRIGHT_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-blue-bright"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONSOLE_BLUE_OUTPUT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CONSOLE_BLUE_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-blue"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONSOLE_CYAN_BRIGHT_OUTPUT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CONSOLE_CYAN_BRIGHT_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-cyan-bright"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONSOLE_CYAN_OUTPUT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CONSOLE_CYAN_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-cyan"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONSOLE_DARKGRAY_OUTPUT",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CONSOLE_DARKGRAY_OUTPUT",
+          "reason": "unsupported: active ICLS CONSOLE_DARKGRAY_OUTPUT has no foreground or font style to apply"
+        }
+      ]
+    },
+    {
+      "name": "CONSOLE_ERROR_OUTPUT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CONSOLE_ERROR_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-error-output"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONSOLE_FONT_NAME",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CONSOLE_FONT_NAME",
+          "monacoTargets": [
+            "terminal-css:font-family"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONSOLE_FONT_SIZE",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CONSOLE_FONT_SIZE",
+          "monacoTargets": [
+            "terminal-css:font-size"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONSOLE_GRAY_OUTPUT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CONSOLE_GRAY_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-gray"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONSOLE_GREEN_BRIGHT_OUTPUT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CONSOLE_GREEN_BRIGHT_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-green-bright"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONSOLE_GREEN_OUTPUT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CONSOLE_GREEN_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-green"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONSOLE_LINE_SPACING",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CONSOLE_LINE_SPACING",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-line-spacing"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONSOLE_MAGENTA_BRIGHT_OUTPUT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CONSOLE_MAGENTA_BRIGHT_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-magenta-bright"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONSOLE_MAGENTA_OUTPUT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CONSOLE_MAGENTA_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-magenta"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONSOLE_NORMAL_OUTPUT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CONSOLE_NORMAL_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-normal-output"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONSOLE_RED_BRIGHT_OUTPUT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CONSOLE_RED_BRIGHT_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-red-bright"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONSOLE_RED_OUTPUT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CONSOLE_RED_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-red"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONSOLE_SYSTEM_OUTPUT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CONSOLE_SYSTEM_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-system-output"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONSOLE_USER_INPUT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CONSOLE_USER_INPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-user-input"
+          ]
+        },
+        {
+          "path": "CONSOLE_USER_INPUT.FONT_TYPE",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-user-input-font-style"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONSOLE_WHITE_OUTPUT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CONSOLE_WHITE_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-white"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONSOLE_YELLOW_BRIGHT_OUTPUT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CONSOLE_YELLOW_BRIGHT_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-yellow-bright"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONSOLE_YELLOW_OUTPUT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CONSOLE_YELLOW_OUTPUT.FOREGROUND",
+          "monacoTargets": [
+            "terminal-css:--maldives-console-yellow"
           ]
         }
       ],

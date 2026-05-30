@@ -140,7 +140,7 @@ const fileSystemAdapter = new FileSystemAccessAdapter();
 const toolWindows = installToolWindowController(document.body);
 const vcsPanel = installVcsPanelController(document.body);
 const runDebugPanel = installRunDebugPanelController(document.body);
-const terminalPanel = installTerminalPanelController(document.body, { token: "maldives-terminal-session" });
+const terminalPanel = installTerminalPanelController(document.body, { token: "maldives-terminal-session", theme: themeConfig.console });
 const favoritesPanel = installFavoritesPanelController(document.body);
 installReadWriteToggle(document.body, { monaco, editor, workspace, adapter: fileSystemAdapter });
 const registeredKeybindings = registerKeybindings(editor, monaco, keymapConfig, {

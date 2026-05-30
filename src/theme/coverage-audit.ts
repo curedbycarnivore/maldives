@@ -39,6 +39,32 @@ const colorAuditEntries: ColorAuditEntry[] = [
 
 const editorOptionAuditAttributes = ["EDITOR_FONT_NAME", "EDITOR_FONT_SIZE"];
 
+const consoleAuditAttributes = [
+  "CONSOLE_BACKGROUND_KEY",
+  "CONSOLE_FONT_NAME",
+  "CONSOLE_FONT_SIZE",
+  "CONSOLE_LINE_SPACING",
+  "CONSOLE_BLACK_OUTPUT",
+  "CONSOLE_BLUE_BRIGHT_OUTPUT",
+  "CONSOLE_BLUE_OUTPUT",
+  "CONSOLE_CYAN_BRIGHT_OUTPUT",
+  "CONSOLE_CYAN_OUTPUT",
+  "CONSOLE_ERROR_OUTPUT",
+  "CONSOLE_GRAY_OUTPUT",
+  "CONSOLE_GREEN_BRIGHT_OUTPUT",
+  "CONSOLE_GREEN_OUTPUT",
+  "CONSOLE_MAGENTA_BRIGHT_OUTPUT",
+  "CONSOLE_MAGENTA_OUTPUT",
+  "CONSOLE_NORMAL_OUTPUT",
+  "CONSOLE_RED_BRIGHT_OUTPUT",
+  "CONSOLE_RED_OUTPUT",
+  "CONSOLE_SYSTEM_OUTPUT",
+  "CONSOLE_USER_INPUT",
+  "CONSOLE_WHITE_OUTPUT",
+  "CONSOLE_YELLOW_BRIGHT_OUTPUT",
+  "CONSOLE_YELLOW_OUTPUT",
+];
+
 const tokenAuditNames = [
   "JS.KEYWORD",
   "JS.LINE_COMMENT",
@@ -97,6 +123,7 @@ export const themeCoverageAuditAttributes = [
   ...colorAuditEntries.map((entry) => entry.iclsAttribute),
   ...editorOptionAuditAttributes,
   ...tokenAuditNames,
+  ...consoleAuditAttributes,
 ];
 
 export function themeCoverageAuditTargets(): Record<string, string[]> {
@@ -108,6 +135,30 @@ export function themeCoverageAuditTargets(): Record<string, string[]> {
 
   targets.set("EDITOR_FONT_NAME", ["option:editor.fontFamily"]);
   targets.set("EDITOR_FONT_SIZE", ["option:editor.fontSize"]);
+  targets.set("CONSOLE_BACKGROUND_KEY", ["terminal-css:--maldives-console-background"]);
+  targets.set("CONSOLE_FONT_NAME", ["terminal-css:font-family"]);
+  targets.set("CONSOLE_FONT_SIZE", ["terminal-css:font-size"]);
+  targets.set("CONSOLE_LINE_SPACING", ["terminal-css:--maldives-console-line-spacing"]);
+  targets.set("CONSOLE_BLACK_OUTPUT.FOREGROUND", ["terminal-css:--maldives-console-black"]);
+  targets.set("CONSOLE_BLUE_OUTPUT.FOREGROUND", ["terminal-css:--maldives-console-blue"]);
+  targets.set("CONSOLE_BLUE_BRIGHT_OUTPUT.FOREGROUND", ["terminal-css:--maldives-console-blue-bright"]);
+  targets.set("CONSOLE_CYAN_OUTPUT.FOREGROUND", ["terminal-css:--maldives-console-cyan"]);
+  targets.set("CONSOLE_CYAN_BRIGHT_OUTPUT.FOREGROUND", ["terminal-css:--maldives-console-cyan-bright"]);
+  targets.set("CONSOLE_ERROR_OUTPUT.FOREGROUND", ["terminal-css:--maldives-console-error-output"]);
+  targets.set("CONSOLE_GRAY_OUTPUT.FOREGROUND", ["terminal-css:--maldives-console-gray"]);
+  targets.set("CONSOLE_GREEN_OUTPUT.FOREGROUND", ["terminal-css:--maldives-console-green"]);
+  targets.set("CONSOLE_GREEN_BRIGHT_OUTPUT.FOREGROUND", ["terminal-css:--maldives-console-green-bright"]);
+  targets.set("CONSOLE_MAGENTA_OUTPUT.FOREGROUND", ["terminal-css:--maldives-console-magenta"]);
+  targets.set("CONSOLE_MAGENTA_BRIGHT_OUTPUT.FOREGROUND", ["terminal-css:--maldives-console-magenta-bright"]);
+  targets.set("CONSOLE_NORMAL_OUTPUT.FOREGROUND", ["terminal-css:--maldives-console-normal-output"]);
+  targets.set("CONSOLE_RED_OUTPUT.FOREGROUND", ["terminal-css:--maldives-console-red"]);
+  targets.set("CONSOLE_RED_BRIGHT_OUTPUT.FOREGROUND", ["terminal-css:--maldives-console-red-bright"]);
+  targets.set("CONSOLE_SYSTEM_OUTPUT.FOREGROUND", ["terminal-css:--maldives-console-system-output"]);
+  targets.set("CONSOLE_USER_INPUT.FOREGROUND", ["terminal-css:--maldives-console-user-input"]);
+  targets.set("CONSOLE_USER_INPUT.FONT_TYPE", ["terminal-css:--maldives-console-user-input-font-style"]);
+  targets.set("CONSOLE_WHITE_OUTPUT.FOREGROUND", ["terminal-css:--maldives-console-white"]);
+  targets.set("CONSOLE_YELLOW_OUTPUT.FOREGROUND", ["terminal-css:--maldives-console-yellow"]);
+  targets.set("CONSOLE_YELLOW_BRIGHT_OUTPUT.FOREGROUND", ["terminal-css:--maldives-console-yellow-bright"]);
 
   for (const tokenName of tokenAuditNames) {
     const scopes = TOKEN_SCOPES[tokenName] ?? [tokenName];
@@ -128,6 +179,10 @@ export function auditThemeCoverage(theme: ThemeConfig, monacoTheme: editor.IStan
         missing.push(`${entry.iclsAttribute} -> ${colorId}`);
       }
     }
+  }
+
+  if (!theme.console.background || !theme.console.normal || !theme.console.error || !theme.console.system || !theme.console.userInput) {
+    missing.push("CONSOLE_* -> terminal-css");
   }
 
   for (const tokenName of tokenAuditNames) {

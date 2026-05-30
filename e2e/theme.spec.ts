@@ -6,6 +6,8 @@ declare global {
   interface Window {
     __maldivesEditor: import("monaco-editor").editor.IStandaloneCodeEditor;
     __monaco: typeof import("monaco-editor");
+    __maldivesExecuteKeybinding: (wsActionId: string) => boolean;
+    __maldivesTerminalPanel: { execute(line: string, token?: string): { ok: boolean; output: string } };
   }
 }
 
@@ -319,4 +321,43 @@ class RepositoryBuilder
 
   await mkdir("proof", { recursive: true });
   await page.screenshot({ path: "proof/p15l-theme-coffeescript-surfaces-proof.png" });
+});
+
+test("renders P32f console palette colors in the terminal panel", async ({ page }) => {
+  await loadEditor(page);
+
+  await page.evaluate(() => {
+    const sample = `import { Effect, Layer, Schema, pipe } from "effect";
+
+function traced(_target: unknown, _key: string) {}
+
+@traced
+class ConsolePaletteService<T extends { id: string }> {
+  run(value: T) {
+    return pipe(Effect.succeed(value), Effect.map((item) => Schema.String));
+  }
+}
+
+export const ConsolePaletteLayer = Layer.succeed(ConsolePaletteService, new ConsolePaletteService());
+`;
+    window.__maldivesEditor.setModel(window.__monaco.editor.createModel(sample, "typescript", window.__monaco.Uri.parse("file:///maldives/p32f-console-palette.tsx")));
+    window.__maldivesEditor.setPosition({ lineNumber: 7, column: 5 });
+    window.__maldivesEditor.focus();
+  });
+
+  await expect.poll(() => page.evaluate(() => window.__maldivesExecuteKeybinding("ActivateTerminalToolWindow"))).toBe(true);
+  await page.evaluate(() => window.__maldivesTerminalPanel.execute("echo Effect.gen Layer Schema", "maldives-terminal-session"));
+  await page.evaluate(() => window.__maldivesTerminalPanel.execute("rm -rf /", "maldives-terminal-session"));
+
+  const panel = page.locator(".maldives-terminal-panel");
+  await expect(panel).toBeVisible();
+  await expect.poll(() => panel.evaluate((element) => getComputedStyle(element).backgroundColor), { timeout: 10000 }).toBe("rgb(0, 0, 0)");
+  await expect.poll(() => panel.evaluate((element) => getComputedStyle(element).fontFamily), { timeout: 10000 }).toContain("Source Code Pro");
+  await expect.poll(() => page.locator(".maldives-terminal-row-system").first().evaluate((element) => getComputedStyle(element).color)).toBe("rgb(102, 153, 204)");
+  await expect.poll(() => page.locator(".maldives-terminal-row-user-input").first().evaluate((element) => getComputedStyle(element).color)).toBe("rgb(153, 204, 153)");
+  await expect.poll(() => page.locator(".maldives-terminal-row-user-input").first().evaluate((element) => getComputedStyle(element).fontStyle)).toBe("italic");
+  await expect.poll(() => page.locator(".maldives-terminal-row-error").first().evaluate((element) => getComputedStyle(element).color)).toBe("rgb(242, 119, 122)");
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/p32f-console-palette-proof.png" });
 });

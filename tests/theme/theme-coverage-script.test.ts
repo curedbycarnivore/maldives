@@ -21,7 +21,7 @@ describe("scripts/theme-coverage", () => {
     expect(report.mapped).toContain("JS.KEYWORD");
     expect(report.unmapped).toEqual(
       expect.arrayContaining([
-        expect.objectContaining({ name: "CONSOLE_BACKGROUND_KEY", occurrences: 1 }),
+        expect.objectContaining({ name: "CONDITIONALLY_NOT_COMPILED", occurrences: 1 }),
         expect.objectContaining({ name: "DEFAULT_TEMPLATE_LANGUAGE_COLOR", occurrences: 1 }),
       ]),
     );
@@ -267,6 +267,52 @@ describe("scripts/theme-coverage", () => {
         },
       ]),
     );
+  });
+
+  test("classifies P32f console palette surfaces into terminal CSS targets or explicit no-value deferrals", () => {
+    const report = auditThemeCoverageMappings(iclsXml);
+    const consoleNames = [
+      "CONSOLE_BACKGROUND_KEY",
+      "CONSOLE_BLACK_OUTPUT",
+      "CONSOLE_BLUE_BRIGHT_OUTPUT",
+      "CONSOLE_BLUE_OUTPUT",
+      "CONSOLE_CYAN_BRIGHT_OUTPUT",
+      "CONSOLE_CYAN_OUTPUT",
+      "CONSOLE_DARKGRAY_OUTPUT",
+      "CONSOLE_ERROR_OUTPUT",
+      "CONSOLE_FONT_NAME",
+      "CONSOLE_FONT_SIZE",
+      "CONSOLE_GRAY_OUTPUT",
+      "CONSOLE_GREEN_BRIGHT_OUTPUT",
+      "CONSOLE_GREEN_OUTPUT",
+      "CONSOLE_LINE_SPACING",
+      "CONSOLE_MAGENTA_BRIGHT_OUTPUT",
+      "CONSOLE_MAGENTA_OUTPUT",
+      "CONSOLE_NORMAL_OUTPUT",
+      "CONSOLE_RED_BRIGHT_OUTPUT",
+      "CONSOLE_RED_OUTPUT",
+      "CONSOLE_SYSTEM_OUTPUT",
+      "CONSOLE_USER_INPUT",
+      "CONSOLE_WHITE_OUTPUT",
+      "CONSOLE_YELLOW_BRIGHT_OUTPUT",
+      "CONSOLE_YELLOW_OUTPUT",
+    ];
+
+    expect(report.top50Unmapped.map((entry) => entry.name)).not.toEqual(expect.arrayContaining(consoleNames));
+    expect(report.classifiedTopLevelOptions.map((entry) => entry.name)).toEqual(expect.arrayContaining(consoleNames));
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CONSOLE_BACKGROUND_KEY")?.mappedPaths).toEqual([
+      { path: "CONSOLE_BACKGROUND_KEY", monacoTargets: ["terminal-css:--maldives-console-background"] },
+    ]);
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CONSOLE_USER_INPUT")?.mappedPaths).toEqual([
+      { path: "CONSOLE_USER_INPUT.FOREGROUND", monacoTargets: ["terminal-css:--maldives-console-user-input"] },
+      { path: "CONSOLE_USER_INPUT.FONT_TYPE", monacoTargets: ["terminal-css:--maldives-console-user-input-font-style"] },
+    ]);
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CONSOLE_DARKGRAY_OUTPUT")?.deferredPaths).toEqual([
+      {
+        path: "CONSOLE_DARKGRAY_OUTPUT",
+        reason: "unsupported: active ICLS CONSOLE_DARKGRAY_OUTPUT has no foreground or font style to apply",
+      },
+    ]);
   });
 
   test("writes proof/theme-coverage.json shaped for watchdog telemetry", () => {

@@ -1,3 +1,32 @@
+export interface ConsoleThemeConfig {
+  background: string;
+  fontFamily: string;
+  fontSize: number;
+  lineSpacing: number;
+  normal: string;
+  error: string;
+  system: string;
+  userInput: string;
+  userInputFontStyle: TokenRule["fontStyle"];
+  ansi: {
+    black?: string;
+    blue?: string;
+    blueBright?: string;
+    cyan?: string;
+    cyanBright?: string;
+    gray?: string;
+    green?: string;
+    greenBright?: string;
+    magenta?: string;
+    magentaBright?: string;
+    red?: string;
+    redBright?: string;
+    white?: string;
+    yellow?: string;
+    yellowBright?: string;
+  };
+}
+
 export interface ThemeConfig {
   background: string;
   gutterBackground: string;
@@ -28,6 +57,7 @@ export interface ThemeConfig {
   defaultForeground: string;
   fontFamily: string;
   fontSize: number;
+  console: ConsoleThemeConfig;
   tokens: TokenRule[];
 }
 
@@ -131,7 +161,39 @@ export function parseIcls(xmlContent: string): ThemeConfig {
     breadcrumbsHoveredBackground: color(optionValue(blockFor(xmlContent, "BREADCRUMBS_HOVERED"), "BACKGROUND")),
     fontFamily: optionValue(fontBlock, "EDITOR_FONT_NAME"),
     fontSize: Number(optionValue(fontBlock, "EDITOR_FONT_SIZE")),
+    console: consoleTheme(xmlContent),
     tokens: tokenNames.map((name) => tokenRule(xmlContent, name)),
+  };
+}
+
+function consoleTheme(xmlContent: string): ConsoleThemeConfig {
+  return {
+    background: color(optionValue(xmlContent, "CONSOLE_BACKGROUND_KEY")),
+    fontFamily: optionValue(xmlContent, "CONSOLE_FONT_NAME"),
+    fontSize: Number(optionValue(xmlContent, "CONSOLE_FONT_SIZE")),
+    lineSpacing: Number(optionValue(xmlContent, "CONSOLE_LINE_SPACING")),
+    normal: color(optionValue(blockFor(xmlContent, "CONSOLE_NORMAL_OUTPUT"), "FOREGROUND")),
+    error: color(optionValue(blockFor(xmlContent, "CONSOLE_ERROR_OUTPUT"), "FOREGROUND")),
+    system: color(optionValue(blockFor(xmlContent, "CONSOLE_SYSTEM_OUTPUT"), "FOREGROUND")),
+    userInput: color(optionValue(blockFor(xmlContent, "CONSOLE_USER_INPUT"), "FOREGROUND")),
+    userInputFontStyle: fontStyle(optionValue(blockFor(xmlContent, "CONSOLE_USER_INPUT"), "FONT_TYPE")),
+    ansi: {
+      black: colorOrUndefined(optionValue(blockFor(xmlContent, "CONSOLE_BLACK_OUTPUT"), "FOREGROUND")),
+      blue: colorOrUndefined(optionValue(blockFor(xmlContent, "CONSOLE_BLUE_OUTPUT"), "FOREGROUND")),
+      blueBright: colorOrUndefined(optionValue(blockFor(xmlContent, "CONSOLE_BLUE_BRIGHT_OUTPUT"), "FOREGROUND")),
+      cyan: colorOrUndefined(optionValue(blockFor(xmlContent, "CONSOLE_CYAN_OUTPUT"), "FOREGROUND")),
+      cyanBright: colorOrUndefined(optionValue(blockFor(xmlContent, "CONSOLE_CYAN_BRIGHT_OUTPUT"), "FOREGROUND")),
+      gray: colorOrUndefined(optionValue(blockFor(xmlContent, "CONSOLE_GRAY_OUTPUT"), "FOREGROUND")),
+      green: colorOrUndefined(optionValue(blockFor(xmlContent, "CONSOLE_GREEN_OUTPUT"), "FOREGROUND")),
+      greenBright: colorOrUndefined(optionValue(blockFor(xmlContent, "CONSOLE_GREEN_BRIGHT_OUTPUT"), "FOREGROUND")),
+      magenta: colorOrUndefined(optionValue(blockFor(xmlContent, "CONSOLE_MAGENTA_OUTPUT"), "FOREGROUND")),
+      magentaBright: colorOrUndefined(optionValue(blockFor(xmlContent, "CONSOLE_MAGENTA_BRIGHT_OUTPUT"), "FOREGROUND")),
+      red: colorOrUndefined(optionValue(blockFor(xmlContent, "CONSOLE_RED_OUTPUT"), "FOREGROUND")),
+      redBright: colorOrUndefined(optionValue(blockFor(xmlContent, "CONSOLE_RED_BRIGHT_OUTPUT"), "FOREGROUND")),
+      white: colorOrUndefined(optionValue(blockFor(xmlContent, "CONSOLE_WHITE_OUTPUT"), "FOREGROUND")),
+      yellow: colorOrUndefined(optionValue(blockFor(xmlContent, "CONSOLE_YELLOW_OUTPUT"), "FOREGROUND")),
+      yellowBright: colorOrUndefined(optionValue(blockFor(xmlContent, "CONSOLE_YELLOW_BRIGHT_OUTPUT"), "FOREGROUND")),
+    },
   };
 }
 

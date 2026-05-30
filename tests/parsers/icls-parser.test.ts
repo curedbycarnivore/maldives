@@ -131,3 +131,27 @@ test("parses P15l CoffeeScript token surfaces from the active ICLS theme", () =>
     ]),
   );
 });
+
+test("parses P32f console palette surfaces from the active ICLS theme", () => {
+  expect(theme.console).toMatchObject({
+    background: "#000000",
+    fontFamily: "Source Code Pro",
+    fontSize: 12,
+    lineSpacing: 0.8,
+    normal: "#cccccc",
+    error: "#f2777a",
+    system: "#6699cc",
+    userInput: "#99cc99",
+    userInputFontStyle: "italic",
+    ansi: expect.objectContaining({
+      black: "#1cbc97",
+      blueBright: "#2d61f0",
+      cyan: "#66cccc",
+      green: "#99cc99",
+      magentaBright: "#a47dde",
+      redBright: "#ff1616",
+      white: "#c9c9c9",
+      yellow: "#ffcc66",
+    }),
+  });
+});
