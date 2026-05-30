@@ -31,6 +31,7 @@ import { installToolWindowController, type ToolWindowController } from "./tool-w
 import { installVcsPanelController, type VcsPanelController } from "./vcs-panel";
 import { configureTypeScriptWorker, registerEffectDtsFiles, type EffectDtsFiles, type RegisterEffectDtsFilesOptions } from "./typescript-worker";
 import { startVscodeTypeScriptWorkerForMaldives, type VscodeTypeScriptWorkerBootstrap } from "./vscode-ts-worker";
+import { installWorkspaceTabStrip } from "./workspace-tabs";
 import { MaldivesWorkspace } from "./workspace";
 
 declare global {
@@ -105,12 +106,8 @@ registerMaldivesCodeActions(monaco);
 window.__monaco = monaco;
 window.__maldivesRegisterEffectDtsFiles = (files, options) => registerEffectDtsFiles(monaco, files, options);
 window.__maldivesOpenEffectDevTools = (options) => openEffectDevToolsPanel(options);
-const sampleModel = monaco.editor.createModel(defaultSampleDocument, "typescript", monaco.Uri.parse(DEFAULT_SAMPLE_URI));
-const secondModel = monaco.editor.createModel(secondDocument, "typescript", monaco.Uri.parse("file:///maldives/second.ts"));
-registerModelTab(sampleModel);
-registerModelTab(secondModel);
 const editor = monaco.editor.create(app, {
-  model: sampleModel,
+  model: null,
   automaticLayout: true,
   theme: THEME_NAME,
   fontFamily: `${themeConfig.fontFamily}, Fira Code, monospace`,
@@ -127,6 +124,10 @@ const workspace = new MaldivesWorkspace({
   },
   editor,
 });
+const sampleModel = workspace.open(DEFAULT_SAMPLE_URI, defaultSampleDocument);
+workspace.open("file:///maldives/second.ts", secondDocument);
+workspace.switchTo(DEFAULT_SAMPLE_URI);
+installWorkspaceTabStrip(document.body, workspace);
 const fileSystemAdapter = new FileSystemAccessAdapter();
 const toolWindows = installToolWindowController(document.body);
 const vcsPanel = installVcsPanelController(document.body);

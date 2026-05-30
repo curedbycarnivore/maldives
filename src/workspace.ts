@@ -16,6 +16,12 @@ export interface MaldivesWorkspaceOptions {
   initialMode?: WorkspaceMode;
 }
 
+export interface MaldivesWorkspaceSubscription {
+  dispose(): void;
+}
+
+export type MaldivesWorkspaceListener = () => void;
+
 interface WorkspaceEntry {
   model: editor.ITextModel;
   dirty: boolean;
@@ -27,6 +33,7 @@ export class MaldivesWorkspace {
   readonly #models = new Map<string, WorkspaceEntry>();
   readonly #createModel: MaldivesWorkspaceOptions["createModel"];
   readonly #editor?: MaldivesWorkspaceEditor;
+  readonly #listeners = new Set<MaldivesWorkspaceListener>();
   #activeUri: string | undefined;
   #mode: WorkspaceMode;
 
@@ -48,11 +55,17 @@ export class MaldivesWorkspace {
   setMode(mode: WorkspaceMode): WorkspaceMode {
     this.#mode = mode;
     this.#applyReadOnlyOption();
+    this.#emitChange();
     return this.#mode;
   }
 
   toggleMode(): WorkspaceMode {
     return this.setMode(this.#mode === "read" ? "write" : "read");
+  }
+
+  onDidChange(listener: MaldivesWorkspaceListener): MaldivesWorkspaceSubscription {
+    this.#listeners.add(listener);
+    return { dispose: () => this.#listeners.delete(listener) };
   }
 
   open(uri: string, content: string): editor.ITextModel {
@@ -72,6 +85,7 @@ export class MaldivesWorkspace {
 
         if (current) {
           current.dirty = true;
+          this.#emitChange();
         }
       }),
     };
@@ -105,6 +119,7 @@ export class MaldivesWorkspace {
       }
     }
 
+    this.#emitChange();
     return true;
   }
 
@@ -125,6 +140,7 @@ export class MaldivesWorkspace {
     }
 
     this.#editor?.focus?.();
+    this.#emitChange();
     return true;
   }
 
@@ -140,6 +156,7 @@ export class MaldivesWorkspace {
     }
 
     entry.dirty = false;
+    this.#emitChange();
     return true;
   }
 
@@ -153,6 +170,12 @@ export class MaldivesWorkspace {
 
   #applyReadOnlyOption(): void {
     this.#editor?.updateOptions?.({ readOnly: this.#mode === "read" });
+  }
+
+  #emitChange(): void {
+    for (const listener of this.#listeners) {
+      listener();
+    }
   }
 
   #saveActiveViewState(): void {
