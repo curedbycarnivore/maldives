@@ -2,10 +2,18 @@ import type { editor } from "monaco-editor";
 
 export type WorkspaceMode = "read" | "write";
 
+export interface WorkspaceCursor {
+  lineNumber: number;
+  column: number;
+}
+
 export interface MaldivesWorkspaceEditor {
   setModel(model: editor.ITextModel | null): void;
   saveViewState?(): unknown;
   restoreViewState?(state: unknown): void;
+  getPosition?(): WorkspaceCursor | null;
+  setPosition?(position: WorkspaceCursor): void;
+  setSelection?(selection: { startLineNumber: number; startColumn: number; endLineNumber: number; endColumn: number }): void;
   updateOptions?(options: { readOnly: boolean }): void;
   focus?(): void;
 }
@@ -26,6 +34,7 @@ interface WorkspaceEntry {
   model: editor.ITextModel;
   dirty: boolean;
   viewState?: unknown;
+  cursor?: WorkspaceCursor;
   changeSubscription: { dispose: () => void };
 }
 
@@ -131,11 +140,35 @@ export class MaldivesWorkspace {
       return false;
     }
 
-    this.#saveActiveViewState();
+    if (this.#activeUri !== uri) {
+      this.#saveActiveViewState();
+    }
     this.#activeUri = uri;
     this.#editor?.setModel(entry.model);
 
-    if (entry.viewState !== undefined) {
+    if (entry.cursor) {
+      this.#editor?.setPosition?.(entry.cursor);
+      this.#editor?.setSelection?.({
+        startLineNumber: entry.cursor.lineNumber,
+        startColumn: entry.cursor.column,
+        endLineNumber: entry.cursor.lineNumber,
+        endColumn: entry.cursor.column,
+      });
+      const restoredUri = uri;
+      if (typeof requestAnimationFrame !== "undefined") {
+        requestAnimationFrame(() => {
+          if (this.#activeUri === restoredUri) {
+            this.#editor?.setPosition?.(entry.cursor!);
+            this.#editor?.setSelection?.({
+              startLineNumber: entry.cursor!.lineNumber,
+              startColumn: entry.cursor!.column,
+              endLineNumber: entry.cursor!.lineNumber,
+              endColumn: entry.cursor!.column,
+            });
+          }
+        });
+      }
+    } else if (entry.viewState !== undefined) {
       this.#editor?.restoreViewState?.(entry.viewState);
     }
 
@@ -164,6 +197,21 @@ export class MaldivesWorkspace {
     return this.#models.get(uri)?.model;
   }
 
+  cursor(uri: string): WorkspaceCursor | undefined {
+    return this.#models.get(uri)?.cursor;
+  }
+
+  setCursor(uri: string, cursor: WorkspaceCursor | undefined): boolean {
+    const entry = this.#models.get(uri);
+
+    if (!entry) {
+      return false;
+    }
+
+    entry.cursor = cursor;
+    return true;
+  }
+
   uris(): string[] {
     return [...this.#models.keys()];
   }
@@ -187,6 +235,7 @@ export class MaldivesWorkspace {
 
     if (active) {
       active.viewState = this.#editor.saveViewState();
+      active.cursor = this.#editor.getPosition?.() ?? active.cursor;
     }
   }
 }

@@ -31,6 +31,7 @@ import { installToolWindowController, type ToolWindowController } from "./tool-w
 import { installVcsPanelController, type VcsPanelController } from "./vcs-panel";
 import { configureTypeScriptWorker, registerEffectDtsFiles, type EffectDtsFiles, type RegisterEffectDtsFilesOptions } from "./typescript-worker";
 import { startVscodeTypeScriptWorkerForMaldives, type VscodeTypeScriptWorkerBootstrap } from "./vscode-ts-worker";
+import { installWorkspacePersistence, restoreWorkspaceFromStorage } from "./workspace-persistence";
 import { installWorkspaceTabStrip } from "./workspace-tabs";
 import { MaldivesWorkspace } from "./workspace";
 
@@ -124,9 +125,21 @@ const workspace = new MaldivesWorkspace({
   },
   editor,
 });
-const sampleModel = workspace.open(DEFAULT_SAMPLE_URI, defaultSampleDocument);
-workspace.open("file:///maldives/second.ts", secondDocument);
-workspace.switchTo(DEFAULT_SAMPLE_URI);
+const workspaceStorage = {
+  getItem: (key: string) => window.localStorage.getItem(key) ?? window.sessionStorage.getItem(key),
+  setItem: (key: string, value: string) => {
+    window.localStorage.setItem(key, value);
+    window.sessionStorage.setItem(key, value);
+  },
+};
+const restoredWorkspace = restoreWorkspaceFromStorage(workspace, workspaceStorage);
+if (!restoredWorkspace) {
+  workspace.open(DEFAULT_SAMPLE_URI, defaultSampleDocument);
+  workspace.open("file:///maldives/second.ts", secondDocument);
+  workspace.switchTo(DEFAULT_SAMPLE_URI);
+}
+installWorkspacePersistence({ workspace, editor, storage: workspaceStorage });
+const readyModel = workspace.model(workspace.activeUri ?? DEFAULT_SAMPLE_URI) ?? workspace.open(DEFAULT_SAMPLE_URI, defaultSampleDocument);
 installWorkspaceTabStrip(document.body, workspace);
 const fileSystemAdapter = new FileSystemAccessAdapter();
 const toolWindows = installToolWindowController(document.body);
@@ -177,8 +190,11 @@ window.__maldivesVscodeTsWorkerReady = vscodeTsWorkerReady;
 window.__maldivesReady = (async () => {
   await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
   await vscodeTsWorkerReady;
-  await awaitTypeScriptWorkerAnswer(monaco, sampleModel);
+  await awaitTypeScriptWorkerAnswer(monaco, readyModel);
   await ensureAstReady();
+  if (workspace.activeUri) {
+    workspace.switchTo(workspace.activeUri);
+  }
 })();
 window.__maldivesKeybindings = registeredKeybindings;
 window.__maldivesExecuteKeybinding = (wsActionId) => {
