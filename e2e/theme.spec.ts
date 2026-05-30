@@ -1,4 +1,4 @@
-import { mkdir } from "node:fs/promises";
+import { mkdir, readFile } from "node:fs/promises";
 import { expect, test } from "@playwright/test";
 import { loadEditor } from "./helpers/load-editor";
 
@@ -456,4 +456,55 @@ test("renders P32h CSS token colors on a real stylesheet for an Effect TSX shell
 
   await mkdir("proof", { recursive: true });
   await page.screenshot({ path: "proof/p32h-css-theme-proof.png" });
+});
+
+test("reports P32i custom-language colors as no-surface while the TSX daily-driver remains real", async ({ page }) => {
+  await loadEditor(page);
+
+  const report = JSON.parse(await readFile("proof/theme-coverage.json", "utf-8")) as {
+    top50Unmapped: Array<{ name: string }>;
+    classifiedTopLevelOptions: Array<{ name: string; mappedPaths: unknown[]; deferredPaths: Array<{ reason: string }> }>;
+  };
+  const customNames = [
+    "CUSTOM_INVALID_STRING_ESCAPE_ATTRIBUTES",
+    "CUSTOM_KEYWORD1_ATTRIBUTES",
+    "CUSTOM_KEYWORD2_ATTRIBUTES",
+    "CUSTOM_KEYWORD3_ATTRIBUTES",
+    "CUSTOM_KEYWORD4_ATTRIBUTES",
+    "CUSTOM_LINE_COMMENT_ATTRIBUTES",
+    "CUSTOM_MULTI_LINE_COMMENT_ATTRIBUTES",
+    "CUSTOM_NUMBER_ATTRIBUTES",
+    "CUSTOM_STRING_ATTRIBUTES",
+    "CUSTOM_VALID_STRING_ESCAPE_ATTRIBUTES",
+  ];
+
+  expect(report.top50Unmapped.map((entry) => entry.name)).not.toEqual(expect.arrayContaining(customNames));
+  for (const name of customNames) {
+    const entry = report.classifiedTopLevelOptions.find((candidate) => candidate.name === name);
+    expect(entry?.mappedPaths).toEqual([]);
+    expect(entry?.deferredPaths.every((path) => path.reason.startsWith("no-surface:"))).toBe(true);
+  }
+
+  await page.evaluate(() => {
+    const sample = `import { Effect, Layer, Schema, pipe } from "effect";
+
+function traced(_target: unknown, _key: string) {}
+
+@traced
+class P32iCustomColorAudit<T extends { id: string }> {
+  render(value: T) {
+    return pipe(Effect.succeed(value), Effect.map((row) => Schema.String));
+  }
+}
+
+export const P32iLayer = Layer.succeed(P32iCustomColorAudit, new P32iCustomColorAudit());
+`;
+    window.__maldivesEditor.setModel(window.__monaco.editor.createModel(sample, "typescript", window.__monaco.Uri.parse("file:///maldives/p32i-custom-color-audit.tsx")));
+    window.__maldivesEditor.setPosition({ lineNumber: 7, column: 5 });
+    window.__maldivesEditor.focus();
+  });
+  await expect(page.locator(".monaco-editor")).toContainText("P32iCustomColorAudit");
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/p32i-custom-language-no-surface-proof.png" });
 });

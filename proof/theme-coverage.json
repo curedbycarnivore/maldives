@@ -120,6 +120,16 @@
     "CSS.STRING",
     "CSS.TAG_NAME",
     "CSS.URL",
+    "CUSTOM_INVALID_STRING_ESCAPE_ATTRIBUTES",
+    "CUSTOM_KEYWORD1_ATTRIBUTES",
+    "CUSTOM_KEYWORD2_ATTRIBUTES",
+    "CUSTOM_KEYWORD3_ATTRIBUTES",
+    "CUSTOM_KEYWORD4_ATTRIBUTES",
+    "CUSTOM_LINE_COMMENT_ATTRIBUTES",
+    "CUSTOM_MULTI_LINE_COMMENT_ATTRIBUTES",
+    "CUSTOM_NUMBER_ATTRIBUTES",
+    "CUSTOM_STRING_ATTRIBUTES",
+    "CUSTOM_VALID_STRING_ESCAPE_ATTRIBUTES",
     "DEFAULT_BRACES",
     "DEFAULT_BRACKETS",
     "DEFAULT_CONSTANT",
@@ -178,76 +188,6 @@
       "occurrences": 1,
       "samplePaths": [
         "CUSP_BRACKETS_ATTR"
-      ]
-    },
-    {
-      "name": "CUSTOM_INVALID_STRING_ESCAPE_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CUSTOM_INVALID_STRING_ESCAPE_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CUSTOM_KEYWORD1_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CUSTOM_KEYWORD1_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CUSTOM_KEYWORD2_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CUSTOM_KEYWORD2_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CUSTOM_KEYWORD3_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CUSTOM_KEYWORD3_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CUSTOM_KEYWORD4_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CUSTOM_KEYWORD4_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CUSTOM_LINE_COMMENT_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CUSTOM_LINE_COMMENT_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CUSTOM_MULTI_LINE_COMMENT_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CUSTOM_MULTI_LINE_COMMENT_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CUSTOM_NUMBER_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CUSTOM_NUMBER_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CUSTOM_STRING_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CUSTOM_STRING_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CUSTOM_VALID_STRING_ESCAPE_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CUSTOM_VALID_STRING_ESCAPE_ATTRIBUTES"
       ]
     },
     {
@@ -3438,76 +3378,6 @@
       ]
     },
     {
-      "name": "CUSTOM_INVALID_STRING_ESCAPE_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CUSTOM_INVALID_STRING_ESCAPE_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CUSTOM_KEYWORD1_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CUSTOM_KEYWORD1_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CUSTOM_KEYWORD2_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CUSTOM_KEYWORD2_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CUSTOM_KEYWORD3_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CUSTOM_KEYWORD3_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CUSTOM_KEYWORD4_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CUSTOM_KEYWORD4_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CUSTOM_LINE_COMMENT_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CUSTOM_LINE_COMMENT_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CUSTOM_MULTI_LINE_COMMENT_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CUSTOM_MULTI_LINE_COMMENT_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CUSTOM_NUMBER_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CUSTOM_NUMBER_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CUSTOM_STRING_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CUSTOM_STRING_ATTRIBUTES"
-      ]
-    },
-    {
-      "name": "CUSTOM_VALID_STRING_ESCAPE_ATTRIBUTES",
-      "occurrences": 1,
-      "samplePaths": [
-        "CUSTOM_VALID_STRING_ESCAPE_ATTRIBUTES"
-      ]
-    },
-    {
       "name": "CY_VARIABLE",
       "occurrences": 1,
       "samplePaths": [
@@ -3771,6 +3641,76 @@
       "occurrences": 1,
       "samplePaths": [
         "EXECUTIONPOINT_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "FILESTATUS_ADDED",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_ADDED"
+      ]
+    },
+    {
+      "name": "FILESTATUS_addedOutside",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_addedOutside"
+      ]
+    },
+    {
+      "name": "FILESTATUS_changelistConflict",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_changelistConflict"
+      ]
+    },
+    {
+      "name": "FILESTATUS_COPIED",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_COPIED"
+      ]
+    },
+    {
+      "name": "FILESTATUS_DELETED",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_DELETED"
+      ]
+    },
+    {
+      "name": "FILESTATUS_HIJACKED",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_HIJACKED"
+      ]
+    },
+    {
+      "name": "FILESTATUS_IDEA_FILESTATUS_DELETED_FROM_FILE_SYSTEM",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_IDEA_FILESTATUS_DELETED_FROM_FILE_SYSTEM"
+      ]
+    },
+    {
+      "name": "FILESTATUS_IDEA_FILESTATUS_IGNORED",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_IDEA_FILESTATUS_IGNORED"
+      ]
+    },
+    {
+      "name": "FILESTATUS_IDEA_FILESTATUS_MERGED_WITH_BOTH_CONFLICTS",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_IDEA_FILESTATUS_MERGED_WITH_BOTH_CONFLICTS"
+      ]
+    },
+    {
+      "name": "FILESTATUS_IDEA_FILESTATUS_MERGED_WITH_CONFLICTS",
+      "occurrences": 1,
+      "samplePaths": [
+        "FILESTATUS_IDEA_FILESTATUS_MERGED_WITH_CONFLICTS"
       ]
     }
   ],
@@ -4534,43 +4474,43 @@
         },
         {
           "path": "CUSTOM_INVALID_STRING_ESCAPE_ATTRIBUTES.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "no-surface: WebStorm custom file-type string escape colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CUSTOM_KEYWORD1_ATTRIBUTES.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "no-surface: WebStorm custom file-type keyword colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CUSTOM_KEYWORD2_ATTRIBUTES.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "no-surface: WebStorm custom file-type keyword colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CUSTOM_KEYWORD3_ATTRIBUTES.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "no-surface: WebStorm custom file-type keyword colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CUSTOM_KEYWORD4_ATTRIBUTES.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "no-surface: WebStorm custom file-type keyword colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CUSTOM_LINE_COMMENT_ATTRIBUTES.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "no-surface: WebStorm custom file-type comment colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CUSTOM_MULTI_LINE_COMMENT_ATTRIBUTES.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "no-surface: WebStorm custom file-type comment colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CUSTOM_NUMBER_ATTRIBUTES.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "no-surface: WebStorm custom file-type number colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CUSTOM_STRING_ATTRIBUTES.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "no-surface: WebStorm custom file-type string colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CUSTOM_VALID_STRING_ESCAPE_ATTRIBUTES.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "no-surface: WebStorm custom file-type string escape colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CY_VARIABLE.FOREGROUND",
@@ -6303,35 +6243,35 @@
         },
         {
           "path": "CUSTOM_KEYWORD1_ATTRIBUTES.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "no-surface: WebStorm custom file-type keyword colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CUSTOM_KEYWORD2_ATTRIBUTES.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "no-surface: WebStorm custom file-type keyword colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CUSTOM_KEYWORD3_ATTRIBUTES.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "no-surface: WebStorm custom file-type keyword colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CUSTOM_KEYWORD4_ATTRIBUTES.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "no-surface: WebStorm custom file-type keyword colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CUSTOM_LINE_COMMENT_ATTRIBUTES.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "no-surface: WebStorm custom file-type comment colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CUSTOM_MULTI_LINE_COMMENT_ATTRIBUTES.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "no-surface: WebStorm custom file-type comment colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CUSTOM_STRING_ATTRIBUTES.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "no-surface: WebStorm custom file-type string colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CUSTOM_VALID_STRING_ESCAPE_ATTRIBUTES.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "no-surface: WebStorm custom file-type string escape colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
         },
         {
           "path": "CY_VARIABLE.FONT_TYPE",
@@ -9460,6 +9400,152 @@
         }
       ],
       "deferredPaths": []
+    },
+    {
+      "name": "CUSTOM_INVALID_STRING_ESCAPE_ATTRIBUTES",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CUSTOM_INVALID_STRING_ESCAPE_ATTRIBUTES.FOREGROUND",
+          "reason": "no-surface: WebStorm custom file-type string escape colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CUSTOM_INVALID_STRING_ESCAPE_ATTRIBUTES.BACKGROUND",
+          "reason": "no-surface: WebStorm custom file-type string escape colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        }
+      ]
+    },
+    {
+      "name": "CUSTOM_KEYWORD1_ATTRIBUTES",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CUSTOM_KEYWORD1_ATTRIBUTES.FOREGROUND",
+          "reason": "no-surface: WebStorm custom file-type keyword colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CUSTOM_KEYWORD1_ATTRIBUTES.FONT_TYPE",
+          "reason": "no-surface: WebStorm custom file-type keyword colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        }
+      ]
+    },
+    {
+      "name": "CUSTOM_KEYWORD2_ATTRIBUTES",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CUSTOM_KEYWORD2_ATTRIBUTES.FOREGROUND",
+          "reason": "no-surface: WebStorm custom file-type keyword colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CUSTOM_KEYWORD2_ATTRIBUTES.FONT_TYPE",
+          "reason": "no-surface: WebStorm custom file-type keyword colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        }
+      ]
+    },
+    {
+      "name": "CUSTOM_KEYWORD3_ATTRIBUTES",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CUSTOM_KEYWORD3_ATTRIBUTES.FOREGROUND",
+          "reason": "no-surface: WebStorm custom file-type keyword colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CUSTOM_KEYWORD3_ATTRIBUTES.FONT_TYPE",
+          "reason": "no-surface: WebStorm custom file-type keyword colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        }
+      ]
+    },
+    {
+      "name": "CUSTOM_KEYWORD4_ATTRIBUTES",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CUSTOM_KEYWORD4_ATTRIBUTES.FOREGROUND",
+          "reason": "no-surface: WebStorm custom file-type keyword colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CUSTOM_KEYWORD4_ATTRIBUTES.FONT_TYPE",
+          "reason": "no-surface: WebStorm custom file-type keyword colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        }
+      ]
+    },
+    {
+      "name": "CUSTOM_LINE_COMMENT_ATTRIBUTES",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CUSTOM_LINE_COMMENT_ATTRIBUTES.FOREGROUND",
+          "reason": "no-surface: WebStorm custom file-type comment colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CUSTOM_LINE_COMMENT_ATTRIBUTES.FONT_TYPE",
+          "reason": "no-surface: WebStorm custom file-type comment colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        }
+      ]
+    },
+    {
+      "name": "CUSTOM_MULTI_LINE_COMMENT_ATTRIBUTES",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CUSTOM_MULTI_LINE_COMMENT_ATTRIBUTES.FOREGROUND",
+          "reason": "no-surface: WebStorm custom file-type comment colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CUSTOM_MULTI_LINE_COMMENT_ATTRIBUTES.FONT_TYPE",
+          "reason": "no-surface: WebStorm custom file-type comment colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        }
+      ]
+    },
+    {
+      "name": "CUSTOM_NUMBER_ATTRIBUTES",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CUSTOM_NUMBER_ATTRIBUTES.FOREGROUND",
+          "reason": "no-surface: WebStorm custom file-type number colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        }
+      ]
+    },
+    {
+      "name": "CUSTOM_STRING_ATTRIBUTES",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CUSTOM_STRING_ATTRIBUTES.FOREGROUND",
+          "reason": "no-surface: WebStorm custom file-type string colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CUSTOM_STRING_ATTRIBUTES.FONT_TYPE",
+          "reason": "no-surface: WebStorm custom file-type string colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        }
+      ]
+    },
+    {
+      "name": "CUSTOM_VALID_STRING_ESCAPE_ATTRIBUTES",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CUSTOM_VALID_STRING_ESCAPE_ATTRIBUTES.FOREGROUND",
+          "reason": "no-surface: WebStorm custom file-type string escape colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        },
+        {
+          "path": "CUSTOM_VALID_STRING_ESCAPE_ATTRIBUTES.FONT_TYPE",
+          "reason": "no-surface: WebStorm custom file-type string escape colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately"
+        }
+      ]
     }
   ]
 }

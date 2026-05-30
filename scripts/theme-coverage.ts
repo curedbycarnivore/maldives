@@ -130,6 +130,16 @@ const classifiedTopLevelOptionNames = [
   "CSS.STRING",
   "CSS.TAG_NAME",
   "CSS.URL",
+  "CUSTOM_INVALID_STRING_ESCAPE_ATTRIBUTES",
+  "CUSTOM_KEYWORD1_ATTRIBUTES",
+  "CUSTOM_KEYWORD2_ATTRIBUTES",
+  "CUSTOM_KEYWORD3_ATTRIBUTES",
+  "CUSTOM_KEYWORD4_ATTRIBUTES",
+  "CUSTOM_LINE_COMMENT_ATTRIBUTES",
+  "CUSTOM_MULTI_LINE_COMMENT_ATTRIBUTES",
+  "CUSTOM_NUMBER_ATTRIBUTES",
+  "CUSTOM_STRING_ATTRIBUTES",
+  "CUSTOM_VALID_STRING_ESCAPE_ATTRIBUTES",
 ];
 
 export interface IclsOptionNameIndex {
@@ -373,6 +383,10 @@ function classifiedTopLevelPathsFor(name: string): string[] {
     return cssPathsFor(name);
   }
 
+  if (name.startsWith("CUSTOM_")) {
+    return customLanguagePathsFor(name);
+  }
+
   return [name];
 }
 
@@ -410,6 +424,18 @@ function cssPathsFor(name: string): string[] {
   }
 
   return [`${name}.FOREGROUND`];
+}
+
+function customLanguagePathsFor(name: string): string[] {
+  if (name === "CUSTOM_INVALID_STRING_ESCAPE_ATTRIBUTES") {
+    return [`${name}.FOREGROUND`, `${name}.BACKGROUND`];
+  }
+
+  if (name === "CUSTOM_NUMBER_ATTRIBUTES") {
+    return [`${name}.FOREGROUND`];
+  }
+
+  return [`${name}.FOREGROUND`, `${name}.FONT_TYPE`];
 }
 
 function consolePathsFor(name: string): string[] {
@@ -519,6 +545,10 @@ function classifiedTopLevelDeferredReason(path: string): string {
     return cssDeferredReason(path);
   }
 
+  if (path.startsWith("CUSTOM_")) {
+    return customLanguageDeferredReason(path);
+  }
+
   if (path.startsWith("CONDITIONALLY_NOT_COMPILED.")) {
     return "defer: Monaco/Maldives does not load a preprocessor inactive-code surface for conditionally-not-compiled regions yet";
   }
@@ -532,6 +562,12 @@ function classifiedTopLevelDeferredReason(path: string): string {
   }
 
   return "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet";
+}
+
+function customLanguageDeferredReason(path: string): string {
+  const label = path.includes("STRING_ESCAPE") ? "string escape" : path.includes("COMMENT") ? "comment" : path.includes("NUMBER") ? "number" : path.includes("STRING") ? "string" : "keyword";
+
+  return `no-surface: WebStorm custom file-type ${label} colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately`;
 }
 
 function constructorDeferredReason(path: string): string {
@@ -668,6 +704,10 @@ function deferredReason(path: string): string {
 
   if (parent.startsWith("CSS")) {
     return cssDeferredReason(path);
+  }
+
+  if (parent.startsWith("CUSTOM_")) {
+    return customLanguageDeferredReason(path);
   }
 
   if (parent.startsWith("APACHE_CONFIG") || parent.startsWith("BASH")) {

@@ -444,6 +444,46 @@ describe("scripts/theme-coverage", () => {
     ]);
   });
 
+  test("classifies P32i custom-language token surfaces as explicit no-surface entries", () => {
+    const report = auditThemeCoverageMappings(iclsXml);
+    const p32iNames = [
+      "CUSTOM_INVALID_STRING_ESCAPE_ATTRIBUTES",
+      "CUSTOM_KEYWORD1_ATTRIBUTES",
+      "CUSTOM_KEYWORD2_ATTRIBUTES",
+      "CUSTOM_KEYWORD3_ATTRIBUTES",
+      "CUSTOM_KEYWORD4_ATTRIBUTES",
+      "CUSTOM_LINE_COMMENT_ATTRIBUTES",
+      "CUSTOM_MULTI_LINE_COMMENT_ATTRIBUTES",
+      "CUSTOM_NUMBER_ATTRIBUTES",
+      "CUSTOM_STRING_ATTRIBUTES",
+      "CUSTOM_VALID_STRING_ESCAPE_ATTRIBUTES",
+    ];
+
+    expect(report.top50Unmapped.map((entry) => entry.name)).not.toEqual(expect.arrayContaining(p32iNames));
+    expect(report.classifiedTopLevelOptions.map((entry) => entry.name)).toEqual(expect.arrayContaining(p32iNames));
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CUSTOM_KEYWORD1_ATTRIBUTES")?.mappedPaths).toEqual([]);
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CUSTOM_KEYWORD1_ATTRIBUTES")?.deferredPaths).toEqual([
+      {
+        path: "CUSTOM_KEYWORD1_ATTRIBUTES.FOREGROUND",
+        reason: "no-surface: WebStorm custom file-type keyword colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately",
+      },
+      {
+        path: "CUSTOM_KEYWORD1_ATTRIBUTES.FONT_TYPE",
+        reason: "no-surface: WebStorm custom file-type keyword colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately",
+      },
+    ]);
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CUSTOM_INVALID_STRING_ESCAPE_ATTRIBUTES")?.deferredPaths).toEqual([
+      {
+        path: "CUSTOM_INVALID_STRING_ESCAPE_ATTRIBUTES.FOREGROUND",
+        reason: "no-surface: WebStorm custom file-type string escape colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately",
+      },
+      {
+        path: "CUSTOM_INVALID_STRING_ESCAPE_ATTRIBUTES.BACKGROUND",
+        reason: "no-surface: WebStorm custom file-type string escape colors have no loaded Maldives language surface; TS/TSX daily-driver tokens are covered separately",
+      },
+    ]);
+  });
+
   test("writes proof/theme-coverage.json shaped for watchdog telemetry", () => {
     const outFile = join(mkdtempSync(join(tmpdir(), "maldives-theme-coverage-")), "theme-coverage.json");
 
