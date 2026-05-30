@@ -193,7 +193,7 @@ test("rename element opens Monaco inline rename input", async ({ page }) => {
   await waitForXmlParserSymbol(page);
 
   const opened = await page.evaluate(() => {
-    window.__maldivesEditor.setPosition({ lineNumber: 2, column: 8 });
+    window.__maldivesEditor.setPosition({ lineNumber: 8, column: 8 });
     window.__maldivesEditor.focus();
 
     return window.__maldivesExecuteKeybinding("RenameElement");
@@ -228,7 +228,7 @@ test("introduce actions and rearrange code keybindings execute Monaco equivalent
   expect(rearranged).toBe(true);
 
   const opened = await page.evaluate(() => {
-    window.__maldivesEditor.setSelection({ startLineNumber: 6, startColumn: 12, endLineNumber: 6, endColumn: 48 });
+    window.__maldivesEditor.setSelection({ startLineNumber: 18, startColumn: 16, endLineNumber: 18, endColumn: 43 });
     window.__maldivesEditor.focus();
 
     return window.__maldivesExecuteKeybinding("IntroduceActionsGroup");
@@ -252,7 +252,7 @@ test("alt number tab keybindings switch deterministic models", async ({ page }) 
   const switchedToFirst = await page.evaluate(() => window.__maldivesExecuteKeybinding("GoToTab1"));
 
   expect(switchedToFirst).toBe(true);
-  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getModel()?.uri.path)).toBe("/maldives/sample.ts");
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getModel()?.uri.path)).toBe("/maldives/sample.tsx");
   await expect.poll(() => page.evaluate(() => window.__maldivesEditor.hasTextFocus())).toBe(true);
 
   await mkdir("proof", { recursive: true });
@@ -269,7 +269,7 @@ test("move tab right reorders deterministic model tabs", async ({ page }) => {
   const switchedToSecondSlot = await page.evaluate(() => window.__maldivesExecuteKeybinding("GoToTab2"));
 
   expect(switchedToSecondSlot).toBe(true);
-  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getModel()?.uri.path)).toBe("/maldives/sample.ts");
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getModel()?.uri.path)).toBe("/maldives/sample.tsx");
   await expect.poll(() => page.evaluate(() => window.__maldivesEditor.hasTextFocus())).toBe(true);
 
   await mkdir("proof", { recursive: true });
@@ -284,8 +284,8 @@ test("goto file opens the Maldives file switcher", async ({ page }) => {
   expect(opened).toBe(true);
   await page.locator(".maldives-file-switcher").waitFor({ state: "visible", timeout: 8000 });
   await expect(page.locator(".maldives-file-switcher")).toContainText("Goto File");
-  await expect(page.locator(".maldives-file-switcher-item").first()).toContainText("sample.ts");
-  await expect(page.locator(".maldives-file-switcher-item").first()).toContainText("/maldives/sample.ts");
+  await expect(page.locator(".maldives-file-switcher-item").first()).toContainText("sample.tsx");
+  await expect(page.locator(".maldives-file-switcher-item").first()).toContainText("/maldives/sample.tsx");
 
   await mkdir("proof", { recursive: true });
   await page.screenshot({ path: "proof/goto-file-switcher-proof.png" });
@@ -299,7 +299,7 @@ test("recent locations overlay restores a deterministic model position", async (
   await loadEditor(page);
 
   const opened = await page.evaluate(() => {
-    const sampleModel = window.__monaco.editor.getModel(window.__monaco.Uri.parse("file:///maldives/sample.ts"));
+    const sampleModel = window.__monaco.editor.getModel(window.__monaco.Uri.parse("file:///maldives/sample.tsx"));
     const secondModel = window.__monaco.editor.getModel(window.__monaco.Uri.parse("file:///maldives/second.ts"));
 
     if (!sampleModel || !secondModel) {
@@ -307,7 +307,7 @@ test("recent locations overlay restores a deterministic model position", async (
     }
 
     window.__maldivesEditor.setModel(sampleModel);
-    window.__maldivesEditor.setPosition({ lineNumber: 2, column: 7 });
+    window.__maldivesEditor.setPosition({ lineNumber: 8, column: 7 });
     window.__maldivesEditor.setModel(secondModel);
     window.__maldivesEditor.setPosition({ lineNumber: 2, column: 14 });
 
@@ -319,8 +319,8 @@ test("recent locations overlay restores a deterministic model position", async (
   await expect(page.locator(".maldives-recent-locations")).toContainText("Recent Locations");
   await expect(page.locator(".maldives-recent-locations")).toContainText("/maldives/second.ts:2:14");
 
-  const sampleLocation = page.locator(".maldives-recent-locations-item").filter({ hasText: "/maldives/sample.ts:2:7" }).first();
-  await expect(sampleLocation).toContainText("const camelCaseWord");
+  const sampleLocation = page.locator(".maldives-recent-locations-item").filter({ hasText: "/maldives/sample.tsx:8:7" }).first();
+  await expect(sampleLocation).toContainText("class XMLParser");
 
   await mkdir("proof", { recursive: true });
   await page.screenshot({ path: "proof/recent-locations-proof.png" });
@@ -328,8 +328,8 @@ test("recent locations overlay restores a deterministic model position", async (
   await sampleLocation.click();
 
   await expect(page.locator(".maldives-recent-locations")).toHaveCount(0);
-  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getModel()?.uri.path)).toBe("/maldives/sample.ts");
-  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getPosition())).toEqual({ lineNumber: 2, column: 7 });
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getModel()?.uri.path)).toBe("/maldives/sample.tsx");
+  await expect.poll(() => page.evaluate(() => window.__maldivesEditor.getPosition())).toEqual({ lineNumber: 8, column: 7 });
   await expect.poll(() => page.evaluate(() => window.__maldivesEditor.hasTextFocus())).toBe(true);
 });
 

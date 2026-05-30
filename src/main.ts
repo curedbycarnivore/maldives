@@ -5,6 +5,7 @@ import editorOptionsXml from "../ssot/options/editor.xml?raw";
 import { ensureAstReady } from "./ast-smart-selection";
 import { registerAstStructuralSearchAction } from "./ast-structural-search";
 import { registerMaldivesCodeActions } from "./code-actions";
+import { defaultSampleDocument, DEFAULT_SAMPLE_URI } from "./default-buffer";
 import { registerSchemaJsonSchemaAction } from "./schema-jsonschema";
 import { installEffectDevToolsButton, openEffectDevToolsPanel, type OpenEffectDevToolsOptions } from "./effect-devtools";
 import { installEffectLanguageService, type EffectLanguageServiceController } from "./effect-language-service";
@@ -64,19 +65,6 @@ document.body.style.margin = "0";
 app.style.height = "100vh";
 app.style.width = "100vw";
 
-const sampleDocument = `// Maldives deterministic sample
-const camelCaseWord = "string value";
-let snake_case = 123;
-class XMLParser {
-  parse(word123: number) {
-    return camelCaseWord + snake_case + word123;
-  }
-}
-
-camelCaseWord;
-camelCaseWord;
-`;
-
 const secondDocument = `// Maldives deterministic second tab
 export const secondTab = true;
 `;
@@ -113,7 +101,7 @@ registerMaldivesCodeActions(monaco);
 window.__monaco = monaco;
 window.__maldivesRegisterEffectDtsFiles = (files, options) => registerEffectDtsFiles(monaco, files, options);
 window.__maldivesOpenEffectDevTools = (options) => openEffectDevToolsPanel(options);
-const sampleModel = monaco.editor.createModel(sampleDocument, "typescript", monaco.Uri.parse("file:///maldives/sample.ts"));
+const sampleModel = monaco.editor.createModel(defaultSampleDocument, "typescript", monaco.Uri.parse(DEFAULT_SAMPLE_URI));
 const secondModel = monaco.editor.createModel(secondDocument, "typescript", monaco.Uri.parse("file:///maldives/second.ts"));
 registerModelTab(sampleModel);
 registerModelTab(secondModel);

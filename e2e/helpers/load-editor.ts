@@ -29,7 +29,7 @@ export async function loadEditor(page: Page, options: { mode?: "read" | "write" 
   }).toPass({ timeout: 120000 });
 
   if (mode === "write") {
-    await expect.poll(() => page.locator(".maldives-readwrite-toggle").count()).toBe(1);
+    await expect.poll(() => page.locator(".maldives-readwrite-toggle").count(), { timeout: 120000 }).toBe(1);
     const currentMode = await page.evaluate(() => (window as unknown as { __maldivesWorkspace?: { mode: "read" | "write" } }).__maldivesWorkspace?.mode);
 
     if (currentMode === "read") {
