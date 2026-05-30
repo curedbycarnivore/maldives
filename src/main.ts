@@ -10,6 +10,7 @@ import { defaultSampleDocument, DEFAULT_SAMPLE_URI } from "./default-buffer";
 import { registerSchemaJsonSchemaAction } from "./schema-jsonschema";
 import { installEffectDevToolsButton, openEffectDevToolsPanel, type OpenEffectDevToolsOptions } from "./effect-devtools";
 import { installEffectLanguageService, type EffectLanguageServiceController } from "./effect-language-service";
+import { installEffectTsgoDiagnosticsClient, type EffectTsgoDiagnosticsClient } from "./effect-tsgo-client";
 import { registerEffectHoverProvider } from "./effect-hover";
 import { registerEffectSnippets } from "./effect-snippets";
 import { installFavoritesPanelController, type FavoritesPanelController } from "./favorites-panel";
@@ -46,6 +47,7 @@ declare global {
     __maldivesOpenEffectDevTools: (options: OpenEffectDevToolsOptions) => void;
     __maldivesVscodeTsWorkerReady: Promise<VscodeTypeScriptWorkerBootstrap>;
     __maldivesEffectLanguageService: EffectLanguageServiceController;
+    __maldivesEffectTsgoDiagnostics: EffectTsgoDiagnosticsClient;
     __maldivesWorkspace: MaldivesWorkspace;
     __maldivesInit?: { readonly fs?: FileSystemAdapterInit };
     __maldivesFileSystemAdapter: FileSystemAdapter;
@@ -170,6 +172,7 @@ registerRecentLocationTracking(editor);
 registerAstStructuralSearchAction(editor);
 registerSchemaJsonSchemaAction(editor);
 const effectLanguageService = installEffectLanguageService(monaco, editor, { effectDtsFiles, typeScriptLibFiles });
+const effectTsgoDiagnostics = installEffectTsgoDiagnosticsClient(monaco, editor);
 if (fileSystemAdapter instanceof FileSystemAccessAdapter) {
   installOpenFileButton(document.body, fileSystemAdapter, workspace);
 }
@@ -179,6 +182,7 @@ installEffectDevToolsButton(document.body, {
 });
 window.__maldivesEditor = editor;
 window.__maldivesEffectLanguageService = effectLanguageService;
+window.__maldivesEffectTsgoDiagnostics = effectTsgoDiagnostics;
 window.__maldivesWorkspace = workspace;
 window.__maldivesFileSystemAdapter = fileSystemAdapter;
 window.__maldivesToolWindows = toolWindows;
