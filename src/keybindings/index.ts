@@ -22,8 +22,9 @@ import {
   switchToPreviousModelTab,
 } from "../file-switcher";
 import type { KeyAction, KeymapConfig } from "../parsers/keymap-parser";
+import { contextFromEditor as runDebugContextFromEditor, type RunDebugPanelController } from "../run-debug-panel";
 import type { ToolWindowController } from "../tool-windows";
-import { contextFromEditor, type VcsPanelController } from "../vcs-panel";
+import { contextFromEditor as vcsContextFromEditor, type VcsPanelController } from "../vcs-panel";
 
 export interface MaldivesAction {
   wsActionId: string;
@@ -41,6 +42,7 @@ export interface RegisterKeybindingsOptions {
   readonly writeModeContextKey?: string;
   readonly toolWindows?: ToolWindowController;
   readonly vcsPanel?: VcsPanelController;
+  readonly runDebugPanel?: RunDebugPanelController;
 }
 
 type Monaco = typeof import("monaco-editor");
@@ -98,6 +100,7 @@ type MonacoTarget =
         | "toggleToolWindowContentMode";
     }
   | { type: "custom"; id: "vcsPanelAction"; actionId: string }
+  | { type: "custom"; id: "runDebugPanelAction"; actionId: string }
   | { type: "custom"; id: "activateToolWindow"; actionId: string }
   | { type: "custom"; id: "switchModelTab"; tabIndex: number };
 
@@ -143,6 +146,16 @@ const actionTargets: Record<string, MonacoTarget> = {
   RecentChangedFiles: { type: "custom", id: "vcsPanelAction", actionId: "RecentChangedFiles" },
   RecentChanges: { type: "custom", id: "vcsPanelAction", actionId: "RecentChanges" },
   "Vcs.UpdateProject": { type: "custom", id: "vcsPanelAction", actionId: "Vcs.UpdateProject" },
+  ChooseDebugConfiguration: { type: "custom", id: "runDebugPanelAction", actionId: "ChooseDebugConfiguration" },
+  Debug: { type: "custom", id: "runDebugPanelAction", actionId: "Debug" },
+  DebugClass: { type: "custom", id: "runDebugPanelAction", actionId: "DebugClass" },
+  Rerun: { type: "custom", id: "runDebugPanelAction", actionId: "Rerun" },
+  RerunTests: { type: "custom", id: "runDebugPanelAction", actionId: "RerunTests" },
+  Resume: { type: "custom", id: "runDebugPanelAction", actionId: "Resume" },
+  Run: { type: "custom", id: "runDebugPanelAction", actionId: "Run" },
+  RunClass: { type: "custom", id: "runDebugPanelAction", actionId: "RunClass" },
+  RunConfiguration: { type: "custom", id: "runDebugPanelAction", actionId: "RunConfiguration" },
+  Stop: { type: "custom", id: "runDebugPanelAction", actionId: "Stop" },
   ...tabActionTargets("GoToTab", 8),
   ...tabActionTargets("Go To Tab #", 10),
   ...tabActionTargets("Switch To Tab #", 10),
@@ -375,6 +388,9 @@ const shortcutlessActionIds = new Set([
   "RecentChangedFiles",
   "RecentChanges",
   "Vcs.UpdateProject",
+  "ChooseDebugConfiguration",
+  "DebugClass",
+  "RunClass",
 ]);
 
 function keybindingsForAction(action: KeyAction, monaco: Monaco, options: RegisterKeybindingsOptions): MaldivesAction[] {
@@ -562,9 +578,19 @@ function handlerForTarget(target: MonacoTarget, options: RegisterKeybindingsOpti
 
   if (target.id === "vcsPanelAction") {
     return (editor) => {
-      const context = contextFromEditor(editor);
+      const context = vcsContextFromEditor(editor);
       if (context) {
         options.vcsPanel?.runAction(target.actionId, context);
+      }
+      editor.focus();
+    };
+  }
+
+  if (target.id === "runDebugPanelAction") {
+    return (editor) => {
+      const context = runDebugContextFromEditor(editor);
+      if (context) {
+        options.runDebugPanel?.runAction(target.actionId, context);
       }
       editor.focus();
     };
