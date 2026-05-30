@@ -15,7 +15,7 @@ import { registerEffectSnippets } from "./effect-snippets";
 import { installFavoritesPanelController, type FavoritesPanelController } from "./favorites-panel";
 import { installFindInFilesPanel, type FindInFilesController } from "./find-in-files";
 import { FileSystemAccessAdapter, installOpenFileButton } from "./fs";
-import { registerModelTab, registerRecentLocationTracking } from "./file-switcher";
+import { installFileSwitcherController, registerModelTab, registerRecentLocationTracking, type FileSwitcherController } from "./file-switcher";
 import { cleanOnBlurFromModel } from "./hooks/trailing-whitespace";
 import { isCustomTextMutationAction, registerKeybindings, type RegisteredMaldivesAction } from "./keybindings";
 import { installReadWriteToggle, WRITE_MODE_CONTEXT_KEY, saveActiveWorkspaceFile } from "./read-write-mode";
@@ -54,6 +54,7 @@ declare global {
     __maldivesTerminalPanel: { execute: (line: string, token?: string) => TerminalResult };
     __maldivesFavoritesPanel: FavoritesPanelController;
     __maldivesFindInFiles: FindInFilesController;
+    __maldivesFileSwitcher: FileSwitcherController;
     __maldivesCrossFileLsp: CrossFileLspController;
     __maldivesSaveActiveFile: () => Promise<boolean>;
     __maldivesReady: Promise<void>;
@@ -150,6 +151,7 @@ const runDebugPanel = installRunDebugPanelController(document.body);
 const terminalPanel = installTerminalPanelController(document.body, { token: "maldives-terminal-session", theme: themeConfig.console });
 const favoritesPanel = installFavoritesPanelController(document.body);
 const findInFiles = installFindInFilesPanel(document.body, { adapter: fileSystemAdapter, editor, workspace });
+const fileSwitcher = installFileSwitcherController(document.body, { adapter: fileSystemAdapter, editor, workspace });
 const crossFileLsp = installCrossFileLspController({ monaco, editor, workspace });
 installReadWriteToggle(document.body, { monaco, editor, workspace, adapter: fileSystemAdapter });
 const registeredKeybindings = registerKeybindings(editor, monaco, keymapConfig, {
@@ -161,6 +163,7 @@ const registeredKeybindings = registerKeybindings(editor, monaco, keymapConfig, 
   terminalPanel,
   favoritesPanel,
   findInFiles,
+  fileSwitcher,
 });
 registerRecentLocationTracking(editor);
 registerAstStructuralSearchAction(editor);
@@ -180,6 +183,7 @@ window.__maldivesVcsPanel = vcsPanel;
 window.__maldivesRunDebugPanel = runDebugPanel;
 window.__maldivesFavoritesPanel = favoritesPanel;
 window.__maldivesFindInFiles = findInFiles;
+window.__maldivesFileSwitcher = fileSwitcher;
 window.__maldivesCrossFileLsp = crossFileLsp;
 window.__maldivesTerminalPanel = {
   execute(line, token) {

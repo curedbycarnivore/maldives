@@ -20,6 +20,7 @@ import {
   switchToModelTab,
   switchToNextModelTab,
   switchToPreviousModelTab,
+  type FileSwitcherController,
 } from "../file-switcher";
 import { contextFromEditor as favoritesContextFromEditor, type FavoritesPanelController } from "../favorites-panel";
 import type { FindInFilesController } from "../find-in-files";
@@ -49,6 +50,7 @@ export interface RegisterKeybindingsOptions {
   readonly terminalPanel?: TerminalPanelController;
   readonly favoritesPanel?: FavoritesPanelController;
   readonly findInFiles?: FindInFilesController;
+  readonly fileSwitcher?: FileSwitcherController;
 }
 
 type Monaco = typeof import("monaco-editor");
@@ -721,7 +723,14 @@ function handlerForTarget(target: MonacoTarget, options: RegisterKeybindingsOpti
   }
 
   if (target.id === "gotoFile") {
-    return openGotoFileSwitcher;
+    return (editor) => {
+      if (options.fileSwitcher) {
+        options.fileSwitcher.open();
+        return;
+      }
+
+      openGotoFileSwitcher(editor);
+    };
   }
 
   if (target.id === "tabSwitcher") {

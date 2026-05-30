@@ -1,5 +1,6 @@
 import { describe, expect, test, vi } from "vitest";
 import {
+  buildQuickOpenItems,
   fileSwitcherItems,
   moveCurrentModelTabRight,
   recentLocationItems,
@@ -10,6 +11,22 @@ import {
 } from "../src/file-switcher";
 
 describe("fileSwitcherItems", () => {
+  test("fuzzy quick-open merges open models with workspace files and ranks filename matches first", () => {
+    const openModel = fakeModel("/maldives/src/current-app.tsx", ["export const current = true;"]);
+    const workspaceFile = { type: "file" as const, name: "effect-stress-app.tsx", path: "/workspace/src/effect-stress-app.tsx" };
+    const duplicateWorkspaceFile = { type: "file" as const, name: "current-app.tsx", path: "/maldives/src/current-app.tsx" };
+
+    const items = buildQuickOpenItems(
+      [{ label: "current-app.tsx", description: "/maldives/src/current-app.tsx", model: openModel as never }],
+      [workspaceFile, duplicateWorkspaceFile],
+      "stress app",
+    );
+
+    expect(items.map((item) => [item.label, item.description, item.source])).toEqual([
+      ["effect-stress-app.tsx", "/workspace/src/effect-stress-app.tsx", "workspace"],
+    ]);
+  });
+
   test("returns a deterministic entry for the current sample TypeScript model", () => {
     const model = { uri: { path: "/maldives/sample.ts" } };
     const editor = { getModel: () => model };

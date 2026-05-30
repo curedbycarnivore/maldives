@@ -1,4 +1,6 @@
 import type { editor } from "monaco-editor";
+import type { FileSystemAdapter, FileSystemEntry } from "./fs/types";
+import type { MaldivesWorkspace } from "./workspace";
 
 export interface FileSwitcherItem {
   label: string;
@@ -9,6 +11,20 @@ export interface FileSwitcherItem {
 export interface RecentLocationItem extends FileSwitcherItem {
   lineNumber: number;
   column: number;
+}
+
+export interface QuickOpenItem {
+  label: string;
+  description: string;
+  source: "open" | "workspace";
+  path: string;
+  model?: editor.ITextModel;
+}
+
+export interface FileSwitcherController {
+  open(): void;
+  setAdapter(adapter: FileSystemAdapter): void;
+  setRoot(root: string): void;
 }
 
 export type NavBarItem =
@@ -149,6 +165,118 @@ function modelForUri(uri: string): editor.ITextModel | undefined {
 
 export function openGotoFileSwitcher(editor: editor.IStandaloneCodeEditor): void {
   openModelSwitcher(editor, "Goto File", "maldives-file-switcher", "maldives-file-switcher-item");
+}
+
+export function buildQuickOpenItems(
+  openItems: FileSwitcherItem[],
+  workspaceEntries: FileSystemEntry[],
+  query = "",
+): QuickOpenItem[] {
+  const seen = new Set<string>();
+  const candidates: QuickOpenItem[] = [];
+
+  for (const item of openItems) {
+    const path = item.description;
+    seen.add(path);
+    candidates.push({ ...item, path, source: "open" });
+  }
+
+  for (const entry of workspaceEntries) {
+    if (entry.type !== "file" || seen.has(entry.path)) {
+      continue;
+    }
+
+    seen.add(entry.path);
+    candidates.push({ label: entry.name, description: entry.path, path: entry.path, source: "workspace" });
+  }
+
+  const needle = query.trim();
+
+  if (!needle) {
+    return candidates;
+  }
+
+  return candidates
+    .map((item) => ({ item, score: quickOpenScore(item, needle) }))
+    .filter(({ score }) => score > Number.NEGATIVE_INFINITY)
+    .sort((a, b) => b.score - a.score || a.item.label.localeCompare(b.item.label))
+    .map(({ item }) => item);
+}
+
+export function installFileSwitcherController(
+  host: HTMLElement,
+  options: { editor: editor.IStandaloneCodeEditor; workspace: MaldivesWorkspace; adapter: FileSystemAdapter; root?: string },
+): FileSwitcherController {
+  let adapter = options.adapter;
+  let root = options.root ? normalizePath(options.root) : undefined;
+  let workspaceEntries: FileSystemEntry[] = [];
+
+  const controller: FileSwitcherController = {
+    open() {
+      render("");
+      void refreshWorkspaceEntries();
+    },
+    setAdapter(nextAdapter) {
+      adapter = nextAdapter;
+    },
+    setRoot(nextRoot) {
+      root = normalizePath(nextRoot);
+    },
+  };
+
+  async function refreshWorkspaceEntries(): Promise<void> {
+    workspaceEntries = root ? await collectWorkspaceFiles(adapter, root).catch(() => []) : [];
+    const input = host.querySelector<HTMLInputElement>(".maldives-file-switcher-input");
+
+    if (input) {
+      render(input.value);
+      host.querySelector<HTMLInputElement>(".maldives-file-switcher-input")?.focus();
+    }
+  }
+
+  function render(query: string): void {
+    host.querySelector(".maldives-file-switcher")?.remove();
+
+    const overlay = createSwitcherOverlay("Goto File", "maldives-file-switcher");
+    const input = document.createElement("input");
+    input.className = "maldives-file-switcher-input";
+    input.value = query;
+    input.placeholder = "Search files by fuzzy path…";
+    input.style.cssText = "width:calc(100% - 24px);margin:10px 12px 8px;padding:7px 8px;background:#252526;color:#d4d4d4;border:1px solid #555;box-sizing:border-box";
+    input.addEventListener("input", () => render(input.value));
+    overlay.append(input);
+
+    for (const item of buildQuickOpenItems(fileSwitcherItems(options.editor), workspaceEntries, query)) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "maldives-file-switcher-item";
+      button.setAttribute("aria-label", `${item.label} ${item.description}`);
+      button.style.cssText = switcherButtonStyle();
+      button.innerHTML = `<div>${escapeHtml(item.label)} <span style="color:#969696;font-size:11px">${item.source}</span></div><div style="color:#9cdcfe;font-size:12px">${escapeHtml(item.description)}</div>`;
+      button.addEventListener("click", () => void openQuickOpenItem(item));
+      overlay.append(button);
+    }
+
+    host.append(overlay);
+    input.focus();
+  }
+
+  async function openQuickOpenItem(item: QuickOpenItem): Promise<void> {
+    if (item.model) {
+      if (switchToModel(options.editor, item.model)) {
+        host.querySelector(".maldives-file-switcher")?.remove();
+      }
+      return;
+    }
+
+    const content = await adapter.readFile(item.path);
+    const model = options.workspace.open(`opfs://${item.path}`, content);
+    options.editor.setModel(model);
+    options.editor.focus();
+    host.querySelector(".maldives-file-switcher")?.remove();
+  }
+
+  return controller;
 }
 
 export function openTabSwitcher(editor: editor.IStandaloneCodeEditor): void {
@@ -536,6 +664,123 @@ function pathSegmentsForPath(path: string): Array<{ label: string; description: 
     label,
     description: `/${segments.slice(0, index + 1).join("/")}`,
   }));
+}
+
+async function collectWorkspaceFiles(adapter: FileSystemAdapter, dir: string): Promise<FileSystemEntry[]> {
+  const entries = await adapter.list(dir);
+  const files: FileSystemEntry[] = [];
+
+  for (const entry of entries) {
+    if (entry.type === "file") {
+      files.push(entry);
+    } else {
+      files.push(...await collectWorkspaceFiles(adapter, entry.path));
+    }
+  }
+
+  return files.sort((a, b) => a.path.localeCompare(b.path));
+}
+
+function quickOpenScore(item: QuickOpenItem, query: string): number {
+  const tokens = query.toLowerCase().split(/\s+/).filter(Boolean);
+  const label = normalizeSearchText(item.label);
+  const path = normalizeSearchText(item.description);
+  let score = item.source === "open" ? 10 : 0;
+
+  for (const token of tokens) {
+    const normalizedToken = normalizeSearchText(token);
+    const labelIndex = label.indexOf(normalizedToken);
+    const pathIndex = path.indexOf(normalizedToken);
+
+    if (labelIndex !== -1) {
+      score += 100 - labelIndex;
+      continue;
+    }
+
+    if (pathIndex !== -1) {
+      score += 50 - pathIndex / 10;
+      continue;
+    }
+
+    if (isSubsequence(normalizedToken, label)) {
+      score += 25;
+      continue;
+    }
+
+    if (isSubsequence(normalizedToken, path)) {
+      score += 10;
+      continue;
+    }
+
+    return Number.NEGATIVE_INFINITY;
+  }
+
+  return score;
+}
+
+function normalizeSearchText(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, "");
+}
+
+function isSubsequence(needle: string, haystack: string): boolean {
+  let index = 0;
+
+  for (const character of haystack) {
+    if (character === needle[index]) {
+      index += 1;
+    }
+
+    if (index === needle.length) {
+      return true;
+    }
+  }
+
+  return needle.length === 0;
+}
+
+function normalizePath(path: string): string {
+  const withLeadingSlash = path.startsWith("/") ? path : `/${path}`;
+  const collapsed = withLeadingSlash.replace(/\/+/g, "/");
+  return collapsed.length > 1 ? collapsed.replace(/\/+$/g, "") : collapsed;
+}
+
+function createSwitcherOverlay(title: string, overlayClass: string): HTMLDivElement {
+  const overlay = document.createElement("div");
+  overlay.className = overlayClass;
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-label", title);
+  overlay.style.cssText = [
+    "position:fixed",
+    "top:72px",
+    "left:50%",
+    "transform:translateX(-50%)",
+    "z-index:10000",
+    "width:min(560px, calc(100vw - 32px))",
+    "background:#1e1e1e",
+    "color:#d4d4d4",
+    "border:1px solid #454545",
+    "box-shadow:0 12px 32px rgba(0,0,0,.45)",
+    "font:13px system-ui, sans-serif",
+  ].join(";");
+
+  const heading = document.createElement("div");
+  heading.textContent = title;
+  heading.style.cssText = "padding:10px 12px;border-bottom:1px solid #333;color:#fff;font-weight:600";
+  overlay.append(heading);
+  return overlay;
+}
+
+function switcherButtonStyle(): string {
+  return [
+    "display:block",
+    "width:100%",
+    "padding:10px 12px",
+    "border:0",
+    "background:transparent",
+    "color:inherit",
+    "text-align:left",
+    "cursor:pointer",
+  ].join(";");
 }
 
 function escapeHtml(value: string): string {
