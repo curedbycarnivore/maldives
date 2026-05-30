@@ -102,6 +102,8 @@ export function createMaldivesEditor(
 
 export { createMemoryFileSystemAdapter, createOpfsFileSystemAdapter, FileSystemAccessAdapter, FileSystemAdapterError, fileUriForFsaPath, fsaPathForFileUri, installOpenFileButton, isFileSystemAdapter, MemoryFileSystemAdapter, OpfsFileSystemAdapter, openPickedFileInWorkspace, ProxyFileSystemAdapter, resolveFileSystemAdapter, saveWorkspaceFile } from "./fs";
 export type { FileSystemAccessAdapterOptions, FileSystemAccessHost, FileSystemAccessWriteOptions, FileSystemAdapter, FileSystemAdapterErrorCode, FileSystemAdapterInit, FileSystemChange, FileSystemDirectoryHandleLike, FileSystemEntry, FileSystemEntryType, FileSystemFileHandleLike, FileSystemHandleLike, FileSystemPermissionStateLike, FileSystemWatcher, FileSystemWritableFileStreamLike, FileSystemWriteOptions, OpenedFile, OpenedWorkspaceFile, OpfsDirectoryHandleLike, OpfsFileHandleLike, OpfsFileSystemAdapterOptions, OpfsHandleLike, OpfsHost, OpfsWritableFileStreamLike, ProxyFileSystemAdapterOptions } from "./fs";
+export { Take5GitProxyClient, normalizeGitPathFromUri } from "./git-proxy";
+export type { GitBlameEntry, GitDiffHunk, GitFileStatusKind, GitStateProvider, GitStatusEntry, Take5GitProxyClientOptions } from "./git-proxy";
 export { createToolWindowController, installToolWindowController, toolWindowIdForAction, toolWindowTitleForAction, ToolWindowController } from "./tool-windows";
 export type { ToolWindowDefinition, ToolWindowId, ToolWindowSnapshot } from "./tool-windows";
 export { registerEffectDtsFiles } from "./typescript-worker";

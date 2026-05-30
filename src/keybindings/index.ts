@@ -608,6 +608,7 @@ function handlerForTarget(target: MonacoTarget, options: RegisterKeybindingsOpti
       const context = vcsContextFromEditor(editor);
       if (context) {
         options.vcsPanel?.runAction(target.actionId, context);
+        void options.vcsPanel?.refreshGitStateFromEditor(editor).catch(() => undefined);
       }
       editor.focus();
     };

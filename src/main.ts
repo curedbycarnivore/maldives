@@ -14,6 +14,7 @@ import { installEffectTsgoDiagnosticsClient, type EffectTsgoDiagnosticsClient } 
 import { registerEffectHoverProvider } from "./effect-hover";
 import { registerEffectSnippets } from "./effect-snippets";
 import { installFavoritesPanelController, type FavoritesPanelController } from "./favorites-panel";
+import { Take5GitProxyClient } from "./git-proxy";
 import { installFindInFilesPanel, type FindInFilesController } from "./find-in-files";
 import { FileSystemAccessAdapter, installOpenFileButton, resolveFileSystemAdapter, type FileSystemAdapter, type FileSystemAdapterInit } from "./fs";
 import { installFileSwitcherController, registerModelTab, registerRecentLocationTracking, type FileSwitcherController } from "./file-switcher";
@@ -49,7 +50,10 @@ declare global {
     __maldivesEffectLanguageService: EffectLanguageServiceController;
     __maldivesEffectTsgoDiagnostics: EffectTsgoDiagnosticsClient;
     __maldivesWorkspace: MaldivesWorkspace;
-    __maldivesInit?: { readonly fs?: FileSystemAdapterInit };
+    __maldivesInit?: {
+      readonly fs?: FileSystemAdapterInit;
+      readonly git?: { readonly origin: string; readonly repo: string; readonly token: string };
+    };
     __maldivesFileSystemAdapter: FileSystemAdapter;
     __maldivesToolWindows: ToolWindowController;
     __maldivesVcsPanel: VcsPanelController;
@@ -150,6 +154,9 @@ installWorkspaceSplitLayout(document.body, workspace);
 const fileSystemAdapter = resolveFileSystemAdapter(window.__maldivesInit?.fs);
 const toolWindows = installToolWindowController(document.body);
 const vcsPanel = installVcsPanelController(document.body);
+if (window.__maldivesInit?.git) {
+  vcsPanel.setGitStateProvider(new Take5GitProxyClient(window.__maldivesInit.git));
+}
 const runDebugPanel = installRunDebugPanelController(document.body);
 const terminalPanel = installTerminalPanelController(document.body, { token: "maldives-terminal-session", theme: themeConfig.console });
 const favoritesPanel = installFavoritesPanelController(document.body);
