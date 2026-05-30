@@ -22,6 +22,7 @@ import {
   switchToPreviousModelTab,
 } from "../file-switcher";
 import { contextFromEditor as favoritesContextFromEditor, type FavoritesPanelController } from "../favorites-panel";
+import type { FindInFilesController } from "../find-in-files";
 import type { KeyAction, KeymapConfig } from "../parsers/keymap-parser";
 import { contextFromEditor as runDebugContextFromEditor, type RunDebugPanelController } from "../run-debug-panel";
 import { contextFromEditor as terminalContextFromEditor, type TerminalPanelController } from "../terminal-panel";
@@ -47,6 +48,7 @@ export interface RegisterKeybindingsOptions {
   readonly runDebugPanel?: RunDebugPanelController;
   readonly terminalPanel?: TerminalPanelController;
   readonly favoritesPanel?: FavoritesPanelController;
+  readonly findInFiles?: FindInFilesController;
 }
 
 type Monaco = typeof import("monaco-editor");
@@ -553,6 +555,9 @@ function handlerForTarget(target: MonacoTarget, options: RegisterKeybindingsOpti
   if (target.id === "activateToolWindow") {
     return (editor) => {
       options.toolWindows?.activateAction(target.actionId);
+      if (target.actionId === "ActivateFindToolWindow") {
+        options.findInFiles?.open();
+      }
       if (target.actionId === "ActivateTerminalToolWindow") {
         const context = terminalContextFromEditor(editor);
         if (context) options.terminalPanel?.runAction(target.actionId, context);

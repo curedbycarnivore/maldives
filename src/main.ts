@@ -12,6 +12,7 @@ import { installEffectLanguageService, type EffectLanguageServiceController } fr
 import { registerEffectHoverProvider } from "./effect-hover";
 import { registerEffectSnippets } from "./effect-snippets";
 import { installFavoritesPanelController, type FavoritesPanelController } from "./favorites-panel";
+import { installFindInFilesPanel, type FindInFilesController } from "./find-in-files";
 import { FileSystemAccessAdapter, installOpenFileButton } from "./fs";
 import { registerModelTab, registerRecentLocationTracking } from "./file-switcher";
 import { cleanOnBlurFromModel } from "./hooks/trailing-whitespace";
@@ -48,6 +49,7 @@ declare global {
     __maldivesRunDebugPanel: RunDebugPanelController;
     __maldivesTerminalPanel: { execute: (line: string, token?: string) => TerminalResult };
     __maldivesFavoritesPanel: FavoritesPanelController;
+    __maldivesFindInFiles: FindInFilesController;
     __maldivesSaveActiveFile: () => Promise<boolean>;
     __maldivesReady: Promise<void>;
   }
@@ -129,6 +131,7 @@ const vcsPanel = installVcsPanelController(document.body);
 const runDebugPanel = installRunDebugPanelController(document.body);
 const terminalPanel = installTerminalPanelController(document.body, { token: "maldives-terminal-session", theme: themeConfig.console });
 const favoritesPanel = installFavoritesPanelController(document.body);
+const findInFiles = installFindInFilesPanel(document.body, { adapter: fileSystemAdapter, editor, workspace });
 installReadWriteToggle(document.body, { monaco, editor, workspace, adapter: fileSystemAdapter });
 const registeredKeybindings = registerKeybindings(editor, monaco, keymapConfig, {
   isWriteMode: () => workspace.mode === "write",
@@ -138,6 +141,7 @@ const registeredKeybindings = registerKeybindings(editor, monaco, keymapConfig, 
   runDebugPanel,
   terminalPanel,
   favoritesPanel,
+  findInFiles,
 });
 registerRecentLocationTracking(editor);
 registerAstStructuralSearchAction(editor);
@@ -156,6 +160,7 @@ window.__maldivesToolWindows = toolWindows;
 window.__maldivesVcsPanel = vcsPanel;
 window.__maldivesRunDebugPanel = runDebugPanel;
 window.__maldivesFavoritesPanel = favoritesPanel;
+window.__maldivesFindInFiles = findInFiles;
 window.__maldivesTerminalPanel = {
   execute(line, token) {
     const context = terminalContextFromEditor(editor);
