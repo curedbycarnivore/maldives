@@ -23,6 +23,7 @@ import { awaitTypeScriptWorkerAnswer, setupDefaultMonacoWorkers } from "./monaco
 import { maldivesProFeatureOptions } from "./pro-features";
 import { registerTheme, THEME_NAME } from "./theme";
 import { installToolWindowController, type ToolWindowController } from "./tool-windows";
+import { installVcsPanelController, type VcsPanelController } from "./vcs-panel";
 import { configureTypeScriptWorker, registerEffectDtsFiles, type EffectDtsFiles, type RegisterEffectDtsFilesOptions } from "./typescript-worker";
 import { startVscodeTypeScriptWorkerForMaldives, type VscodeTypeScriptWorkerBootstrap } from "./vscode-ts-worker";
 import { MaldivesWorkspace } from "./workspace";
@@ -40,6 +41,7 @@ declare global {
     __maldivesWorkspace: MaldivesWorkspace;
     __maldivesFileSystemAdapter: FileSystemAccessAdapter;
     __maldivesToolWindows: ToolWindowController;
+    __maldivesVcsPanel: VcsPanelController;
     __maldivesSaveActiveFile: () => Promise<boolean>;
     __maldivesReady: Promise<void>;
   }
@@ -130,11 +132,13 @@ const workspace = new MaldivesWorkspace({
 });
 const fileSystemAdapter = new FileSystemAccessAdapter();
 const toolWindows = installToolWindowController(document.body);
+const vcsPanel = installVcsPanelController(document.body);
 installReadWriteToggle(document.body, { monaco, editor, workspace, adapter: fileSystemAdapter });
 const registeredKeybindings = registerKeybindings(editor, monaco, keymapConfig, {
   isWriteMode: () => workspace.mode === "write",
   writeModeContextKey: WRITE_MODE_CONTEXT_KEY,
   toolWindows,
+  vcsPanel,
 });
 registerRecentLocationTracking(editor);
 registerAstStructuralSearchAction(editor);
@@ -150,6 +154,7 @@ window.__maldivesEffectLanguageService = effectLanguageService;
 window.__maldivesWorkspace = workspace;
 window.__maldivesFileSystemAdapter = fileSystemAdapter;
 window.__maldivesToolWindows = toolWindows;
+window.__maldivesVcsPanel = vcsPanel;
 window.__maldivesSaveActiveFile = () => saveActiveWorkspaceFile({ adapter: fileSystemAdapter, workspace, editor, userGesture: true });
 window.__maldivesVscodeTsWorkerReady = vscodeTsWorkerReady;
 window.__maldivesReady = (async () => {

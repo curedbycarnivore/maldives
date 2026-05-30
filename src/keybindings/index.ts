@@ -23,6 +23,7 @@ import {
 } from "../file-switcher";
 import type { KeyAction, KeymapConfig } from "../parsers/keymap-parser";
 import type { ToolWindowController } from "../tool-windows";
+import { contextFromEditor, type VcsPanelController } from "../vcs-panel";
 
 export interface MaldivesAction {
   wsActionId: string;
@@ -39,6 +40,7 @@ export interface RegisterKeybindingsOptions {
   readonly isWriteMode?: () => boolean;
   readonly writeModeContextKey?: string;
   readonly toolWindows?: ToolWindowController;
+  readonly vcsPanel?: VcsPanelController;
 }
 
 type Monaco = typeof import("monaco-editor");
@@ -95,6 +97,7 @@ type MonacoTarget =
         | "showToolWindowContent"
         | "toggleToolWindowContentMode";
     }
+  | { type: "custom"; id: "vcsPanelAction"; actionId: string }
   | { type: "custom"; id: "activateToolWindow"; actionId: string }
   | { type: "custom"; id: "switchModelTab"; tabIndex: number };
 
@@ -122,6 +125,24 @@ const actionTargets: Record<string, MonacoTarget> = {
   NextWindow: { type: "custom", id: "nextToolWindow" },
   ShowContent: { type: "custom", id: "showToolWindowContent" },
   ToggleContentUiTypeMode: { type: "custom", id: "toggleToolWindowContentMode" },
+  Annotate: { type: "custom", id: "vcsPanelAction", actionId: "Annotate" },
+  "ChangesView.AddUnversioned": { type: "custom", id: "vcsPanelAction", actionId: "ChangesView.AddUnversioned" },
+  "ChangesView.ShelveSilently": { type: "custom", id: "vcsPanelAction", actionId: "ChangesView.ShelveSilently" },
+  CheckinProject: { type: "custom", id: "vcsPanelAction", actionId: "CheckinProject" },
+  "Diff.NextChange": { type: "custom", id: "vcsPanelAction", actionId: "Diff.NextChange" },
+  "Diff.NextConflict": { type: "custom", id: "vcsPanelAction", actionId: "Diff.NextConflict" },
+  "Diff.PrevChange": { type: "custom", id: "vcsPanelAction", actionId: "Diff.PrevChange" },
+  "Diff.PreviousConflict": { type: "custom", id: "vcsPanelAction", actionId: "Diff.PreviousConflict" },
+  "Diff.ShowSettingsPopup": { type: "custom", id: "vcsPanelAction", actionId: "Diff.ShowSettingsPopup" },
+  "Git.Branches": { type: "custom", id: "vcsPanelAction", actionId: "Git.Branches" },
+  "Git.CompareWithBranch": { type: "custom", id: "vcsPanelAction", actionId: "Git.CompareWithBranch" },
+  "Git.Stash": { type: "custom", id: "vcsPanelAction", actionId: "Git.Stash" },
+  JumpToNextChange: { type: "custom", id: "vcsPanelAction", actionId: "JumpToNextChange" },
+  NextDiff: { type: "custom", id: "vcsPanelAction", actionId: "NextDiff" },
+  PreviousDiff: { type: "custom", id: "vcsPanelAction", actionId: "PreviousDiff" },
+  RecentChangedFiles: { type: "custom", id: "vcsPanelAction", actionId: "RecentChangedFiles" },
+  RecentChanges: { type: "custom", id: "vcsPanelAction", actionId: "RecentChanges" },
+  "Vcs.UpdateProject": { type: "custom", id: "vcsPanelAction", actionId: "Vcs.UpdateProject" },
   ...tabActionTargets("GoToTab", 8),
   ...tabActionTargets("Go To Tab #", 10),
   ...tabActionTargets("Switch To Tab #", 10),
@@ -347,6 +368,13 @@ const shortcutlessActionIds = new Set([
   "GotoSuperMethod",
   "GotoTest",
   "MethodHierarchy",
+  "ChangesView.AddUnversioned",
+  "ChangesView.ShelveSilently",
+  "CheckinProject",
+  "Diff.ShowSettingsPopup",
+  "RecentChangedFiles",
+  "RecentChanges",
+  "Vcs.UpdateProject",
 ]);
 
 function keybindingsForAction(action: KeyAction, monaco: Monaco, options: RegisterKeybindingsOptions): MaldivesAction[] {
@@ -528,6 +556,16 @@ function handlerForTarget(target: MonacoTarget, options: RegisterKeybindingsOpti
   if (target.id === "toggleToolWindowContentMode") {
     return (editor) => {
       options.toolWindows?.toggleContentUiTypeMode();
+      editor.focus();
+    };
+  }
+
+  if (target.id === "vcsPanelAction") {
+    return (editor) => {
+      const context = contextFromEditor(editor);
+      if (context) {
+        options.vcsPanel?.runAction(target.actionId, context);
+      }
       editor.focus();
     };
   }

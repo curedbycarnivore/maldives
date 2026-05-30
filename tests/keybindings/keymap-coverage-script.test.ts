@@ -16,7 +16,13 @@ describe("scripts/keymap-coverage", () => {
     expect(coverage.wired).toContain("EditorPageDown");
     expect(coverage.wired).toContain("ActivateTerminalToolWindow");
     expect(coverage.wired).toContain("ActivateVersionControlToolWindow");
+    expect(coverage.wired).toContain("Annotate");
+    expect(coverage.wired).toContain("ChangesView.ShelveSilently");
+    expect(coverage.wired).toContain("CheckinProject");
+    expect(coverage.wired).toContain("Git.Branches");
+    expect(coverage.wired).toContain("Vcs.UpdateProject");
     expect(coverage.deferred).not.toContain("ActivateTerminalToolWindow");
+    expect(coverage.deferred).not.toContain("Annotate");
     expect(coverage.dropped).toContain("AceJumpAction");
     expect(coverage.dropped).toContain("DBNavigator.Actions.Calendar.CalendarNextMonth");
     expect(coverage.dropReasons["AceJumpAction"]).toContain("no maldives equivalent");

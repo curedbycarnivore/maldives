@@ -1,7 +1,7 @@
 # Keymap Unwired Action Specs
 
 Source: `ssot/keymaps/leet hax.xml` vs `src/keybindings/index.ts`.
-Coverage summary: wired=142 deferred=61 dropped=27 unwired=0 accounted=230/230.
+Coverage summary: wired=160 deferred=43 dropped=27 unwired=0 accounted=230/230.
 
 No unwired SSOT actions remain.
 
