@@ -56,6 +56,7 @@ export interface EffectLanguageServiceController {
   refreshModel(model: monaco.editor.ITextModel): Promise<void>;
   getDiagnostics(model: monaco.editor.ITextModel): EffectLanguageServiceDiagnostic[];
   getRenderedDiagnostics(model: monaco.editor.ITextModel): EffectLanguageServiceRenderedDiagnostic[];
+  getRenderedDiagnosticsForRule(model: monaco.editor.ITextModel, rule: string): EffectLanguageServiceRenderedDiagnostic[];
   getInMemoryRenderedDiagnostics(model: monaco.editor.ITextModel): EffectLanguageServiceRenderedDiagnostic[];
   getRefactors(model: monaco.editor.ITextModel, range: { pos: number; end: number }): EffectLanguageServiceRefactor[];
   dispose(): void;
@@ -192,6 +193,9 @@ export function installEffectLanguageService(
           message: marker.message,
         }))
         .sort(compareRenderedDiagnostics);
+    },
+    getRenderedDiagnosticsForRule(model, rule) {
+      return this.getRenderedDiagnostics(model).filter((diagnostic) => diagnostic.rule === rule);
     },
     getInMemoryRenderedDiagnostics(model) {
       return (diagnosticsByUri.get(model.uri.toString()) ?? [])

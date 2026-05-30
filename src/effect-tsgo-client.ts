@@ -31,6 +31,7 @@ export interface EffectTsgoDiagnosticsClient {
   configure(options: { readonly endpoint: string; readonly debounceMs?: number }): void;
   refreshModel(model: Pick<monaco.editor.ITextModel, "uri" | "getValue">): Promise<void>;
   getRenderedDiagnostics(model: Pick<monaco.editor.ITextModel, "uri">): EffectTsgoRenderedDiagnostic[];
+  getRenderedDiagnosticsForRule(model: Pick<monaco.editor.ITextModel, "uri">, rule: string): EffectTsgoRenderedDiagnostic[];
   dispose(): void;
 }
 
@@ -104,24 +105,27 @@ export function createEffectTsgoDiagnosticsClient(options: {
     );
   };
 
+  const getRenderedDiagnostics = (model: Pick<monaco.editor.ITextModel, "uri">): EffectTsgoRenderedDiagnostic[] => options.monaco.editor
+    .getModelMarkers({ resource: model.uri })
+    .filter((marker) => marker.source === markerOwner)
+    .map((marker) => ({
+      rule: markerRule(marker.code),
+      startLine: marker.startLineNumber,
+      startCol: marker.startColumn,
+      endLine: marker.endLineNumber,
+      endCol: marker.endColumn,
+      message: marker.message,
+    }))
+    .sort(compareRenderedDiagnostics);
+
   return {
     configure(nextOptions) {
       endpoint = nextOptions.endpoint;
     },
     refreshModel,
-    getRenderedDiagnostics(model) {
-      return options.monaco.editor
-        .getModelMarkers({ resource: model.uri })
-        .filter((marker) => marker.source === markerOwner)
-        .map((marker) => ({
-          rule: markerRule(marker.code),
-          startLine: marker.startLineNumber,
-          startCol: marker.startColumn,
-          endLine: marker.endLineNumber,
-          endCol: marker.endColumn,
-          message: marker.message,
-        }))
-        .sort(compareRenderedDiagnostics);
+    getRenderedDiagnostics,
+    getRenderedDiagnosticsForRule(model, rule) {
+      return getRenderedDiagnostics(model).filter((diagnostic) => diagnostic.rule === rule);
     },
     dispose() {
       endpoint = undefined;
@@ -163,6 +167,7 @@ export function installEffectTsgoDiagnosticsClient(
       await client.refreshModel(model);
     },
     getRenderedDiagnostics: client.getRenderedDiagnostics,
+    getRenderedDiagnosticsForRule: client.getRenderedDiagnosticsForRule,
     dispose() {
       if (refreshTimer) globalThis.clearTimeout(refreshTimer);
       modelDisposable.dispose();
