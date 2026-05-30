@@ -32,6 +32,7 @@ import { installVcsPanelController, type VcsPanelController } from "./vcs-panel"
 import { configureTypeScriptWorker, registerEffectDtsFiles, type EffectDtsFiles, type RegisterEffectDtsFilesOptions } from "./typescript-worker";
 import { startVscodeTypeScriptWorkerForMaldives, type VscodeTypeScriptWorkerBootstrap } from "./vscode-ts-worker";
 import { installWorkspacePersistence, restoreWorkspaceFromStorage } from "./workspace-persistence";
+import { installWorkspaceSplitLayout } from "./workspace-splits";
 import { installWorkspaceTabStrip } from "./workspace-tabs";
 import { MaldivesWorkspace } from "./workspace";
 
@@ -141,6 +142,7 @@ if (!restoredWorkspace) {
 installWorkspacePersistence({ workspace, editor, storage: workspaceStorage });
 const readyModel = workspace.model(workspace.activeUri ?? DEFAULT_SAMPLE_URI) ?? workspace.open(DEFAULT_SAMPLE_URI, defaultSampleDocument);
 installWorkspaceTabStrip(document.body, workspace);
+installWorkspaceSplitLayout(document.body, workspace);
 const fileSystemAdapter = new FileSystemAccessAdapter();
 const toolWindows = installToolWindowController(document.body);
 const vcsPanel = installVcsPanelController(document.body);

@@ -1,6 +1,13 @@
 import type { editor } from "monaco-editor";
 
 export type WorkspaceMode = "read" | "write";
+export type WorkspaceSplitDirection = "root" | "right" | "down";
+
+export interface WorkspacePane {
+  readonly id: string;
+  readonly uri: string;
+  readonly direction: WorkspaceSplitDirection;
+}
 
 export interface WorkspaceCursor {
   lineNumber: number;
@@ -43,7 +50,10 @@ export class MaldivesWorkspace {
   readonly #createModel: MaldivesWorkspaceOptions["createModel"];
   readonly #editor?: MaldivesWorkspaceEditor;
   readonly #listeners = new Set<MaldivesWorkspaceListener>();
+  readonly #panes: WorkspacePane[] = [];
   #activeUri: string | undefined;
+  #activePaneId: string | undefined;
+  #nextPaneNumber = 1;
   #mode: WorkspaceMode;
 
   constructor(options: MaldivesWorkspaceOptions) {
@@ -100,6 +110,9 @@ export class MaldivesWorkspace {
     };
 
     this.#models.set(uri, entry);
+    if (this.#panes.length === 0) {
+      this.#activePaneId = this.#createPane(uri, "root").id;
+    }
     this.switchTo(uri);
     return model;
   }
@@ -114,6 +127,7 @@ export class MaldivesWorkspace {
     const wasActive = this.#activeUri === uri;
     entry.changeSubscription.dispose();
     this.#models.delete(uri);
+    this.#removePanesForUri(uri);
     entry.model.dispose();
 
     if (wasActive) {
@@ -121,9 +135,13 @@ export class MaldivesWorkspace {
 
       if (nextUri) {
         this.#activeUri = undefined;
+        if (this.#panes.length === 0) {
+          this.#activePaneId = this.#createPane(nextUri, "root").id;
+        }
         this.switchTo(nextUri);
       } else {
         this.#activeUri = undefined;
+        this.#activePaneId = undefined;
         this.#editor?.setModel(null);
       }
     }
@@ -144,6 +162,7 @@ export class MaldivesWorkspace {
       this.#saveActiveViewState();
     }
     this.#activeUri = uri;
+    this.#setActivePaneUri(uri);
     this.#editor?.setModel(entry.model);
 
     if (entry.cursor) {
@@ -216,6 +235,32 @@ export class MaldivesWorkspace {
     return [...this.#models.keys()];
   }
 
+  panes(): WorkspacePane[] {
+    return this.#panes.map((pane) => ({ ...pane }));
+  }
+
+  splitRight(uri = this.#activeUri): WorkspacePane {
+    return this.#split(uri, "right");
+  }
+
+  splitDown(uri = this.#activeUri): WorkspacePane {
+    return this.#split(uri, "down");
+  }
+
+  movePane(paneId: string, targetIndex: number): boolean {
+    const fromIndex = this.#panes.findIndex((pane) => pane.id === paneId);
+
+    if (fromIndex === -1) {
+      return false;
+    }
+
+    const [pane] = this.#panes.splice(fromIndex, 1);
+    const nextIndex = Math.max(0, Math.min(targetIndex, this.#panes.length));
+    this.#panes.splice(nextIndex, 0, pane);
+    this.#emitChange();
+    return true;
+  }
+
   #applyReadOnlyOption(): void {
     this.#editor?.updateOptions?.({ readOnly: this.#mode === "read" });
   }
@@ -223,6 +268,46 @@ export class MaldivesWorkspace {
   #emitChange(): void {
     for (const listener of this.#listeners) {
       listener();
+    }
+  }
+
+  #split(uri: string | undefined, direction: WorkspaceSplitDirection): WorkspacePane {
+    if (!uri || !this.#models.has(uri)) {
+      throw new Error(`Cannot split missing workspace model: ${uri ?? "<none>"}`);
+    }
+
+    const pane = this.#createPane(uri, direction);
+    this.#activePaneId = pane.id;
+    this.switchTo(uri);
+    this.#emitChange();
+    return { ...pane };
+  }
+
+  #createPane(uri: string, direction: WorkspaceSplitDirection): WorkspacePane {
+    const pane: WorkspacePane = { id: `pane-${this.#nextPaneNumber++}`, uri, direction };
+    this.#panes.push(pane);
+    return pane;
+  }
+
+  #setActivePaneUri(uri: string): void {
+    const activePane = this.#panes.find((pane) => pane.id === this.#activePaneId) ?? this.#panes[0];
+
+    if (activePane) {
+      this.#activePaneId = activePane.id;
+      const index = this.#panes.findIndex((pane) => pane.id === activePane.id);
+      this.#panes[index] = { ...activePane, uri };
+    }
+  }
+
+  #removePanesForUri(uri: string): void {
+    for (let index = this.#panes.length - 1; index >= 0; index -= 1) {
+      if (this.#panes[index].uri === uri) {
+        this.#panes.splice(index, 1);
+      }
+    }
+
+    if (this.#activePaneId && !this.#panes.some((pane) => pane.id === this.#activePaneId)) {
+      this.#activePaneId = this.#panes[0]?.id;
     }
   }
 
