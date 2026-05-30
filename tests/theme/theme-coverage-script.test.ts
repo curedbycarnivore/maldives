@@ -21,7 +21,6 @@ describe("scripts/theme-coverage", () => {
     expect(report.mapped).toContain("JS.KEYWORD");
     expect(report.unmapped).toEqual(
       expect.arrayContaining([
-        expect.objectContaining({ name: "CONDITIONALLY_NOT_COMPILED", occurrences: 1 }),
         expect.objectContaining({ name: "DEFAULT_TEMPLATE_LANGUAGE_COLOR", occurrences: 1 }),
       ]),
     );
@@ -390,6 +389,57 @@ describe("scripts/theme-coverage", () => {
       {
         path: "CONSOLE_DARKGRAY_OUTPUT",
         reason: "unsupported: active ICLS CONSOLE_DARKGRAY_OUTPUT has no foreground or font style to apply",
+      },
+    ]);
+  });
+
+  test("classifies P32h CSS token surfaces into loaded Monaco CSS scopes or explicit no-surface deferrals", () => {
+    const report = auditThemeCoverageMappings(iclsXml);
+    const p32hNames = [
+      "CONDITIONALLY_NOT_COMPILED",
+      "CSS.COLOR",
+      "CSS.COMMENT",
+      "CSS.FUNCTION",
+      "CSS.IDENT",
+      "CSS.IMPORTANT",
+      "CSS.KEYWORD",
+      "CSS.NUMBER",
+      "CSS.OPERATORS",
+      "CSS.PROPERTY_NAME",
+      "CSS.PROPERTY_VALUE",
+      "CSS.STRING",
+      "CSS.TAG_NAME",
+      "CSS.URL",
+    ];
+
+    expect(report.top50Unmapped.map((entry) => entry.name)).not.toEqual(expect.arrayContaining(p32hNames));
+    expect(report.classifiedTopLevelOptions.map((entry) => entry.name)).toEqual(expect.arrayContaining(p32hNames));
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CSS.COMMENT")?.mappedPaths).toEqual([
+      { path: "CSS.COMMENT.FOREGROUND", monacoTargets: ["token:comment.css.foreground"] },
+      { path: "CSS.COMMENT.FONT_TYPE", monacoTargets: ["token:comment.css.fontStyle"] },
+    ]);
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CSS.COLOR")?.mappedPaths).toEqual([
+      { path: "CSS.COLOR.FOREGROUND", monacoTargets: ["token:attribute.value.hex.css.foreground"] },
+    ]);
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CSS.PROPERTY_NAME")?.mappedPaths).toEqual([
+      { path: "CSS.PROPERTY_NAME.FOREGROUND", monacoTargets: ["token:attribute.name.css.foreground"] },
+    ]);
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CSS.FUNCTION")?.deferredPaths).toEqual([
+      {
+        path: "CSS.FUNCTION.FOREGROUND",
+        reason: "unsupported: Monaco's CSS grammar emits functions as generic attribute values, colliding with CSS property values",
+      },
+    ]);
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CSS.IDENT")?.deferredPaths).toEqual([
+      {
+        path: "CSS.IDENT.FOREGROUND",
+        reason: "unsupported: Monaco's CSS grammar emits class/id selectors as generic tag tokens, not distinct identifiers",
+      },
+    ]);
+    expect(report.classifiedTopLevelOptions.find((entry) => entry.name === "CSS.PROPERTY_VALUE")?.deferredPaths).toEqual([
+      {
+        path: "CSS.PROPERTY_VALUE.FOREGROUND",
+        reason: "unsupported: Monaco's CSS grammar emits generic property values with the same token as functions/units",
       },
     ]);
   });

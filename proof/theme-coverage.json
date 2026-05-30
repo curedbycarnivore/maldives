@@ -59,6 +59,7 @@
     "COFFEESCRIPT.STRING",
     "COFFEESCRIPT.STRING_LITERAL",
     "COFFEESCRIPT.THIS",
+    "CONDITIONALLY_NOT_COMPILED",
     "CONSOLE_BACKGROUND_KEY",
     "CONSOLE_BLACK_OUTPUT",
     "CONSOLE_BLUE_BRIGHT_OUTPUT",
@@ -106,6 +107,19 @@
     "CPP.STRING",
     "CPP.TYPE",
     "CPP.UNUSED",
+    "CSS.COLOR",
+    "CSS.COMMENT",
+    "CSS.FUNCTION",
+    "CSS.IDENT",
+    "CSS.IMPORTANT",
+    "CSS.KEYWORD",
+    "CSS.NUMBER",
+    "CSS.OPERATORS",
+    "CSS.PROPERTY_NAME",
+    "CSS.PROPERTY_VALUE",
+    "CSS.STRING",
+    "CSS.TAG_NAME",
+    "CSS.URL",
     "DEFAULT_BRACES",
     "DEFAULT_BRACKETS",
     "DEFAULT_CONSTANT",
@@ -152,104 +166,6 @@
     "WHITESPACES"
   ],
   "unmapped": [
-    {
-      "name": "CONDITIONALLY_NOT_COMPILED",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONDITIONALLY_NOT_COMPILED"
-      ]
-    },
-    {
-      "name": "CSS.COLOR",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.COLOR"
-      ]
-    },
-    {
-      "name": "CSS.COMMENT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.COMMENT"
-      ]
-    },
-    {
-      "name": "CSS.FUNCTION",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.FUNCTION"
-      ]
-    },
-    {
-      "name": "CSS.IDENT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.IDENT"
-      ]
-    },
-    {
-      "name": "CSS.IMPORTANT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.IMPORTANT"
-      ]
-    },
-    {
-      "name": "CSS.KEYWORD",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.KEYWORD"
-      ]
-    },
-    {
-      "name": "CSS.NUMBER",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.NUMBER"
-      ]
-    },
-    {
-      "name": "CSS.OPERATORS",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.OPERATORS"
-      ]
-    },
-    {
-      "name": "CSS.PROPERTY_NAME",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.PROPERTY_NAME"
-      ]
-    },
-    {
-      "name": "CSS.PROPERTY_VALUE",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.PROPERTY_VALUE"
-      ]
-    },
-    {
-      "name": "CSS.STRING",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.STRING"
-      ]
-    },
-    {
-      "name": "CSS.TAG_NAME",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.TAG_NAME"
-      ]
-    },
-    {
-      "name": "CSS.URL",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.URL"
-      ]
-    },
     {
       "name": "CTRL_CLICKABLE",
       "occurrences": 1,
@@ -3508,104 +3424,6 @@
   ],
   "top50Unmapped": [
     {
-      "name": "CONDITIONALLY_NOT_COMPILED",
-      "occurrences": 1,
-      "samplePaths": [
-        "CONDITIONALLY_NOT_COMPILED"
-      ]
-    },
-    {
-      "name": "CSS.COLOR",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.COLOR"
-      ]
-    },
-    {
-      "name": "CSS.COMMENT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.COMMENT"
-      ]
-    },
-    {
-      "name": "CSS.FUNCTION",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.FUNCTION"
-      ]
-    },
-    {
-      "name": "CSS.IDENT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.IDENT"
-      ]
-    },
-    {
-      "name": "CSS.IMPORTANT",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.IMPORTANT"
-      ]
-    },
-    {
-      "name": "CSS.KEYWORD",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.KEYWORD"
-      ]
-    },
-    {
-      "name": "CSS.NUMBER",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.NUMBER"
-      ]
-    },
-    {
-      "name": "CSS.OPERATORS",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.OPERATORS"
-      ]
-    },
-    {
-      "name": "CSS.PROPERTY_NAME",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.PROPERTY_NAME"
-      ]
-    },
-    {
-      "name": "CSS.PROPERTY_VALUE",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.PROPERTY_VALUE"
-      ]
-    },
-    {
-      "name": "CSS.STRING",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.STRING"
-      ]
-    },
-    {
-      "name": "CSS.TAG_NAME",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.TAG_NAME"
-      ]
-    },
-    {
-      "name": "CSS.URL",
-      "occurrences": 1,
-      "samplePaths": [
-        "CSS.URL"
-      ]
-    },
-    {
       "name": "CTRL_CLICKABLE",
       "occurrences": 1,
       "samplePaths": [
@@ -3855,6 +3673,104 @@
       "occurrences": 1,
       "samplePaths": [
         "DJANGO_ID"
+      ]
+    },
+    {
+      "name": "DJANGO_KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "DJANGO_KEYWORD"
+      ]
+    },
+    {
+      "name": "DJANGO_NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "DJANGO_NUMBER"
+      ]
+    },
+    {
+      "name": "DJANGO_STRING_LITERAL",
+      "occurrences": 1,
+      "samplePaths": [
+        "DJANGO_STRING_LITERAL"
+      ]
+    },
+    {
+      "name": "DJANGO_TAG_NAME",
+      "occurrences": 1,
+      "samplePaths": [
+        "DJANGO_TAG_NAME"
+      ]
+    },
+    {
+      "name": "DOUBLE_QUOTE_ATTR",
+      "occurrences": 1,
+      "samplePaths": [
+        "DOUBLE_QUOTE_ATTR"
+      ]
+    },
+    {
+      "name": "DUPLICATE_FROM_SERVER",
+      "occurrences": 1,
+      "samplePaths": [
+        "DUPLICATE_FROM_SERVER"
+      ]
+    },
+    {
+      "name": "EDITOR_LIGATURES",
+      "occurrences": 1,
+      "samplePaths": [
+        "EDITOR_LIGATURES"
+      ]
+    },
+    {
+      "name": "EL.BOUNDS",
+      "occurrences": 1,
+      "samplePaths": [
+        "EL.BOUNDS"
+      ]
+    },
+    {
+      "name": "EL.IDENT",
+      "occurrences": 1,
+      "samplePaths": [
+        "EL.IDENT"
+      ]
+    },
+    {
+      "name": "EL.KEYWORD",
+      "occurrences": 1,
+      "samplePaths": [
+        "EL.KEYWORD"
+      ]
+    },
+    {
+      "name": "EL.NUMBER",
+      "occurrences": 1,
+      "samplePaths": [
+        "EL.NUMBER"
+      ]
+    },
+    {
+      "name": "EL.STRING",
+      "occurrences": 1,
+      "samplePaths": [
+        "EL.STRING"
+      ]
+    },
+    {
+      "name": "ENUM_CONST",
+      "occurrences": 1,
+      "samplePaths": [
+        "ENUM_CONST"
+      ]
+    },
+    {
+      "name": "EXECUTIONPOINT_ATTRIBUTES",
+      "occurrences": 1,
+      "samplePaths": [
+        "EXECUTIONPOINT_ATTRIBUTES"
       ]
     }
   ],
@@ -4255,6 +4171,66 @@
           ]
         },
         {
+          "path": "CSS.COLOR.FOREGROUND",
+          "monacoTargets": [
+            "token:attribute.value.hex.css.foreground"
+          ]
+        },
+        {
+          "path": "CSS.COMMENT.FOREGROUND",
+          "monacoTargets": [
+            "token:comment.css.foreground"
+          ]
+        },
+        {
+          "path": "CSS.IMPORTANT.FOREGROUND",
+          "monacoTargets": [
+            "token:keyword.css.foreground"
+          ]
+        },
+        {
+          "path": "CSS.KEYWORD.FOREGROUND",
+          "monacoTargets": [
+            "token:keyword.css.foreground"
+          ]
+        },
+        {
+          "path": "CSS.NUMBER.FOREGROUND",
+          "monacoTargets": [
+            "token:attribute.value.number.css.foreground"
+          ]
+        },
+        {
+          "path": "CSS.OPERATORS.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.css.foreground"
+          ]
+        },
+        {
+          "path": "CSS.PROPERTY_NAME.FOREGROUND",
+          "monacoTargets": [
+            "token:attribute.name.css.foreground"
+          ]
+        },
+        {
+          "path": "CSS.STRING.FOREGROUND",
+          "monacoTargets": [
+            "token:string.css.foreground"
+          ]
+        },
+        {
+          "path": "CSS.TAG_NAME.FOREGROUND",
+          "monacoTargets": [
+            "token:tag.css.foreground"
+          ]
+        },
+        {
+          "path": "CSS.URL.FOREGROUND",
+          "monacoTargets": [
+            "token:string.css.foreground"
+          ]
+        },
+        {
           "path": "DEFAULT_BRACES.FOREGROUND",
           "monacoTargets": [
             "token:delimiter.foreground",
@@ -4537,56 +4513,16 @@
           "reason": "unsupported: Monaco's C++ Monarch grammar emits types as generic identifiers, not a distinct type token"
         },
         {
-          "path": "CSS.COLOR.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CSS.COMMENT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
           "path": "CSS.FUNCTION.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's CSS grammar emits functions as generic attribute values, colliding with CSS property values"
         },
         {
           "path": "CSS.IDENT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CSS.IMPORTANT.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CSS.KEYWORD.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CSS.NUMBER.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CSS.OPERATORS.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CSS.PROPERTY_NAME.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's CSS grammar emits class/id selectors as generic tag tokens, not distinct identifiers"
         },
         {
           "path": "CSS.PROPERTY_VALUE.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CSS.STRING.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CSS.TAG_NAME.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
-        },
-        {
-          "path": "CSS.URL.FOREGROUND",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
+          "reason": "unsupported: Monaco's CSS grammar emits generic property values with the same token as functions/units"
         },
         {
           "path": "CTRL_CLICKABLE.FOREGROUND",
@@ -6218,6 +6154,12 @@
           ]
         },
         {
+          "path": "CSS.COMMENT.FONT_TYPE",
+          "monacoTargets": [
+            "token:comment.css.fontStyle"
+          ]
+        },
+        {
           "path": "DEFAULT_BRACES.FONT_TYPE",
           "monacoTargets": [
             "token:delimiter.fontStyle",
@@ -6354,10 +6296,6 @@
         {
           "path": "CPP.STATIC_FUNCTION.FONT_TYPE",
           "reason": "unsupported: Monaco's C++ Monarch grammar emits static-functions as generic identifiers, not a distinct static-function token"
-        },
-        {
-          "path": "CSS.COMMENT.FONT_TYPE",
-          "reason": "defer: no concrete Monaco token or UI surface has been selected for this ICLS attribute yet"
         },
         {
           "path": "CUSP_BRACKETS_ATTR.FONT_TYPE",
@@ -9326,6 +9264,198 @@
           "path": "CONSOLE_YELLOW_OUTPUT.FOREGROUND",
           "monacoTargets": [
             "terminal-css:--maldives-console-yellow"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CONDITIONALLY_NOT_COMPILED",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CONDITIONALLY_NOT_COMPILED.FOREGROUND",
+          "reason": "defer: Monaco/Maldives does not load a preprocessor inactive-code surface for conditionally-not-compiled regions yet"
+        }
+      ]
+    },
+    {
+      "name": "CSS.COLOR",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CSS.COLOR.FOREGROUND",
+          "monacoTargets": [
+            "token:attribute.value.hex.css.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CSS.COMMENT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CSS.COMMENT.FOREGROUND",
+          "monacoTargets": [
+            "token:comment.css.foreground"
+          ]
+        },
+        {
+          "path": "CSS.COMMENT.FONT_TYPE",
+          "monacoTargets": [
+            "token:comment.css.fontStyle"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CSS.FUNCTION",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CSS.FUNCTION.FOREGROUND",
+          "reason": "unsupported: Monaco's CSS grammar emits functions as generic attribute values, colliding with CSS property values"
+        }
+      ]
+    },
+    {
+      "name": "CSS.IDENT",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CSS.IDENT.FOREGROUND",
+          "reason": "unsupported: Monaco's CSS grammar emits class/id selectors as generic tag tokens, not distinct identifiers"
+        }
+      ]
+    },
+    {
+      "name": "CSS.IMPORTANT",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CSS.IMPORTANT.FOREGROUND",
+          "monacoTargets": [
+            "token:keyword.css.foreground"
+          ]
+        },
+        {
+          "path": "CSS.IMPORTANT.FONT_TYPE",
+          "monacoTargets": [
+            "token:keyword.css.fontStyle"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CSS.KEYWORD",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CSS.KEYWORD.FOREGROUND",
+          "monacoTargets": [
+            "token:keyword.css.foreground"
+          ]
+        },
+        {
+          "path": "CSS.KEYWORD.FONT_TYPE",
+          "monacoTargets": [
+            "token:keyword.css.fontStyle"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CSS.NUMBER",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CSS.NUMBER.FOREGROUND",
+          "monacoTargets": [
+            "token:attribute.value.number.css.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CSS.OPERATORS",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CSS.OPERATORS.FOREGROUND",
+          "monacoTargets": [
+            "token:delimiter.css.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CSS.PROPERTY_NAME",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CSS.PROPERTY_NAME.FOREGROUND",
+          "monacoTargets": [
+            "token:attribute.name.css.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CSS.PROPERTY_VALUE",
+      "occurrences": 1,
+      "mappedPaths": [],
+      "deferredPaths": [
+        {
+          "path": "CSS.PROPERTY_VALUE.FOREGROUND",
+          "reason": "unsupported: Monaco's CSS grammar emits generic property values with the same token as functions/units"
+        }
+      ]
+    },
+    {
+      "name": "CSS.STRING",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CSS.STRING.FOREGROUND",
+          "monacoTargets": [
+            "token:string.css.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CSS.TAG_NAME",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CSS.TAG_NAME.FOREGROUND",
+          "monacoTargets": [
+            "token:tag.css.foreground"
+          ]
+        }
+      ],
+      "deferredPaths": []
+    },
+    {
+      "name": "CSS.URL",
+      "occurrences": 1,
+      "mappedPaths": [
+        {
+          "path": "CSS.URL.FOREGROUND",
+          "monacoTargets": [
+            "token:string.css.foreground"
           ]
         }
       ],

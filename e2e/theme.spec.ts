@@ -412,3 +412,48 @@ private:
   await mkdir("proof", { recursive: true });
   await page.screenshot({ path: "proof/p32g-cpp-theme-proof.png" });
 });
+
+test("renders P32h CSS token colors on a real stylesheet for an Effect TSX shell", async ({ page }) => {
+  await loadEditor(page);
+
+  await page.evaluate(() => {
+    const sample = `/* P32h CSS skins a real Effect TSX shell */
+@media screen and (min-width: 768px) {
+  .effect-workbench[data-state="ready"] {
+    color: #cccccc;
+    background-image: url("/assets/effect-layer.svg");
+    margin: calc(100% - 42px) !important;
+  }
+}
+`;
+    window.__maldivesEditor.setModel(window.__monaco.editor.createModel(sample, "css", window.__monaco.Uri.parse("file:///maldives/p32h-effect-workbench.css")));
+    window.__maldivesEditor.setPosition({ lineNumber: 5, column: 5 });
+    window.__maldivesEditor.focus();
+  });
+
+  const colorForText = (text: string) =>
+    page.evaluate((needle) => {
+      const normalize = (value: string | null) => (value ?? "").replace(/\u00a0/g, " ").trim();
+      const spans = Array.from(document.querySelectorAll<HTMLElement>(".monaco-editor .view-line span"));
+      const match = spans.find((span) => span.childElementCount === 0 && normalize(span.textContent) === needle);
+      return match ? getComputedStyle(match).color : "";
+    }, text);
+  const colorForSpanContaining = (text: string) =>
+    page.evaluate((needle) => {
+      const normalize = (value: string | null) => (value ?? "").replace(/\u00a0/g, " ").trim();
+      const spans = Array.from(document.querySelectorAll<HTMLElement>(".monaco-editor .view-line span"));
+      const match = spans.find((span) => span.childElementCount === 0 && normalize(span.textContent).includes(needle));
+      return match ? getComputedStyle(match).color : "";
+    }, text);
+
+  await expect.poll(() => colorForText("/* P32h CSS skins a real Effect TSX shell */"), { timeout: 10000 }).toBe("rgb(153, 153, 153)");
+  await expect.poll(() => colorForText("media"), { timeout: 10000 }).toBe("rgb(255, 204, 102)");
+  await expect.poll(() => colorForText("color:"), { timeout: 10000 }).toBe("rgb(153, 204, 153)");
+  await expect.poll(() => colorForText("#cccccc"), { timeout: 10000 }).toBe("rgb(204, 204, 204)");
+  await expect.poll(() => colorForSpanContaining("42"), { timeout: 10000 }).toBe("rgb(249, 145, 87)");
+  await expect.poll(() => colorForText("!important"), { timeout: 10000 }).toBe("rgb(242, 119, 122)");
+  await expect.poll(() => colorForSpanContaining("/assets/effect-layer.svg"), { timeout: 10000 }).toBe("rgb(255, 204, 102)");
+
+  await mkdir("proof", { recursive: true });
+  await page.screenshot({ path: "proof/p32h-css-theme-proof.png" });
+});

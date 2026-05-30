@@ -126,6 +126,16 @@ const tokenAuditNames = [
   "CPP.OPERATION_SIGN",
   "CPP.PP_ARG",
   "CPP.STRING",
+  "CSS.COLOR",
+  "CSS.COMMENT",
+  "CSS.IMPORTANT",
+  "CSS.KEYWORD",
+  "CSS.NUMBER",
+  "CSS.OPERATORS",
+  "CSS.PROPERTY_NAME",
+  "CSS.STRING",
+  "CSS.TAG_NAME",
+  "CSS.URL",
 ];
 
 export const themeCoverageAuditAttributes = [

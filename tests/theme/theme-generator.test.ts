@@ -142,6 +142,21 @@ test("maps P32g C++ token colors onto Monaco-loaded C++ token scopes", () => {
   );
 });
 
+test("maps P32h CSS token colors onto Monaco CSS token scopes", () => {
+  expect(theme.rules).toEqual(
+    expect.arrayContaining([
+      { token: "comment.css", foreground: "999999", fontStyle: "italic" },
+      { token: "keyword.css", foreground: "f2777a" },
+      { token: "attribute.value.hex.css", foreground: "cccccc" },
+      { token: "attribute.value.number.css", foreground: "f99157" },
+      { token: "attribute.name.css", foreground: "99cc99" },
+      { token: "delimiter.css", foreground: "cccccc" },
+      { token: "string.css", foreground: "ffcc66" },
+      { token: "tag.css", foreground: "ffcc66" },
+    ]),
+  );
+});
+
 test("registers the generated Monaco theme", () => {
   const defineTheme = vi.fn();
   const monaco = { editor: { defineTheme } } as unknown as typeof import("monaco-editor");

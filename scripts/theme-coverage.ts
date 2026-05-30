@@ -116,6 +116,20 @@ const classifiedTopLevelOptionNames = [
   "CONSOLE_WHITE_OUTPUT",
   "CONSOLE_YELLOW_BRIGHT_OUTPUT",
   "CONSOLE_YELLOW_OUTPUT",
+  "CONDITIONALLY_NOT_COMPILED",
+  "CSS.COLOR",
+  "CSS.COMMENT",
+  "CSS.FUNCTION",
+  "CSS.IDENT",
+  "CSS.IMPORTANT",
+  "CSS.KEYWORD",
+  "CSS.NUMBER",
+  "CSS.OPERATORS",
+  "CSS.PROPERTY_NAME",
+  "CSS.PROPERTY_VALUE",
+  "CSS.STRING",
+  "CSS.TAG_NAME",
+  "CSS.URL",
 ];
 
 export interface IclsOptionNameIndex {
@@ -351,6 +365,14 @@ function classifiedTopLevelPathsFor(name: string): string[] {
     return consolePathsFor(name);
   }
 
+  if (name === "CONDITIONALLY_NOT_COMPILED") {
+    return ["CONDITIONALLY_NOT_COMPILED.FOREGROUND"];
+  }
+
+  if (name.startsWith("CSS.")) {
+    return cssPathsFor(name);
+  }
+
   return [name];
 }
 
@@ -373,6 +395,18 @@ function cppPathsFor(name: string): string[] {
 
   if (["CPP.CONSTANT", "CPP.FIELD", "CPP.METHOD", "CPP.NAMESPACE", "CPP.PP_SKIPPED", "CPP.STATIC", "CPP.STATIC_FUNCTION"].includes(name)) {
     return [`${name}.FOREGROUND`, `${name}.FONT_TYPE`];
+  }
+
+  return [`${name}.FOREGROUND`];
+}
+
+function cssPathsFor(name: string): string[] {
+  if (["CSS.COMMENT", "CSS.IMPORTANT", "CSS.KEYWORD"].includes(name)) {
+    return [`${name}.FOREGROUND`, `${name}.FONT_TYPE`];
+  }
+
+  if (["CSS.FUNCTION", "CSS.IDENT", "CSS.PROPERTY_VALUE"].includes(name)) {
+    return [`${name}.FOREGROUND`];
   }
 
   return [`${name}.FOREGROUND`];
@@ -481,6 +515,14 @@ function classifiedTopLevelDeferredReason(path: string): string {
     return "unsupported: active ICLS CONSOLE_DARKGRAY_OUTPUT has no foreground or font style to apply";
   }
 
+  if (path.startsWith("CSS.")) {
+    return cssDeferredReason(path);
+  }
+
+  if (path.startsWith("CONDITIONALLY_NOT_COMPILED.")) {
+    return "defer: Monaco/Maldives does not load a preprocessor inactive-code surface for conditionally-not-compiled regions yet";
+  }
+
   if (path.endsWith(".BACKGROUND")) {
     return "unsupported: Monaco token theme rules do not expose per-token backgrounds for this attribute";
   }
@@ -498,6 +540,26 @@ function constructorDeferredReason(path: string): string {
   }
 
   return "unsupported: Monaco's loaded grammars do not emit a distinct constructor-declaration token";
+}
+
+function cssDeferredReason(path: string): string {
+  if (path.startsWith("CSS.FUNCTION.")) {
+    return "unsupported: Monaco's CSS grammar emits functions as generic attribute values, colliding with CSS property values";
+  }
+
+  if (path.startsWith("CSS.IDENT.")) {
+    return "unsupported: Monaco's CSS grammar emits class/id selectors as generic tag tokens, not distinct identifiers";
+  }
+
+  if (path.startsWith("CSS.PROPERTY_VALUE.")) {
+    return "unsupported: Monaco's CSS grammar emits generic property values with the same token as functions/units";
+  }
+
+  if (path.endsWith(".EFFECT_TYPE")) {
+    return "unsupported: Monaco themes do not expose WebStorm effect-type styles for CSS attributes";
+  }
+
+  return "defer: no concrete Monaco token or UI surface has been selected for this CSS ICLS attribute yet";
 }
 
 function cppDeferredReason(path: string): string {
@@ -602,6 +664,10 @@ function deferredReason(path: string): string {
 
   if (parent.startsWith("CPP")) {
     return cppDeferredReason(path);
+  }
+
+  if (parent.startsWith("CSS")) {
+    return cssDeferredReason(path);
   }
 
   if (parent.startsWith("APACHE_CONFIG") || parent.startsWith("BASH")) {

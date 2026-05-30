@@ -99,6 +99,16 @@ export const TOKEN_SCOPES: Record<string, string[]> = {
   "CPP.OPERATION_SIGN": ["delimiter.cpp"],
   "CPP.PP_ARG": ["string.include.identifier.cpp"],
   "CPP.STRING": ["string.cpp", "string.escape.cpp"],
+  "CSS.COLOR": ["attribute.value.hex.css"],
+  "CSS.COMMENT": ["comment.css"],
+  "CSS.IMPORTANT": ["keyword.css"],
+  "CSS.KEYWORD": ["keyword.css"],
+  "CSS.NUMBER": ["attribute.value.number.css"],
+  "CSS.OPERATORS": ["delimiter.css"],
+  "CSS.PROPERTY_NAME": ["attribute.name.css"],
+  "CSS.STRING": ["string.css"],
+  "CSS.TAG_NAME": ["tag.css"],
+  "CSS.URL": ["string.css"],
 };
 
 export function buildMonacoTheme(theme: ThemeConfig): editor.IStandaloneThemeData {
