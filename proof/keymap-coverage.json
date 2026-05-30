@@ -12,6 +12,7 @@
     "ActivateTerminalToolWindow",
     "ActivateVersionControlToolWindow",
     "ActivateYouTrackToolWindow",
+    "AddToFavoritesPopup",
     "Annotate",
     "AutoIndentLines",
     "Back",
@@ -177,7 +178,6 @@
   ],
   "unwired": [],
   "deferred": [
-    "AddToFavoritesPopup",
     "CodeInspection.OnEditor",
     "CollapseExpandableComponent",
     "CompareClipboardWithSelection",
@@ -237,7 +237,6 @@
     "osmedile.intellij.stringmanip.WordsCapitalizeAction"
   ],
   "deferredReasons": {
-    "AddToFavoritesPopup": "deferred — favorites subsystem not built yet",
     "CodeInspection.OnEditor": "deferred — WebStorm IDE-shell action needs a later maldives subsystem",
     "CollapseExpandableComponent": "deferred — WebStorm IDE-shell action needs a later maldives subsystem",
     "CompareClipboardWithSelection": "deferred — WebStorm IDE-shell action needs a later maldives subsystem",
@@ -298,8 +297,8 @@
   },
   "totals": {
     "ssot": 230,
-    "wired": 174,
-    "deferred": 29,
+    "wired": 175,
+    "deferred": 28,
     "dropped": 27,
     "unwired": 0,
     "accounted": 230,

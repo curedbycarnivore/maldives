@@ -11,6 +11,7 @@ import { installEffectDevToolsButton, openEffectDevToolsPanel, type OpenEffectDe
 import { installEffectLanguageService, type EffectLanguageServiceController } from "./effect-language-service";
 import { registerEffectHoverProvider } from "./effect-hover";
 import { registerEffectSnippets } from "./effect-snippets";
+import { installFavoritesPanelController, type FavoritesPanelController } from "./favorites-panel";
 import { FileSystemAccessAdapter, installOpenFileButton } from "./fs";
 import { registerModelTab, registerRecentLocationTracking } from "./file-switcher";
 import { cleanOnBlurFromModel } from "./hooks/trailing-whitespace";
@@ -46,6 +47,7 @@ declare global {
     __maldivesVcsPanel: VcsPanelController;
     __maldivesRunDebugPanel: RunDebugPanelController;
     __maldivesTerminalPanel: { execute: (line: string, token?: string) => TerminalResult };
+    __maldivesFavoritesPanel: FavoritesPanelController;
     __maldivesSaveActiveFile: () => Promise<boolean>;
     __maldivesReady: Promise<void>;
   }
@@ -139,6 +141,7 @@ const toolWindows = installToolWindowController(document.body);
 const vcsPanel = installVcsPanelController(document.body);
 const runDebugPanel = installRunDebugPanelController(document.body);
 const terminalPanel = installTerminalPanelController(document.body, { token: "maldives-terminal-session" });
+const favoritesPanel = installFavoritesPanelController(document.body);
 installReadWriteToggle(document.body, { monaco, editor, workspace, adapter: fileSystemAdapter });
 const registeredKeybindings = registerKeybindings(editor, monaco, keymapConfig, {
   isWriteMode: () => workspace.mode === "write",
@@ -147,6 +150,7 @@ const registeredKeybindings = registerKeybindings(editor, monaco, keymapConfig, 
   vcsPanel,
   runDebugPanel,
   terminalPanel,
+  favoritesPanel,
 });
 registerRecentLocationTracking(editor);
 registerAstStructuralSearchAction(editor);
@@ -164,6 +168,7 @@ window.__maldivesFileSystemAdapter = fileSystemAdapter;
 window.__maldivesToolWindows = toolWindows;
 window.__maldivesVcsPanel = vcsPanel;
 window.__maldivesRunDebugPanel = runDebugPanel;
+window.__maldivesFavoritesPanel = favoritesPanel;
 window.__maldivesTerminalPanel = {
   execute(line, token) {
     const context = terminalContextFromEditor(editor);

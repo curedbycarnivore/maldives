@@ -21,6 +21,7 @@ import {
   switchToNextModelTab,
   switchToPreviousModelTab,
 } from "../file-switcher";
+import { contextFromEditor as favoritesContextFromEditor, type FavoritesPanelController } from "../favorites-panel";
 import type { KeyAction, KeymapConfig } from "../parsers/keymap-parser";
 import { contextFromEditor as runDebugContextFromEditor, type RunDebugPanelController } from "../run-debug-panel";
 import { contextFromEditor as terminalContextFromEditor, type TerminalPanelController } from "../terminal-panel";
@@ -45,6 +46,7 @@ export interface RegisterKeybindingsOptions {
   readonly vcsPanel?: VcsPanelController;
   readonly runDebugPanel?: RunDebugPanelController;
   readonly terminalPanel?: TerminalPanelController;
+  readonly favoritesPanel?: FavoritesPanelController;
 }
 
 type Monaco = typeof import("monaco-editor");
@@ -104,6 +106,7 @@ type MonacoTarget =
   | { type: "custom"; id: "vcsPanelAction"; actionId: string }
   | { type: "custom"; id: "runDebugPanelAction"; actionId: string }
   | { type: "custom"; id: "terminalPanelAction"; actionId: string }
+  | { type: "custom"; id: "favoritesPanelAction"; actionId: string }
   | { type: "custom"; id: "activateToolWindow"; actionId: string }
   | { type: "custom"; id: "switchModelTab"; tabIndex: number };
 
@@ -163,6 +166,7 @@ const actionTargets: Record<string, MonacoTarget> = {
   "tasks.goto": { type: "custom", id: "terminalPanelAction", actionId: "tasks.goto" },
   "tasks.open.in.browser": { type: "custom", id: "terminalPanelAction", actionId: "tasks.open.in.browser" },
   "tasks.switch": { type: "custom", id: "terminalPanelAction", actionId: "tasks.switch" },
+  AddToFavoritesPopup: { type: "custom", id: "favoritesPanelAction", actionId: "AddToFavoritesPopup" },
   ...tabActionTargets("GoToTab", 8),
   ...tabActionTargets("Go To Tab #", 10),
   ...tabActionTargets("Switch To Tab #", 10),
@@ -402,6 +406,7 @@ const shortcutlessActionIds = new Set([
   "tasks.goto",
   "tasks.open.in.browser",
   "tasks.switch",
+  "AddToFavoritesPopup",
 ]);
 
 function keybindingsForAction(action: KeyAction, monaco: Monaco, options: RegisterKeybindingsOptions): MaldivesAction[] {
@@ -616,6 +621,16 @@ function handlerForTarget(target: MonacoTarget, options: RegisterKeybindingsOpti
       const context = terminalContextFromEditor(editor);
       if (context) {
         options.terminalPanel?.runAction(target.actionId, context);
+      }
+      editor.focus();
+    };
+  }
+
+  if (target.id === "favoritesPanelAction") {
+    return (editor) => {
+      const context = favoritesContextFromEditor(editor);
+      if (context) {
+        options.favoritesPanel?.runAction(target.actionId, context);
       }
       editor.focus();
     };

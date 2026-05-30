@@ -28,10 +28,12 @@ describe("scripts/keymap-coverage", () => {
     expect(coverage.wired).toContain("Stop");
     expect(coverage.wired).toContain("tasks.switch");
     expect(coverage.wired).toContain("tasks.open.in.browser");
+    expect(coverage.wired).toContain("AddToFavoritesPopup");
     expect(coverage.deferred).not.toContain("ActivateTerminalToolWindow");
     expect(coverage.deferred).not.toContain("Annotate");
     expect(coverage.deferred).not.toContain("Run");
     expect(coverage.deferred).not.toContain("tasks.switch");
+    expect(coverage.deferred).not.toContain("AddToFavoritesPopup");
     expect(coverage.dropped).toContain("AceJumpAction");
     expect(coverage.dropped).toContain("DBNavigator.Actions.Calendar.CalendarNextMonth");
     expect(coverage.dropReasons["AceJumpAction"]).toContain("no maldives equivalent");
