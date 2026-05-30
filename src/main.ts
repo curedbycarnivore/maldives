@@ -5,6 +5,7 @@ import editorOptionsXml from "../ssot/options/editor.xml?raw";
 import { ensureAstReady } from "./ast-smart-selection";
 import { registerAstStructuralSearchAction } from "./ast-structural-search";
 import { registerMaldivesCodeActions } from "./code-actions";
+import { installCrossFileLspController, type CrossFileLspController } from "./cross-file-lsp";
 import { defaultSampleDocument, DEFAULT_SAMPLE_URI } from "./default-buffer";
 import { registerSchemaJsonSchemaAction } from "./schema-jsonschema";
 import { installEffectDevToolsButton, openEffectDevToolsPanel, type OpenEffectDevToolsOptions } from "./effect-devtools";
@@ -50,6 +51,7 @@ declare global {
     __maldivesTerminalPanel: { execute: (line: string, token?: string) => TerminalResult };
     __maldivesFavoritesPanel: FavoritesPanelController;
     __maldivesFindInFiles: FindInFilesController;
+    __maldivesCrossFileLsp: CrossFileLspController;
     __maldivesSaveActiveFile: () => Promise<boolean>;
     __maldivesReady: Promise<void>;
   }
@@ -132,6 +134,7 @@ const runDebugPanel = installRunDebugPanelController(document.body);
 const terminalPanel = installTerminalPanelController(document.body, { token: "maldives-terminal-session", theme: themeConfig.console });
 const favoritesPanel = installFavoritesPanelController(document.body);
 const findInFiles = installFindInFilesPanel(document.body, { adapter: fileSystemAdapter, editor, workspace });
+const crossFileLsp = installCrossFileLspController({ monaco, editor, workspace });
 installReadWriteToggle(document.body, { monaco, editor, workspace, adapter: fileSystemAdapter });
 const registeredKeybindings = registerKeybindings(editor, monaco, keymapConfig, {
   isWriteMode: () => workspace.mode === "write",
@@ -161,6 +164,7 @@ window.__maldivesVcsPanel = vcsPanel;
 window.__maldivesRunDebugPanel = runDebugPanel;
 window.__maldivesFavoritesPanel = favoritesPanel;
 window.__maldivesFindInFiles = findInFiles;
+window.__maldivesCrossFileLsp = crossFileLsp;
 window.__maldivesTerminalPanel = {
   execute(line, token) {
     const context = terminalContextFromEditor(editor);
