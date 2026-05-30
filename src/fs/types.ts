@@ -15,19 +15,25 @@ export interface FileSystemWatcher {
   dispose(): void;
 }
 
+export interface FileSystemWriteOptions {
+  readonly userGesture?: boolean;
+}
+
 export interface FileSystemAdapter {
   readFile(path: string): Promise<string>;
-  writeFile(path: string, content: string): Promise<void>;
+  writeFile(path: string, content: string, options?: FileSystemWriteOptions): Promise<void>;
   list(dir: string): Promise<FileSystemEntry[]>;
   watch(path: string, callback: (change: FileSystemChange) => void): FileSystemWatcher;
 }
 
+export type FileSystemAdapterErrorCode = "ENOENT" | "EACCES" | "EFBIG" | "ESECURITY";
+
 export class FileSystemAdapterError extends Error {
-  readonly code: "ENOENT";
+  readonly code: FileSystemAdapterErrorCode;
   readonly path: string;
 
-  constructor(code: "ENOENT", path: string) {
-    super(`${code}: ${path}`);
+  constructor(code: FileSystemAdapterErrorCode, path: string, message = `${code}: ${path}`) {
+    super(message);
     this.name = "FileSystemAdapterError";
     this.code = code;
     this.path = path;

@@ -94,7 +94,7 @@ export function createMaldivesEditor(
   };
 }
 
-export { createMemoryFileSystemAdapter, FileSystemAccessAdapter, FileSystemAdapterError, fileUriForFsaPath, installOpenFileButton, MemoryFileSystemAdapter, openPickedFileInWorkspace } from "./fs";
-export type { FileSystemAccessHost, FileSystemAdapter, FileSystemChange, FileSystemDirectoryHandleLike, FileSystemEntry, FileSystemEntryType, FileSystemFileHandleLike, FileSystemHandleLike, FileSystemWatcher, OpenedFile, OpenedWorkspaceFile } from "./fs";
+export { createMemoryFileSystemAdapter, FileSystemAccessAdapter, FileSystemAdapterError, fileUriForFsaPath, fsaPathForFileUri, installOpenFileButton, MemoryFileSystemAdapter, openPickedFileInWorkspace, saveWorkspaceFile } from "./fs";
+export type { FileSystemAccessAdapterOptions, FileSystemAccessHost, FileSystemAccessWriteOptions, FileSystemAdapter, FileSystemAdapterErrorCode, FileSystemChange, FileSystemDirectoryHandleLike, FileSystemEntry, FileSystemEntryType, FileSystemFileHandleLike, FileSystemHandleLike, FileSystemPermissionStateLike, FileSystemWatcher, FileSystemWritableFileStreamLike, FileSystemWriteOptions, OpenedFile, OpenedWorkspaceFile } from "./fs";
 export { registerEffectDtsFiles } from "./typescript-worker";
 export type { EffectDtsFiles } from "./typescript-worker";
