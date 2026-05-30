@@ -94,8 +94,8 @@ export function createMaldivesEditor(
   };
 }
 
-export { createMemoryFileSystemAdapter, createOpfsFileSystemAdapter, FileSystemAccessAdapter, FileSystemAdapterError, fileUriForFsaPath, fsaPathForFileUri, installOpenFileButton, MemoryFileSystemAdapter, OpfsFileSystemAdapter, openPickedFileInWorkspace, saveWorkspaceFile } from "./fs";
-export type { FileSystemAccessAdapterOptions, FileSystemAccessHost, FileSystemAccessWriteOptions, FileSystemAdapter, FileSystemAdapterErrorCode, FileSystemChange, FileSystemDirectoryHandleLike, FileSystemEntry, FileSystemEntryType, FileSystemFileHandleLike, FileSystemHandleLike, FileSystemPermissionStateLike, FileSystemWatcher, FileSystemWritableFileStreamLike, FileSystemWriteOptions, OpenedFile, OpenedWorkspaceFile, OpfsDirectoryHandleLike, OpfsFileHandleLike, OpfsFileSystemAdapterOptions, OpfsHandleLike, OpfsHost, OpfsWritableFileStreamLike } from "./fs";
+export { createMemoryFileSystemAdapter, createOpfsFileSystemAdapter, FileSystemAccessAdapter, FileSystemAdapterError, fileUriForFsaPath, fsaPathForFileUri, installOpenFileButton, MemoryFileSystemAdapter, OpfsFileSystemAdapter, openPickedFileInWorkspace, ProxyFileSystemAdapter, saveWorkspaceFile } from "./fs";
+export type { FileSystemAccessAdapterOptions, FileSystemAccessHost, FileSystemAccessWriteOptions, FileSystemAdapter, FileSystemAdapterErrorCode, FileSystemChange, FileSystemDirectoryHandleLike, FileSystemEntry, FileSystemEntryType, FileSystemFileHandleLike, FileSystemHandleLike, FileSystemPermissionStateLike, FileSystemWatcher, FileSystemWritableFileStreamLike, FileSystemWriteOptions, OpenedFile, OpenedWorkspaceFile, OpfsDirectoryHandleLike, OpfsFileHandleLike, OpfsFileSystemAdapterOptions, OpfsHandleLike, OpfsHost, OpfsWritableFileStreamLike, ProxyFileSystemAdapterOptions } from "./fs";
 export { createToolWindowController, installToolWindowController, toolWindowIdForAction, toolWindowTitleForAction, ToolWindowController } from "./tool-windows";
 export type { ToolWindowDefinition, ToolWindowId, ToolWindowSnapshot } from "./tool-windows";
 export { registerEffectDtsFiles } from "./typescript-worker";

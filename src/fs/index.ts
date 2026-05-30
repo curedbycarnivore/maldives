@@ -3,5 +3,7 @@ export type { FileSystemAccessAdapterOptions, FileSystemAccessHost, FileSystemAc
 export { createMemoryFileSystemAdapter, MemoryFileSystemAdapter } from "./memory-adapter";
 export { createOpfsFileSystemAdapter, OpfsFileSystemAdapter } from "./opfs-adapter";
 export type { OpfsDirectoryHandleLike, OpfsFileHandleLike, OpfsFileSystemAdapterOptions, OpfsHandleLike, OpfsHost, OpfsWritableFileStreamLike } from "./opfs-adapter";
+export { ProxyFileSystemAdapter } from "./proxy-adapter";
+export type { ProxyFileSystemAdapterOptions } from "./proxy-adapter";
 export type { FileSystemAdapter, FileSystemAdapterErrorCode, FileSystemChange, FileSystemEntry, FileSystemEntryType, FileSystemWatcher, FileSystemWriteOptions } from "./types";
 export { FileSystemAdapterError } from "./types";
